@@ -1,0 +1,37 @@
+$color-white: #FFFFFF !default;//白色
+$color-theme: #EE735D !default;//主题色
+$color-theme-2: #FEC795 !default;//主题色2
+$color-theme-3: #F07A76 !default;//主题色3
+$color-bg: #F2F2F2 !default;//背景色
+$color-big: #484848 !default;//大标题
+$color-small: #929292 !default;//小标题
+$color-line: #EfEEf4 !default;//线的颜色
+$color-success: #97A78A !default;//成功: 深绿色
+$color-green: #57D295 !default;//绿色
+$color-mark: #A9A9A9 !default;//遮罩
+
+@mixin flex-wrap {
+  display: flex;
+  justify-content: center;//主轴的对齐方式
+  align-items: center;//交叉轴对齐方式
+  align-content: center;//多根轴线对齐方式
+}
+
+@mixin sc($size, $color) {
+  font-size: $size;
+  color: $color;
+}
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*位于屏幕顶部*/
+@mixin pt {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+}

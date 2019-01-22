@@ -1,0 +1,116 @@
+@import "../../styles/mixin";
+
+.address-layout {
+  position: fixed;
+  width: 100%;
+  //height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin-bottom: taro-tabbar-height;
+  background-color: rgba(0, 0, 0, 0.3);
+  visibility: hidden;
+  z-index: 400;
+  transition: visibility 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+
+  .address-layout__overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 150ms ease-in;
+  }
+
+  .address-layout__container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 261Px;
+    font-size: 17Px;
+    background-color: #FFF;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    -webkit-transition: -webkit-transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+    transition: -webkit-transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+    transition: transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+    transition: transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1), -webkit-transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+
+    .layout-header {
+      position: relative;
+      padding: 9Px;
+      height: 25Px;
+      line-height: 22Px;
+      background-color: #F7F7F7;
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+
+      .cancel {
+        color: $color-small;
+      }
+      .title {
+        color: $color-big;
+      }
+      .confirm {
+        color: $color-theme;
+      }
+
+    }
+
+    .layout-body {
+      @include sc(15Px, $color-big);
+      padding: 9Px;
+      height: 200Px;
+
+      .address-scroller {
+        display: flex;
+        justify-content: space-around;
+        position: relative;
+        scrollbar: none;
+
+        .area-box {
+          width: 90%;
+          height: 40Px;
+          position: absolute;
+          z-index: 1;
+          top: 80Px;
+          border: dashed 1Px #f00;
+        }
+      }
+    }
+  }
+
+}
+
+.address-layout--active {
+  visibility: visible;
+
+  .address-layout__container {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.area-container {
+  width: 112Px;
+  height: 200Px;
+  scrollbar: none;
+
+  .area-list {
+    width: 100%;
+    padding-top: 80Px;
+    padding-bottom: 80Px;
+
+    .area-item {
+      width: 100%;
+      height: 40Px;
+      text-align: center;
+      line-height: 40Px;
+      cursor: pointer;
+    }
+  }
+}
+
+

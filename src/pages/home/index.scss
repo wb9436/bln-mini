@@ -1,0 +1,23 @@
+@import "../../styles/mixin";
+
+.home-page {
+
+  .loading {
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    width: 100%;
+    background-color: #f1f1f1;
+    transform: translate3d(0, 120px, 0);
+    transition: all 0.2s;
+    translate: 120;
+  }
+
+  .scroll-item {
+    height: 60px;
+    border-bottom: 2px solid #ddd;
+    line-height: 60px;
+    padding-left: 20px;
+  }
+
+}
