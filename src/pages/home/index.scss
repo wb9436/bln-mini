@@ -3,7 +3,6 @@
 .home-page {
   width: 100%;
   height: 100%;
-  overflow: hidden;
 
   .act-type {
     width: 100%;
@@ -98,28 +97,13 @@
           }
 
           .share-btn {
-            height: 100%;
             width: 150px;
-            display: flex;
-            align-items: center;
-            position: relative;
-
-            .share-img {
-              width: 150px;
-              height: auto;
-            }
-
-            .share-msg {
-              height: 100%;
-              width: 100%;
-              line-height: 46px;
-              text-align: center;
-              position: absolute;
-              top: 0;
-              left: 0;
-              z-index: 1;
-              @include sc(24px, $color-white);
-            }
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            @include sc(24px, $color-white);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
           }
         }
 
@@ -150,11 +134,8 @@
       align-items: center;
       justify-content: center;
       animation: rotate .4s linear infinite paused;
-
-      .refresh-img {
-        width: 100%;
-        height: auto;
-      }
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
     }
 
     .loading {

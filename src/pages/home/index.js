@@ -6,6 +6,7 @@ import './index.scss'
 import LoadAll from '../../components/LoadAll'
 
 import shareBtn from '../../images/activity/share.png'
+import overtimeBtn from '../../images/activity/overtime.png'
 import refreshBtn from '../../images/public/refresh.png'
 
 @connect(({activity, loading}) => ({
@@ -108,9 +109,8 @@ class Home extends Component {
               {item.hot == 2 && <View className='title-icon new'> 新 </View>}
               100人阅读
             </View>
-            <View className='share-btn'>
-              <Image className='share-img' src={shareBtn} mode='widthFix' />
-              <View className='share-msg'>立即分享</View>
+            <View className='share-btn' style={{backgroundImage: `url(${item.state == 1 ? shareBtn : overtimeBtn})`}}>
+              {item.state == 1 ? '立即分享' : '活动已结束'}
             </View>
           </View>
         </View>
@@ -136,8 +136,9 @@ class Home extends Component {
 
           </ScrollView>
 
-          <View className={loading ? 'refresh-btn loading' : 'refresh-btn'} onClick={this.onRefreshHandler.bind(this)}>
-            <Image className='refresh-img' src={refreshBtn} mode='widthFix' />
+          <View className={loading ? 'refresh-btn loading' : 'refresh-btn'}
+            style={{backgroundImage: `url(${refreshBtn})`}} onClick={this.onRefreshHandler.bind(this)}
+          >
           </View>
 
         </View>
