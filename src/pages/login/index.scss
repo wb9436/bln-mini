@@ -51,28 +51,12 @@
   .login-btn {
     margin-top: 75px;
     width: 450px;
-    height: 110px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-
-    .btn-img {
-      width: 450px;
-      height: auto;
-    }
-
-    .btn-desc {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 450px;
-      height: 110px;
-      line-height: 110px;
-      text-align: center;
-      font-size: 32px;
-      color: white;
-    }
+    height: 98px;
+    line-height: 98px;
+    text-align: center;
+    @include sc(32px, $color-white);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
   }
 
   .other-btn {

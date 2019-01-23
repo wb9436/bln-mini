@@ -160,7 +160,7 @@ class ForgetPassword extends Component {
           <Image className='icon' src={phone} mode='widthFix' />
           <Input className='input-box'
             placeholderClass='placeholder'
-            placeholder='您注册时的手机号'
+            placeholder='注册的手机号'
             maxLength={11}
             onInput={this.onInputHandler.bind(this, 'mobile')}
           />
@@ -192,9 +192,8 @@ class ForgetPassword extends Component {
           />
         </View>
 
-        <View className='login-btn'>
-          <Image className='btn-img' src={btn} mode='widthFix' />
-          <View className='btn-desc' onClick={this.onUpdatePwdHandler.bind(this)}>立即修改</View>
+        <View className='login-btn' style={{backgroundImage: `url(${btn})`}} onClick={this.onUpdatePwdHandler.bind(this)}>
+          立即修改
         </View>
 
         {isLogin ? '' :

@@ -1,6 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, Image} from '@tarojs/components'
-
+import {View, Image, Button} from '@tarojs/components'
 import './index.scss'
 
 import authImg from '../../images/mine/authen.png'
@@ -20,8 +19,25 @@ class Mine extends Component {
     }
   }
 
-
   componentWillMount() {
+  }
+
+  onLogoutHandler() {
+    Taro.showModal({
+      content: '确定退出登录吗？',
+      confirmColor: '#EE735D',
+    }).then(res => {
+      if (res.confirm) {
+        Taro.removeStorageSync('sid')
+        Taro.removeStorageSync('user')
+        Taro.removeStorageSync('userId')
+        Taro.removeStorageSync('address')
+
+        Taro.redirectTo({
+          url: '/pages/login/index'
+        })
+      }
+    })
   }
 
   render() {
@@ -49,7 +65,7 @@ class Mine extends Component {
         </View>
         <View className='data-column' style={{height: `${remainHeight}px`}}>
 
-
+          <Button onClick={this.onLogoutHandler.bind(this)}>退出登录</Button>
 
         </View>
 

@@ -265,9 +265,8 @@ class ForgetPassword extends Component {
           </View> : ''
         }
 
-        <View className='login-btn'>
-          <Image className='btn-img' src={btn} mode='widthFix' />
-          <View className='btn-desc' onClick={this.onRegisterHandler.bind(this, isCheck)}>{btnMsg}</View>
+        <View className='login-btn' style={{backgroundImage: `url(${btn})`}} onClick={this.onRegisterHandler.bind(this, isCheck)}>
+          {btnMsg}
         </View>
 
         {isLogin ? '' :
