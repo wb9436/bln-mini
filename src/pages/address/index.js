@@ -159,7 +159,7 @@ class DistrictTest extends Component {
     })
 
     return (
-      <View className='scroll-container'>
+      <View className='address-container'>
         <View className='address-scroller'>
           <View className='area-box'></View>
 

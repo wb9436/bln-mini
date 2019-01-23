@@ -1,7 +1,11 @@
 import dva from './dva'
 
+import activity from './activity/index'
 
-const models = []
+const models = [
+  activity,
+
+]
 
 const dvaApp = dva.createApp({
   initialState: {},
