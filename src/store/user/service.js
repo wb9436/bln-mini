@@ -64,4 +64,19 @@ export const mobileRegister = data => Request({
   data
 })
 
+/*获取用户数据Sid*/
+export const getMineData = data => Request({
+  url: '/api/user/mine',
+  method: 'POST',
+  need_sid: true,
+  data
+})
+
+/*修改用户信息*/
+export const updateUserInfo = data => Request({
+  url: '/api/user/updateInfo',
+  method: 'POST',
+  need_sid: true,
+  data
+})
 

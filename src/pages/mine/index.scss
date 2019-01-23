@@ -7,9 +7,9 @@
   .user-info {
     width: 100%;
 
-    .base-info {
-      height: 140px;
-      padding: 0 100px;
+    .user-base-info {
+      height: 150px;
+      margin-left: 85px;
       display: flex;
       align-items: center;
 
@@ -41,16 +41,117 @@
           background-repeat: no-repeat;
           background-size: 100% 100%;
         }
+      }
 
+      .user-msg {
+        width: 150px;
+        height: 100%;
+        margin-left: 240px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .msg-btn {
+          width: 70px;
+          height: auto;
+        }
+
+        .address-info {
+          height: 36px;
+          line-height: 36px;
+          text-align: center;
+          @include sc(30px, $color-small);
+        }
       }
 
     }
 
+    .user-data-info {
+      width: 100%;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      .data-item {
+        text-align: center;
+
+        .data-num {
+          @include sc(30px, $color-big);
+        }
+
+        .data-desc {
+          @include sc(26px, $color-small);
+        }
+      }
+
+    }
   }
 
   .data-column {
     width: 100%;
     background: $color-bg;
+    overflow-y: scroll;
+
+    .column-item {
+      padding: 0 10px 0 30px;
+      height: 100px;
+      background: $color-white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid $color-line;
+
+      .column-left {
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        .column-icon {
+          width: 36px;
+          height: auto;
+        }
+
+        .column-name {
+          margin-left: 32px;
+          @include sc(30px, $color-big);
+        }
+      }
+
+      .column-right {
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        .wallet-money {
+          display: inline-block;
+          @include sc(30px, $color-theme);
+          font-weight: bold;
+
+          .money-name {
+            margin-left: 5px;
+            display: inline-block;
+            color: $color-small;
+          }
+        }
+
+        .task-sign {
+          width: 16px;
+          height: auto;
+        }
+
+        .column-right-btn {
+          width: 24px;
+          height: auto;
+        }
+      }
+
+    }
+
+    .column-item:first-child {
+      margin-top: 10px;
+    }
 
   }
 
