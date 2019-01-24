@@ -26,6 +26,7 @@ class App extends Component {
       'pages/forget/index',
       'pages/register/index',
       'pages/address/index',
+      'pages/setup/index',
     ],
     tabBar: {
       "color": "#929292",

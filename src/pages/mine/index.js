@@ -111,11 +111,24 @@ class Mine extends Component {
     })
   }
 
+  onLookPageHandler(page) {
+    const {userAccount, userSign} = this.props
+    if (page) {
+      if (page.indexOf('wallet') > -1) {
+        page = page + '?amount=' + userAccount.amount + '&money=' + userAccount.money
+      } else if (page.indexOf('task')) {
+        page = page + '?signTime=' + userSign.signTime
+      }
+      Taro.navigateTo({
+        url: page
+      })
+    }
+  }
+
   render() {
     const {windowHeight, columnItem, area, address, isOpened} = this.state
     let infoHeight = 135
     let remainHeight = windowHeight - infoHeight
-
     const {isAuth, userData, userAccount, userSign} = this.props
 
     const columnContent = columnItem.map((item, index) => {
@@ -127,7 +140,7 @@ class Mine extends Component {
           signMessage = true
         }
       }
-      return <View key={index} className='column-item'>
+      return <View key={index} className='column-item' onClick={this.onLookPageHandler.bind(this, item.page)}>
         <View className='column-left'>
           <Image className='column-icon' src={item.icon} mode='widthFix' />
           <View className='column-name'>{item.name}</View>
@@ -139,11 +152,9 @@ class Mine extends Component {
               <View className='money-name'>元</View>
             </View> : ''
           }
-
           {signMessage && item.type === 'task' ?
             <Image className='task-sign' src={discCircular} mode='widthFix' /> : ''
           }
-
           <AtIcon value='chevron-right' size={28} color='#EfEEf4' />
         </View>
       </View>
