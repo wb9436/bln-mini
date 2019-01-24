@@ -4,7 +4,7 @@ module.exports = {
   },
   defineConstants: {
     BASE_API: '"https://api.viplark.com"',
-    PDD_API: '"https://ddk.vipsunyou.com"',
+    PDD_API: '"https://ddk.viplark.com"',
     TOPIC_API: '"https://chat.viplark.com"'
   },
   weapp: {},
