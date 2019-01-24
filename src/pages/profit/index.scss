@@ -1,0 +1,212 @@
+@import "../../styles/mixin";
+
+.day-page {
+  width: 100%;
+  height: 100vh;
+
+  .day-list {
+    width: 100%;
+    background: $color-bg;
+
+    .day-item {
+      width: 92.6%;
+      height: 80px;
+      padding: 0 3.7%;
+      background: $color-white;
+      border-bottom: 2px solid $color-line;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 30px;
+
+      .day-date {
+        color: $color-big;
+      }
+
+      .day-num {
+        color: $color-theme;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.task-page {
+  width: 100%;
+  height: 100vh;
+
+  .task-list {
+    width: 100%;
+    background: $color-bg;
+
+    .task-item {
+      width: 92.6%;
+      height: 200px;
+      padding: 0 3.7%;
+      background: $color-white;
+      border-bottom: 2px solid $color-line;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 30px;
+
+      .task-img {
+        width: 30%;
+        height: auto;
+        max-height: 180px;
+      }
+
+      .task-content {
+        width: 67%;
+        height: 100%;
+        margin-left: 3%;
+
+        .task-title {
+          width: 100%;
+          height: 90px;
+          margin-top: 10px;
+          @include sc(30px, $color-big);
+          line-height: 45px;
+          white-space: normal;
+          word-wrap: break-word;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+
+          .hot-state {
+            width: 50px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            display: inline-block;
+            border-radius: 4px;
+          }
+        }
+
+        .task-data {
+          width: 100%;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .data-detail {
+            font-size: 26px;
+            color: $color-small;
+
+            .data-num {
+              display: inline-block;
+              color: $color-theme;
+            }
+          }
+        }
+
+        .task-state {
+          width: 100%;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+
+          .task-icon {
+            width: 35px;
+            height: auto;
+          }
+
+          .state-desc {
+            margin-left: 10px;
+            @include sc(28px, $color-theme)
+          }
+        }
+      }
+    }
+  }
+}
+
+.pdd-page {
+  width: 100%;
+  height: 100vh;
+
+  .pdd-list {
+    width: 100%;
+    background: $color-bg;
+
+    .pdd-item {
+      width: 98%;
+      height: 140px;
+      padding-left: 2%;
+      background: $color-white;
+      border-bottom: 2px solid $color-line;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 30px;
+
+      .pdd-img {
+        width: 17%;
+        height: auto;
+      }
+
+      .pdd-content {
+        width: 80%;
+        height: 100%;
+        margin-left: 3%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .pdd-detail {
+          width: 100%;
+          height: 50px;
+          line-height: 50px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+
+          .goods-name {
+            width: 55%;
+            @include sc(28px, $color-big);
+            @include ellipsis;
+          }
+
+          .user-amount {
+            width: 45%;
+            text-align: center;
+            @include sc(30px, $color-small);
+
+            .account-money {
+              margin-left: 5px;
+              display: inline-block;
+              color: $color-theme;
+            }
+          }
+        }
+
+        .pdd-state {
+          width: 100%;
+          height: 45px;
+          line-height: 45px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .account-desc {
+            width: 55%;
+            @include sc(24px, $color-small);
+            @include ellipsis;
+          }
+
+          .state-desc {
+            width: 45%;
+            text-align: center;
+            @include sc(28px, $color-theme);
+          }
+
+        }
+      }
+
+    }
+  }
+}

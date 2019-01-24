@@ -1,0 +1,60 @@
+@import "../../styles/mixin";
+
+.account-page {
+  width: 100%;
+  height: 100vh;
+
+  .account-list {
+    width: 100%;
+    background: $color-bg;
+
+    .account-item {
+      width: 92.6%;
+      height: 120px;
+      padding: 0 3.7%;
+      background: $color-white;
+      border-bottom: 2px solid $color-line;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .account-data {
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .data-name {
+          @include sc(32px, $color-big);
+        }
+
+        .data-num {
+          @include sc(32px, $color-theme);
+          font-weight: bold;
+        }
+      }
+
+      .account-desc {
+        width: 100%;
+        height: 46px;
+        line-height: 46px;
+        @include sc(24px, $color-small);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .data-desc {
+          max-width: 75%;
+          @include ellipsis;
+        }
+
+      }
+
+    }
+
+  }
+
+}
