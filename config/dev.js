@@ -10,7 +10,7 @@ module.exports = {
   weapp: {},
   h5: {
     devServer: {
-      host: '127.0.0.1',
+      host: '192.168.1.166',
       port: 10086,
       https: false,
       disableHostCheck: true
