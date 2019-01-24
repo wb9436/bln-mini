@@ -27,6 +27,7 @@ class App extends Component {
       'pages/register/index',
       'pages/address/index',
       'pages/setup/index',
+      'pages/wallet/index',
     ],
     tabBar: {
       "color": "#929292",
