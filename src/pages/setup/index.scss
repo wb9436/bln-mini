@@ -1,0 +1,50 @@
+@import "../../styles/mixin";
+
+.setup-page {
+  width: 100%;
+  height: 100%;
+  background: $color-bg;
+
+  .column-item {
+    padding: 0 10px 0 30px;
+    height: 100px;
+    background: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid $color-line;
+
+    .column-left {
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      .column-icon {
+        width: 36px;
+        height: auto;
+      }
+
+      .column-name {
+        margin-left: 32px;
+        @include sc(30px, $color-big);
+      }
+
+      .at-column {
+        margin-left: 24px;
+      }
+    }
+
+    .column-right {
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      .column-right-btn {
+        width: 24px;
+        height: auto;
+      }
+    }
+
+  }
+
+}
