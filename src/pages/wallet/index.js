@@ -33,11 +33,11 @@ class Wallet extends Component {
     let walletItem = [
       // {name: '我要提现', icon: cash, page: '/pages/applyCash/index'},
       // {name: '提现绑定', icon: bind, page: '/pages/cashBind/index'},
-      {name: '账户明细', icon: detail, page: '/pages/accountDetail/index'},
-      {name: '每日收益', icon: day, page: '/pages/dayProfit/index'},
-      {name: '任务收益', icon: task, page: '/pages/taskProfit/index'},
-      {name: '拼多多', icon: pdd, page: '/pages/pddProfit/index'},
-      {name: '提现记录', icon: record, page: '/pages/cashRecord/index'},
+      {name: '账户明细', icon: detail, page: '/pages/account/index'},
+      {name: '每日收益', icon: day, page: '/pages/profit/day'},
+      {name: '任务收益', icon: task, page: '/pages/profit/task'},
+      {name: '拼多多', icon: pdd, page: '/pages/profit/pdd'},
+      {name: '提现记录', icon: record, page: '/pages/cash/index'},
     ]
 
     this.setState({
@@ -49,7 +49,9 @@ class Wallet extends Component {
   }
 
   onLookPageHandler(page) {
-
+    Taro.navigateTo({
+      url: page
+    })
   }
 
   render() {

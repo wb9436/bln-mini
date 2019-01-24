@@ -28,6 +28,10 @@ class App extends Component {
       'pages/address/index',
       'pages/setup/index',
       'pages/wallet/index',
+      'pages/account/index',
+      'pages/profit/day',
+      'pages/profit/task',
+      'pages/profit/pdd',
     ],
     tabBar: {
       "color": "#929292",

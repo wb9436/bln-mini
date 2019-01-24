@@ -86,3 +86,46 @@ export const isTodayDay = date => {
     return false
   }
 }
+
+export const accountLogType = data => {
+  let desc = ''
+  if(!Number.isNaN(data)) {
+    switch (data) {
+      case 0:
+        desc = '新注册用户'
+        break;
+      case 1:
+        desc = '佣金'
+        break;
+      case 2:
+        desc = '提现'
+        break;
+      case 3:
+        desc = '其他'
+        break;
+    }
+  }
+  return desc
+}
+
+/**推广订单结算状态*/
+export const ddkOrderState = data => {
+  let desc = ''
+  if(!Number.isNaN(data)) {
+    switch (data) {
+      case -1:
+        desc = '未支付'
+        break;
+      case 0:
+        desc = '不可提现'
+        break;
+      case 1:
+        desc = '已支付'
+        break;
+      case 2:
+        desc = '已结算'
+        break;
+    }
+  }
+  return desc
+}

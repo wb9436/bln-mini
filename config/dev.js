@@ -4,13 +4,13 @@ module.exports = {
   },
   defineConstants: {
     BASE_API: '"https://api.viplark.com"',
-    PDD_API: '"https://pdd.viplark.com"',
+    PDD_API: '"https://ddk.vipsunyou.com"',
     TOPIC_API: '"https://chat.viplark.com"'
   },
   weapp: {},
   h5: {
     devServer: {
-      host: '192.168.1.166',
+      host: '127.0.0.1',
       port: 10086,
       https: false,
       disableHostCheck: true
