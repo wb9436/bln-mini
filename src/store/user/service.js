@@ -80,3 +80,10 @@ export const updateUserInfo = data => Request({
   data
 })
 
+export const userSignToday = data => Request({
+  url: '/api/user/sign/today',
+  method: 'POST',
+  need_sid: true,
+  data
+})
+

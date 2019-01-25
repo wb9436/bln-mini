@@ -33,6 +33,7 @@ class App extends Component {
       'pages/profit/task',
       'pages/profit/pdd',
       'pages/cash/index',
+      'pages/task/index',
     ],
     tabBar: {
       "color": "#929292",
