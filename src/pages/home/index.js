@@ -3,7 +3,7 @@ import {View, ScrollView, Image} from '@tarojs/components'
 import {connect} from '@tarojs/redux'
 import './index.scss'
 
-import LoadAll from '../../components/LoadAll'
+import LoadAll from '../../components/LoadAll/index'
 
 import shareBtn from '../../images/activity/share.png'
 import overtimeBtn from '../../images/activity/overtime.png'

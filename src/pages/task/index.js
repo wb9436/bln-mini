@@ -1,5 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, Image} from '@tarojs/components'
+import {View, Image, Button} from '@tarojs/components'
 import './index.scss'
 
 import * as Api from '../../store/user/service'
@@ -164,11 +164,23 @@ class Task extends Component {
           <View className='task-desc'>
             <View className='desc'>{item.desc}</View>
             <View className='task-btn'>
-              <View className='btn' style={{backgroundImage: `url(${taskState == true ? btnComplete : btn})`}}
-                onClick={this.onCompleteTask.bind(this, item.type, taskState)}
-              >
+
+              {Taro.getEnv() === Taro.ENV_TYPE.WEAPP && item.type === 'invite' &&
+                <Button className='btn' openType='share' style={{backgroundImage: `url(${taskState == true ? btnComplete : btn})`}}
+                  onClick={this.onCompleteTask.bind(this, item.type, taskState)}
+                >
                 {taskState == true ? item.btn_yes : item.btn_no}
-              </View>
+                </Button>
+              }
+
+              {(Taro.getEnv() !== Taro.ENV_TYPE.WEAPP || item.type !== 'invite') &&
+                <View className='btn' style={{backgroundImage: `url(${taskState == true ? btnComplete : btn})`}}
+                  onClick={this.onCompleteTask.bind(this, item.type, taskState)}
+                >
+                  {taskState == true ? item.btn_yes : item.btn_no}
+                </View>
+              }
+
             </View>
           </View>
         </View>

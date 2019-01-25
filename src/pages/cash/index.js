@@ -2,7 +2,7 @@ import Taro, {Component} from '@tarojs/taro'
 import {View, ScrollView} from '@tarojs/components'
 import './index.scss'
 
-import LoadAll from '../../components/LoadAll'
+import LoadAll from '../../components/LoadAll/index'
 
 import * as Api from '../../store/profit/service'
 import * as Utils from '../../utils/utils'
