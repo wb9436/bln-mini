@@ -1,0 +1,124 @@
+@import "../../styles/mixin";
+
+.task-page {
+  width: 100%;
+  height: 100vh;
+  background: $color-bg;
+
+  .task-item {
+    width: 100%;
+    height: 160px;
+    background: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .task-state {
+      width: 15%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .upper-line {
+        width: 3px;
+        height: 25px;
+        background: $color-theme;
+      }
+
+      .task-sign {
+        width: 20px;
+        height: 20px;
+      }
+
+      .lower-line {
+        width: 3px;
+        height: 115px;
+        background: $color-theme;
+      }
+    }
+
+    .task-content {
+      width: 85%;
+      height: 100%;
+
+      .task-award {
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+
+        .task-title {
+          width: 60%;
+          height: 100%;
+          line-height: 70px;
+          @include sc(30px, $color-big);
+          font-weight: bold;
+        }
+
+        .award-desc {
+          width: 25%;
+          height: 100%;
+          text-align: center;
+          @include sc(30px, $color-theme);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .award-img {
+            margin-left: 5px;
+            width: 30px;
+            height: auto;
+          }
+        }
+      }
+
+      .task-desc {
+        width: 100%;
+        height: 98px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid $color-line;
+
+        .desc {
+          width: 70%;
+          margin-top: 5px;
+          height: 90%;
+          @include sc(24px, $color-small);
+        }
+
+        .task-btn {
+          width: 25%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+
+          .btn {
+            width: 75%;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            @include sc(24px, $color-white);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+          }
+        }
+      }
+    }
+  }
+
+  .task-item:first-child {
+    .upper-line {
+      background: none;
+    }
+  }
+
+  .task-item:last-child {
+    .lower-line {
+      background: none;
+    }
+  }
+
+}
