@@ -125,6 +125,12 @@ class Mine extends Component {
     }
   }
 
+  onOpenMsgHandler() {
+    Taro.navigateTo({
+      url: '/pages/message/index'
+    })
+  }
+
   render() {
     const {windowHeight, columnItem, area, address, isOpened} = this.state
     let infoHeight = 135
@@ -170,7 +176,7 @@ class Mine extends Component {
               <View className='auth-btn' style={{backgroundImage: `url(${authImg})`}}>{isAuth}</View>
             </View>
             <View className='user-msg'>
-              <Image className='msg-btn' src={msgBtn} mode='widthFix' />
+              <Image className='msg-btn' src={msgBtn} mode='widthFix' onClick={this.onOpenMsgHandler.bind(this)} />
               <View className='address-info' onClick={this.openAddress.bind(this)}>{area}</View>
             </View>
           </View>
