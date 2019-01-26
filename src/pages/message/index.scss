@@ -1,0 +1,86 @@
+@import "../../styles/mixin";
+
+.message-page {
+  width: 100%;
+  height: 100vh;
+
+  .msg-tab {
+    width: 100%;
+    @include sc(32px, $color-small);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .tab-item {
+      width: 160px;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+    }
+
+    .tab__left {
+      margin-left: 40px;
+    }
+
+    .tab_checked {
+      color: $color-theme;
+      border-bottom: 3px solid $color-theme;
+    }
+
+  }
+
+  .message-list {
+    width: 100%;
+    background: $color-bg;
+
+    .message-item {
+      width: 92.6%;
+      height: 130px;
+      padding: 0 3.7%;
+      background: $color-white;
+      border-bottom: 2px solid $color-line;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .msg-content {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .msg-title {
+          width: 60%;
+          @include ellipsis;
+          @include sc(30px, $color-big)
+        }
+
+        .msg-date {
+          width: 40%;
+          text-align: right;
+          white-space: nowrap;
+          @include sc(24px, $color-small);
+        }
+
+        .msg-desc {
+          width: 90%;
+          @include ellipsis;
+          @include sc(26px, $color-small);
+        }
+
+        .msg-state {
+          width: 10%;
+          width: 15px;
+
+          .state-img {
+            width: 15px;
+            height: auto;
+          }
+        }
+      }
+
+    }
+  }
+}
