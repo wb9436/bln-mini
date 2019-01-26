@@ -35,6 +35,7 @@ class App extends Component {
       'pages/cash/index',
       'pages/task/index',
       'pages/message/index',
+      'pages/auth/index',
     ],
     tabBar: {
       "color": "#929292",

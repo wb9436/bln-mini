@@ -50,7 +50,7 @@ class Mine extends Component {
         {name: '我的话题',type: 'topic',  icon: mine, page: ''},
         {name: '日常任务',type: 'task',  icon: task, page: '/pages/task/index'},
         {name: '排行榜',type: 'rank',  icon: rank, page: '/pages/rank/index'},
-        {name: '实名认证',type: 'auth',  icon: auth, page: '/pages/rank/index'},
+        {name: '实名认证',type: 'auth',  icon: auth, page: '/pages/auth/index'},
         {name: '商家推广',type: 'business',  icon: business, page: ''},
         {name: '帮助中心',type: 'help',  icon: help, page: ''},
         {name: '系统设置',type: 'setup',  icon: setup, page: '/pages/setup/index'},
@@ -116,7 +116,7 @@ class Mine extends Component {
     if (page) {
       if (page.indexOf('wallet') > -1) {
         page = page + '?amount=' + userAccount.amount + '&money=' + userAccount.money
-      } else if (page.indexOf('task')) {
+      } else if (page.indexOf('task') > -1) {
         page = page + '?signTime=' + userSign.signTime
       }
       Taro.navigateTo({
@@ -173,7 +173,9 @@ class Mine extends Component {
             <Image className='avatar' src={userData.avatar || avatar} mode='widthFix' />
             <View className='info'>
               <View className='nickname'>{userData.nickname}</View>
-              <View className='auth-btn' style={{backgroundImage: `url(${authImg})`}}>{isAuth}</View>
+              <View className='auth-btn' style={{backgroundImage: `url(${authImg})`}}
+                onClick={this.onLookPageHandler.bind(this, '/pages/auth/index')}
+              >{isAuth}</View>
             </View>
             <View className='user-msg'>
               <Image className='msg-btn' src={msgBtn} mode='widthFix' onClick={this.onOpenMsgHandler.bind(this)} />
