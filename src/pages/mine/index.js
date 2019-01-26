@@ -58,7 +58,7 @@ class Mine extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidShow() {
     this.props.dispatch({
       type: 'user/setMineData'
     })
