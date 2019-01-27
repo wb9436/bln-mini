@@ -1,0 +1,201 @@
+@import "../../styles/mixin";
+
+.rank-page {
+  width: 100%;
+  height: 100vh;
+
+  .rank-list {
+    width: 100%;
+    background: $color-bg;
+
+    .rank-item {
+      margin-top: 12px;
+      width: 92.6%;
+      height: 160px;
+      padding: 0 3.7%;
+
+      .rank-data {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        .rank-avatar {
+          position: absolute;
+          left: 0;
+          top: 20px;
+          z-index: 1;
+          width: 120px;
+          height: 120px;
+          background: $color-white;
+          border-radius: 15px;
+          box-shadow: 0 0 20px $color-small;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .avatar {
+            width: 80px;
+            height: auto;
+            border-radius: 50%;
+          }
+        }
+
+        .rank-content {
+          float: right;
+          width: 91.5%;
+          height: 100%;
+          background: $color-white;
+          border-radius: 15px;
+          display: flex;
+          justify-content: space-between;
+
+          .rank-info {
+            width: 300px;
+            height: 100%;
+            margin-left: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+
+            .rank-name {
+              width: 100%;
+              @include sc(30px, $color-big);
+              @include ellipsis;
+            }
+
+            .rank-share {
+              width: 100%;
+              @include sc(24px, $color-small);
+              @include ellipsis;
+            }
+          }
+
+          .rank-level {
+            height: 100%;
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+
+            .level-img {
+              margin-top: 10px;
+              height: 90px;
+              width: auto;
+            }
+
+            .level-data {
+              width: 100%;
+              height: 50px;
+              line-height: 50px;
+              text-align: center;
+              @include sc(24px, $color-theme);
+              @include ellipsis;
+            }
+
+            .level {
+              width: 100%;
+              top: 30px;
+              height: 65px;
+              position: absolute;
+              right: 0;
+              z-index: 1;
+              text-align: center;
+              line-height: 65px;
+              @include sc(12px, $color-white)
+            }
+
+          }
+
+        }
+      }
+
+    }
+  }
+
+  .mine-rank {
+    width: 92.6%;
+    padding: 0 3.7%;
+    background: $color-theme-2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .user-data {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .avatar {
+        margin-left: 10px;
+        width: 100px;
+        height: auto;
+        border-radius: 50%;
+      }
+
+      .rank-info {
+        width: 300px;
+        height: 100%;
+        margin-left: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+
+        .rank-name {
+          width: 100%;
+          @include sc(30px, $color-big);
+          @include ellipsis;
+        }
+
+        .rank-share {
+          width: 100%;
+          @include sc(24px, $color-small);
+          @include ellipsis;
+        }
+      }
+    }
+
+    .rank-level {
+      height: 100%;
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+
+      .level-img {
+        margin-top: 10px;
+        height: 90px;
+        width: auto;
+      }
+
+      .level-data {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        @include sc(24px, $color-theme);
+        @include ellipsis;
+      }
+
+      .level {
+        width: 100%;
+        top: 30px;
+        height: 65px;
+        position: absolute;
+        right: 0;
+        z-index: 1;
+        text-align: center;
+        line-height: 65px;
+        @include sc(12px, $color-white)
+      }
+
+    }
+  }
+
+}
