@@ -154,7 +154,7 @@ class UserRank extends Component {
           {loadAll && <LoadAll />}
         </ScrollView>
 
-        <View className='mine-rank'>
+        <View className='mine-rank' style={{height: `${mineHeight}px`}}>
           <View className='user-data'>
             <Image className='avatar' src={mine.avatar || avatar} mode='widthFix' />
             <View className='rank-info'>
