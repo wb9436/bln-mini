@@ -107,7 +107,7 @@ class Home extends Component {
             <View className='data-detail'>
               {item.hot == 1 && <View className='title-icon hot'> 热 </View>}
               {item.hot == 2 && <View className='title-icon new'> 新 </View>}
-              100人阅读
+              {item.hits}人阅读
             </View>
             <View className='share-btn' style={{backgroundImage: `url(${item.state == 1 ? shareBtn : overtimeBtn})`}}>
               {item.state == 1 ? '立即分享' : '活动已结束'}
