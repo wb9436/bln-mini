@@ -130,7 +130,7 @@ class UserRank extends Component {
             </View>
             <View className='rank-level'>
               <Image className='level-img' mode='aspectFill' src={levelImg} />
-              <View className='level-data'>{`阅读数：${item.readNum}`}</View>
+              <View className='level-data'>{`阅读数 ${item.readNum}`}</View>
               <View className='level'>{levelMsg}</View>
             </View>
           </View>
@@ -163,7 +163,7 @@ class UserRank extends Component {
           </View>
           <View className='rank-level'>
             <Image className='level-img' mode='aspectFill' src={myLevelImg} />
-            <View className='level-data'>{`阅读数：${mine.readNum}`}</View>
+            <View className='level-data'>{`阅读数 ${mine.readNum}`}</View>
             <View className='level'>{myLevelMsg}</View>
           </View>
         </View>
