@@ -87,3 +87,11 @@ export const userSignToday = data => Request({
   data
 })
 
+/*用户排行榜*/
+export const userRankList = data => Request({
+  url: '/api/user/rank',
+  method: 'POST',
+  need_sid: true,
+  data
+})
+
