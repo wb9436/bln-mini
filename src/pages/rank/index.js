@@ -148,7 +148,6 @@ class UserRank extends Component {
           scrollWithAnimation
           onScrollToLower={this.onLoadHandler.bind(this)}
         >
-
           {content}
 
           {loadAll && <LoadAll />}
