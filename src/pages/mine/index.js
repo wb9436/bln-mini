@@ -141,7 +141,7 @@ class Mine extends Component {
       let signMessage = false
       if (item.type === 'wallet' && userAccount.money > 0) {
         signMessage = true
-      } else if (item.type === 'task' && userSign.signTime) {
+      } else if (item.type === 'task' && userSign) {
         if (!Utils.isTodayDay(new Date(userSign.signTime))) {
           signMessage = true
         }
