@@ -24,7 +24,7 @@ export default {
     readTime: 0,//阅读时间(单位秒),
     scrollTop: 0,//滑动距离
     scrollHeight: 0,//滑块内容高度
-    screenHeight: Taro.getSystemInfoSync().screenHeight,//屏幕高度
+    screenHeight: Taro.getSystemInfoSync().windowHeight,//屏幕高度
     openTime: 0,
     sendStatus: false,//任务发送状态
     openid: '',
@@ -102,7 +102,7 @@ export default {
           slideTimes: 0,//滑动次数
           readTime: 0,//阅读时间(单位秒),
           scrollTop: 0,//滑动距离
-          scrollHeight: Taro.getSystemInfoSync().screenHeight,//屏幕高度
+          scrollHeight: Taro.getSystemInfoSync().windowHeight,//屏幕高度
           openTime: 0,
           sendStatus: false,//任务发送状态
           openid: '',
