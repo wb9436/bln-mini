@@ -59,6 +59,15 @@ export const activityEffect = data => Request({
   data
 })
 
+/*活动点赞*/
+export const activityPraise = data => Request({
+  url: '/api/activity/like',
+  method: 'POST',
+  need_sid: false,
+  no_toast: true,//是否需要弹窗
+  data
+})
+
 /*完成活动任务*/
 export const getOpenid = data => Request({
   url: '/api/web/getOpenid',
@@ -76,3 +85,22 @@ export const getDecryptData = data => Request({
   no_toast: true,//是否需要弹窗
   data
 })
+
+/*活动广告*/
+export const activityAd = data => Request({
+  url: '/api/activity/footAdv/randomOne',
+  method: 'POST',
+  need_sid: false,
+  no_toast: true,//是否需要弹窗
+  data
+})
+
+/*活动详情活动广告*/
+export const activityActAd = data => Request({
+  url: '/api/activity/random',
+  method: 'POST',
+  need_sid: false,
+  no_toast: true,//是否需要弹窗
+  data
+})
+

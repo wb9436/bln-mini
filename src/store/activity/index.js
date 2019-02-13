@@ -142,19 +142,6 @@ export default {
       }
     },
 
-    * loadNewsContent(_, {call, put, select}) {
-      const {userId, actId} = yield select(state => state.activity)
-      const {code, body} = yield call(Api.newsContent, {userId, id: actId})
-      if (code == 200) {
-        yield put({
-          type: 'save',
-          payload: {
-            content: body.content
-          }
-        })
-      }
-    },
-
     * getWeiXinOpenid({payload}, {call, put}) {
       const {code} = payload
       const data = yield call(Api.getOpenid, {code})

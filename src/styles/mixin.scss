@@ -9,7 +9,8 @@ $color-line: #EfEEf4 !default;//线的颜色
 $color-success: #97A78A !default;//成功: 深绿色
 $color-green: #57D295 !default;//绿色
 $color-mark: #A9A9A9 !default;//遮罩
-$color-gray: #C6C5CA !default;;//深灰
+$color-gray: #C6C5CA !default;//深灰
+$color-blue: #7A80A0 !default;//浅蓝色
 
 @mixin flex-wrap {
   display: flex;
