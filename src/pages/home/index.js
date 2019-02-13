@@ -101,7 +101,7 @@ class Home extends Component {
         <View className='item-content'>
           <View className='item-title'>{`【${item.title}】${item.subTitle}`}</View>
           <View className='item-desc'>
-            {item.state != 2 ? `每增加一次阅读可获得${item.money}元` : ''}
+            {item.state != 2 && item.money > 0 ? `每增加一次阅读可获得${item.money}元` : ''}
           </View>
           <View className='item-data'>
             <View className='data-detail'>
