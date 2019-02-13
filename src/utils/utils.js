@@ -1,4 +1,5 @@
 import Taro from '@tarojs/taro'
+import CryptoJS from 'crypto-js'
 
 export const windowHeight = tabPage => {
   let height = Taro.getSystemInfoSync().windowHeight
@@ -128,4 +129,9 @@ export const ddkOrderState = data => {
     }
   }
   return desc
+}
+
+/**MD5*/
+export const md5 = data => {
+  return CryptoJS.MD5(data).toString()
 }
