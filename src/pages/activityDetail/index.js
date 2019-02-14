@@ -95,7 +95,7 @@ class ActivityDetail extends Component {
     const {isAd, isImage, isVideo, picUrl, videoUrl, adTitle, subTitle, btnTitle, actList} = this.props
 
     let shareBtnHeight = 50
-    let scrollHeight = Utils.windowHeight(false) - 50
+    let scrollHeight = Utils.windowHeight(false)
     if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
       scrollHeight -= 50
     }
@@ -184,11 +184,6 @@ class ActivityDetail extends Component {
           </View>
 
         </ScrollView>
-
-        <Button className='share-btn' openType='share' style={{height: `${shareBtnHeight}px`}}>
-          <Image className='btn-img' src={shareBtn} mode='widthFix' />
-          <View>立即分享</View>
-        </Button>
 
         {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ?
           <Button className='share-btn' openType='share' style={{height: `${shareBtnHeight}px`}}>
