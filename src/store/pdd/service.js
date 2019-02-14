@@ -18,10 +18,11 @@ export const optSearch = data => Request({
   data
 })
 
-/*类目商品查询*/
-export const bannerList = data => Request({
-  url: '/api/banner/list',
+/*商品搜索*/
+export const keywordsSearch = data => Request({
+  url: '/ddk/goods/searchGoods',
   method: 'POST',
   need_sid: true,
+  api_type: 'pdd',
   data
 })

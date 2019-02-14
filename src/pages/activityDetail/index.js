@@ -122,12 +122,12 @@ class ActivityDetail extends Component {
     })
 
     return (
-      <View className='detail-container'>
+      <View className='activity-page'>
         {/*微信分享*/}
         {Taro.getEnv() === Taro.ENV_TYPE.WEB ? <WxShare link={link} title={title} desc={desc} imgUrl={imageUrl} /> : ''}
 
         <ScrollView
-          className='detail-scroll'
+          className='act-scroll'
           style={{height: `${scrollHeight}px`}}
           scrollY
           scrollWithAnimation

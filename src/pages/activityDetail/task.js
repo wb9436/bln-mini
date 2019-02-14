@@ -206,10 +206,10 @@ class ActivityTask extends Component {
     })
 
     return (
-      <View className='detail-container'>
+      <View className='activity-page'>
 
         <ScrollView
-          className='detail-scroll'
+          className='act-scroll'
           style={{height: `${scrollHeight}px`}}
           scrollY
           scrollWithAnimation
