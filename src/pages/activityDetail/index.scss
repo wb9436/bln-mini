@@ -115,6 +115,13 @@
       .ad-media {
         width: 100%;
         background: $color-white;
+
+        .media-style {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+
       }
 
       .ad-container {

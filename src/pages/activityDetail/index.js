@@ -66,7 +66,7 @@ class ActivityDetail extends Component {
 
   render() {
     const {title, content, link, desc, imageUrl, refreshTime, hits, praise, praiseState, scrollTop} = this.props
-    const {isAd, isImage, isVideo, picUrl, videoUrl, accessUrl, adTitle, subTitle, btnTitle, id, actList} = this.props
+    const {isAd, isImage, isVideo, picUrl, videoUrl, adTitle, subTitle, btnTitle, actList} = this.props
 
     let height = Utils.windowHeight(false)
     let shareBtnHeight = 50
@@ -135,12 +135,8 @@ class ActivityDetail extends Component {
           {isAd &&
             <View className='act-ad'>
               <View className='ad-media'>
-                {isImage &&
-                  <Image style='width: 100%; height: auto;display: block;' src={picUrl} mode='widthFix' />
-                }
-                {isVideo &&
-                  <Video style='width: 100%; height: auto;display: block;' controls='controls' src={videoUrl} poster={picUrl} />
-                }
+                {isImage && <Image className='media-style' src={picUrl} mode='widthFix' />}
+                {isVideo && <Video className='media-style' controls src={videoUrl} poster={picUrl} />}
               </View>
               <View className='ad-container'>
                 <View className='ad-content'>
@@ -161,7 +157,6 @@ class ActivityDetail extends Component {
           <View className='act-list'>
             {actContent}
           </View>
-
 
         </ScrollView>
 
