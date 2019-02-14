@@ -27,7 +27,7 @@ class ActivityTask extends Component {
 
   componentDidMount() {
     const {userId, type, actId, title} = this.$router.params
-    Taro.setNavigationBarTitle({title: title})
+    // Taro.setNavigationBarTitle({title: title})
     let unionid = this.$router.params.unionid
     // console.log(`Activity Task: ${JSON.stringify(this.$router.params)}`)
     if (userId) {
@@ -169,8 +169,8 @@ class ActivityTask extends Component {
   }
 
   render() {
-    const {title, content, unionid, refreshTime, hits, praise, praiseState, scrollTop} = this.props
-    const {isAd, isImage, isVideo, picUrl, videoUrl, adTitle, subTitle, btnTitle, id, actList} = this.props
+    const {title, content, unionid, refreshTime, hits, praise, praiseState} = this.props
+    const {isAd, isImage, isVideo, picUrl, videoUrl, adTitle, subTitle, btnTitle, actList} = this.props
 
     let scrollHeight = Utils.windowHeight(false)
 
@@ -206,7 +206,7 @@ class ActivityTask extends Component {
           style={{height: `${scrollHeight}px`}}
           scrollY
           scrollWithAnimation
-          scrollTop={scrollTop}
+          onScroll={this.onScroll.bind(this)}
         >
           <View className='act-detail'>
             <View className='act-title'>
