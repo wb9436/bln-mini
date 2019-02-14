@@ -64,19 +64,44 @@ class ActivityDetail extends Component {
     })
   }
 
+  onActivityClick(actId, title, iconUrl) {
+    let scrollTop = 0
+    let type = 0
+    const {userId} = this.props
+    let link = `http://api.viplark.com/api/web/share?userId=${userId}&type=${type}&actId=${actId}`
+    let desc = '更多有趣的段子，尽在百灵鸟平台'
+    if (type == 0) {
+      desc = '更多生活资讯、优惠信息，尽在百灵鸟平台'
+    }
+    this.props.dispatch({
+      type: 'activityDetail/initActivity'
+    })
+    this.props.dispatch({
+      type: 'activityDetail/save',
+      payload: {
+        userId, actId, title, link, desc, imageUrl: iconUrl, scrollTop
+      }
+    })
+    this.props.dispatch({
+      type: 'activityDetail/loadActivityData'
+    })
+    this.props.dispatch({
+      type: 'activityDetail/loadAdData'
+    })
+  }
+
   render() {
     const {title, content, link, desc, imageUrl, refreshTime, hits, praise, praiseState, scrollTop} = this.props
     const {isAd, isImage, isVideo, picUrl, videoUrl, adTitle, subTitle, btnTitle, actList} = this.props
 
-    let height = Utils.windowHeight(false)
     let shareBtnHeight = 50
-    let scrollHeight = height - 50
+    let scrollHeight = Utils.windowHeight(false) - 50
     if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
       scrollHeight -= 50
     }
 
     const actContent = actList.map((item, index) => {
-      return <View key={index} className='activity-item'>
+      return <View key={index} className='activity-item' onClick={this.onActivityClick.bind(this, item.actId, item.subTitle, item.iconUrl)}>
         <View className='item-image'>
           <Image className='act-logo' src={item.iconUrl} mode='widthFix' />
         </View>
@@ -97,7 +122,7 @@ class ActivityDetail extends Component {
     })
 
     return (
-      <View className='detail-container' style={{height: `${height}px`}}>
+      <View className='detail-container'>
         {/*微信分享*/}
         {Taro.getEnv() === Taro.ENV_TYPE.WEB ? <WxShare link={link} title={title} desc={desc} imgUrl={imageUrl} /> : ''}
 
@@ -132,7 +157,7 @@ class ActivityDetail extends Component {
             </View>
           </View>
 
-          {isAd &&
+          {isAd && Taro.getEnv() === Taro.ENV_TYPE.WEB &&
             <View className='act-ad'>
               <View className='ad-media'>
                 {isImage && <Image className='media-style' src={picUrl} mode='widthFix' />}

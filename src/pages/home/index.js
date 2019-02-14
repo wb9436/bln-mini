@@ -81,11 +81,10 @@ class Home extends Component {
     }
   }
 
-  onActivityClick(id, title, link, iconUrl) {
-    Taro.setStorageSync('actLink', link)
+  onActivityClick(actId, title, iconUrl) {
     Taro.navigateTo({
-      url: `/pages/activityDetail/index?type=0&title=${title}&actId=${id}&imageUrl=${iconUrl}`
-      // url: `/pages/activityDetail/task?type=0&title=${title}&actId=${id}&userId=${Taro.getStorageSync('userId')}`
+      url: `/pages/activityDetail/index?type=0&title=${title}&actId=${actId}&imageUrl=${iconUrl}`
+      // url: `/pages/activityDetail/task?type=0&title=${title}&actId=${actId}&userId=${Taro.getStorageSync('userId')}`
     })
   }
 
@@ -102,7 +101,7 @@ class Home extends Component {
     let actHeight = windowHeight - 40
 
     const actContent = activityList.map((item, index) => {
-      return <View key={index} className='activity-item' onClick={this.onActivityClick.bind(this, item.actId, item.subTitle, item.link, item.iconUrl)}>
+      return <View key={index} className='activity-item' onClick={this.onActivityClick.bind(this, item.actId, item.subTitle, item.iconUrl)}>
         <View className='item-image'>
           <Image className='act-logo' src={item.iconUrl} mode='widthFix' />
         </View>

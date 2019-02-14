@@ -168,6 +168,13 @@ class ActivityTask extends Component {
     })
   }
 
+  onActivityClick(actId, title) {
+    const {userId} = this.props
+    Taro.navigateTo({
+      url: `/pages/activityDetail/task?type=0&title=${title}&actId=${actId}&userId=${userId}`
+    })
+  }
+
   render() {
     const {title, content, unionid, refreshTime, hits, praise, praiseState} = this.props
     const {isAd, isImage, isVideo, picUrl, videoUrl, adTitle, subTitle, btnTitle, actList} = this.props
@@ -178,7 +185,7 @@ class ActivityTask extends Component {
     let canScrollTemp = (unionid && unionid.length > 0) ? true : this.state.canScroll
 
     const actContent = actList.map((item, index) => {
-      return <View key={index} className='activity-item'>
+      return <View key={index} className='activity-item' onClick={this.onActivityClick.bind(this, item.actId, item.subTitle)}>
         <View className='item-image'>
           <Image className='act-logo' src={item.iconUrl} mode='widthFix' />
         </View>
@@ -232,7 +239,7 @@ class ActivityTask extends Component {
             </View>
           </View>
 
-          {isAd &&
+          {isAd && Taro.getEnv() === Taro.ENV_TYPE.WEB &&
             <View className='act-ad'>
               <View className='ad-media'>
                 {isImage && <Image className='media-style' src={picUrl} mode='widthFix' />}
