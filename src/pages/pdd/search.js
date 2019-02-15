@@ -10,8 +10,8 @@ import LoadAll from '../../components/LoadAll/index'
 import SortList from '../../components/SortList'
 import * as Utils from "../../utils/utils";
 
-@connect(({pdd}) => ({
-  ...pdd
+@connect(({pddSearch}) => ({
+  ...pddSearch
 }))
 class PddSearch extends Component {
   config = {
@@ -19,15 +19,18 @@ class PddSearch extends Component {
   }
 
   goBack() {
-    this.props.dispatch({
-      type: 'pdd/initData',
-    })
     Taro.navigateBack()
+  }
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'pddSearch/initData',
+    })
   }
 
   onKeywordInput(e) {
     this.props.dispatch({
-      type: 'pdd/save',
+      type: 'pddSearch/save',
       payload: {
         keyword: e.detail.value
       }
@@ -38,15 +41,14 @@ class PddSearch extends Component {
     const {keyword} = this.props
     if (keyword != null && keyword.trim() != '') {
       this.props.dispatch({
-        type: 'pdd/save',
+        type: 'pddSearch/save',
         payload: {
           page: 1,
           goodsList: [],
-          showSort: true
         }
       })
       this.props.dispatch({
-        type: 'pdd/keywordsSearch'
+        type: 'pddSearch/keywordsSearch'
       })
     } else {
       Taro.showToast({
@@ -61,7 +63,7 @@ class PddSearch extends Component {
     const {sortType} = this.props
     if (value != sortType) {
       this.props.dispatch({
-        type: 'pdd/save',
+        type: 'pddSearch/save',
         payload: {
           loadAll: false,
           page: 1,
@@ -70,7 +72,7 @@ class PddSearch extends Component {
         }
       })
       this.props.dispatch({
-        type: 'pdd/keywordsSearch'
+        type: 'pddSearch/keywordsSearch'
       })
     }
   }
@@ -79,20 +81,19 @@ class PddSearch extends Component {
     const {page, loadAll} = this.props
     if (!loadAll) {
       this.props.dispatch({
-        type: 'pdd/save',
+        type: 'pddSearch/save',
         payload: {
           page: page + 1
         }
       })
       this.props.dispatch({
-        type: 'pdd/keywordsSearch'
+        type: 'pddSearch/keywordsSearch'
       })
     }
   }
 
   render() {
     const {showSort, goodsList, loadAll} = this.props
-    const isH5 = (process.env.TARO_ENV === 'h5' ? true : false)
 
     let windowHeight = Utils.windowHeight(false) //可用窗口高度
     let searchHeight = 50 //搜索栏高度
@@ -127,8 +128,10 @@ class PddSearch extends Component {
         {Taro.getEnv() === Taro.ENV_TYPE.WEB && <WxShare />}
 
         <View className='search-btn' style={{height: `${searchHeight}px`}} >
-          <View className='btn-back' onClick={this.goBack.bind(this)} hidden={!isH5}>
-            <AtIcon value='chevron-left' color='#FFF' size='30' />
+          <View className='btn-back' onClick={this.goBack.bind(this)}>
+            {Taro.getEnv() === Taro.ENV_TYPE.WEB &&
+              <AtIcon value='chevron-left' color='#FFF' size='30' />
+            }
           </View>
           <View className='search-input'>
             <View className='search-icon'>
@@ -145,9 +148,9 @@ class PddSearch extends Component {
 
         <View className='goods-container' style={{height: `${goodsHeight}px`}}>
           {showSort &&
-          <View className='sort-btn' style={{height: `${sortHeight}px`, background: '#F2F2F2'}}>
-            <SortList onSortChecked={this.onSortChecked.bind(this)} />
-          </View>
+            <View className='sort-btn' style={{height: `${sortHeight}px`, background: '#F2F2F2'}}>
+              <SortList onSortChecked={this.onSortChecked.bind(this)} />
+            </View>
           }
 
           <View className='goods-scroll' style={{height: `${scrollHeight}px`}}>

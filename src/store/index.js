@@ -5,6 +5,7 @@ import activityDetail from './activity/detail'
 import user from './user/index'
 import news from './news/index'
 import pdd from './pdd/index'
+import pddSearch from './pdd/search'
 
 const models = [
   activity,
@@ -12,6 +13,7 @@ const models = [
   user,
   news,
   pdd,
+  pddSearch,
 ]
 
 const dvaApp = dva.createApp({

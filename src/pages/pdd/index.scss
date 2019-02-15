@@ -11,8 +11,16 @@
     align-items: center;
     justify-content: center;
 
+    .btn-back {
+      height: 60px;
+      width: 12.5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .search-input {
-      width: 80%;
+      width: 75%;
       height: 60px;
       margin: 0 auto;
       background: $color-white;
@@ -26,7 +34,16 @@
 
       .search-value {
         margin-left: 6px;
+        color: $color-input;
       }
+    }
+
+    .btn-search {
+      height: 60px;
+      width: 12.5%;
+      line-height: 60px;
+      text-align: center;
+      @include sc(32px, $color-big);
     }
   }
 
@@ -58,7 +75,7 @@
   flex-wrap: wrap;
 
   .goods-item {
-    margin-top: 15px;
+    margin-top: 10px;
     width: 352px;
     height: 540px;
     display: flex;
