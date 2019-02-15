@@ -27,14 +27,16 @@ export default {
     },
 
     * refreshNews(_, {call, put, select}) {
-      const {curPageNum, pageSize} = yield select(state => state.news)
+      let curPageNum = 1
+      const {pageSize} = yield select(state => state.news)
       const {code, body} = yield call(Api.newsList, {curPageNum, pageSize})
       if(code == 200) {
         yield put({
           type: 'save',
           payload: {
             newsList: body.array,
-            loadAll: body.paging.last
+            loadAll: body.paging.last,
+            curPageNum: curPageNum
           }
         })
       }
@@ -51,13 +53,13 @@ export default {
             type: 'save',
             payload: {
               newsList: newsList.concat(body.array),
-              loadAll: body.paging.last
+              loadAll: body.paging.last,
+              curPageNum: curPageNum + 1
             }
           })
         }
       }
     },
-
   },
 
   reducers: {
