@@ -101,6 +101,7 @@ class Pdd extends Component {
   onLookGoodsDetail(goodsId) {
     Taro.navigateTo({
       url: '/pages/pddDetail/index?goodsId=' + goodsId
+      // url: '/pages/pddDetail/buy?goodsId=' + goodsId + '&inviter=' + Taro.getStorageSync('userId')
     })
   }
 

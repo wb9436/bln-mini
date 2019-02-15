@@ -254,51 +254,7 @@
     }
   }
 
-  .guide-container {
-    height: 50Px;
-    position: absolute;
-    z-index: 666;
-    bottom: 50Px;
-    right: 0;
-    display: flex;
-    align-items: center;
 
-    .guide-btn {
-      width: 45Px;
-      height: 45Px;
-      background: $color-theme;
-      @include sc(12Px, $color-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-top-left-radius: 3Px;
-      border-bottom-left-radius: 3Px;
-
-      .btn-name {
-        width: 25Px;
-        text-align: center;
-        line-height: 16Px;
-      }
-    }
-
-    .guide-content {
-      height: 45Px;
-      background: $color-theme;
-      color: $color-white;
-      line-height: 16Px;
-      display: flex;
-      align-items: center;
-
-      .guide-home {
-        width: 45Px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-      }
-    }
-  }
 
   .detail-mark{
     width: 100%;

@@ -1,124 +1,116 @@
 @import "../../styles/mixin";
 
-.detail-container {
+.pdd-detail-page {
   width: 100%;
-  height: 100%;
-  background: $color-bg;
-  color: $color-big;
+  height: 100vh;
+  position: relative;
 
-  .goods-detail {
+  .goods-content {
     width: 100%;
+    background: $color-bg;
 
-    .detail_wrapper {
-      width: 100vw;
+    .goods-banner-swiper {
+      width: 750px;
       height: 750px;
 
-      .swiper__item, img, image {
-        height: 750px !important;
-      }
-
-      img, image {
-        width: 750px !important;
-        height: 750px !important;
+      .goods-banner {
+        width: 750px;
+        height: 750px;
+        overflow-y: hidden;
       }
     }
 
-    .goods-data {
+    .goods-discount {
+      padding: 10px 14px 0px;
+      height: 60px;
+      width: auto;
       background: $color-white;
-      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
       font-size: 30px;
 
-      .goods-price {
-        width: 100%;
-
-        .price1 {
-          width: 100%;
-          height: 50px;
-          line-height: 44px;
-          padding-top: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          text-align: center;
-
-          .title {
-            width: 100px;
-            background: $color-theme-3;
-            color: $color-white;
-          }
-
-          .data {
-            border: 2px solid $color-theme-3;
-            border-radius: 4px;
-            color: $color-theme-3;
-            padding: 0 8px;
-          }
-
-          .present-price {
-            @include sc(36px, $color-big);
-            margin-left: 4px;
-          }
-
-          .original-price {
-            color: $color-small;
-            margin-left: 30px;
-            text-decoration: line-through;
-          }
-
-          .sales {
-            color: $color-small;
-          }
-
-        }
+      .discount-title {
+        width: 100px;
+        background: $color-theme;
+        color: $color-white;
       }
 
-      .goods-desc {
-        width: 100%;
-        height: 90px;
-        @include sc(32px, $color-big)
+      .discount-receive {
+        border: 2px solid $color-theme;
+        border-radius: 4px;
+        color: $color-theme-3;
+        padding: 0 8px;
+      }
+
+      .present-price {
+        @include sc(36px, $color-big);
+        margin-left: 4px;
+      }
+
+      .original-price {
+        color: $color-small;
+        margin-left: 30px;
+        text-decoration: line-through;
       }
 
       .goods-sales {
-        width: 100%;
-        height: 64px;
-        padding: 10px 0;
-        font-size: 32px;
-        line-height: 64px;
-
-        .name {
-          width: 46px;
-          height: 40px;
-          line-height: 40px;
-          background: $color-theme-3;
-          color: $color-white;
-          display: inline-block;
-          text-align: center;
-        }
-        .price {
-          margin-left: 10px;
-          color: $color-theme-3;
-        }
-        .remain {
-          padding: 0 10px;
-          font-size: 24px;
-          color: $color-small;
-          margin-left: 30px;
-        }
+        color: $color-small;
       }
     }
 
-    .task-desc {
+    .goods-desc {
+      padding: 0 14px;
+      height: 90px;
+      @include sc(32px, $color-big);
+      background: $color-white;
+    }
+
+    .goods-coupon-data {
+      padding: 10px 14px;
+      height: 64px;
+      font-size: 32px;
+      line-height: 64px;
+      background: $color-white;
+
+      .coupon-name {
+        width: 46px;
+        height: 40px;
+        line-height: 40px;
+        background: $color-theme-3;
+        color: $color-white;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .coupon-price {
+        margin-left: 10px;
+        color: $color-theme-3;
+      }
+
+      .coupon-remain {
+        padding: 0 10px;
+        font-size: 24px;
+        color: $color-small;
+        margin-left: 30px;
+      }
+
+    }
+
+    .task-content {
       margin-top: 20px;
       height: 260px;
       background: $color-white;
       padding: 0 14px;
 
-      .desc-title {
+      .task-title {
         @include sc(34px, $color-big);
         height: 80px;
         line-height: 80px;
       }
-      .desc-content {
+
+      .task-desc {
         @include sc(28px, $color-small);
         padding-left: 10px;
       }
@@ -180,5 +172,10 @@
     }
 
   }
+
+  .pdd-guide {
+    bottom: 140Px;
+  }
+
 
 }
