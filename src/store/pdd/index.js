@@ -5,15 +5,31 @@ export default {
   namespace: 'pdd',
   state: {
     loadAll: false,
+    keyword: '',
     optId: -1,
     sortType: 0,
     goodsList: [],
     page: 1,
     totalPage: 0,
     showSort: false,
-    bannerList: [],
   },
   effects: {
+    * initData(_, {put}) {
+      yield put({
+        type: 'save',
+        payload: {
+          loadAll: false,
+          keyword: '',
+          optId: -1,
+          sortType: 0,
+          goodsList: [],
+          page: 1,
+          totalPage: 0,
+          showSort: false,
+        }
+      })
+    },
+
     * recommendSearch(_, {call, put, select}) {
       let userId = Taro.getStorageSync('userId')
       const {page, goodsList} = yield select(state => state.pdd);
@@ -46,6 +62,21 @@ export default {
       }
     },
 
+    * keywordsSearch(_, {call, put, select}) {
+      let userId = Taro.getStorageSync('userId')
+      const {page, goodsList, keyword, sortType} = yield select(state => state.pdd);
+      const {code, body} = yield call(Api.keywordsSearch, {page, userId, keyword, sortType})
+      if (code == 200) {
+        yield put({
+          type: 'save',
+          payload: {
+            goodsList: goodsList.concat(body.goodsList),
+            totalPage: body.totalPage,
+            loadAll: page >= body.totalPage ? true : false,
+          }
+        })
+      }
+    },
 
   },
   reducers: {

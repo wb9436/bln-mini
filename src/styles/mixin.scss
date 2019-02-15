@@ -37,3 +37,11 @@ $color-blue: #7A80A0 !default;//浅蓝色
   z-index: 999;
   width: 100%;
 }
+
+@mixin rowWrap($row) {
+  white-space: normal;
+  word-wrap: break-word;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $row;
+  overflow: hidden;
+}

@@ -1,55 +1,59 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, ScrollView, Image} from '@tarojs/components'
+import {View, Input, ScrollView, Image} from '@tarojs/components'
 import {AtIcon} from 'taro-ui'
 import {connect} from '@tarojs/redux'
 import './index.scss'
-import * as Utils from '../../utils/utils'
 
-import WxShare from '../../components/WxShare/index'
+import WxShare from '../../components/WxShare'
 import LoadAll from '../../components/LoadAll/index'
 
-import OptList from '../../components/OptionList/index'
-import SortList from '../../components/SortList/index'
+import SortList from '../../components/SortList'
+import * as Utils from "../../utils/utils";
 
 @connect(({pdd}) => ({
-  ...pdd,
+  ...pdd
 }))
-class Pdd extends Component {
+class PddSearch extends Component {
   config = {
-    navigationBarTitleText: '拼多多'
+    navigationBarTitleText: '商品搜索'
   }
 
-  componentDidMount() {
+  goBack() {
     this.props.dispatch({
       type: 'pdd/initData',
     })
+    Taro.navigateBack()
+  }
+
+  onKeywordInput(e) {
     this.props.dispatch({
-      type: 'pdd/recommendSearch',
+      type: 'pdd/save',
+      payload: {
+        keyword: e.detail.value
+      }
     })
   }
 
-  onOptChecked(value) {
-    const {optId} = this.props
-    if (value != optId) {
+  onSearchByKeyword() {
+    const {keyword} = this.props
+    if (keyword != null && keyword.trim() != '') {
       this.props.dispatch({
         type: 'pdd/save',
         payload: {
-          loadAll: false,
-          optId: value,
           page: 1,
-          showSort: value != -1 ? true : false,
           goodsList: [],
+          showSort: true
         }
       })
-      if(value == -1) {
-        this.props.dispatch({
-          type: 'pdd/recommendSearch'
-        })
-      }else{
-        this.props.dispatch({
-          type: 'pdd/optSearch'
-        })
-      }
+      this.props.dispatch({
+        type: 'pdd/keywordsSearch'
+      })
+    } else {
+      Taro.showToast({
+        title: '请输入关键词',
+        icon: 'none',
+        duration: 2000
+      })
     }
   }
 
@@ -66,13 +70,13 @@ class Pdd extends Component {
         }
       })
       this.props.dispatch({
-        type: 'pdd/optSearch'
+        type: 'pdd/keywordsSearch'
       })
     }
   }
 
   appendNextPageList() {
-    const {optId, page, loadAll} = this.props
+    const {page, loadAll} = this.props
     if (!loadAll) {
       this.props.dispatch({
         type: 'pdd/save',
@@ -80,30 +84,19 @@ class Pdd extends Component {
           page: page + 1
         }
       })
-      if(optId == -1) {
-        this.props.dispatch({
-          type: 'pdd/recommendSearch'
-        })
-      }else{
-        this.props.dispatch({
-          type: 'pdd/optSearch'
-        })
-      }
+      this.props.dispatch({
+        type: 'pdd/keywordsSearch'
+      })
     }
   }
 
-  onSearchGoods() {
-    Taro.navigateTo({
-      url: '/pages/pdd/search'
-    })
-  }
-
   render() {
-    const {goodsList, loadAll, showSort} = this.props
+    const {showSort, goodsList, loadAll} = this.props
+    const isH5 = (process.env.TARO_ENV === 'h5' ? true : false)
+
     let windowHeight = Utils.windowHeight(false) //可用窗口高度
     let searchHeight = 50 //搜索栏高度
-    let optHeight = 40 //类目高度
-    let goodsHeight = windowHeight - searchHeight - optHeight //商品展示高度
+    let goodsHeight = windowHeight - searchHeight //商品展示高度
     let sortHeight = 35 //排序高度
     let scrollHeight = goodsHeight //滑动高度
     if (showSort) {
@@ -133,24 +126,28 @@ class Pdd extends Component {
         {/*微信分享*/}
         {Taro.getEnv() === Taro.ENV_TYPE.WEB && <WxShare />}
 
-        <View className='search-btn' style={{height: `${searchHeight}px`}} onClick={this.onSearchGoods.bind(this)} >
+        <View className='search-btn' style={{height: `${searchHeight}px`}} >
+          <View className='btn-back' onClick={this.goBack.bind(this)} hidden={!isH5}>
+            <AtIcon value='chevron-left' color='#FFF' size='30' />
+          </View>
           <View className='search-input'>
             <View className='search-icon'>
               <AtIcon value='search' color='#B5B5B5' size='20' />
             </View>
-            <View className='search-value'>搜索</View>
+            <View className='search-value'>
+              <Input placeholder='搜索' focus autoFocus maxLength='16' onInput={this.onKeywordInput.bind(this)}
+                onChange={this.onKeywordInput.bind(this)}
+              />
+            </View>
           </View>
-        </View>
-
-        <View className='opt-btn' style={{height: `${optHeight}px`}}>
-          <OptList onOptChecked={this.onOptChecked.bind(this)} />
+          <View className='btn-search' onClick={this.onSearchByKeyword.bind(this)}>搜索</View>
         </View>
 
         <View className='goods-container' style={{height: `${goodsHeight}px`}}>
           {showSort &&
-            <View className='sort-btn' style={{height: `${sortHeight}px`}}>
-              <SortList onSortChecked={this.onSortChecked.bind(this)} />
-            </View>
+          <View className='sort-btn' style={{height: `${sortHeight}px`, background: '#F2F2F2'}}>
+            <SortList onSortChecked={this.onSortChecked.bind(this)} />
+          </View>
           }
 
           <View className='goods-scroll' style={{height: `${scrollHeight}px`}}>
@@ -174,4 +171,4 @@ class Pdd extends Component {
   }
 }
 
-export default Pdd
+export default PddSearch

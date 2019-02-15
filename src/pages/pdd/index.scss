@@ -1,65 +1,152 @@
 @import "../../styles/mixin";
 
-.pdd {
+.pdd-page {
   width: 100%;
-  height: 100%;
-  background: $color-bg;
 
-  .search {
+  .search-btn {
     font-size: 30px;
     width: 100%;
+    background: $color-theme;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    .banner {
+    .search-input {
+      width: 80%;
+      height: 60px;
+      margin: 0 auto;
+      background: $color-white;
+      @include flex-wrap;
+      justify-content: flex-start;
+      border-radius: 10px;
+
+      .search-icon {
+        margin-left: 6px;
+      }
+
+      .search-value {
+        margin-left: 6px;
+      }
+    }
+  }
+
+  .opt-btn {
+    width: 100%;
+    background: $color-bg;
+    display: flex;
+    align-items: center;
+  }
+
+  .goods-container {
+    width: 100%;
+
+    .sort-btn {
       width: 100%;
-      height: 220px;
+      display: flex;
+      align-items: center;
+    }
+  }
 
-      .search-btn {
-        width: 100%;
-        height: 60px;
-        position: absolute;
-        top: 20px;
-        margin: 0 auto;
-        @include flex-wrap;
+}
 
-        .search-input {
-          width: 80%;
-          height: 60px;
-          margin: 0 auto;
-          background: $color-white;
-          @include flex-wrap;
-          justify-content: flex-start;
-          border-radius: 10px;
+.goods-list {
+  margin: 0 15px;
+  width: auto;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 
-          .search-icon {
-            margin-left: 6px;
-          }
+  .goods-item {
+    margin-top: 15px;
+    width: 352px;
+    height: 540px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 
-          .search-value {
-            margin-left: 6px;
-          }
-        }
+    .goods-icon {
+      width: 352px;
+      height: 352px;
+    }
+
+    .goods-name {
+      width: 352px;
+      height: 70px;
+      margin-top: 5px;
+      line-height: 35px;
+      @include sc(13px, $color-big);
+      @include rowWrap(2);
+    }
+
+    .goods-data-1 {
+      width: 352px;
+      height: 55px;
+      line-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .goods-coupon {
+        width: 50px;
+        height: 40px;
+        line-height: 43px;
+        border: 4px solid $color-theme;
+        text-align: center;
+        background-color: $color-theme;
+        @include sc(26px, $color-white);
+      }
+
+      .coupon-money {
+        padding: 0 8px;
+        height: 40px;
+        line-height: 43px;
+        border: 4px solid $color-theme;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        @include sc(26px, $color-theme);
+      }
+
+      .goods-sale {
+        height: 48px;
+        line-height: 46px;
+        margin-left: 20px;
+        max-width: 158px;
+        color: $color-small;
+        @include ellipsis;
+        @include sc(30px, $color-small);
       }
     }
 
-    .banner-top {
-      height: 100px;
-      background: $color-theme-3;
+    .goods-data-2 {
+      width: 352px;
+      height: 60px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .goods-price {
+        width: 50%;
+        height: 50px;
+        line-height: 50px;
+        @include sc(40px, $color-big);
+        @include ellipsis;
+      }
+
+      .goods-comm {
+        width: 40%;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        border-radius: 5px;
+        background-color: $color-theme;
+        @include sc(30px, $color-white);
+        @include ellipsis;
+      }
     }
-  }
-
-  .goods {
-    width: 100%;
-    background-color: $color-white;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-
-    .content {
-      width: 100%;
-    }
-  }
-
-  .goods-top {
-    top: 180px;
   }
 
 }
