@@ -187,7 +187,7 @@ class ActivityTask extends Component {
     const actContent = actList.map((item, index) => {
       return <View key={index} className='activity-item' onClick={this.onActivityClick.bind(this, item.actId, item.subTitle)}>
         <View className='item-image'>
-          <Image className='act-logo' src={item.iconUrl} mode='widthFix' />
+          <Image className='act-logo' src={item.iconUrl} mode='scaleToFill' />
         </View>
         <View className='item-content'>
           <View className='item-title'>{`【${item.title}】${item.subTitle}`}</View>
