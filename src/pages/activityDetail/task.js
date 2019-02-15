@@ -48,12 +48,15 @@ class ActivityTask extends Component {
         userId, type, actId, title, openTime, unionid
       }
     })
+    this.props.dispatch({
+      type: 'activityDetail/loadAdData'
+    })
     if (type == 0) {
       this.props.dispatch({
         type: 'activityDetail/loadActivityData'
       })
       this.props.dispatch({
-        type: 'activityDetail/loadAdData'
+        type: 'activityDetail/loadActAdData'
       })
       if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
         this.checkUnionid(type, unionid)
@@ -176,7 +179,7 @@ class ActivityTask extends Component {
   }
 
   render() {
-    const {title, content, unionid, refreshTime, hits, praise, praiseState} = this.props
+    const {type, title, content, unionid, refreshTime, hits, praise, praiseState} = this.props
     const {isAd, isImage, isVideo, picUrl, videoUrl, adTitle, subTitle, btnTitle, actList} = this.props
 
     let scrollHeight = Utils.windowHeight(false)
@@ -228,16 +231,18 @@ class ActivityTask extends Component {
             {Taro.getEnv() === Taro.ENV_TYPE.WEB && <View className='rich-text'><RichText nodes={content} /></View>}
           </View>
 
-          <View className='act-data'>
-            <View className='act-hits'>
-              阅读量
-              <View className='hits-data'>{hits}</View>
+          {type == 0 &&
+            <View className='act-data'>
+              <View className='act-hits'>
+                阅读量
+                <View className='hits-data'>{hits}</View>
+              </View>
+              <View className='act-praise' onClick={this.onActivityPraise.bind(this)}>
+                <Image className='praise-btn' mode='widthFix' src={praiseBtn}/>
+                <View className={praiseState === 1 ? 'praise-data praise-state' : 'praise-data'}>{praise}</View>
+              </View>
             </View>
-            <View className='act-praise' onClick={this.onActivityPraise.bind(this)}>
-              <Image className='praise-btn' mode='widthFix' src={praiseBtn} />
-              <View className={praiseState === 1 ? 'praise-data praise-state' : 'praise-data'}>{praise}</View>
-            </View>
-          </View>
+          }
 
           {isAd && Taro.getEnv() === Taro.ENV_TYPE.WEB &&
             <View className='act-ad'>

@@ -27,7 +27,7 @@ class Classify extends Component {
         //type: 0=本程序页面, 1=web页面, 2=小程序页面
         {title: '阅点商城', desc: '阅点可以兑换商品', icon: Mall, page: Constant.pointShopUrl + '?sid=' + Taro.getStorageSync('sid'), type: 1},
         {title: '拼多多', desc: '随时随地拼多多', icon: Pdd, page: '', type: 0},
-        {title: '段子手', desc: '段子手', icon: Hot, page: '', type: 0},
+        {title: '段子手', desc: '段子手', icon: Hot, page: '/pages/news/index', type: 0},
         {title: '兑换钻石', desc: '阅点可以兑换游戏钻石', icon: Diamond, page: Constant.diamondShopUrl + '?sid=' + Taro.getStorageSync('sid'), type: 1},
       ],
     }

@@ -39,6 +39,7 @@ class App extends Component {
       'pages/rank/index',
       'pages/activityDetail/index',
       'pages/activityDetail/task',
+      'pages/news/index',
     ],
     tabBar: {
       "color": "#929292",

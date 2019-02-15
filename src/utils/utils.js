@@ -131,6 +131,41 @@ export const ddkOrderState = data => {
   return desc
 }
 
+/*显示距现在时间*/
+export const timeDesc = time => {
+  let desc = ''
+  if(Number.isNaN(time)) {
+    return desc
+  }
+  let diff = parseInt(new Date().getTime() / 1000) - time
+  if (diff <= 0) {
+    desc = '刚刚'
+  } else {
+    let month = parseInt(diff / 3600 / 24 / 30)
+    if (month > 0) {
+      desc = `${month}月前`
+    } else {
+      let day = parseInt(diff / 3600 / 24)
+      if (day > 0) {
+        desc = `${day}天前`
+      } else {
+        let hour = parseInt(diff / 3600)
+        if (hour > 0) {
+          desc = `${hour}小时前`
+        } else {
+          let minute = parseInt(diff / 60)
+          if (minute > 0) {
+            desc = `${minute}分钟前`
+          } else {
+            desc = `${diff}秒前`
+          }
+        }
+      }
+    }
+  }
+  return desc
+}
+
 /**MD5*/
 export const md5 = data => {
   return CryptoJS.MD5(data).toString()

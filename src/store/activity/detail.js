@@ -154,7 +154,7 @@ export default {
     },
 
     * loadNewsContent(_, {call, put, select}) {
-      const {userId, actId} = yield select(state => state.activity)
+      const {userId, actId} = yield select(state => state.activityDetail)
       let id = actId
       const {code, body} = yield call(Api.newsContent, {userId, id})
       if (code == 200) {
@@ -233,10 +233,8 @@ export default {
 
     * loadAdData(_, {call, put, select}) {
       const {userId} = yield select(state => state.activityDetail)
-      let num = 5//活动推荐
-      let res = yield call(Api.activityAd, {userId})
-      let body = res.body
-      if (res && res.code == 200 && body.accessUrl) {
+      const {code, body} = yield call(Api.activityAd, {userId})
+      if (code == 200 && body.accessUrl) {
         yield put({
           type: 'save',
           payload: {
@@ -253,16 +251,22 @@ export default {
           }
         })
       }
-      res = yield call(Api.activityActAd, {userId, num})
-      if (res && res.code == 200) {
+    },
+
+    * loadActAdData(_, {call, put, select}) {
+      const {userId} = yield select(state => state.activityDetail)
+      let num = 5//活动推荐
+      const {code, body} = yield call(Api.activityActAd, {userId, num})
+      if (code == 200) {
         yield put({
           type: 'save',
           payload: {
-            actList: res.body
+            actList: body
           }
         })
       }
-    }
+    },
+
   },
 
   reducers: {
