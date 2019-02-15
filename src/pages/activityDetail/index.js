@@ -2,8 +2,10 @@ import Taro, {Component} from '@tarojs/taro'
 import {View, RichText, Button, ScrollView, Image, Video} from '@tarojs/components'
 import {connect} from '@tarojs/redux'
 import './index.scss'
-import * as Utils from '../../utils/utils'
+
 import WxShare from '../../components/WxShare'
+
+import * as Utils from '../../utils/utils'
 import ParseComponent from './wxParseComponent'
 
 import praiseBtn from '../../images/public/praiseBtn.png'

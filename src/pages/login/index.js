@@ -2,6 +2,8 @@ import Taro, {Component} from '@tarojs/taro'
 import {View, Image, Input} from '@tarojs/components'
 import './index.scss'
 
+import WxShare from '../../components/WxShare'
+
 import {userMobileLogin as UserLogin, getUserDataBySid as CheckUserSid} from '../../store/user/service'
 
 import btn from '../../images/login/btn.png'
@@ -123,6 +125,8 @@ class Login extends Component {
 
     return (
       <View className='login-container'>
+
+        {Taro.getEnv() === Taro.ENV_TYPE.WEB && <WxShare />}
 
         <Image className='logo' src={logo} mode='widthFix' />
 
