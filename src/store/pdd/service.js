@@ -26,3 +26,19 @@ export const keywordsSearch = data => Request({
   api_type: 'pdd',
   data
 })
+
+/*查询商品详情*/
+export const detailSearch = data => Request({
+  url: '/ddk/goods/detail',
+  method: 'POST',
+  api_type: 'pdd',
+  data
+})
+
+/*查询推广信息*/
+export const promotionData = data => Request({
+  url: '/ddk/promotion/data',
+  method: 'POST',
+  api_type: 'pdd',
+  data
+})

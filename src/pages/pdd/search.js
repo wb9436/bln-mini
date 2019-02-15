@@ -92,6 +92,12 @@ class PddSearch extends Component {
     }
   }
 
+  onLookGoodsDetail(goodsId) {
+    Taro.navigateTo({
+      url: '/pages/pddDetail/index?goodsId=' + goodsId
+    })
+  }
+
   render() {
     const {showSort, goodsList, loadAll} = this.props
 
@@ -105,7 +111,7 @@ class PddSearch extends Component {
     }
 
     const goodsContent = goodsList.map((item) => {
-      return <View key={item.goodsId} className='goods-item'>
+      return <View key={item.goodsId} className='goods-item' onClick={this.onLookGoodsDetail.bind(this, item.goodsId)}>
         <Image className='goods-icon' lazyLoad mode='widthFix' src={item.thumbnailUrl} />
         <View className='goods-name'>
           {item.goodsName}

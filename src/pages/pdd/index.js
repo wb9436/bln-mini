@@ -98,6 +98,12 @@ class Pdd extends Component {
     })
   }
 
+  onLookGoodsDetail(goodsId) {
+    Taro.navigateTo({
+      url: '/pages/pddDetail/index?goodsId=' + goodsId
+    })
+  }
+
   render() {
     const {goodsList, loadAll, showSort} = this.props
     let windowHeight = Utils.windowHeight(false) //可用窗口高度
@@ -111,7 +117,7 @@ class Pdd extends Component {
     }
 
     const goodsContent = goodsList.map((item) => {
-      return <View key={item.goodsId} className='goods-item'>
+      return <View key={item.goodsId} className='goods-item' onClick={this.onLookGoodsDetail.bind(this, item.goodsId)}>
         <Image className='goods-icon' lazyLoad mode='widthFix' src={item.thumbnailUrl} />
         <View className='goods-name'>
           {item.goodsName}

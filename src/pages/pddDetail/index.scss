@@ -1,0 +1,184 @@
+@import "../../styles/mixin";
+
+.detail-container {
+  width: 100%;
+  height: 100%;
+  background: $color-bg;
+  color: $color-big;
+
+  .goods-detail {
+    width: 100%;
+
+    .detail_wrapper {
+      width: 100vw;
+      height: 750px;
+
+      .swiper__item, img, image {
+        height: 750px !important;
+      }
+
+      img, image {
+        width: 750px !important;
+        height: 750px !important;
+      }
+    }
+
+    .goods-data {
+      background: $color-white;
+      padding: 0 14px;
+      font-size: 30px;
+
+      .goods-price {
+        width: 100%;
+
+        .price1 {
+          width: 100%;
+          height: 50px;
+          line-height: 44px;
+          padding-top: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          text-align: center;
+
+          .title {
+            width: 100px;
+            background: $color-theme-3;
+            color: $color-white;
+          }
+
+          .data {
+            border: 2px solid $color-theme-3;
+            border-radius: 4px;
+            color: $color-theme-3;
+            padding: 0 8px;
+          }
+
+          .present-price {
+            @include sc(36px, $color-big);
+            margin-left: 4px;
+          }
+
+          .original-price {
+            color: $color-small;
+            margin-left: 30px;
+            text-decoration: line-through;
+          }
+
+          .sales {
+            color: $color-small;
+          }
+
+        }
+      }
+
+      .goods-desc {
+        width: 100%;
+        height: 90px;
+        @include sc(32px, $color-big)
+      }
+
+      .goods-sales {
+        width: 100%;
+        height: 64px;
+        padding: 10px 0;
+        font-size: 32px;
+        line-height: 64px;
+
+        .name {
+          width: 46px;
+          height: 40px;
+          line-height: 40px;
+          background: $color-theme-3;
+          color: $color-white;
+          display: inline-block;
+          text-align: center;
+        }
+        .price {
+          margin-left: 10px;
+          color: $color-theme-3;
+        }
+        .remain {
+          padding: 0 10px;
+          font-size: 24px;
+          color: $color-small;
+          margin-left: 30px;
+        }
+      }
+    }
+
+    .task-desc {
+      margin-top: 20px;
+      height: 260px;
+      background: $color-white;
+      padding: 0 14px;
+
+      .desc-title {
+        @include sc(34px, $color-big);
+        height: 80px;
+        line-height: 80px;
+      }
+      .desc-content {
+        @include sc(28px, $color-small);
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .goods-btn {
+    width: 100%;
+    @include flex-wrap;
+    text-align: center;
+
+    button {
+      border-radius: 0;
+      border: none;
+      outline: none;
+    }
+
+    .btn-buy {
+      width: 50%;
+      height: 100%;
+      @include flex-wrap;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: $color-theme-2;
+      color: $color-white;
+    }
+
+    .btn-buy-now {
+      width: 100%;
+      height: 100%;
+      @include flex-wrap;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: $color-theme;
+      color: $color-white;
+    }
+
+    .btn-share {
+      width: 50%;
+      height: 100%;
+      @include flex-wrap;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: $color-theme-3;
+      color: $color-white;
+
+    }
+
+    .btn-name {
+      height: 60px;
+      font-size: 36px;
+      line-height: 70px;
+    }
+
+    .btn-desc {
+      height: 60px;
+      font-size: 29px;
+      line-height: 40px;
+    }
+
+  }
+
+}
