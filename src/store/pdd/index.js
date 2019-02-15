@@ -46,21 +46,6 @@ export default {
       }
     },
 
-    * loadPddBanner(_, {call, put}) {
-      const {code, body} = yield call(Api.bannerList)
-      if (code == 200) {
-        for(let key in body){
-          if(key == 5) {
-            yield put({
-              type: 'save',
-              payload: {
-                bannerList: body[key]
-              }
-            })
-          }
-        }
-      }
-    },
 
   },
   reducers: {

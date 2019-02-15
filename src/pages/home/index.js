@@ -3,6 +3,7 @@ import {View, ScrollView, Image} from '@tarojs/components'
 import {connect} from '@tarojs/redux'
 import './index.scss'
 
+import WxShare from '../../components/WxShare/index'
 import LoadAll from '../../components/LoadAll/index'
 
 import shareBtn from '../../images/activity/share.png'
@@ -126,6 +127,8 @@ class Home extends Component {
 
     return (
       <View className='home-page'>
+        {Taro.getEnv() === Taro.ENV_TYPE.WEB && <WxShare />}
+
         <View className='act-type' style={{height: `${typeHeight}px`}}>
           {typeContent}
         </View>

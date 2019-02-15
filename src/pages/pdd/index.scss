@@ -1,0 +1,67 @@
+@import "../../styles/mixin";
+
+.pdd {
+  width: 100%;
+  height: 100%;
+  background: $color-bg;
+
+  .search {
+    font-size: 30px;
+    width: 100%;
+
+    .banner {
+      width: 100%;
+      height: 220px;
+
+      .search-btn {
+        width: 100%;
+        height: 60px;
+        position: absolute;
+        top: 20px;
+        margin: 0 auto;
+        @include flex-wrap;
+
+        .search-input {
+          width: 80%;
+          height: 60px;
+          margin: 0 auto;
+          background: $color-white;
+          @include flex-wrap;
+          justify-content: flex-start;
+          border-radius: 10px;
+
+          .search-icon {
+            margin-left: 6px;
+          }
+
+          .search-value {
+            margin-left: 6px;
+          }
+        }
+      }
+    }
+
+    .banner-top {
+      height: 100px;
+      background: $color-theme-3;
+    }
+  }
+
+  .goods {
+    width: 100%;
+    background-color: $color-white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    .content {
+      width: 100%;
+    }
+  }
+
+  .goods-top {
+    top: 180px;
+  }
+
+}
+
+

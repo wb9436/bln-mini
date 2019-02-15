@@ -55,7 +55,7 @@ class Hot extends Component {
         </View>
         <View className='news-content'>
           <View className='news-title'>
-            <View className='content' style='white-space:normal;word-wrap:break-word;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;'>
+            <View className='news-title_content'>
               {item.title}
             </View>
           </View>
