@@ -1,0 +1,111 @@
+@import "../../styles/mixin";
+
+.topic-add-page {
+  width: 100%;
+  height: 100vh;
+
+  .nav-header {
+    height: 90px;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-line;
+
+    .cancel-btn {
+      @include sc(30px, $color-big);
+    }
+
+    .nav-title {
+      line-height: 35px;
+      text-align: center;
+
+      .title-desc {
+        @include sc(30px, $color-big);
+      }
+      .topic-author {
+        @include sc(24px, $color-small);
+      }
+    }
+
+    .send-btn {
+      @include sc(30px, $color-theme);
+    }
+  }
+
+  .topic-content {
+    padding: 10px 28px 0;
+
+    .topic-input {
+      width: 100%;
+      min-height: 200px;
+      @include sc(30px, $color-big);
+      border: 2px solid $color-bg;
+      outline: none;
+    }
+  }
+
+  .topic-media {
+    padding: 0 28px;
+    margin-top: 10px;
+
+    .topic-img-list {
+      display: flex;
+      flex-wrap: wrap;
+
+      .topic-img-box {
+        width: 33.33%;
+        position: relative;
+        @include flex-wrap;
+
+        .topic-img {
+          margin-top: 10px;
+          width: 220px;
+          height: 220px;
+        }
+
+        .remove-btn {
+          position: absolute;
+          right: 3px;
+          top: 3px;
+          width: 60px;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+      }
+    }
+
+    .image-list {
+      display: flex;
+      flex-wrap: wrap;
+
+      .image-item {
+        width: 115.67Px;
+        height: 115.67Px;
+        position: relative;
+        @include flex-wrap;
+
+        .image-container {
+          width: 112Px;
+          height: 112Px;
+          overflow: hidden;
+        }
+
+        .remove-btn {
+          position: absolute;
+          right: 3px;
+          top: 3px;
+          width: 60px;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+}

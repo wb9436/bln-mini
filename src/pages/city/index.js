@@ -255,7 +255,9 @@ class CityTopic extends Component {
   }
 
   onAddTopic() {
-
+    Taro.navigateTo({
+      url: '/pages/topic/add'
+    })
   }
 
   render() {
