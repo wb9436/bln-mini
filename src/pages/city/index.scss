@@ -1,0 +1,213 @@
+@import "../../styles/mixin";
+
+.city-topic-page {
+  width: 100%;
+
+  .topic-nav {
+    padding: 0 28px 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 4px solid $color-line;
+    //box-shadow:0Px 1Px 5Px $color-small;
+
+    .nav-icon {
+      width: 35px;
+      height: auto;
+    }
+
+    .topic-city {
+      width: 33.3%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .city-name {
+        margin-left: 5px;
+        height: 50px;
+        line-height: 50px;
+        @include sc(32px, $color-big);
+        max-width: 180px;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+
+    .topic-type {
+      width: 33.3%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .type-item {
+        padding: 0 10px;
+        height: 60px;
+        line-height:60px;
+        text-align: center;
+        @include sc(34px, $color-big);
+      }
+
+      .type-item_active {
+        color: $color-theme;
+        border-bottom: 4px solid $color-theme;
+      }
+
+      .type-item:last-child {
+        margin-left: 40px;
+      }
+    }
+
+    .topic-add {
+      width: 33.3%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+  }
+
+  .topic-scroll {
+    width: 100%;
+    background: $color-bg;
+  }
+
+  .topic-item {
+    margin-bottom: 10px;
+    padding: 0 28px;
+    background: $color-white;
+
+    .topic-author {
+      width: 100%;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .author-info {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .author-avatar {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+        }
+
+        .author-info {
+          width: 300px;
+          margin-left: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+
+          .author-name {
+            @include sc(32px, $color-big);
+            line-height: 50px;
+            @include ellipsis;
+          }
+
+          .author-desc {
+            @include sc(26px, $color-small);
+            line-height: 36px;
+            @include ellipsis;
+          }
+        }
+      }
+
+      .topic-btn {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .topic-follow {
+          width: 100px;
+          height: 50px;
+          line-height: 50px;
+          text-align: center;
+          border: 2px solid $color-theme;
+          border-radius: 6px;
+          @include sc(24px, $color-theme);
+        }
+
+        .topic-more {
+          width: 30px;
+          height: auto;
+          margin-left: 30px;
+        }
+      }
+    }
+
+    .topic-content {
+      @include sc(32px, $color-big);
+      line-height: 44px;
+      word-wrap: break-word;
+    }
+
+    .topic-media {
+      width: 100%;
+
+      .topic-img-list {
+        display: flex;
+        flex-wrap: wrap;
+
+        .topic-img-box {
+          width: 33.33%;
+          @include flex-wrap;
+
+          .topic-img {
+            margin-top: 10px;
+            width: 220px;
+            height: 220px;
+          }
+        }
+      }
+    }
+
+    .topic-hit {
+      margin-top: 20px;
+      height: 50px;
+      line-height: 50px;
+      @include sc(24px, $color-small);
+    }
+
+    .topic-data {
+      width: 100%;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .topic-data-item {
+        width: 200px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .topic-data-icon {
+          width: 32px;
+          height: auto;
+        }
+
+        .item-data {
+          height: 50px;
+          line-height: 50px;
+          margin-left: 10px;
+          @include sc(30px, $color-small);
+        }
+
+        .item-data_checked {
+          color: $color-theme;
+        }
+      }
+    }
+  }
+
+}

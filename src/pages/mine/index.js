@@ -21,7 +21,7 @@ import business from '../../images/mine/business.png'
 import help from '../../images/mine/help.png'
 import setup from '../../images/mine/setup.png'
 
-import avatar from '../../images/mine/avatar.png'
+import avatar from '../../images/public/avatar.png'
 import discCircular from '../../images/public/disc-circular.png'
 import AddressDialog from "../../components/Address";
 
@@ -62,10 +62,10 @@ class Mine extends Component {
     this.props.dispatch({
       type: 'user/setMineData'
     })
-    this.loadAreaData()
+    this.onLoadAreaData()
   }
 
-  loadAreaData() {
+  onLoadAreaData() {
     let address = Taro.getStorageSync('address')
     let area = ''
     let addArr = address.split(' ')

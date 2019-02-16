@@ -7,10 +7,10 @@
   top: 0;
   left: 0;
   bottom: 0;
-  margin-bottom: taro-tabbar-height;
+  //margin-bottom: taro-tabbar-height;
   background-color: rgba(0, 0, 0, 0.3);
   visibility: hidden;
-  z-index: 400;
+  z-index: 1010;
   transition: visibility 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
 
   .address-layout__overlay {

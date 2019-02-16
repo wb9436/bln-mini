@@ -78,7 +78,7 @@ class Index extends Component {
     const {remain} = this.state
 
     return (
-      <View className='guide-container'>
+      <View className='index-page'>
         <Swiper className='guide-swiper' autoplay circular interval={2000}
           duration={1000}
         >

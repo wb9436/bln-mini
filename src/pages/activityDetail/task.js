@@ -7,7 +7,7 @@ import * as Api from '../../store/activity/service'
 import ParseComponent from './wxParseComponent'
 import * as Utils from '../../utils/utils'
 
-import praiseBtn from '../../images/public/praiseBtn.png'
+import praiseBtn from '../../images/public/praise_yes.png'
 
 @connect(({activityDetail}) => ({
   ...activityDetail

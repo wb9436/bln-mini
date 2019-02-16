@@ -8,7 +8,7 @@ import WxShare from '../../components/WxShare'
 import * as Utils from '../../utils/utils'
 import ParseComponent from './wxParseComponent'
 
-import praiseBtn from '../../images/public/praiseBtn.png'
+import praiseBtn from '../../images/public/praise_yes.png'
 import shareBtn from '../../images/public/shareBtn.png'
 
 @connect(({activityDetail}) => ({

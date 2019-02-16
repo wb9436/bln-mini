@@ -7,6 +7,7 @@ import news from './news/index'
 import pdd from './pdd/index'
 import pddSearch from './pdd/search'
 import pddDetail from './pdd/detail'
+import cityTopic from './topic/index'
 
 const models = [
   activity,
@@ -16,6 +17,7 @@ const models = [
   pdd,
   pddSearch,
   pddDetail,
+  cityTopic,
 ]
 
 const dvaApp = dva.createApp({

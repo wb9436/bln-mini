@@ -11,7 +11,7 @@ import first from '../../images/rank/first.png'
 import second from '../../images/rank/second.png'
 import third from '../../images/rank/third.png'
 import level from '../../images/rank/level.png'
-import avatar from '../../images/mine/avatar.png'
+import avatar from '../../images/public/avatar.png'
 
 class UserRank extends Component {
   config = {
