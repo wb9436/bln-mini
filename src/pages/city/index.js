@@ -251,7 +251,9 @@ class CityTopic extends Component {
   }
 
   onTopicDetail(id) {
-    console.log('查看详情')
+    Taro.navigateTo({
+      url: '/pages/topic/detail?id=' + id
+    })
   }
 
   onAddTopic() {
