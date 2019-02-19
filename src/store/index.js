@@ -9,6 +9,7 @@ import pddSearch from './pdd/search'
 import pddDetail from './pdd/detail'
 import cityTopic from './topic/index'
 import topicComment from './topic/comment'
+import topicReply from './topic/reply'
 
 const models = [
   activity,
@@ -20,6 +21,7 @@ const models = [
   pddDetail,
   cityTopic,
   topicComment,
+  topicReply,
 ]
 
 const dvaApp = dva.createApp({

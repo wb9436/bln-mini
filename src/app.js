@@ -47,6 +47,7 @@ class App extends Component {
       'pages/topic/add',
       'pages/topic/detail',
       'pages/topic/share',
+      'pages/topic/reply',
     ],
     tabBar: {
       "color": "#929292",

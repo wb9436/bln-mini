@@ -160,3 +160,52 @@ export const addCommentReply = data => Request({
   data
 })
 
+/*评论回复列表*/
+export const replyList = data => Request({
+  url: '/chat/topic/comment/reply/list',
+  method: 'POST',
+  need_sid: true,
+  no_toast: true,
+  api_type: 'topic',
+  data
+})
+
+/*删除评论回复*/
+export const deleteReply = data => Request({
+  url: '/chat/topic/comment/reply/delete',
+  method: 'POST',
+  need_sid: true,
+  no_toast: true,
+  api_type: 'topic',
+  data
+})
+
+/*点赞评论回复*/
+export const praiseReply = data => Request({
+  url: '/chat/topic/comment/reply/praise',
+  method: 'POST',
+  need_sid: true,
+  no_toast: true,
+  api_type: 'topic',
+  data
+})
+
+/*取消点赞评论回复*/
+export const unPraiseReply = data => Request({
+  url: '/chat/topic/comment/reply/unPraise',
+  method: 'POST',
+  need_sid: true,
+  no_toast: true,
+  api_type: 'topic',
+  data
+})
+
+/*回复评论回复*/
+export const replyCommentReply = data => Request({
+  url: '/chat/topic/comment/reply/reply',
+  method: 'POST',
+  need_sid: true,
+  no_toast: true,
+  api_type: 'topic',
+  data
+})

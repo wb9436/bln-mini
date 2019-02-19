@@ -1,0 +1,164 @@
+@import "../../styles/mixin";
+
+.reply-container {
+  width: 100%;
+  height: 100%;
+  background: $color-white;
+  position: absolute;
+
+  .reply-scroll {
+    .reply-item--reply {
+      background: $color-bg;
+
+      .content {
+        border-bottom: 1Px solid $color-white !important;
+      }
+    }
+
+    .reply-item {
+      padding-left: 14Px;
+      @include sc(15Px, $color-big);
+      display: flex;
+      justify-content: space-between;
+      transition: background-color 300ms ease-in;
+
+      .user-avatar {
+        width: 13%;
+
+        .avatar-container {
+          margin-top: 8Px;
+          width: 40Px;
+          height: 40Px;
+
+          image, img {
+            border-radius: 40Px;
+          }
+        }
+
+      }
+      .content {
+        width: 87%;
+        padding-right: 14Px;
+        border-bottom: 1Px solid $color-line;
+
+        .nickname {
+          height: 25Px;
+        }
+
+        .content-detail {
+          line-height: 20Px;
+        }
+
+        .reply-data {
+          height: 25Px;
+          @include sc(13Px, $color-small);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .reply-data {
+              margin-left: 20Px;
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+
+              .reply-btn {
+                width: 14Px;
+                height: 14Px;
+              }
+            }
+
+            .praise-data {
+              margin-left: 20Px;
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+
+              .praise-btn {
+                width: 14Px;
+                height: 14Px;
+              }
+
+              .praise-num {
+                margin-left: 3Px;
+                max-width: 50Px;
+                @include ellipsis;
+              }
+
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+  .modal-mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.3;
+    overflow: hidden;
+    z-index: 1000;
+    color: #fff;
+  }
+
+  .modal-dialog {
+    width: 100%;;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1002;
+    background: $color-bg;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .modal-content {
+      width: 100%;
+      height: 100Px;
+      padding-left: 14Px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .comment-input {
+        width: 85%;
+        height: 75%;
+        border-radius: 3Px;
+        background: $color-white;
+        @include sc(16Px, $color-big);
+      }
+
+      .comment-btn {
+        width: 15%;
+        height: 75%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .send-btn {
+          width: 90%;
+          height: 30Px;
+          border-radius: 3Px;
+          line-height: 30Px;
+          text-align: center;
+          background: $color-theme;
+          color: $color-white;
+        }
+
+      }
+    }
+  }
+
+}

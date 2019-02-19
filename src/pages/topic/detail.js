@@ -257,12 +257,11 @@ class TopicDetail extends Component {
   onLookCommentReply() {
     const {actId, index} = this.state
     this.setState({isOpenAct: false})
-    console.log('查看评论回复: actId=' + actId)
-    // const {commentList} = this.props
-    // let data = JSON.stringify(commentList[index])
-    // Taro.navigateTo({
-    //   url: '/pages/topic/reply?id=' + id + '&data=' + data
-    // })
+    const {commentList} = this.props
+    let data = JSON.stringify(commentList[index])
+    Taro.navigateTo({
+      url: '/pages/topic/reply?id=' + actId + '&data=' + data
+    })
   }
 
   render() {
