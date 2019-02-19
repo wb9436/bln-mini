@@ -6,7 +6,7 @@ import './detail.scss'
 import TextInput from '../../components/TextArea/index'
 
 import * as Api from '../../store/topic/service'
-import {formatTime} from '../../utils/utils'
+import * as Utils from '../../utils/utils'
 
 import share from '../../images/topic/share.png'
 import commentImg from '../../images/topic/comment.png'
@@ -14,12 +14,12 @@ import laudSelect from '../../images/public/praise_yes.png'
 import laud from '../../images/public/praise_no.png'
 import topicBg from '../../images/topic/topic_bg.png'
 import blnShare from '../../images/public/bln_share.png'
-import avatar from "../../images/public/avatar.png";
-import * as Utils from "../../utils/utils";
-import moreBtn from "../../images/topic/more.png";
+import avatar from '../../images/public/avatar.png'
+import moreBtn from '../../images/topic/more.png'
 
-@connect(({topicComment, loading}) => ({
+@connect(({topicComment, cityTopic, loading}) => ({
   ...topicComment,
+  ...cityTopic,
   ...loading
 }))
 class TopicDetail extends Component {
@@ -31,15 +31,28 @@ class TopicDetail extends Component {
     let windowHeight = Taro.getSystemInfoSync().windowHeight
     this.state = {
       windowHeight: windowHeight,
-      hideModal: true,
-      content: '',//评论内容
-      id: 0,//评论ID
-      isOpened: false,//删除话题弹窗
-      isMySelf: 0,//是否是我的
-      dialogType: 0, //弹窗类型 0=删除话题;1=删除评论
-      dialogTitle: '删除话题',
-      idx: 0,//评论index
+      myself: 0, //是否是我的
+      actType: 0, //动作类型: 0=删除, 1=查看, 2=投诉, 3=查看回复
+      isOpenAct: false, //是否打开动作面板
+      id: 0, //话题id或评论id
+      replyType: 0, //回复类型:0=话题评论, 1=评论回复
+      replyAct: false, //回复面板
+      index: 0,//评论index
     }
+  }
+
+  componentDidMount() {
+    const {id} = this.$router.params
+    this.props.dispatch({
+      type: 'topicComment/onInitData',
+      payload: {id}
+    })
+    this.props.dispatch({
+      type: 'topicComment/onLoadTopicDetail',
+    })
+    this.props.dispatch({
+      type: 'topicComment/onLoadCommentList',
+    })
   }
 
   onShareAppMessage = () => {
@@ -52,22 +65,8 @@ class TopicDetail extends Component {
     }
   }
 
-  componentDidMount() {
-    const {id} = this.$router.params
-    this.props.dispatch({
-      type: 'topicComment/onInit',
-      payload: {id}
-    })
-    this.props.dispatch({
-      type: 'topicComment/onLoadTopicDetail',
-    })
-    this.props.dispatch({
-      type: 'topicComment/onLoadCommentList',
-    })
-  }
-
-  previewImage = (sourceUrl, index) => {
-    if(sourceUrl && sourceUrl.length > 0) {
+  onPreviewImage(sourceUrl, index) {
+    if (sourceUrl && sourceUrl.length > 0) {
       Taro.previewImage({
         current: sourceUrl[index],
         urls: sourceUrl
@@ -75,71 +74,84 @@ class TopicDetail extends Component {
     }
   }
 
-  onTopicAttention = () => {
-    this.props.dispatch({
-      type: 'topicComment/onTopicAttention',
-    })
+  onTopicAttention(myself) {
+    let isOpenAct = false
+    let actType = 0
+    if (myself == 1) {
+      isOpenAct = true
+      this.setState({actType, isOpenAct})
+    } else {
+      this.props.dispatch({
+        type: 'topicComment/onTopicAttention',
+      })
+    }
   }
 
-  onTopicPraise = () => {
+  onTopicPraise() {
     this.props.dispatch({
       type: 'topicComment/onTopicPraise',
     })
   }
 
-  onDeleteClick = (id, dialogType, isMySelf, idx, e) => {
-    e.stopPropagation()
-    this.setState({
-      id: id,
-      isOpened: true,
-      isMySelf: isMySelf,
-      dialogType: dialogType,
-      dialogTitle: dialogType == 0 ? '删除话题' : '删除评论',
-      idx: idx
+  onOpenAction() {
+    let actType = 1
+    let isOpenAct = true
+    this.setState({actType, isOpenAct})
+  }
+
+  onOpenReportAction() {
+    let actType = 2
+    let isOpenAct = true
+    this.setState({actType, isOpenAct})
+  }
+
+  onOpenCommentAction(id, index, myself) {
+    let actType = 3
+    let isOpenAct = true
+    this.setState({myself, actType, isOpenAct, id, index})
+  }
+
+  onCloseAction() {
+    this.setState({isOpenAct: false})
+  }
+
+  onTopicReport(id, reason) {
+    this.setState({isOpenAct: false})
+    this.props.dispatch({
+      type: 'cityTopic/onTopicReport',
+      payload: {id, reason}
     })
   }
 
-  onCancelTopicDelete() {
-    this.setState({
-      isOpened: false
-    })
-  }
-
-  onConfirmTopicDelete() {
-    const {id, dialogType, idx} = this.state
-    if (dialogType == 0) {//删除话题
-      Api.deleteTopic({id}).then(data => {
-        const {code} = data
-        if (code == 200) {
-          if (process.env.TARO_ENV === 'weapp') {
-            Taro.reLaunch({
-              url: '/pages/city/index'
-            })
-          } else {
-            Taro.navigateTo({
-              url: '/pages/city/index'
-            })
-          }
+  onTopicDelete() {
+    const {id} = this.props
+    this.setState({isOpenAct: false})
+    Api.deleteTopic({id}).then(data => {
+      const {code} = data
+      if (code == 200) {
+        if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+          Taro.reLaunch({
+            url: '/pages/city/index'
+          })
         } else {
-          Taro.showToast({
-            icon: 'none',
-            title: '删除失败'
+          Taro.navigateTo({
+            url: '/pages/city/index'
           })
         }
-      })
-    } else {//删除评论
-      this.setState({
-        isOpened: false
-      })
-      let index = idx
-      this.props.dispatch({
-        type: 'topicComment/onCommentDelete',
-        payload: {index, id}
-      })
-    }
+      } else {
+        Taro.showToast({
+          icon: 'none',
+          title: '删除失败'
+        })
+      }
+    })
   }
 
-  onCommentPraise = (index, id, praise, e) => {
+  onOpenTopicComment(id) {
+    this.setState({id, replyType: 0, replyAct: true, isOpenAct: false})
+  }
+
+  onCommentPraise(index, id, praise, e) {
     this.props.dispatch({
       type: 'topicComment/onCommentPraise',
       payload: {index, id, praise}
@@ -147,6 +159,14 @@ class TopicDetail extends Component {
     e.stopPropagation()
   }
 
+  onCommentDelete() {
+    const {id, index} = this.state
+    this.setState({isOpenAct: false})
+    this.props.dispatch({
+      type: 'topicComment/onCommentDelete',
+      payload: {index, id}
+    })
+  }
 
   onScroll(e) {
     let scrollTop = e.detail.scrollTop
@@ -172,38 +192,18 @@ class TopicDetail extends Component {
     }
   }
 
-  onShowReplyModal = (id, dialogType, e) => {
-    this.setState({
-      id: id,
-      dialogType: dialogType,//回复评论
-      hideModal: false
-    })
+  onOpenReplyAction(id, dialogType, e) {
     e.stopPropagation()
+    this.setState({id: id, replyType: 1, replyAct: true})
   }
 
-  onHideReplyModal() {
-    this.setState({
-      id: '',
-      content: '',
-      dialogType: 0,//评论话题
-      hideModal: true
-    })
-  }
-
-  onInput(e) {
-    this.setState({
-      content: e.detail.value
-    })
+  onCloseReplyAction() {
+    this.setState({replyType: 0, replyAct: false})
   }
 
   onConfirm(content) {
-    const {id, dialogType} = this.state
-    this.setState({
-      id: '',
-      content: '',
-      dialogType: 0,//评论话题
-      hideModal: true
-    })
+    const {id, replyType} = this.state
+    this.setState({replyType: 0, replyAct: false})
     if (id && id != '') {
       if (!content || content.trim() == '') {
         Taro.showToast({
@@ -212,7 +212,7 @@ class TopicDetail extends Component {
         })
         return
       }
-      if (dialogType == 0) {
+      if (replyType == 0) {
         this.addComment(id, content)
       } else {
         this.addCommentReply(id, content)
@@ -224,10 +224,7 @@ class TopicDetail extends Component {
     Api.addComment({id, content}).then(data => {
       const {code} = data
       if (code == 200) {
-        this.setState({
-          content: '',
-          hideModal: true
-        })
+        this.setState({replyAct: false})
         Taro.showToast({
           icon: 'success',
           title: '发送成功',
@@ -243,10 +240,7 @@ class TopicDetail extends Component {
     Api.addCommentReply({id, content}).then(data => {
       const {code} = data
       if (code == 200) {
-        this.setState({
-          content: '',
-          hideModal: true
-        })
+        this.setState({replyAct: false})
         Taro.showToast({
           icon: 'success',
           title: '发送成功',
@@ -269,7 +263,7 @@ class TopicDetail extends Component {
   }
 
   render() {
-    const {windowHeight, hideModal, isOpened, isMySelf, dialogType, dialogTitle, content} = this.state
+    const {windowHeight, myself, isOpenAct, actType, replyAct} = this.state
     const {id, topic, commentList} = this.props
     let existTopic = topic.id == null ? false : true
     let scrollHeight = windowHeight
@@ -279,8 +273,7 @@ class TopicDetail extends Component {
     }
 
     const commentContent = commentList.map((item,index) => {
-      console.log('updateTime: ' + item.updateTime)
-      return <View key={index} className='comment-item' onClick={this.onDeleteClick.bind(this, item.id, 1, item.myself, index)}>
+      return <View key={index} className='comment-item' onClick={this.onOpenCommentAction.bind(this, item.id, index, item.myself)}>
         <View className='comment-author'>
           <Image className='author-avatar' mode='widthFix' src={item.avatar} />
         </View>
@@ -297,9 +290,9 @@ class TopicDetail extends Component {
           }
 
           <View className='reply-data'>
-            <View className='comment-time'>{formatTime(new Date(item.createTime))}</View>
+            <View className='comment-time'>{Utils.formatTime(new Date(item.createTime))}</View>
             <View className='replay-btn'>
-              <Image className='comment-icon' src={commentImg} mode='widthFix' onClick={this.onShowReplyModal.bind(this, item.id, 1)} />
+              <Image className='comment-icon' src={commentImg} mode='widthFix' onClick={this.onOpenReplyAction.bind(this, item.id, 1)} />
               <View className='praise-btn' onClick={this.onCommentPraise.bind(this, index, item.id, item.praise)}>
                 <Image className='praise-icon' src={item.praise == 1 ? laudSelect : laud} mode='widthFix' />
                 {item.praiseNum}
@@ -330,9 +323,12 @@ class TopicDetail extends Component {
                   </View>
                 </View>
                 <View className='topic-btn'>
-                  <View className='topic-follow'>
+                  <View className='topic-follow' onClick={this.onTopicAttention.bind(this, topic.myself)}>
                     {topic.myself == 1 && '删除'}
                     {topic.myself == 0 && `${topic.attention == 1 ? '已关注' : '关注' }`}
+                  </View>
+                  <View className='topic-more' onClick={this.onOpenAction.bind(this)}>
+                    <Image className='more-icon' src={moreBtn} mode='widthFix' />
                   </View>
                 </View>
               </View>
@@ -353,7 +349,7 @@ class TopicDetail extends Component {
                   <View className='topic-img-list'>
                     {topic.sourceUrl.map((imageUrl, idx) => (
                       <View key={idx} className='topic-img-box'>
-                        <Image className='topic-img' src={imageUrl} mode='aspectFill' onClick={this.previewImage.bind(this, topic.sourceUrl, idx)} />
+                        <Image className='topic-img' src={imageUrl} mode='aspectFill' onClick={this.onPreviewImage.bind(this, topic.sourceUrl, idx)} />
                       </View>
                     ))}
                   </View> : ''
@@ -361,7 +357,6 @@ class TopicDetail extends Component {
               </View>
               <View className='topic-hit'> {`${topic.hitNum}次浏览`} </View>
             </View>
-
             {/*话题评论详情*/}
             <View className='comment-detail'>
               <View className='comment-header'>
@@ -372,7 +367,6 @@ class TopicDetail extends Component {
                   赞 {topic.praiseNum}
                 </View>
               </View>
-
               <View className='comment-list'>
                 {commentContent}
               </View>
@@ -390,7 +384,7 @@ class TopicDetail extends Component {
               </View>
               <View className='data'>分享</View>
             </Button>
-            <Button className='data-item' onClick={this.onShowReplyModal.bind(this, topic.id, 0)}>
+            <Button className='data-item' onClick={this.onOpenTopicComment.bind(this, id)}>
               <View className='data-img'>
                 <Image src={commentImg} mode='widthFix' />
               </View>
@@ -405,31 +399,79 @@ class TopicDetail extends Component {
           </View> : ''
         }
 
+        {actType == 0 &&
+          <AtActionSheet isOpened={isOpenAct}
+            onClose={this.onCloseAction.bind(this)}
+            onCancel={this.onCloseAction.bind(this)}
+            cancelText='取消'
+          >
+            <AtActionSheetItem onClick={this.onTopicDelete.bind(this)}>
+              删除话题
+            </AtActionSheetItem>
+          </AtActionSheet>
+        }
+
+        {actType == 1 &&
+          <AtActionSheet isOpened={isOpenAct}
+            onClose={this.onCloseAction.bind(this)}
+            onCancel={this.onCloseAction.bind(this)}
+            cancelText='取消'
+          >
+            <AtActionSheetItem onClick={this.onOpenTopicComment.bind(this, id)}>
+              评论
+            </AtActionSheetItem>
+            <AtActionSheetItem onClick={this.onOpenReportAction.bind(this)}>
+              投诉
+            </AtActionSheetItem>
+          </AtActionSheet>
+        }
+
+        {actType == 2 &&
+          <AtActionSheet isOpened={isOpenAct}
+            onClose={this.onCloseAction.bind(this)}
+            onCancel={this.onCloseAction.bind(this)}
+            cancelText='取消'
+          >
+            <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '垃圾营销')}>
+              垃圾营销
+            </AtActionSheetItem>
+            <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '涉黄信息')}>
+              涉黄信息
+            </AtActionSheetItem>
+            <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '有害信息')}>
+              有害信息
+            </AtActionSheetItem>
+            <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '违法信息')}>
+              违法信息
+            </AtActionSheetItem>
+            <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '侵犯人身权益')}>
+              侵犯人身权益
+            </AtActionSheetItem>
+          </AtActionSheet>
+        }
+
+        {actType == 3 &&
+          <AtActionSheet isOpened={isOpenAct}
+            onClose={this.onCloseAction.bind(this)}
+            onCancel={this.onCloseAction.bind(this)}
+            cancelText='取消'
+          >
+            <AtActionSheetItem onClick={this.onOpenTopicComment.bind(this)}>
+              查看回复
+            </AtActionSheetItem>
+            {myself == 1 &&
+              <AtActionSheetItem onClick={this.onCommentDelete.bind(this)}>
+                删除评论
+              </AtActionSheetItem>
+            }
+          </AtActionSheet>
+        }
+
         {/*书写评论弹窗*/}
-        <TextInput isOpened={!hideModal} maxLength={180} placeholder='写评论'
-          onCancel={this.onHideReplyModal.bind(this)}
+        <TextInput isOpened={replyAct} maxLength={180} placeholder='写评论'
+          onCancel={this.onCloseReplyAction.bind(this)}
           onConfirm={this.onConfirm.bind(this)}
         />
-
-        {/*删除弹窗*/}
-        <AtActionSheet isOpened={isOpened}
-          onClose={this.onCancelTopicDelete.bind(this)}
-          onCancel={this.onCancelTopicDelete.bind(this)}
-          cancelText='取消'
-        >
-          {dialogType == 1 ?
-            <AtActionSheetItem onClick={this.onViewReply.bind(this)}>
-              查看回复
-            </AtActionSheetItem> : ''
-          }
-
-          {isMySelf == 1 ?
-            <AtActionSheetItem onClick={this.onConfirmTopicDelete.bind(this)}>
-              {dialogTitle}
-            </AtActionSheetItem> : ''
-          }
-
-        </AtActionSheet>
 
       </View>
     )

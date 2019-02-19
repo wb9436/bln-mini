@@ -28,7 +28,7 @@ export default {
   },
 
   effects: {
-    * onInit({payload}, {put}) {
+    * onInitData({payload}, {put}) {
       const {id} = payload
       yield put({
         type: 'save',

@@ -151,17 +151,13 @@ class CityTopic extends Component {
     e.stopPropagation()
     let actType = 1
     let isOpenAct = true
-    this.setState({
-      index, id, actType, isOpenAct
-    })
+    this.setState({index, id, actType, isOpenAct})
   }
 
   onOpenReportAction() {
     let actType = 2
     let isOpenAct = true
-    this.setState({
-      actType, isOpenAct
-    })
+    this.setState({actType, isOpenAct})
   }
 
   onCloseAction() {
@@ -172,9 +168,7 @@ class CityTopic extends Component {
     this.setState({isOpenAct: false})
     this.props.dispatch({
       type: 'cityTopic/onTopicReport',
-      payload: {
-        id, reason
-      }
+      payload: {id, reason}
     })
   }
 
@@ -206,8 +200,6 @@ class CityTopic extends Component {
       }
     })
   }
-
-
 
   onTopicDetail(id) {
     Taro.navigateTo({
