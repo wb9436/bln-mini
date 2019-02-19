@@ -101,7 +101,6 @@ class TopicShareDetail extends Component {
         <View className='content-container'>
           <View className='author-nickname'>{item.nickname}</View>
           <View className='comment-content'>{item.content}</View>
-
           {item.replyNum > 0 &&
             <View className='comment-reply'>
               <View className='last-play'>{`${item.lastReplyNickname}`}</View>
@@ -109,7 +108,6 @@ class TopicShareDetail extends Component {
               <View className='reply-num'>{`共${item.replyNum}条回复`}</View>
             </View>
           }
-
           <View className='reply-data'>
             <View className='comment-time'>{Utils.formatTime(new Date(item.createTime))}</View>
             <View className='replay-btn'>
