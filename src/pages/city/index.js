@@ -50,15 +50,10 @@ class CityTopic extends Component {
     let area = Taro.getStorageSync('topicAddress') || Taro.getStorageSync('address') || '上海市 上海市 浦东新区'
     let cityArr = area.split(' ')
     let city = cityArr[cityArr.length - 1]
-    this.setState({
-      area: area,
-      city: city
-    })
+    this.setState({area, city})
     this.props.dispatch({
       type: 'cityTopic/onInitData',
-      payload: {
-        area: area
-      }
+      payload: {area}
     })
     this.props.dispatch({
       type: 'cityTopic/onLoadTopicList'
@@ -68,14 +63,10 @@ class CityTopic extends Component {
   onCheckTopicType(typeValue) {
     const {type, area} = this.state
     if (typeValue !== type) {
-      this.setState({
-        type: typeValue
-      })
+      this.setState({type: typeValue})
       this.props.dispatch({
         type: 'cityTopic/onInitData',
-        payload: {
-          area: area
-        }
+        payload: {area}
       })
       if (typeValue == 0) {
         this.props.dispatch({
@@ -90,15 +81,11 @@ class CityTopic extends Component {
   }
 
   onOpenAddress() {
-    this.setState({
-      isOpenAdd: true
-    })
+    this.setState({isOpenAdd: true})
   }
 
   onCancelAddress() {
-    this.setState({
-      isOpenAdd: false
-    })
+    this.setState({isOpenAdd: false})
   }
 
   onConfirmAddress(address) {
@@ -107,28 +94,38 @@ class CityTopic extends Component {
       Taro.setStorageSync('topicAddress', address)
       let cityArr = area.split(' ')
       let city = cityArr[cityArr.length - 1]
-      this.setState({
-        area: address,
-        city: city,
-        isOpenAdd: false
-      })
+      this.setState({area: address, city: city, isOpenAdd: false})
       this.props.dispatch({
         type: 'cityTopic/onChangArea',
-        payload: {
-          topicAddress: address
-        }
+        payload: {area: address}
       })
       if (type == 0) {
         this.props.dispatch({
           type: 'cityTopic/save',
-          payload: {
-            loadAll: false,
-            curPageNum: 1,
-            topicList: []
-          }
+          payload: {loadAll: false, curPageNum: 1, topicList: []}
         })
         this.props.dispatch({
           type: 'cityTopic/onLoadTopicList'
+        })
+      }
+    }
+  }
+
+  appendNextPageList() {
+    const {curPageNum, loadAll} = this.props
+    if (!loadAll) {
+      this.props.dispatch({
+        type: 'cityTopic/save',
+        payload: {curPageNum: curPageNum + 1}
+      })
+      const {type} = this.state
+      if (type == 0) {
+        this.props.dispatch({
+          type: 'cityTopic/onLoadTopicList'
+        })
+      } else {
+        this.props.dispatch({
+          type: 'cityTopic/onLoadAttentionTopicList'
         })
       }
     }
@@ -140,21 +137,17 @@ class CityTopic extends Component {
     let actType = 0
     if (myself == 1) {
       isOpenAct = true
-      this.setState({
-        index, id, actType, isOpenAct
-      })
+      this.setState({index, id, actType, isOpenAct})
     } else {
       const {type} = this.state
       this.props.dispatch({
         type: 'cityTopic/onTopicAttention',
-        payload: {
-          type, index, id, attention
-        }
+        payload: {type, index, id, attention}
       })
     }
   }
 
-  onOpenTopicDetail(index, id, e) {
+  onOpenAction(index, id, e) {
     e.stopPropagation()
     let actType = 1
     let isOpenAct = true
@@ -163,7 +156,7 @@ class CityTopic extends Component {
     })
   }
 
-  onOpenReport() {
+  onOpenReportAction() {
     let actType = 2
     let isOpenAct = true
     this.setState({
@@ -171,12 +164,12 @@ class CityTopic extends Component {
     })
   }
 
+  onCloseAction() {
+    this.setState({isOpenAct: false})
+  }
+
   onTopicReport(id, reason) {
-    this.setState({
-      index: 0,
-      id: '',
-      isOpenAct: false
-    })
+    this.setState({isOpenAct: false})
     this.props.dispatch({
       type: 'cityTopic/onTopicReport',
       payload: {
@@ -185,26 +178,12 @@ class CityTopic extends Component {
     })
   }
 
-  onCancelAction() {
-    this.setState({
-      index: 0,
-      id: '',
-      isOpenAct: false
-    })
-  }
-
-  onConfirmTopicDelete() {
+  onTopicDelete() {
     const {index, id} = this.state
-    this.setState({
-      index: 0,
-      id: '',
-      isOpenAct: false
-    })
+    this.setState({isOpenAct: false})
     this.props.dispatch({
       type: 'cityTopic/onTopicDelete',
-      payload: {
-        index, id
-      }
+      payload: {index, id}
     })
   }
 
@@ -228,27 +207,7 @@ class CityTopic extends Component {
     })
   }
 
-  appendNextPageList() {
-    const {curPageNum, loadAll} = this.props
-    if (!loadAll) {
-      this.props.dispatch({
-        type: 'cityTopic/save',
-        payload: {
-          curPageNum: curPageNum + 1
-        }
-      })
-      const {type} = this.state
-      if (type == 0) {
-        this.props.dispatch({
-          type: 'cityTopic/onLoadTopicList'
-        })
-      } else {
-        this.props.dispatch({
-          type: 'cityTopic/onLoadAttentionTopicList'
-        })
-      }
-    }
-  }
+
 
   onTopicDetail(id) {
     Taro.navigateTo({
@@ -288,7 +247,9 @@ class CityTopic extends Component {
               {item.myself == 1 && '删除'}
               {item.myself == 0 && `${item.attention == 1 ? '已关注' : '关注' }`}
             </View>
-            <Image className='topic-more' src={moreBtn} mode='widthFix' onClick={this.onOpenTopicDetail.bind(this, index, item.id)} />
+            <View className='topic-more' onClick={this.onOpenAction.bind(this, index, item.id)}>
+              <Image className='more-icon' src={moreBtn} mode='widthFix' />
+            </View>
           </View>
         </View>
         <View className='topic-content'> {item.content} </View>
@@ -362,11 +323,11 @@ class CityTopic extends Component {
 
         {actType == 0 &&
           <AtActionSheet isOpened={isOpenAct}
-            onClose={this.onCancelAction.bind(this)}
-            onCancel={this.onCancelAction.bind(this)}
+            onClose={this.onCloseAction.bind(this)}
+            onCancel={this.onCloseAction.bind(this)}
             cancelText='取消'
           >
-            <AtActionSheetItem onClick={this.onConfirmTopicDelete.bind(this)}>
+            <AtActionSheetItem onClick={this.onTopicDelete.bind(this)}>
               删除话题
             </AtActionSheetItem>
           </AtActionSheet>
@@ -374,14 +335,14 @@ class CityTopic extends Component {
 
         {actType == 1 &&
           <AtActionSheet isOpened={isOpenAct}
-            onClose={this.onCancelAction.bind(this)}
-            onCancel={this.onCancelAction.bind(this)}
+            onClose={this.onCloseAction.bind(this)}
+            onCancel={this.onCloseAction.bind(this)}
             cancelText='取消'
           >
             <AtActionSheetItem onClick={this.onTopicDetail.bind(this, id)}>
               评论
             </AtActionSheetItem>
-            <AtActionSheetItem onClick={this.onOpenReport.bind(this)}>
+            <AtActionSheetItem onClick={this.onOpenReportAction.bind(this)}>
               投诉
             </AtActionSheetItem>
           </AtActionSheet>
@@ -389,8 +350,8 @@ class CityTopic extends Component {
 
         {actType == 2 &&
           <AtActionSheet isOpened={isOpenAct}
-            onClose={this.onCancelAction.bind(this)}
-            onCancel={this.onCancelAction.bind(this)}
+            onClose={this.onCloseAction.bind(this)}
+            onCancel={this.onCloseAction.bind(this)}
             cancelText='取消'
           >
             <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '垃圾营销')}>
