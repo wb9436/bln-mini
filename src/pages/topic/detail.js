@@ -18,9 +18,8 @@ import blnShare from '../../images/public/bln_share.png'
 import avatar from '../../images/public/avatar.png'
 import moreBtn from '../../images/topic/more.png'
 
-@connect(({topicComment, cityTopic, loading}) => ({
+@connect(({topicComment, loading}) => ({
   ...topicComment,
-  ...cityTopic,
   ...loading
 }))
 class TopicDetail extends Component {
@@ -118,9 +117,11 @@ class TopicDetail extends Component {
 
   onTopicReport(id, reason) {
     this.setState({isOpenAct: false})
-    this.props.dispatch({
-      type: 'cityTopic/onTopicReport',
-      payload: {id, reason}
+    Api.reportTopic({id, reason}).then(res => {
+      const {code} = res
+      if (code == 200) {
+        console.log('已举报该话题...')
+      }
     })
   }
 
