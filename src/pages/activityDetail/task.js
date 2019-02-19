@@ -238,7 +238,7 @@ class ActivityTask extends Component {
                 <View className='hits-data'>{hits}</View>
               </View>
               <View className='act-praise' onClick={this.onActivityPraise.bind(this)}>
-                <Image className='praise-btn' mode='widthFix' src={praiseBtn}/>
+                <Image className='praise-btn' mode='widthFix' src={praiseBtn} />
                 <View className={praiseState === 1 ? 'praise-data praise-state' : 'praise-data'}>{praise}</View>
               </View>
             </View>
