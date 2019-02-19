@@ -204,6 +204,7 @@ class CityTopic extends Component {
   onTopicDetail(id) {
     Taro.navigateTo({
       url: '/pages/topic/detail?id=' + id
+      // url: '/pages/topic/share?id=' + id
     })
   }
 

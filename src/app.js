@@ -46,6 +46,7 @@ class App extends Component {
       'pages/pddDetail/buy',
       'pages/topic/add',
       'pages/topic/detail',
+      'pages/topic/share',
     ],
     tabBar: {
       "color": "#929292",

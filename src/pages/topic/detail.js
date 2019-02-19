@@ -3,7 +3,9 @@ import {View, Image, Video, ScrollView, Button, RichText} from '@tarojs/componen
 import {AtActionSheet, AtActionSheetItem} from 'taro-ui';
 import {connect} from '@tarojs/redux'
 import './detail.scss'
+
 import TextInput from '../../components/TextArea/index'
+import LoadAll from '../../components/LoadAll/index'
 
 import * as Api from '../../store/topic/service'
 import * as Utils from '../../utils/utils'
@@ -12,7 +14,6 @@ import share from '../../images/topic/share.png'
 import commentImg from '../../images/topic/comment.png'
 import laudSelect from '../../images/public/praise_yes.png'
 import laud from '../../images/public/praise_no.png'
-import topicBg from '../../images/topic/topic_bg.png'
 import blnShare from '../../images/public/bln_share.png'
 import avatar from '../../images/public/avatar.png'
 import moreBtn from '../../images/topic/more.png'
@@ -61,7 +62,7 @@ class TopicDetail extends Component {
     return {
       title: '更多热门话题, 尽在百灵鸟, 快来参与互动吧',
       imageUrl: blnShare,
-      path: `/pages/topic/share?id=${id}&userId=${userId}`
+      path: `/pages/topic/share?id=${id}&inviter=${userId}`
     }
   }
 
@@ -192,7 +193,7 @@ class TopicDetail extends Component {
     }
   }
 
-  onOpenReplyAction(id, dialogType, e) {
+  onOpenReplyAction(id, e) {
     e.stopPropagation()
     this.setState({actId: id, replyType: 1, replyAct: true})
   }
@@ -265,7 +266,7 @@ class TopicDetail extends Component {
 
   render() {
     const {windowHeight, myself, isOpenAct, actType, replyAct} = this.state
-    const {id, topic, commentList} = this.props
+    const {id, topic, commentList, loadAll} = this.props
     let existTopic = topic.id == null ? false : true
     let scrollHeight = windowHeight
     let topicDataHeight = 53
@@ -293,7 +294,7 @@ class TopicDetail extends Component {
           <View className='reply-data'>
             <View className='comment-time'>{Utils.formatTime(new Date(item.createTime))}</View>
             <View className='replay-btn'>
-              <Image className='comment-icon' src={commentImg} mode='widthFix' onClick={this.onOpenReplyAction.bind(this, item.id, 1)} />
+              <Image className='comment-icon' src={commentImg} mode='widthFix' onClick={this.onOpenReplyAction.bind(this, item.id)} />
               <View className='praise-btn' onClick={this.onCommentPraise.bind(this, index, item.id, item.praise)}>
                 <Image className='praise-icon' src={item.praise == 1 ? laudSelect : laud} mode='widthFix' />
                 {item.praiseNum}
@@ -373,6 +374,7 @@ class TopicDetail extends Component {
               </View>
               <View className='comment-list'>
                 {commentContent}
+                {loadAll && <LoadAll />}
               </View>
             </View>
 
