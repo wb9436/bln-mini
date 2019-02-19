@@ -80,6 +80,7 @@ class TextInput extends Component {
         <View className='textarea-layout__container' style={bottom ? `margin-bottom:50px`:''}>
           <View className='layout-body'>
             <Textarea className='textarea-input' placeholder={placeholder}
+              focus={isOpened}
               autoFocus={isOpened}
               fixed
               cursorSpacing={60}
