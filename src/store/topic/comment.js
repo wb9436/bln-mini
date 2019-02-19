@@ -136,6 +136,22 @@ export default {
       }
     },
 
+    * onInitCommentList(_, {call, put, select}) {
+      const {id, sid, pageSize} = yield select(state => state.topicComment)
+      let curPageNum = 1
+      const {code, body} = yield call(Api.topicCommentList, {id, sid, curPageNum, pageSize})
+      if(code == 200) {
+        yield put({
+          type: 'save',
+          payload: {
+            commentList: body.array,
+            loadAll: body.paging.last,
+            curPageNum: curPageNum
+          }
+        })
+      }
+    },
+
     * onLoadCommentList(_, {call, put, select}) {
       const {id, sid, curPageNum, pageSize, commentList} = yield select(state => state.topicComment)
       const {code, body} = yield call(Api.topicCommentList, {id, sid, curPageNum, pageSize})

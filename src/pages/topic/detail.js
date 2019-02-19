@@ -51,7 +51,13 @@ class TopicDetail extends Component {
       type: 'topicComment/onLoadTopicDetail',
     })
     this.props.dispatch({
-      type: 'topicComment/onLoadCommentList',
+      type: 'topicComment/onInitCommentList',
+    })
+  }
+
+  componentDidShow() {
+    this.props.dispatch({
+      type: 'topicComment/onInitCommentList',
     })
   }
 
@@ -226,7 +232,6 @@ class TopicDetail extends Component {
     Api.addComment({id, content}).then(data => {
       const {code} = data
       if (code == 200) {
-        this.setState({replyAct: false})
         Taro.showToast({
           icon: 'success',
           title: '发送成功',
@@ -242,7 +247,6 @@ class TopicDetail extends Component {
     Api.addCommentReply({id, content}).then(data => {
       const {code} = data
       if (code == 200) {
-        this.setState({replyAct: false})
         Taro.showToast({
           icon: 'success',
           title: '发送成功',
@@ -291,7 +295,7 @@ class TopicDetail extends Component {
           }
           <View className='reply-data'>
             <View className='comment-time'>{Utils.formatTime(new Date(item.createTime))}</View>
-            <View className='replay-btn'>
+            <View className='reply-btn'>
               <Image className='comment-icon' src={commentBtn} mode='widthFix' onClick={this.onOpenReplyAction.bind(this, item.id)} />
               <View className='praise-btn' onClick={this.onCommentPraise.bind(this, index, item.id, item.praise)}>
                 <Image className='praise-icon' src={item.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />

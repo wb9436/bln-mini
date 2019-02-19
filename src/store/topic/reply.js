@@ -17,7 +17,6 @@ export default {
       praiseNum: 0,
       replyNum: 0,
       topicId: '',
-      updateTime: new Date().getTime(),
     },
     replyList: [],
     curPageNum: 1,
@@ -45,7 +44,6 @@ export default {
             praiseNum: comment.praiseNum,
             replyNum: comment.replyNum,
             topicId: comment.topicId,
-            updateTime: comment.updateTime,
           },
           replyList: [],
           curPageNum: 1,
@@ -88,9 +86,11 @@ export default {
     * onCommentPraise(_, {call, put, select}) {
       const {id, comment} = yield select(state => state.topicReply)
       let praise = comment.praise
+      let praiseNum = comment.praiseNum
       const {code} = yield call(praise == 1 ? Api.commentUnPraise : Api.commentPraise, {id})
       if(code == 200) {
         comment.praise = praise == 1 ? 0 : 1
+        comment.praiseNum = praise == 1 ? (praiseNum - 1) : (praiseNum + 1)
         yield put({
           type: 'save',
           payload: {
