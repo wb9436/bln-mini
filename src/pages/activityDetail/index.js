@@ -93,6 +93,9 @@ class ActivityDetail extends Component {
     this.props.dispatch({
       type: 'activityDetail/loadAdData'
     })
+    this.props.dispatch({
+      type: 'activityDetail/loadActAdData'
+    })
   }
 
   render() {
