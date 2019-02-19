@@ -12,6 +12,7 @@ $color-mark: #A9A9A9 !default;//遮罩
 $color-gray: #C6C5CA !default;//深灰
 $color-blue: #7A80A0 !default;//浅蓝色
 $color-input: #757575 !default;//输入框内颜色
+$color-line-gray: #D9D9D9 !default;
 
 @mixin flex-wrap {
   display: flex;

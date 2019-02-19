@@ -185,7 +185,11 @@ class CommentReply extends Component {
               </View>
             </View>
           </View>
-          <View className='comment-content'>{item.content}</View>
+          <View className='comment-content'>
+            {item.oldNickname && '回复'}
+            {item.oldNickname && <View className='reply-name'>{`@${item.oldNickname}：`}</View>}
+            {item.content}
+          </View>
         </View>
       </View>
     })

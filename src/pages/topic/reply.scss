@@ -29,6 +29,7 @@
       .content-container {
         width: 620px;
 
+
         .reply-data {
           margin-top: 15px;
           margin-right: 28px;
@@ -87,6 +88,12 @@
           min-height: 50px;
           line-height: 40px;
           @include sc(32px, $color-big);
+
+          .reply-name {
+            display: inline-block;
+            color: $color-theme;
+          }
+
         }
 
       }
@@ -94,8 +101,18 @@
 
     .comment-item_reply {
       background: $color-bg;
-      border-bottom: 2px solid #E8E7EC;
+
+      .content-container {
+        border-bottom: 2px solid $color-line-gray;
+      }
     }
+
+    .comment-item_reply:last-child {
+      .content-container {
+        border: none;
+      }
+    }
+
   }
 
 }
