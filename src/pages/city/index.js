@@ -13,10 +13,10 @@ import * as Utils from '../../utils/utils'
 import avatar from '../../images/public/avatar.png'
 import addressImg from '../../images/topic/address.png'
 import addBtn from '../../images/topic/addBtn.png'
-import praiseYes from '../../images/public/praise_yes.png'
-import praiseNo from '../../images/public/praise_no.png'
 import shareBtn from '../../images/topic/share.png'
 import commentBtn from '../../images/topic/comment.png'
+import praiseYes from '../../images/public/praise_yes.png'
+import praiseNo from '../../images/public/praise_no.png'
 import moreBtn from '../../images/topic/more.png'
 
 @connect(({cityTopic, loading}) => ({

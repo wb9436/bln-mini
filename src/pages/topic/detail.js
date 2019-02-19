@@ -10,10 +10,10 @@ import LoadAll from '../../components/LoadAll/index'
 import * as Api from '../../store/topic/service'
 import * as Utils from '../../utils/utils'
 
-import share from '../../images/topic/share.png'
-import commentImg from '../../images/topic/comment.png'
-import laudSelect from '../../images/public/praise_yes.png'
-import laud from '../../images/public/praise_no.png'
+import shareBtn from '../../images/topic/share.png'
+import commentBtn from '../../images/topic/comment.png'
+import praiseYes from '../../images/public/praise_yes.png'
+import praiseNo from '../../images/public/praise_no.png'
 import blnShare from '../../images/public/bln_share.png'
 import avatar from '../../images/public/avatar.png'
 import moreBtn from '../../images/topic/more.png'
@@ -292,9 +292,9 @@ class TopicDetail extends Component {
           <View className='reply-data'>
             <View className='comment-time'>{Utils.formatTime(new Date(item.createTime))}</View>
             <View className='replay-btn'>
-              <Image className='comment-icon' src={commentImg} mode='widthFix' onClick={this.onOpenReplyAction.bind(this, item.id)} />
+              <Image className='comment-icon' src={commentBtn} mode='widthFix' onClick={this.onOpenReplyAction.bind(this, item.id)} />
               <View className='praise-btn' onClick={this.onCommentPraise.bind(this, index, item.id, item.praise)}>
-                <Image className='praise-icon' src={item.praise == 1 ? laudSelect : laud} mode='widthFix' />
+                <Image className='praise-icon' src={item.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />
                 {item.praiseNum}
               </View>
             </View>
@@ -384,19 +384,19 @@ class TopicDetail extends Component {
           <View className='topic-data' style={{height: `${topicDataHeight}px`, borderTop: `1px solid #EfEEf4`}}>
             <Button className='data-item' openType='share'  >
               <View className='data-img'>
-                <Image src={share} mode='widthFix' />
+                <Image src={shareBtn} mode='widthFix' />
               </View>
               <View className='data'>分享</View>
             </Button>
             <Button className='data-item' onClick={this.onOpenTopicComment.bind(this, id)}>
               <View className='data-img'>
-                <Image src={commentImg} mode='widthFix' />
+                <Image src={commentBtn} mode='widthFix' />
               </View>
               <View className='data'>评论</View>
             </Button>
             <Button className='data-item' onClick={this.onTopicPraise.bind(this)}>
               <View className='data-img'>
-                <Image src={topic.praise == 1 ? laudSelect : laud} mode='widthFix' />
+                <Image src={topic.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />
               </View>
               <View className='data'>赞</View>
             </Button>

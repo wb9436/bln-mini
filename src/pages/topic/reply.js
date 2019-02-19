@@ -8,9 +8,9 @@ import TextInput from '../../components/TextArea'
 import * as Api from '../../store/topic/service'
 import * as Utils from '../../utils/utils'
 
-import commentImg from '../../images/topic/comment.png'
-import laudSelect from '../../images/public/praise_yes.png'
-import laud from '../../images/public/praise_no.png'
+import commentBtn from '../../images/topic/comment.png'
+import praiseYes from '../../images/public/praise_yes.png'
+import praiseNo from '../../images/public/praise_no.png'
 
 @connect(({topicReply, loading}) => ({
   ...topicReply,
@@ -219,12 +219,12 @@ class CommentReply extends Component {
             <View className='btn'>
               <View className='reply-data' onClick={this.onShowReplyModal.bind(this, item.id, 1)}>
                 <View className='reply-btn'>
-                  <Image src={commentImg} mode='widthFix' />
+                  <Image src={commentBtn} mode='widthFix' />
                 </View>
               </View>
               <View className='praise-data' onClick={this.onReplayPraise.bind(this, item.id, index, item.praise)}>
                 <View className='praise-btn'>
-                  <Image src={item.praise == 1 ? laudSelect : laud} mode='widthFix' />
+                  <Image src={item.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />
                 </View>
                 <View className='praise-num'>{item.praiseNum}</View>
               </View>
@@ -257,12 +257,12 @@ class CommentReply extends Component {
                 <View className='btn'>
                   <View className='reply-data' onClick={this.onShowReplyModal.bind(this, comment.id, 0)}>
                     <View className='reply-btn'>
-                      <Image src={commentImg} mode='widthFix' />
+                      <Image src={commentBtn} mode='widthFix' />
                     </View>
                   </View>
                   <View className='praise-data' onClick={this.onCommentPraise.bind(this)}>
                     <View className='praise-btn'>
-                      <Image src={comment.praise == 1 ? laudSelect : laud} mode='widthFix' />
+                      <Image src={comment.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />
                     </View>
                     <View className='praise-num'>{comment.praiseNum}</View>
                   </View>
