@@ -172,18 +172,20 @@ class CommentReply extends Component {
           <Image className='author-avatar' mode='widthFix' src={item.avatar} />
         </View>
         <View className='content-container'>
-          <View className='author-nickname'>{item.nickname}</View>
-          <View className='comment-content'>{item.content}</View>
           <View className='reply-data'>
-            <View className='comment-time'>{Utils.formatTime(new Date(item.createTime))}</View>
+            <View className='reply-info'>
+              <View className='author-nickname'>{item.nickname}</View>
+              <View className='comment-time'>{Utils.formatTime(new Date(item.createTime))}</View>
+            </View>
             <View className='reply-btn'>
-              <Image className='comment-icon' src={commentBtn} mode='widthFix' onClick={this.onOpenReplyAction.bind(this, 1, item.id)} />
+              {/*<Image className='comment-icon' src={commentBtn} mode='widthFix' onClick={this.onOpenReplyAction.bind(this, 1, item.id)} />*/}
               <View className='praise-btn' onClick={this.onReplyPraise.bind(this, item.id, index, item.praise)}>
                 <Image className='praise-icon' src={item.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />
                 {item.praiseNum}
               </View>
             </View>
           </View>
+          <View className='comment-content'>{item.content}</View>
         </View>
       </View>
     })
@@ -202,10 +204,11 @@ class CommentReply extends Component {
                 <Image className='author-avatar' mode='widthFix' src={comment.avatar} />
               </View>
               <View className='content-container'>
-                <View className='author-nickname'>{comment.nickname}</View>
-                <View className='comment-content'>{comment.content}</View>
                 <View className='reply-data'>
-                  <View className='comment-time'>{Utils.formatTime(new Date(comment.createTime))}</View>
+                  <View className='reply-info'>
+                    <View className='author-nickname'>{comment.nickname}</View>
+                    <View className='comment-time'>{Utils.formatTime(new Date(comment.createTime))}</View>
+                  </View>
                   <View className='reply-btn'>
                     <Image className='comment-icon' src={commentBtn} mode='widthFix' onClick={this.onOpenReplyAction.bind(this, 0, comment.id)} />
                     <View className='praise-btn' onClick={this.onCommentPraise.bind(this)}>
@@ -213,6 +216,9 @@ class CommentReply extends Component {
                       {comment.praiseNum}
                     </View>
                   </View>
+                </View>
+                <View className='comment-content'>
+                  {comment.content}
                 </View>
               </View>
             </View>
