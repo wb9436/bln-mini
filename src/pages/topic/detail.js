@@ -34,10 +34,10 @@ class TopicDetail extends Component {
       myself: 0, //是否是我的
       actType: 0, //动作类型: 0=删除, 1=查看, 2=投诉, 3=查看回复
       isOpenAct: false, //是否打开动作面板
-      id: 0, //话题id或评论id
+      actId: 0, //话题id或评论id
+      index: 0, //评论index
       replyType: 0, //回复类型:0=话题评论, 1=评论回复
       replyAct: false, //回复面板
-      index: 0,//评论index
     }
   }
 
@@ -108,7 +108,7 @@ class TopicDetail extends Component {
   onOpenCommentAction(id, index, myself) {
     let actType = 3
     let isOpenAct = true
-    this.setState({myself, actType, isOpenAct, id, index})
+    this.setState({myself, actType, isOpenAct, actId: id, index})
   }
 
   onCloseAction() {
@@ -148,7 +148,7 @@ class TopicDetail extends Component {
   }
 
   onOpenTopicComment(id) {
-    this.setState({id, replyType: 0, replyAct: true, isOpenAct: false})
+    this.setState({actId: id, replyType: 0, replyAct: true, isOpenAct: false})
   }
 
   onCommentPraise(index, id, praise, e) {
@@ -160,11 +160,11 @@ class TopicDetail extends Component {
   }
 
   onCommentDelete() {
-    const {id, index} = this.state
+    const {actId, index} = this.state
     this.setState({isOpenAct: false})
     this.props.dispatch({
       type: 'topicComment/onCommentDelete',
-      payload: {index, id}
+      payload: {index, id: actId}
     })
   }
 
@@ -194,7 +194,7 @@ class TopicDetail extends Component {
 
   onOpenReplyAction(id, dialogType, e) {
     e.stopPropagation()
-    this.setState({id: id, replyType: 1, replyAct: true})
+    this.setState({actId: id, replyType: 1, replyAct: true})
   }
 
   onCloseReplyAction() {
@@ -202,9 +202,9 @@ class TopicDetail extends Component {
   }
 
   onConfirm(content) {
-    const {id, replyType} = this.state
+    const {actId, replyType} = this.state
     this.setState({replyType: 0, replyAct: false})
-    if (id && id != '') {
+    if (actId && actId != '') {
       if (!content || content.trim() == '') {
         Taro.showToast({
           icon: 'none',
@@ -213,9 +213,9 @@ class TopicDetail extends Component {
         return
       }
       if (replyType == 0) {
-        this.addComment(id, content)
+        this.addComment(actId, content)
       } else {
-        this.addCommentReply(id, content)
+        this.addCommentReply(actId, content)
       }
     }
   }
@@ -252,14 +252,15 @@ class TopicDetail extends Component {
     })
   }
 
-  onViewReply() {
-    const {id, idx} = this.state
-    const {commentList} = this.props
-    let data = JSON.stringify(commentList[idx])
-    Taro.navigateTo({
-      url: '/pages/topic/reply?id=' + id + '&data=' + data
-    })
-    this.onCancelTopicDelete()
+  onLookCommentReply() {
+    const {actId, index} = this.state
+    this.setState({isOpenAct: false})
+    console.log('查看评论回复: actId=' + actId)
+    // const {commentList} = this.props
+    // let data = JSON.stringify(commentList[index])
+    // Taro.navigateTo({
+    //   url: '/pages/topic/reply?id=' + id + '&data=' + data
+    // })
   }
 
   render() {
@@ -332,7 +333,10 @@ class TopicDetail extends Component {
                   </View>
                 </View>
               </View>
-              <View className='topic-content'> {topic.content} </View>
+              <View className='topic-content'>
+                {Taro.getEnv() === Taro.ENV_TYPE.WEB && <RichText nodes={topic.content} />}
+                {Taro.getEnv() === Taro.ENV_TYPE.WEAPP && topic.content}
+              </View>
               <View className='topic-media'>
                 {topic.type == 2 && topic.sourceUrl.length > 0 > 0 ?
                   <Video
@@ -456,7 +460,7 @@ class TopicDetail extends Component {
             onCancel={this.onCloseAction.bind(this)}
             cancelText='取消'
           >
-            <AtActionSheetItem onClick={this.onOpenTopicComment.bind(this)}>
+            <AtActionSheetItem onClick={this.onLookCommentReply.bind(this)}>
               查看回复
             </AtActionSheetItem>
             {myself == 1 &&
