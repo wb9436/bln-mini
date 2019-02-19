@@ -8,9 +8,9 @@ import LoadAll from '../../components/LoadAll'
 import * as Constant from '../../config/index'
 import * as Utils from '../../utils/utils'
 
-import commentImg from '../../images/topic/comment.png'
-import laudSelect from '../../images/public/praise_yes.png'
-import laud from '../../images/public/praise_no.png'
+import commentBtn from '../../images/topic/comment.png'
+import praiseYes from '../../images/public/praise_yes.png'
+import praiseNo from '../../images/public/praise_no.png'
 import topicBg from '../../images/topic/topic_bg.png'
 import avatar from '../../images/public/avatar.png'
 
@@ -111,9 +111,9 @@ class TopicShareDetail extends Component {
           <View className='reply-data'>
             <View className='comment-time'>{Utils.formatTime(new Date(item.createTime))}</View>
             <View className='replay-btn'>
-              <Image className='comment-icon' src={commentImg} mode='widthFix' />
+              <Image className='comment-icon' src={commentBtn} mode='widthFix' />
               <View className='praise-btn'>
-                <Image className='praise-icon' src={item.praise == 1 ? laudSelect : laud} mode='widthFix' />
+                <Image className='praise-icon' src={item.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />
                 {item.praiseNum}
               </View>
             </View>
