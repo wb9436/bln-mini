@@ -87,6 +87,20 @@
         @include sc(32px, $color-big);
         line-height: 44px;
         word-wrap: break-word;
+
+
+        .topic-error {
+          width: 100%;
+          height: 200px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .topic-bg {
+            width: 40%;
+            height: auto;
+          }
+        }
       }
 
       .topic-media {

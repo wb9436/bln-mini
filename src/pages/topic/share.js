@@ -151,8 +151,14 @@ class TopicShareDetail extends Component {
                 </View>
               </View>
               <View className='topic-content'>
-                {Taro.getEnv() === Taro.ENV_TYPE.WEB && <RichText nodes={topic.content} />}
-                {Taro.getEnv() === Taro.ENV_TYPE.WEAPP && topic.content}
+                {existTopic && Taro.getEnv() === Taro.ENV_TYPE.WEB && <RichText nodes={topic.content}/>}
+                {existTopic && Taro.getEnv() === Taro.ENV_TYPE.WEAPP && topic.content}
+
+                {!existTopic &&
+                  <View className='topic-error'>
+                    <Image className='topic-bg' mode='widthFix' src={topicBg} />
+                  </View>
+                }
               </View>
               <View className='topic-media'>
                 {topic.type == 2 && topic.sourceUrl.length > 0 > 0 ?
