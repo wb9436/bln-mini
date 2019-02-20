@@ -125,11 +125,9 @@ class Login extends Component {
 
     return (
       <View className='login-container'>
-
         {Taro.getEnv() === Taro.ENV_TYPE.WEB && <WxShare />}
 
         <Image className='logo' src={logo} mode='widthFix' />
-
         <View className='input phone'>
           <Image className='icon' src={phone} mode='widthFix' />
           <Input className='input-box'
