@@ -243,20 +243,20 @@ class CommentReply extends Component {
           onCancel={this.onCloseAction.bind(this)}
           cancelText='取消'
         >
-          {actType == 0 &&
+          {actType == 0 ?
             <AtActionSheetItem onClick={this.onOpenReplyAction.bind(this, 0, comment.id)}>
               回复
-            </AtActionSheetItem>
+            </AtActionSheetItem> : ''
           }
-          {actType == 1 && myself == 1 &&
+          {(actType == 1 && myself == 1) ?
             <AtActionSheetItem onClick={this.onReplyDelete.bind(this)}>
               删除回复
-            </AtActionSheetItem>
+            </AtActionSheetItem> : ''
           }
-          {actType == 1 &&
+          {actType == 1 ?
             <AtActionSheetItem onClick={this.onOpenReplyAction.bind(this, 1, id)}>
               回复
-            </AtActionSheetItem>
+            </AtActionSheetItem> : ''
           }
         </AtActionSheet>
 

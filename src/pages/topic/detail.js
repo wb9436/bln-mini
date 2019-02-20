@@ -423,7 +423,7 @@ class TopicDetail extends Component {
           </AtActionSheet>
         }
 
-        {actType == 1 &&
+        {actType == 1 ?
           <AtActionSheet isOpened={isOpenAct}
             onClose={this.onCloseAction.bind(this)}
             onCancel={this.onCloseAction.bind(this)}
@@ -435,10 +435,10 @@ class TopicDetail extends Component {
             <AtActionSheetItem onClick={this.onOpenReportAction.bind(this)}>
               投诉
             </AtActionSheetItem>
-          </AtActionSheet>
+          </AtActionSheet> : ''
         }
 
-        {actType == 2 &&
+        {actType == 2 ?
           <AtActionSheet isOpened={isOpenAct}
             onClose={this.onCloseAction.bind(this)}
             onCancel={this.onCloseAction.bind(this)}
@@ -459,10 +459,10 @@ class TopicDetail extends Component {
             <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '侵犯人身权益')}>
               侵犯人身权益
             </AtActionSheetItem>
-          </AtActionSheet>
+          </AtActionSheet> : ''
         }
 
-        {actType == 3 &&
+        {actType == 3 ?
           <AtActionSheet isOpened={isOpenAct}
             onClose={this.onCloseAction.bind(this)}
             onCancel={this.onCloseAction.bind(this)}
@@ -476,7 +476,7 @@ class TopicDetail extends Component {
                 删除评论
               </AtActionSheetItem>
             }
-          </AtActionSheet>
+          </AtActionSheet> : ''
         }
 
         {/*书写评论弹窗*/}
