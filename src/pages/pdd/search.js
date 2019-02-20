@@ -4,7 +4,7 @@ import {AtIcon} from 'taro-ui'
 import {connect} from '@tarojs/redux'
 import './index.scss'
 
-import WxShare from '../../components/WxShare'
+import WxShare from '../../components/WxShare/index'
 import LoadAll from '../../components/LoadAll/index'
 
 import SortList from '../../components/SortList'
