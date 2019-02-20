@@ -65,7 +65,7 @@ class TopicAdd extends Component {
   onAddTopic = () => {
     const {area, clickAdd, content, mediaType, sourceUrl} = this.state
     if(clickAdd) return
-    if (!content || content.trim === '') {
+    if ((!content || content.trim === '') && sourceUrl.length <= 0) {
       Taro.showToast({
         icon: 'none',
         title: '请输入分享内容'
@@ -151,7 +151,7 @@ class TopicAdd extends Component {
     }
     Api.addTopic({area, type, content, files}).then((data) => {
       Taro.hideToast()
-      const {code} = data
+      const {code, msg} = data
       if (code == 200) {
         Taro.reLaunch({
           url: '/pages/city/index'
@@ -160,9 +160,13 @@ class TopicAdd extends Component {
         this.setState({
           clickAdd: false
         })
+        let title = '发布失败'
+        if (code == 9001) {
+          title = msg
+        }
         Taro.showToast({
           icon: 'none',
-          title: '发布失败'
+          title: title
         })
       }
     })
