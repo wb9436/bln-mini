@@ -137,7 +137,7 @@ class TopicShareDetail extends Component {
                 <View className='author-info'>
                   <Image className='author-avatar' mode='widthFix' src={topic.avatar || avatar} />
                   <View className='author-info'>
-                    <View className='author-name'>{topic.nickname}</View>
+                    <View className='author-name'>{topic.nickname || '百灵鸟'}</View>
                     <View className='author-desc'>{Utils.timeDesc(parseInt(topic.createTime / 1000))}</View>
                   </View>
                 </View>
