@@ -63,7 +63,7 @@ export default {
       const {code, body} = yield call(Api.topicDetail, {id, sid})
       if(code == 200 && body) {
         let content = body.content
-        if(Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+        if(Taro.getEnv() === Taro.ENV_TYPE.WEB && body.content) {
           content = `<p>${body.content}</p>`
           let reg = /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/
           content = content.replace(reg, (url) => {
