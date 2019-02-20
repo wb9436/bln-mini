@@ -95,7 +95,7 @@ class Classify extends Component {
 
     return (
       <View className='classify-page' style={{height: `${windowHeight}px`}}>
-        {Taro.getEnv() === Taro.ENV_TYPE.WEB && <WxShare />}
+        {process.env.TARO_ENV === 'h5' ? <WxShare /> : ''}
 
         <ScrollView className='scroll-container'
           scrollY

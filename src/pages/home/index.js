@@ -127,7 +127,7 @@ class Home extends Component {
 
     return (
       <View className='home-page'>
-        {Taro.getEnv() === Taro.ENV_TYPE.WEB && <WxShare />}
+        {process.env.TARO_ENV === 'h5' ? <WxShare /> : ''}
 
         <View className='act-type' style={{height: `${typeHeight}px`}}>
           {typeContent}

@@ -131,7 +131,7 @@ class PddSearch extends Component {
     return (
       <View className='pdd-page'>
         {/*微信分享*/}
-        {Taro.getEnv() === Taro.ENV_TYPE.WEB && <WxShare />}
+        {process.env.TARO_ENV === 'h5' ? <WxShare /> : ''}
 
         <View className='search-btn' style={{height: `${searchHeight}px`}} >
           <View className='btn-back' onClick={this.goBack.bind(this)}>

@@ -85,7 +85,7 @@ class PddDetail extends Component {
     return (
       <View className='pdd-detail-page'>
         {/*微信分享*/}
-        {Taro.getEnv() === Taro.ENV_TYPE.WEB && <WxShare link={buyUrl} desc={goodsName} imgUrl={thumbnailUrl} />}
+        {process.env.TARO_ENV === 'h5' ? <WxShare link={buyUrl} desc={goodsName} imgUrl={thumbnailUrl} /> : ''}
 
         <View className='goods-content' style={{height: `${goodsHeight}px`}}>
           <ScrollView className='scroll-container'

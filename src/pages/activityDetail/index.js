@@ -131,7 +131,7 @@ class ActivityDetail extends Component {
 
     return (
       <View className='activity-page'>
-        {Taro.getEnv() === Taro.ENV_TYPE.WEB ? <WxShare link={link} title={title} desc={desc} imgUrl={imageUrl} /> : ''}
+        {process.env.TARO_ENV === 'h5' ? <WxShare link={link} title={title} desc={desc} imgUrl={imageUrl} /> : ''}
 
         <ScrollView
           className='act-scroll'
