@@ -31,7 +31,7 @@
   .auth-img {
     width: 92.6%;
     padding: 0 3.7%;
-    height: 430px;
+    height: 450px;
     background: $color-white;
     display: flex;
     flex-direction: column;
@@ -52,6 +52,15 @@
       max-height: 300px;
       overflow-y: hidden;
     }
+
+    .auth-result {
+      width: 100%;
+      text-align: center;
+      height: 60px;
+      line-height: 60px;
+      @include sc(24px, $color-theme);
+      @include ellipsis;
+    }
   }
 
   .auth-submit {
@@ -63,6 +72,10 @@
     background: $color-theme;
     border-radius: 10px;
     @include sc(30px, $color-white);
+  }
+
+  .auth-disabled {
+    background: $color-theme-2;
   }
 
 }
