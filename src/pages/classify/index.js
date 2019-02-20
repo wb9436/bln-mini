@@ -48,7 +48,9 @@ class Classify extends Component {
             page: item.linkUrl,
             type: item.type,
           }
-          classifyItems.push(classifyItem)
+          if(item.type != 2) {
+            classifyItems.push(classifyItem)
+          }
         })
         this.setState({
           classifyItems
