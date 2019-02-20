@@ -93,6 +93,10 @@ class TopicShareDetail extends Component {
     const {topic, commentList, loadAll} = this.props
     let existTopic = topic.id == null ? false : true
     let scrollHeight = windowHeight
+    let content = topic.content
+    if(!content) {
+      content = ''
+    }
 
     const commentContent = commentList.map((item,index) => {
       return <View key={index} className='comment-item'>
@@ -152,17 +156,17 @@ class TopicShareDetail extends Component {
                 </View>
               </View>
               <View className='topic-content'>
-                {existTopic && Taro.getEnv() === Taro.ENV_TYPE.WEB && <RichText nodes={topic.content} />}
-                {existTopic && Taro.getEnv() === Taro.ENV_TYPE.WEAPP && topic.content}
+                {(existTopic && process.env.TARO_ENV === 'h5') ? <RichText nodes={content} /> : ''}
+                {existTopic && process.env.TARO_ENV === 'weapp' ? content : ''}
 
-                {!existTopic &&
+                {!existTopic ?
                   <View className='topic-error'>
                     <Image className='topic-bg' mode='widthFix' src={topicBg} />
-                  </View>
+                  </View> : ''
                 }
               </View>
               <View className='topic-media'>
-                {topic.type == 2 && topic.sourceUrl.length > 0 > 0 ?
+                {(topic.type == 2 && topic.sourceUrl.length > 0) ?
                   <Video
                     src={topic.sourceUrl[0]}
                     controls
@@ -173,7 +177,7 @@ class TopicShareDetail extends Component {
                     muted
                   /> : ''
                 }
-                {topic.type == 1 && topic.sourceUrl.length > 0 ?
+                {(topic.type == 1 && topic.sourceUrl.length > 0) ?
                   <View className='topic-img-list'>
                     {topic.sourceUrl.map((imageUrl, idx) => (
                       <View key={idx} className='topic-img-box'>
