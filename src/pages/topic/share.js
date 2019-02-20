@@ -13,6 +13,7 @@ import praiseYes from '../../images/public/praise_yes.png'
 import praiseNo from '../../images/public/praise_no.png'
 import topicBg from '../../images/topic/topic_bg.png'
 import avatar from '../../images/public/avatar.png'
+import moreBtn from '../../images/topic/more.png'
 
 @connect(({topicComment, loading}) => ({
   ...topicComment,
@@ -145,13 +146,13 @@ class TopicShareDetail extends Component {
                   <View className='topic-follow' onClick={this.onOpenHome.bind(this)}>
                     打开
                   </View>
-                  <View className='topic-more'>
+                  {/*<View className='topic-more'>*/}
                     {/*<Image className='more-icon' src={moreBtn} mode='widthFix' />*/}
-                  </View>
+                  {/*</View>*/}
                 </View>
               </View>
               <View className='topic-content'>
-                {existTopic && Taro.getEnv() === Taro.ENV_TYPE.WEB && <RichText nodes={topic.content}/>}
+                {existTopic && Taro.getEnv() === Taro.ENV_TYPE.WEB && <RichText nodes={topic.content} />}
                 {existTopic && Taro.getEnv() === Taro.ENV_TYPE.WEAPP && topic.content}
 
                 {!existTopic &&
