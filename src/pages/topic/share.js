@@ -201,7 +201,7 @@ class TopicShareDetail extends Component {
               </View>
               <View className='comment-list'>
                 {commentContent}
-                {loadAll && <LoadAll />}
+                <LoadAll loadAll={loadAll} />
               </View>
             </View>
 
