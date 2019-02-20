@@ -136,7 +136,7 @@ class PddDetail extends Component {
           </ScrollView>
         </View>
 
-        {Taro.getEnv() === Taro.ENV_TYPE.WEAPP &&
+        {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ?
           <View className='goods-btn' style={{height: `${btnHeight}px`}}>
             <Button className='btn-buy' onClick={this.onWeAppBuyGoods.bind(this)}>
               <View className='btn-name'>
@@ -154,9 +154,9 @@ class PddDetail extends Component {
                 赚{Utils.formatPrice(groupPromotePrice)}元
               </View>
             </Button>
-          </View>
+          </View> : ''
         }
-        {Taro.getEnv() === Taro.ENV_TYPE.WEB &&
+        {Taro.getEnv() === Taro.ENV_TYPE.WEB ?
           <View className='goods-btn' style={{height: `${btnHeight}px`}}>
             <Button className='btn-buy-now' onClick={this.onWebBuyGoods.bind(this, buyUrl)}>
               <View className='btn-name'>
@@ -166,7 +166,7 @@ class PddDetail extends Component {
                 省{Utils.formatPrice(couponDiscount + groupPromotePrice)}元（券+佣金）
               </View>
             </Button>
-          </View>
+          </View> : ''
         }
 
       </View>

@@ -170,7 +170,7 @@ class Pdd extends Component {
                 {goodsContent}
               </View>
 
-              {loadAll && <LoadAll />}
+              <LoadAll loadAll={loadAll} />
             </ScrollView>
           </View>
 

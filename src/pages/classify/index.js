@@ -104,7 +104,6 @@ class Classify extends Component {
           scrollWithAnimation
         >
           {scrollContent}
-
         </ScrollView>
       </View>
     )

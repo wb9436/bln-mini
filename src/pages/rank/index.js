@@ -150,7 +150,7 @@ class UserRank extends Component {
         >
           {content}
 
-          {loadAll && <LoadAll />}
+          <LoadAll loadAll={loadAll} />
         </ScrollView>
 
         <View className='mine-rank' style={{height: `${mineHeight}px`}}>

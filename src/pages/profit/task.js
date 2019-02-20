@@ -89,7 +89,7 @@ class TaskProfit extends Component {
         >
           {content}
 
-          {loadAll && <LoadAll />}
+          <LoadAll loadAll={loadAll} />
         </ScrollView>
 
       </View>

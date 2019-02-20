@@ -83,7 +83,7 @@ class PddProfit extends Component {
         >
           {content}
 
-          {loadAll && <LoadAll />}
+          <LoadAll loadAll={loadAll} />
         </ScrollView>
 
       </View>

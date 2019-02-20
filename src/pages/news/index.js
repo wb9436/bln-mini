@@ -79,7 +79,7 @@ class Hot extends Component {
         >
           {newsContent}
 
-          {loadAll && <LoadAll />}
+          <LoadAll loadAll={loadAll} />
         </ScrollView>
       </View>
     )
