@@ -157,7 +157,7 @@ class TopicShareDetail extends Component {
               </View>
               <View className='topic-content'>
                 {(existTopic && process.env.TARO_ENV === 'h5') ? <RichText nodes={content} /> : ''}
-                {existTopic && process.env.TARO_ENV === 'weapp' ? content : ''}
+                {(existTopic && process.env.TARO_ENV === 'weapp') ? content : ''}
 
                 {!existTopic ?
                   <View className='topic-error'>
