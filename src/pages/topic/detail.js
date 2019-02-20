@@ -277,6 +277,10 @@ class TopicDetail extends Component {
     if (existTopic) {//border=1px
       scrollHeight = windowHeight - topicDataHeight - 1
     }
+    let content = topic.content
+    if(!content) {
+      content = ''
+    }
 
     const commentContent = commentList.map((item,index) => {
       return <View key={index} className='comment-item' onClick={this.onOpenCommentAction.bind(this, item.id, index, item.myself)}>
@@ -337,8 +341,8 @@ class TopicDetail extends Component {
                 </View>
               </View>
               <View className='topic-content'>
-                {Taro.getEnv() === Taro.ENV_TYPE.WEB && <RichText nodes={topic.content} />}
-                {Taro.getEnv() === Taro.ENV_TYPE.WEAPP && topic.content}
+                {Taro.getEnv() === Taro.ENV_TYPE.WEB ? <RichText nodes={content} /> : ''}
+                {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? content : ''}
               </View>
               <View className='topic-media'>
                 {topic.type == 2 && topic.sourceUrl.length > 0 > 0 ?
@@ -376,7 +380,7 @@ class TopicDetail extends Component {
               </View>
               <View className='comment-list'>
                 {commentContent}
-                {loadAll ? <LoadAll /> : ''}
+                <LoadAll loadAll={loadAll} />
               </View>
             </View>
 

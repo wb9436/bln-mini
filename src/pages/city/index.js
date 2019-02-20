@@ -219,7 +219,6 @@ class CityTopic extends Component {
     const {topicList, loadAll, effects} = this.props
     let navHeight = 43
     let scrollHeight = windowHeight - 45
-    let loading = effects['cityTopic/onLoadTopicList'] || effects['cityTopic/onLoadAttentionTopicList']
 
     const topicContent = topicList.map((item, index) => {
       let sourceUrl = []
@@ -289,18 +288,18 @@ class CityTopic extends Component {
     return (
       <View className='city-topic-page'>
         <View className='topic-nav' style={{height: `${navHeight}px`}}>
-          <View className='topic-city' onClick={this.onOpenAddress.bind(this)}>
-            <Image className='nav-icon' src={addressImg} mode='widthFix' />
-            <View className='city-name'>{city}</View>
-          </View>
-          <View className='topic-type'>
-            <View className={type == 0 ? 'type-item type-item_active' : 'type-item'} onClick={this.onCheckTopicType.bind(this, 0)}>话题</View>
-            <View className={type == 1 ? 'type-item type-item_active' : 'type-item'} onClick={this.onCheckTopicType.bind(this, 1)}>关注</View>
-          </View>
-          <View className='topic-add' onClick={this.onAddTopic.bind(this)}>
-            <Image className='nav-icon' src={addBtn} mode='widthFix' />
-          </View>
+        <View className='topic-city' onClick={this.onOpenAddress.bind(this)}>
+          <Image className='nav-icon' src={addressImg} mode='widthFix' />
+          <View className='city-name'>{city}</View>
         </View>
+        <View className='topic-type'>
+          <View className={type == 0 ? 'type-item type-item_active' : 'type-item'} onClick={this.onCheckTopicType.bind(this, 0)}>话题</View>
+          <View className={type == 1 ? 'type-item type-item_active' : 'type-item'} onClick={this.onCheckTopicType.bind(this, 1)}>关注</View>
+        </View>
+        <View className='topic-add' onClick={this.onAddTopic.bind(this)}>
+          <Image className='nav-icon' src={addBtn} mode='widthFix' />
+        </View>
+      </View>
 
         <View className='topic-scroll' style={{height: `${scrollHeight}px`}}>
           <ScrollView className='scroll-container'
@@ -308,9 +307,9 @@ class CityTopic extends Component {
             scrollWithAnimation
             onScrollToLower={this.appendNextPageList.bind(this)}
           >
-            {loading ? <Loading /> : ''}
+            <Loading loading={effects['cityTopic/onLoadTopicList'] || effects['cityTopic/onLoadAttentionTopicList']} />
             {topicContent}
-            {loadAll ? <LoadAll /> : ''}
+            <LoadAll loadAll={loadAll} />
           </ScrollView>
         </View>
 

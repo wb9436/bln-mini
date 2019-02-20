@@ -142,8 +142,7 @@ class Home extends Component {
           >
             {actContent}
 
-            {loadAll && <LoadAll />}
-
+            <LoadAll loadAll={loadAll} />
           </ScrollView>
 
           <View className={loading ? 'refresh-btn loading' : 'refresh-btn'}
