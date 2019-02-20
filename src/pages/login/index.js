@@ -2,7 +2,7 @@ import Taro, {Component} from '@tarojs/taro'
 import {View, Image, Input} from '@tarojs/components'
 import './index.scss'
 
-import WxShare from '../../components/WxShare'
+import WxShare from '../../components/WxShare/index'
 
 import {userMobileLogin as UserLogin, getUserDataBySid as CheckUserSid} from '../../store/user/service'
 

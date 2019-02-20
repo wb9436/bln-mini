@@ -3,7 +3,7 @@ import {View, RichText, Button, ScrollView, Image, Video} from '@tarojs/componen
 import {connect} from '@tarojs/redux'
 import './index.scss'
 
-import WxShare from '../../components/WxShare'
+import WxShare from '../../components/WxShare/index'
 
 import * as Utils from '../../utils/utils'
 import ParseComponent from './wxParseComponent'
@@ -131,7 +131,6 @@ class ActivityDetail extends Component {
 
     return (
       <View className='activity-page'>
-        {/*微信分享*/}
         {Taro.getEnv() === Taro.ENV_TYPE.WEB ? <WxShare link={link} title={title} desc={desc} imgUrl={imageUrl} /> : ''}
 
         <ScrollView

@@ -2,7 +2,7 @@ import Taro, {Component} from '@tarojs/taro'
 import {View, ScrollView, Image} from '@tarojs/components'
 import './index.scss'
 
-import WxShare from '../../components/WxShare'
+import WxShare from '../../components/WxShare/index'
 
 import * as Api from '../../store/game/service'
 
@@ -95,7 +95,6 @@ class Classify extends Component {
 
     return (
       <View className='classify-page' style={{height: `${windowHeight}px`}}>
-
         {Taro.getEnv() === Taro.ENV_TYPE.WEB && <WxShare />}
 
         <ScrollView className='scroll-container'
