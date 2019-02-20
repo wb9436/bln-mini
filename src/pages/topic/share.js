@@ -101,7 +101,7 @@ class TopicShareDetail extends Component {
         </View>
         <View className='content-container'>
           <View className='author-nickname'>{item.nickname}</View>
-          <View className='comment-content'>{item.content}</View>
+          <View className='comment-content'>{item.content ? item.content : ''}</View>
           {item.replyNum > 0 &&
             <View className='comment-reply'>
               <View className='last-play'>{`${item.lastReplyNickname}`}</View>

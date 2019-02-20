@@ -285,7 +285,7 @@ class TopicDetail extends Component {
         </View>
         <View className='content-container'>
           <View className='author-nickname'>{item.nickname}</View>
-          <View className='comment-content'>{item.content}</View>
+          <View className='comment-content'>{item.content ? item.content : ''}</View>
           {item.replyNum > 0 &&
             <View className='comment-reply'>
               <View className='last-play'>{`${item.lastReplyNickname}`}</View>
@@ -328,8 +328,8 @@ class TopicDetail extends Component {
                 </View>
                 <View className='topic-btn'>
                   <View className='topic-follow' onClick={this.onTopicAttention.bind(this, topic.myself)}>
-                    {topic.myself == 1 && '删除'}
-                    {topic.myself == 0 && `${topic.attention == 1 ? '已关注' : '关注' }`}
+                    {topic.myself == 1 ? '删除' : ''}
+                    {topic.myself == 0 ? `${topic.attention == 1 ? '已关注' : '关注' }` : ''}
                   </View>
                   <View className='topic-more' onClick={this.onOpenAction.bind(this)}>
                     <Image className='more-icon' src={moreBtn} mode='widthFix' />
@@ -376,7 +376,7 @@ class TopicDetail extends Component {
               </View>
               <View className='comment-list'>
                 {commentContent}
-                {loadAll && <LoadAll />}
+                {loadAll ? <LoadAll /> : ''}
               </View>
             </View>
 

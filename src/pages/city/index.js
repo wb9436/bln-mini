@@ -237,15 +237,15 @@ class CityTopic extends Component {
           </View>
           <View className='topic-btn'>
             <View className='topic-follow' onClick={this.onTopicAttention.bind(this, index, item.id, item.myself, item.attention)}>
-              {item.myself == 1 && '删除'}
-              {item.myself == 0 && `${item.attention == 1 ? '已关注' : '关注' }`}
+              {item.myself == 1 ? '删除' : ''}
+              {item.myself == 0 ? `${item.attention == 1 ? '已关注' : '关注' }` : ''}
             </View>
             <View className='topic-more' onClick={this.onOpenAction.bind(this, index, item.id)}>
               <Image className='more-icon' src={moreBtn} mode='widthFix' />
             </View>
           </View>
         </View>
-        <View className='topic-content'> {item.content} </View>
+        <View className='topic-content'> {item.content ? item.content : ''} </View>
         <View className='topic-media'>
           {item.type == 2 && sourceUrl.length > 0 ?
             <Video
@@ -308,9 +308,9 @@ class CityTopic extends Component {
             scrollWithAnimation
             onScrollToLower={this.appendNextPageList.bind(this)}
           >
-            {loading && <Loading />}
+            {loading ? <Loading /> : ''}
             {topicContent}
-            {loadAll && <LoadAll />}
+            {loadAll ? <LoadAll /> : ''}
           </ScrollView>
         </View>
 
