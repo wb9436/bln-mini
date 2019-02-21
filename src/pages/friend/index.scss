@@ -1,0 +1,190 @@
+@import "../../styles/mixin";
+
+.friend-page {
+  width: 100%;
+  height: 100vh;
+
+  .invite-title {
+    width: 100%;
+    position: relative;
+
+    .title-icon {
+      width: 100%;
+    }
+
+    .invite-code {
+      width: 100%;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      @include sc(30px, $color-white);
+      position: absolute;
+      z-index: 1;
+      top: 250px;
+      left: 0;
+    }
+
+  }
+
+  .invite-nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+    .nav-item {
+      height: 100%;
+      width: 50%;
+      line-height: 84px;
+      text-align: center;
+      @include sc(32px, $color-big);
+      border-bottom: 2px solid $color-line;
+    }
+
+    .nav-checked {
+      border-bottom: 4px solid $color-white;
+    }
+
+  }
+
+  .invite-scroll {
+    width: 100%;
+    background: $color-bg;
+
+    .invite-desc {
+      margin-top: 40px;
+      padding: 0 28px;
+      width: auto;
+      position: relative;
+
+      .invite-desc-icon {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .desc {
+        padding: 0 80px;
+        width: auto;
+        height: 220px;
+        position: absolute;
+        z-index: 1;
+        top: 90px;
+        left: 0;
+
+        .desc-item {
+          margin-top: 20px;
+          line-height: 40px;
+          @include sc(30px, $color-big);
+        }
+
+      }
+
+    }
+
+    .invite-how {
+      margin-top: 40px;
+      padding: 0 28px;
+      width: auto;
+
+      .invite-how-icon {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+    }
+
+    .friend-info {
+      padding: 0 28px;
+      height: 130px;
+      background: $color-white;
+      border-bottom: 2px solid $color-line;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid $color-line;
+
+      .friend-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+
+      .friend-data {
+        height: 100%;
+        width: 590px;
+        margin-left: 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+
+        .friend-nickname {
+          width: 100%;
+          height: 60px;
+          line-height: 60px;
+
+          .nickname {
+            @include sc(32px, $color-theme);
+          }
+        }
+
+        .friend-desc {
+          width: 100%;
+          height: 40px;
+          line-height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .desc {
+            height: 100%;
+            width: 60%;
+            @include sc(26px, $color-small);
+            overflow: hidden;
+          }
+
+          .date {
+            height: 100%;
+            width: 40%;
+            text-align: right;
+            @include sc(24px, $color-small);
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  .invite-share {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: $color-theme;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .invite-share-icon {
+      width: 40px;
+      height: auto;
+    }
+
+    .invite-share-title {
+      margin-left: 20px;
+      height: 60px;
+      line-height: 70px;
+      @include sc(34px, $color-white)
+    }
+
+  }
+
+
+}
+
+
+

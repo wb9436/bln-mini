@@ -46,7 +46,7 @@ class Mine extends Component {
       columnItem: [
         {name: '我的钱包',type: 'wallet', icon: wallet, page: '/pages/wallet/index'},
         // {name: '账号绑定',type: 'account',  icon: account, page: ''},
-        {name: '邀请好友',type: 'friend',  icon: friend, page: ''},
+        {name: '邀请好友',type: 'friend',  icon: friend, page: '/pages/friend/index'},
         {name: '我的话题',type: 'topic',  icon: mine, page: '/pages/myTopic/index'},
         {name: '日常任务',type: 'task',  icon: task, page: '/pages/task/index'},
         {name: '排行榜',type: 'rank',  icon: rank, page: '/pages/rank/index'},

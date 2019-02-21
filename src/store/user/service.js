@@ -95,3 +95,11 @@ export const userRankList = data => Request({
   data
 })
 
+
+/*用户好友列表*/
+export const userFriends = data => Request({
+  url: '/api/user/friends',
+  method: 'POST',
+  need_sid: true,
+  data
+})
