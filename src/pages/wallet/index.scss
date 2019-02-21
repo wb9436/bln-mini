@@ -7,35 +7,49 @@
   background: $color-bg;
 
   .wallet-data {
-    width: 92%;
     height: 210px;
-    padding: 24px 4%;
-    background-color: $color-white;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 92% 82%;
+    padding: 24px 28px;
     border-bottom: 2px solid $color-line;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    background: $color-white;
+    position: relative;
 
-    .item-data {
-      width: 49%;
+    .bg-icon {
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+    }
+
+    .user-wallet {
+      width: 100%;
       height: 100%;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-around;
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
 
-      .item-desc {
-        @include sc(28px, $color-white);
+      .item-data {
+        width: 49%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .item-desc {
+          @include sc(28px, $color-white);
+        }
+
+        .item-num {
+          @include sc(50px, $color-white);
+        }
+
       }
-
-      .item-num {
-        @include sc(50px, $color-white);
-      }
-
     }
+
+
 
     .line {
       margin-top: 15px;

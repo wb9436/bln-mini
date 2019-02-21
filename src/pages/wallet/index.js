@@ -72,16 +72,20 @@ class Wallet extends Component {
     return (
       <View className='wallet-page'>
 
-        <View className='wallet-data' style={{backgroundImage: `url(${walletBg})`}}>
-          <View className='item-data'>
-            <View className='item-desc'>总收益</View>
-            <View className='item-num'>{amount}</View>
+        <View className='wallet-data'>
+          <Image className='bg-icon' src={walletBg} mode='widthFix' />
+          <View className='user-wallet'>
+            <View className='item-data'>
+              <View className='item-desc'>总收益</View>
+              <View className='item-num'>{amount}</View>
+            </View>
+            <View className='line'></View>
+            <View className='item-data'>
+              <View className='item-desc'>余额</View>
+              <View className='item-num'>{money}</View>
+            </View>
           </View>
-          <View className='line'></View>
-          <View className='item-data'>
-            <View className='item-desc'>余额</View>
-            <View className='item-num'>{money}</View>
-          </View>
+
         </View>
 
         {walletContent}
