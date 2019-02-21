@@ -12,6 +12,7 @@ class IdAuth extends Component {
   constructor() {
     super(...arguments)
     this.state = {
+      isChange: false, //是否手动更改图片
       imgUrl: '', //身份证图片地址
       realName: '', //真实姓名
       idNumber: '', //身份证号
@@ -26,6 +27,7 @@ class IdAuth extends Component {
       if (code == 200) {
         if (body && body.idNumber && body.idNumber.toString().trim() != '') {
           this.setState({
+            isChange: false,
             imgUrl: body.imgUrl,
             realName: body.realName,
             idNumber: body.idNumber,
@@ -44,6 +46,7 @@ class IdAuth extends Component {
         count: 1
       }).then((data) => {
         this.setState({
+          isChange: true,
           imgUrl: data.tempFilePaths[0]
         })
       })
@@ -57,7 +60,7 @@ class IdAuth extends Component {
   }
 
   onUserAuth() {
-    const {imgUrl, realName, idNumber, authState} = this.state
+    const {isChange, imgUrl, realName, idNumber, authState} = this.state
     if (authState == -1 || authState == 2) {
       let isIDCard = /^(\d{6})(19|20)(\d{2})(1[0-2]|0[1-9])(0[1-9]|[1-2][0-9]|3[0-1])(\d{3})(\d|X|x)?$/
       if (!realName || realName.trim() === '') {
@@ -92,28 +95,36 @@ class IdAuth extends Component {
         })
         return false
       }
-      let that = this
-      let mediaType = 1
-      let filePath = imgUrl
-      Api.uploadFile({mediaType, filePath}).then(res => {
-        const {code, body} = res
-        if (code == 200) {
-          filePath = body[0]
-          Api.userAuth({realName, idNumber, imgUrl: filePath}).then(data => {
-            if (data.code == 200) {
-              Taro.showToast({
-                title: '已提交审核',
-                icon: 'success',
-                mask: true,
-              })
-              that.setState({
-                authState: 0
-              })
-            }
-          })
-        }
-      })
+      if (isChange) {
+        let that = this
+        let mediaType = 1
+        let filePath = imgUrl
+        Api.uploadFile({mediaType, filePath}).then(res => {
+          const {code, body} = res
+          if (code == 200) {
+            filePath = body[0]
+            that.onSubmitAuth(realName, idNumber, filePath)
+          }
+        })
+      } else {
+        this.onSubmitAuth(realName, idNumber, imgUrl)
+      }
     }
+  }
+
+  onSubmitAuth(realName, idNumber, imgUrl) {
+    Api.userAuth({realName, idNumber, imgUrl}).then(data => {
+      if (data.code == 200) {
+        Taro.showToast({
+          title: '已提交审核',
+          icon: 'success',
+          mask: true,
+        })
+        this.setState({
+          authState: 0
+        })
+      }
+    })
   }
 
   render() {
