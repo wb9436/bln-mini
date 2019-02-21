@@ -129,7 +129,7 @@ class UserRank extends Component {
               <View className='rank-share'>{`转发数：${item.sendNum}`}</View>
             </View>
             <View className='rank-level'>
-              <Image className='level-img' mode='aspectFill' src={levelImg} />
+              <Image className={item.sequence > 3 ? 'level-img' : 'level-img top-three'} mode='widthFix' src={levelImg} />
               <View className='level-data'>{`阅读数 ${item.readNum}`}</View>
               <View className='level'>{levelMsg}</View>
             </View>
@@ -162,7 +162,7 @@ class UserRank extends Component {
             </View>
           </View>
           <View className='rank-level'>
-            <Image className='level-img' mode='aspectFill' src={myLevelImg} />
+            <Image className={mine.sequence > 3 ? 'level-img' : 'level-img top-three'} mode='widthFix' src={myLevelImg} />
             <View className='level-data'>{`阅读数 ${mine.readNum}`}</View>
             <View className='level'>{myLevelMsg}</View>
           </View>
