@@ -66,10 +66,6 @@ class Home extends Component {
   }
 
   onRefreshHandler() {
-    // this.props.dispatch({
-    //   type: 'activity/save',
-    //   payload: {activityList: []}
-    // })
     this.props.dispatch({
       type: 'activity/refreshActivity'
     })
