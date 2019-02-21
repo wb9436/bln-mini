@@ -70,12 +70,12 @@ class SortList extends Component {
         <View className={item.typeId == typeId ? 'sort-name sort-checked' : 'sort-name'}>
           {item.name}
         </View>
-        {
-          item.types.length > 0 && <View className='sort-icon'>
+        {item.types.length > 0 ?
+          <View className='sort-icon'>
             {item.types.map(sort => {
               return <AtIcon key={sort.type} size='15' color={sort.type == sortType ? '#EE735D' : ''} value={sort.icon} />
             })}
-          </View>
+          </View> : ''
         }
       </View>
     })

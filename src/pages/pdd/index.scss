@@ -94,7 +94,7 @@
       height: 70px;
       margin-top: 5px;
       line-height: 35px;
-      @include sc(13px, $color-big);
+      @include sc(24px, $color-big);
       @include rowWrap(2);
     }
 

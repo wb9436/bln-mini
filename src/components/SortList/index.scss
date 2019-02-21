@@ -1,7 +1,7 @@
 @import "../../styles/mixin";
 
 .sort-view {
-  width: 100%;
+  width: 100vw;
   height: 70px;
   @include sc(28px, $color-small);
   display: flex;
