@@ -7,7 +7,6 @@ import './index.scss'
 import * as Api from '../../store/user/service'
 import * as Utils from '../../utils/utils'
 
-import authImg from '../../images/mine/authBtn.png'
 import msgBtn from '../../images/mine/msgBtn.png'
 
 import wallet from '../../images/mine/wallet.png'
@@ -173,7 +172,7 @@ class Mine extends Component {
             <Image className='avatar' src={userData.avatar || avatar} mode='widthFix' />
             <View className='info'>
               <View className='nickname'>{userData.nickname}</View>
-              <View className='auth-btn' style={{backgroundImage: `url(${authImg})`}}
+              <View className='auth-btn'
                 onClick={this.onLookPageHandler.bind(this, '/pages/auth/index')}
               >{isAuth}</View>
             </View>
