@@ -3,9 +3,9 @@ module.exports = {
     NODE_ENV: '"development"'
   },
   defineConstants: {
-    BASE_API: '"https://api.viplark.com"',
-    PDD_API: '"https://ddk.viplark.com"',
-    TOPIC_API: '"https://chat.viplark.com"'
+    BASE_API: '"https://api.vipsunyou.com"',
+    PDD_API: '"https://ddk.vipsunyou.com"',
+    TOPIC_API: '"https://chat.vipsunyou.com"'
   },
   weapp: {},
   h5: {
