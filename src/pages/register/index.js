@@ -6,7 +6,6 @@ import * as Api from '../../store/user/service'
 import AddressDialog from '../../components/Address/index'
 
 import map from '../../images/public/map.png'
-import btn from '../../images/login/btn.png'
 import logo from '../../images/login/logo.png'
 import phone from '../../images/login/phone.png'
 import pwd from '../../images/login/pwd.png'
@@ -265,7 +264,7 @@ class ForgetPassword extends Component {
           </View> : ''
         }
 
-        <View className='login-btn' style={{backgroundImage: `url(${btn})`}} onClick={this.onRegisterHandler.bind(this, isCheck)}>
+        <View className='login-btn' onClick={this.onRegisterHandler.bind(this, isCheck)}>
           {btnMsg}
         </View>
 

@@ -94,15 +94,20 @@
             }
           }
 
-          .share-btn {
+          .share-btn_start {
             width: 150px;
             height: 48px;
             line-height: 48px;
             text-align: center;
             @include sc(24px, $color-white);
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
+            background: $color-theme;
+            border-radius: 24px;
           }
+
+          .share-btn_end {
+            background: $color-theme-2;
+          }
+
         }
 
 

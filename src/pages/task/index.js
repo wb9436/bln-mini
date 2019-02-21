@@ -8,8 +8,6 @@ import * as Utils from '../../utils/utils'
 import discCircular from '../../images/public/disc-circular.png'
 import emptyCircular from '../../images/public/empty-circular.png'
 import award from '../../images/task/award.png'
-import btn from '../../images/task/btn.png'
-import btnComplete from '../../images/task/btn-complete.png'
 import blnShare from '../../images/public/bln_share.png'
 
 class Task extends Component {
@@ -166,7 +164,7 @@ class Task extends Component {
             <View className='task-btn'>
 
               {Taro.getEnv() === Taro.ENV_TYPE.WEAPP && item.type === 'invite' &&
-                <Button className='btn' openType='share' style={{backgroundImage: `url(${taskState == true ? btnComplete : btn})`}}
+                <Button className={taskState ? 'btn_start btn_end' : 'btn_start'} openType='share'
                   onClick={this.onCompleteTask.bind(this, item.type, taskState)}
                 >
                 {taskState == true ? item.btn_yes : item.btn_no}
@@ -174,7 +172,7 @@ class Task extends Component {
               }
 
               {(Taro.getEnv() !== Taro.ENV_TYPE.WEAPP || item.type !== 'invite') &&
-                <View className='btn' style={{backgroundImage: `url(${taskState == true ? btnComplete : btn})`}}
+                <View className={taskState ? 'btn_start btn_end' : 'btn_start'}
                   onClick={this.onCompleteTask.bind(this, item.type, taskState)}
                 >
                   {taskState == true ? item.btn_yes : item.btn_no}

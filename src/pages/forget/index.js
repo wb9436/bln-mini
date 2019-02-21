@@ -4,7 +4,6 @@ import './index.scss'
 
 import * as Api from '../../store/user/service'
 
-import btn from '../../images/login/btn.png'
 import logo from '../../images/login/logo.png'
 import phone from '../../images/login/phone.png'
 import pwd from '../../images/login/pwd.png'
@@ -192,7 +191,7 @@ class ForgetPassword extends Component {
           />
         </View>
 
-        <View className='login-btn' style={{backgroundImage: `url(${btn})`}} onClick={this.onUpdatePwdHandler.bind(this)}>
+        <View className='login-btn' onClick={this.onUpdatePwdHandler.bind(this)}>
           立即修改
         </View>
 

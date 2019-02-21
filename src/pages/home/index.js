@@ -6,8 +6,6 @@ import './index.scss'
 import WxShare from '../../components/WxShare/index'
 import LoadAll from '../../components/LoadAll/index'
 
-import shareBtn from '../../images/activity/share.png'
-import overtimeBtn from '../../images/activity/overtime.png'
 import refreshBtn from '../../images/public/refresh.png'
 
 @connect(({activity, loading}) => ({
@@ -117,7 +115,7 @@ class Home extends Component {
               {item.hot == 2 && <View className='title-icon new'> 新 </View>}
               {item.hits}人阅读
             </View>
-            <View className='share-btn' style={{backgroundImage: `url(${item.state == 1 ? shareBtn : overtimeBtn})`}}>
+            <View className={item.state == 1 ? 'share-btn_start' : 'share-btn_start share-btn_end'}>
               {item.state == 1 ? '立即分享' : '活动已结束'}
             </View>
           </View>

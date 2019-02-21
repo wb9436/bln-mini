@@ -6,7 +6,6 @@ import WxShare from '../../components/WxShare/index'
 
 import {userMobileLogin as UserLogin, getUserDataBySid as CheckUserSid} from '../../store/user/service'
 
-import btn from '../../images/login/btn.png'
 import logo from '../../images/login/logo.png'
 import phone from '../../images/login/phone.png'
 import pwd from '../../images/login/pwd.png'
@@ -151,7 +150,7 @@ class Login extends Component {
           />
         </View>
 
-        <View className='login-btn' style={{backgroundImage: `url(${btn})`}} onClick={this.onLoginHandler.bind(this)}>
+        <View className='login-btn' onClick={this.onLoginHandler.bind(this)}>
           登录
         </View>
 

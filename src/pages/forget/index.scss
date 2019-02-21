@@ -70,8 +70,8 @@
     line-height: 98px;
     text-align: center;
     @include sc(32px, $color-white);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background: $color-theme;
+    border-radius: 49px;
   }
 
   .other-btn {

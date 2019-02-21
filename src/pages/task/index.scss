@@ -94,15 +94,18 @@
           display: flex;
           justify-content: center;
 
-          .btn {
+          .btn_start {
             width: 85%;
             height: 50px;
             line-height: 50px;
             text-align: center;
             @include sc(24px, $color-white);
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
+            background: $color-theme;
+            border-radius: 25px;
+          }
+
+          .btn_end {
+            background: $color-theme-2;
           }
         }
       }
