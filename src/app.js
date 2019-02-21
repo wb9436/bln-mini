@@ -50,6 +50,7 @@ class App extends Component {
       'pages/topic/reply',
       'pages/myTopic/index',
       'pages/friend/index',
+      'pages/help/index',
     ],
     tabBar: {
       "color": "#929292",
