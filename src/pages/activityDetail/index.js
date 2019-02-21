@@ -102,9 +102,13 @@ class ActivityDetail extends Component {
     const {type, title, content, link, desc, imageUrl, refreshTime, hits, praise, praiseState, scrollTop} = this.props
     const {isAd, isImage, isVideo, picUrl, videoUrl, adTitle, subTitle, btnTitle, actList} = this.props
 
+    let existAct = false
+    if(content && content.trim() !== '') {
+      existAct = true
+    }
     let shareBtnHeight = 50
     let scrollHeight = Utils.windowHeight(false)
-    if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+    if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP && existAct) {
       scrollHeight -= 50
     }
 
@@ -153,7 +157,7 @@ class ActivityDetail extends Component {
             {Taro.getEnv() === Taro.ENV_TYPE.WEB && <View className='rich-text'><RichText nodes={content} /></View>}
           </View>
 
-          {type == 0 &&
+          {type == 0 && existAct &&
             <View className='act-data'>
               <View className='act-hits'>
                 阅读量
@@ -166,7 +170,7 @@ class ActivityDetail extends Component {
             </View>
           }
 
-          {isAd && Taro.getEnv() === Taro.ENV_TYPE.WEB &&
+          {isAd && existAct && Taro.getEnv() === Taro.ENV_TYPE.WEB &&
             <View className='act-ad'>
               <View className='ad-media'>
                 {isImage && <Image className='media-style' src={picUrl} mode='widthFix' />}
@@ -188,12 +192,12 @@ class ActivityDetail extends Component {
             </View>
           }
           <View className='act-list'>
-            {actContent}
+            {existAct ? actContent : ''}
           </View>
 
         </ScrollView>
 
-        {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ?
+        {(existAct && Taro.getEnv() === Taro.ENV_TYPE.WEAPP) ?
           <Button className='share-btn' openType='share' style={{height: `${shareBtnHeight}px`}}>
             <Image className='btn-img' src={shareBtn} mode='widthFix' />
             <View>立即分享</View>

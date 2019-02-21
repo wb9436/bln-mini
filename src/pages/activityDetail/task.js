@@ -73,6 +73,14 @@ class ActivityTask extends Component {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.checkTaskTimerID)
+  }
+
+  componentDidHide() {
+    clearInterval(this.checkTaskTimerID)
+  }
+
   checkUnionid(type, unionid) {
     const that = this
     if (type == 0 && Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
@@ -93,7 +101,8 @@ class ActivityTask extends Component {
   }
 
   checkTaskStatus() {
-    const {slideTimes, readTime, scrollTop, scrollHeight, screenHeight, openTime, sendStatus} = this.props
+    const {slideTimes, readTime, scrollTop, scrollHeight, screenHeight, openTime, sendStatus, actId, unionid} = this.props
+    let that = this
     if (slideTimes > 0 && readTime > 0 && scrollHeight > 0 && scrollTop > 0) {
       if (!sendStatus) {
         let defScroll = 100 * slideTimes//认为每次滑动距离超过100
@@ -101,8 +110,19 @@ class ActivityTask extends Component {
         let totalTop = scrollHeight - screenHeight
 
         if (nowTime >= readTime && (scrollTop >= totalTop || scrollTop >= defScroll)) {
-          this.props.dispatch({
-            type: 'activityDetail/activityEffect',
+          Api.activityEffect({actId, unionid}).then(res => {
+            const {code, msg} = res
+            if (code == 200) {
+              that.props.dispatch({
+                type: 'activityDetail/save',
+                payload: {sendStatus: true}
+              })
+            } else {
+              console.log('非有效任务...: ' + msg)
+              if (msg.indexOf('任务地址') > -1) {
+                clearInterval(this.checkTaskTimerID)
+              }
+            }
           })
         }
       } else {
@@ -111,9 +131,7 @@ class ActivityTask extends Component {
     }
   }
 
-  componentDidHide() {
-    clearInterval(this.checkTaskTimerID)
-  }
+
 
   onScroll(e) {
     let top = this.props.scrollTop
@@ -182,8 +200,11 @@ class ActivityTask extends Component {
     const {type, title, content, unionid, refreshTime, hits, praise, praiseState} = this.props
     const {isAd, isImage, isVideo, picUrl, videoUrl, adTitle, subTitle, btnTitle, actList} = this.props
 
+    let existAct = false
+    if(content && content.trim() !== '') {
+      existAct = true
+    }
     let scrollHeight = Utils.windowHeight(false)
-
     const {click} = this.state
     let canScrollTemp = (unionid && unionid.length > 0) ? true : this.state.canScroll
 
@@ -231,7 +252,7 @@ class ActivityTask extends Component {
             {Taro.getEnv() === Taro.ENV_TYPE.WEB && <View className='rich-text'><RichText nodes={content} /></View>}
           </View>
 
-          {type == 0 &&
+          {type == 0 && existAct &&
             <View className='act-data'>
               <View className='act-hits'>
                 阅读量
@@ -244,7 +265,7 @@ class ActivityTask extends Component {
             </View>
           }
 
-          {isAd && Taro.getEnv() === Taro.ENV_TYPE.WEB &&
+          {isAd && existAct && Taro.getEnv() === Taro.ENV_TYPE.WEB &&
             <View className='act-ad'>
               <View className='ad-media'>
                 {isImage && <Image className='media-style' src={picUrl} mode='widthFix' />}
@@ -267,26 +288,28 @@ class ActivityTask extends Component {
           }
 
           <View className='act-list'>
-            {actContent}
+            {existAct ? actContent : ''}
           </View>
 
         </ScrollView>
 
-        <View className='guide-container'>
-          <View className='guide-btn' onClick={this.onGuideBtnClick.bind(this)}>
-            <AtIcon value={click ? 'chevron-right' : 'chevron-left'} size='15' />
-            <View className='btn-name'>{click ? '收起' : '快速导航'}</View>
-          </View>
+        {existAct ?
+          <View className='guide-container'>
+            <View className='guide-btn' onClick={this.onGuideBtnClick.bind(this)}>
+              <AtIcon value={click ? 'chevron-right' : 'chevron-left'} size='15' />
+              <View className='btn-name'>{click ? '收起' : '快速导航'}</View>
+            </View>
 
-          {click ?
-            <View className='guide-content'>
-              <View className='guide-home' onClick={this.onGoHome}>
-                <AtIcon value='home' size='20' color='#FFF' />
-                <View>首页</View>
-              </View>
-            </View> : ''
-          }
-        </View>
+            {click ?
+              <View className='guide-content'>
+                <View className='guide-home' onClick={this.onGoHome}>
+                  <AtIcon value='home' size='20' color='#FFF' />
+                  <View>首页</View>
+                </View>
+              </View> : ''
+            }
+          </View> : ''
+        }
 
         {/*小程序需要授权*/}
         {!canScrollTemp ?
