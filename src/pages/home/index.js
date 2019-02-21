@@ -142,10 +142,9 @@ class Home extends Component {
             <LoadAll loadAll={loadAll} />
           </ScrollView>
 
-          <View className={loading ? 'refresh-btn loading' : 'refresh-btn'}
-            style={{backgroundImage: `url(${refreshBtn})`}} onClick={this.onRefreshHandler.bind(this)}
-          >
-          </View>
+          <Image className={loading ? 'refresh-btn loading' : 'refresh-btn'} src={refreshBtn}
+            onClick={this.onRefreshHandler.bind(this)}
+          />
 
         </View>
       </View>
