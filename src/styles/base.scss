@@ -7,6 +7,10 @@
   color: transparent;
 }
 
+.stop-scroll {
+  overflow: hidden;
+}
+
 .scroll-container {
   width: 100%;
   height: 100%;
@@ -79,3 +83,4 @@ button {
     }
   }
 }
+

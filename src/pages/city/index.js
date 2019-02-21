@@ -302,7 +302,7 @@ class CityTopic extends Component {
         </View>
 
         <View className='topic-scroll' style={{height: `${scrollHeight}px`}}>
-          <ScrollView className='scroll-container'
+          <ScrollView className={isOpenAdd ? 'scroll-container stop-scroll' : 'scroll-container'}
             scrollY
             scrollWithAnimation
             onScrollToLower={this.appendNextPageList.bind(this)}
