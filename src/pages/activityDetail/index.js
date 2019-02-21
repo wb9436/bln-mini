@@ -145,7 +145,7 @@ class ActivityDetail extends Component {
               <View className='act-desc'>{title}</View>
               <View className='act-date'>
                 <View className='date-title'>百灵鸟</View>
-                <View className='date'>{Utils.formatSimpleTime(new Date(refreshTime))}</View>
+                <View className='date'>{type == 0 ? Utils.formatSimpleTime(new Date(refreshTime)) : ''}</View>
               </View>
             </View>
 

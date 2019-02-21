@@ -60,26 +60,37 @@ class IdAuth extends Component {
     const {imgUrl, realName, idNumber, authState} = this.state
     if (authState == -1 || authState == 2) {
       let isIDCard = /^(\d{6})(19|20)(\d{2})(1[0-2]|0[1-9])(0[1-9]|[1-2][0-9]|3[0-1])(\d{3})(\d|X|x)?$/
-      if(!realName || realName.trim() === '') {
+      if (!realName || realName.trim() === '') {
         Taro.showToast({
           title: '请输入真实姓名',
           icon: 'none',
           mask: true,
         })
+        return false
       }
-      if(!idNumber || idNumber.trim() === '') {
+      if (!idNumber || idNumber.trim() === '') {
         Taro.showToast({
           title: '请输入身份证号',
           icon: 'none',
           mask: true,
         })
+        return false
       }
-      if(!isIDCard.test(idNumber)) {
+      if (!isIDCard.test(idNumber)) {
         Taro.showToast({
           title: '请输入正确的身份证号',
           icon: 'none',
           mask: true,
         })
+        return false
+      }
+      if (!imgUrl || imgUrl.trim() === '') {
+        Taro.showToast({
+          title: '请选择手持身份证照',
+          icon: 'none',
+          mask: true,
+        })
+        return false
       }
       let that = this
       let mediaType = 1
@@ -90,6 +101,11 @@ class IdAuth extends Component {
           filePath = body[0]
           Api.userAuth({realName, idNumber, imgUrl: filePath}).then(data => {
             if (data.code == 200) {
+              Taro.showToast({
+                title: '已提交审核',
+                icon: 'success',
+                mask: true,
+              })
               that.setState({
                 authState: 0
               })

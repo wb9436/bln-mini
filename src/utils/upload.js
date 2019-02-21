@@ -20,7 +20,7 @@ export default (options = {method: 'GET', data: {}}) => {
       if (!noConsole) {
         console.log(`${new Date().toLocaleString()}【 M=${options.url} 】【接口响应：】`, res.data)
       }
-      return data
+      return JSON.parse(data)
     } else {
       return {
         code: 201,
