@@ -301,7 +301,7 @@ class TopicDetail extends Component {
             <View className='comment-time'>{Utils.formatTime(new Date(item.createTime))}</View>
             <View className='reply-btn'>
               <Image className='comment-icon' src={commentBtn} mode='widthFix' onClick={this.onOpenReplyAction.bind(this, item.id)} />
-              <View className='praise-btn' onClick={this.onCommentPraise.bind(this, index, item.id, item.praise)}>
+              <View className={item.praise == 1 ? 'praise-btn has-praised' : 'praise-btn'} onClick={this.onCommentPraise.bind(this, index, item.id, item.praise)}>
                 <Image className='praise-icon' src={item.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />
                 {item.praiseNum}
               </View>
@@ -406,7 +406,7 @@ class TopicDetail extends Component {
               <View className='data-img'>
                 <Image src={topic.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />
               </View>
-              <View className='data'>赞</View>
+              <View className={topic.praise == 1 ? 'data has-praised' : 'data'}>赞</View>
             </Button>
           </View> : ''
         }

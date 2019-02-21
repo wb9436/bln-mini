@@ -179,7 +179,7 @@ class CommentReply extends Component {
             </View>
             <View className='reply-btn'>
               {/*<Image className='comment-icon' src={commentBtn} mode='widthFix' onClick={this.onOpenReplyAction.bind(this, 1, item.id)} />*/}
-              <View className='praise-btn' onClick={this.onReplyPraise.bind(this, item.id, index, item.praise)}>
+              <View className={item.praise == 1 ? 'praise-btn has-praised' : 'praise-btn'} onClick={this.onReplyPraise.bind(this, item.id, index, item.praise)}>
                 <Image className='praise-icon' src={item.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />
                 {item.praiseNum}
               </View>
@@ -215,7 +215,7 @@ class CommentReply extends Component {
                   </View>
                   <View className='reply-btn'>
                     <Image className='comment-icon' src={commentBtn} mode='widthFix' onClick={this.onOpenReplyAction.bind(this, 0, comment.id)} />
-                    <View className='praise-btn' onClick={this.onCommentPraise.bind(this)}>
+                    <View className={comment.praise == 1 ? 'praise-btn has-praised' : 'praise-btn'} onClick={this.onCommentPraise.bind(this)}>
                       <Image className='praise-icon' src={comment.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />
                       {comment.praiseNum}
                     </View>
