@@ -168,6 +168,11 @@ class AddressDialog extends Component {
     }
   }
 
+  onTouchMove(e) {
+    e.stopPropagation()
+    e.preventDefault()
+  }
+
   render() {
     const {_isOpened, pro, city, area} = this.state
     let proTop = pro.index * 40
@@ -187,7 +192,7 @@ class AddressDialog extends Component {
     })
 
     return (
-      <View className={_isOpened ? 'address-layout address-layout--active' : 'address-layout'}>
+      <View className={_isOpened ? 'address-layout address-layout--active' : 'address-layout'} onTouchMove={this.onTouchMove.bind(this)}>
         <View className='address-layout__overlay' onClick={this.onCancel.bind(this)} />
         <View className='address-layout__container'>
           <View className='layout-header'>
