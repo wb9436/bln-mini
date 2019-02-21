@@ -3,6 +3,7 @@ import * as Api from './service'
 export default {
   namespace: 'activity',
   state: {
+    scrollTop: 0,
     actTypes: [{name: '推荐', id: 1}],
     category: '推荐',
     activityList: [],
@@ -25,6 +26,13 @@ export default {
     },
 
     * refreshActivity(_, {call, put, select}) {
+      yield put({
+        type: 'save',
+        payload: {
+          scrollTop: 0,
+          activityList: [],
+        }
+      })
       let curPageNum = 1
       const {category, pageSize} = yield select(state => state.activity)
       let params = {curPageNum, pageSize}
@@ -36,6 +44,7 @@ export default {
         yield put({
           type: 'save',
           payload: {
+
             activityList: body.array,
             loadAll: body.paging.last,
             curPageNum: curPageNum

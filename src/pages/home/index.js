@@ -66,6 +66,10 @@ class Home extends Component {
   }
 
   onRefreshHandler() {
+    // this.props.dispatch({
+    //   type: 'activity/save',
+    //   payload: {activityList: []}
+    // })
     this.props.dispatch({
       type: 'activity/refreshActivity'
     })
@@ -91,7 +95,7 @@ class Home extends Component {
 
   render() {
     const {windowHeight, loading} = this.state
-    const {category, actTypes, activityList, loadAll} = this.props
+    const {category, actTypes, activityList, loadAll, scrollTop} = this.props
     const typeContent = actTypes.map((item, index) => {
       return <View key={index} className={category === item.name ? 'type-item checked' : 'type-item'}
         onClick={this.onActTypeChecked.bind(this, category, item.name)}
@@ -135,8 +139,7 @@ class Home extends Component {
         <View className='act-list' style={{height: `${actHeight}px`}}>
           <ScrollView className='scroll-container'
             scrollY
-            scrollLeft='0'
-            scrollTop='0'
+            scrollTop={scrollTop}
             scrollWithAnimation
             onScrollToLower={this.onLoadHandler.bind(this)}
           >
