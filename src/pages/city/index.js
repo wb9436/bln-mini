@@ -307,8 +307,8 @@ class CityTopic extends Component {
             scrollWithAnimation
             onScrollToLower={this.appendNextPageList.bind(this)}
           >
-            <Loading loading={effects['cityTopic/onLoadTopicList'] || effects['cityTopic/onLoadAttentionTopicList']} />
             {topicContent}
+            <Loading loading={effects['cityTopic/onLoadTopicList'] || effects['cityTopic/onLoadAttentionTopicList']} />
             <LoadAll loadAll={loadAll} />
           </ScrollView>
         </View>
