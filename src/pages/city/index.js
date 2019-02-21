@@ -147,11 +147,11 @@ class CityTopic extends Component {
     }
   }
 
-  onOpenAction(index, id, e) {
+  onOpenAction(index, id, myself, e) {
     e.stopPropagation()
     let actType = 1
     let isOpenAct = true
-    this.setState({index, id, actType, isOpenAct})
+    this.setState({index, id, myself, actType, isOpenAct})
   }
 
   onOpenReportAction() {
@@ -215,7 +215,7 @@ class CityTopic extends Component {
   }
 
   render() {
-    const {windowHeight, area, city, type, id, actType, isOpenAct, isOpenAdd} = this.state
+    const {windowHeight, area, city, type, id, myself, actType, isOpenAct, isOpenAdd} = this.state
     const {topicList, loadAll, effects} = this.props
     let navHeight = 43
     let scrollHeight = windowHeight - 45
@@ -239,7 +239,7 @@ class CityTopic extends Component {
               {item.myself == 1 ? '删除' : ''}
               {item.myself == 0 ? `${item.attention == 1 ? '已关注' : '关注' }` : ''}
             </View>
-            <View className='topic-more' onClick={this.onOpenAction.bind(this, index, item.id)}>
+            <View className='topic-more' onClick={this.onOpenAction.bind(this, index, item.id, item.myself)}>
               <Image className='more-icon' src={moreBtn} mode='widthFix' />
             </View>
           </View>
@@ -334,9 +334,11 @@ class CityTopic extends Component {
             <AtActionSheetItem onClick={this.onTopicDetail.bind(this, id)}>
               评论
             </AtActionSheetItem>
-            <AtActionSheetItem onClick={this.onOpenReportAction.bind(this)}>
-              投诉
-            </AtActionSheetItem>
+            {myself == 0 ?
+              <AtActionSheetItem onClick={this.onOpenReportAction.bind(this)}>
+                投诉
+              </AtActionSheetItem> : ''
+            }
           </AtActionSheet>
         }
 

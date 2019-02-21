@@ -99,10 +99,10 @@ class TopicDetail extends Component {
     })
   }
 
-  onOpenAction() {
+  onOpenAction(myself) {
     let actType = 1
     let isOpenAct = true
-    this.setState({actType, isOpenAct})
+    this.setState({myself, actType, isOpenAct})
   }
 
   onOpenReportAction() {
@@ -331,11 +331,12 @@ class TopicDetail extends Component {
                   </View>
                 </View>
                 <View className='topic-btn'>
-                  <View className='topic-follow' onClick={this.onTopicAttention.bind(this, topic.myself)}>
-                    {topic.myself == 1 ? '删除' : ''}
-                    {topic.myself == 0 ? `${topic.attention == 1 ? '已关注' : '关注' }` : ''}
-                  </View>
-                  <View className='topic-more' onClick={this.onOpenAction.bind(this)}>
+                  {topic.myself == 0 ?
+                    <View className='topic-follow' onClick={this.onTopicAttention.bind(this, topic.myself)}>
+                      {`${topic.attention == 1 ? '已关注' : '关注' }`}
+                    </View> : ''
+                  }
+                  <View className='topic-more' onClick={this.onOpenAction.bind(this, topic.myself)}>
                     <Image className='more-icon' src={moreBtn} mode='widthFix' />
                   </View>
                 </View>
@@ -432,9 +433,11 @@ class TopicDetail extends Component {
             <AtActionSheetItem onClick={this.onOpenTopicComment.bind(this, id)}>
               评论
             </AtActionSheetItem>
-            <AtActionSheetItem onClick={this.onOpenReportAction.bind(this)}>
-              投诉
-            </AtActionSheetItem>
+            {myself == 0 ?
+              <AtActionSheetItem onClick={this.onOpenReportAction.bind(this)}>
+                投诉
+              </AtActionSheetItem> : ''
+            }
           </AtActionSheet> : ''
         }
 

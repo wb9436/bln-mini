@@ -10,6 +10,7 @@ import pddDetail from './pdd/detail'
 import cityTopic from './topic/index'
 import topicComment from './topic/comment'
 import topicReply from './topic/reply'
+import myTopic from './topic/myTopic'
 
 const models = [
   activity,
@@ -22,6 +23,7 @@ const models = [
   cityTopic,
   topicComment,
   topicReply,
+  myTopic,
 ]
 
 const dvaApp = dva.createApp({
