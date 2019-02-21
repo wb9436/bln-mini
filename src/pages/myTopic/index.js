@@ -4,11 +4,7 @@ import {AtActionSheet, AtActionSheetItem} from 'taro-ui'
 import {connect} from '@tarojs/redux'
 import './index.scss'
 
-import Loading from '../../components/Loading'
-import LoadAll from '../../components/LoadAll'
-
 import * as Utils from '../../utils/utils'
-import * as Api from '../../store/topic/service'
 
 import moreBtn from '../../images/topic/more.png'
 import shareBtn from '../../images/topic/share.png'
