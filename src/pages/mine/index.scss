@@ -1,11 +1,12 @@
 @import "../../styles/mixin";
 
 .mine-page {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  background: $color-bg;
 
   .user-info {
     width: 100%;
+    background: $color-white;
 
     .user-base-info {
       height: 150px;
@@ -91,7 +92,6 @@
 
   .data-column {
     width: 100%;
-    background: $color-bg;
     overflow-y: scroll;
 
     .column-item {

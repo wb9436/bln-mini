@@ -1,5 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, Image} from '@tarojs/components'
+import {View, Image, ScrollView} from '@tarojs/components'
 import {connect} from '@tarojs/redux'
 import {AtIcon} from 'taro-ui'
 import './index.scss'
@@ -166,45 +166,51 @@ class Mine extends Component {
     })
 
     return (
-      <View className='mine-page'>
-        <View className='user-info' style={{height: `${infoHeight}px`}}>
-          <View className='user-base-info'>
-            <Image className='avatar' src={userData.avatar || avatar} mode='widthFix' />
-            <View className='info'>
-              <View className='nickname'>{userData.nickname}</View>
-              <View className='auth-btn'
-                onClick={this.onLookPageHandler.bind(this, '/pages/auth/index')}
-              >{isAuth}</View>
+      <View className='mine-page' style={{height: `${windowHeight}px`}}>
+        <ScrollView className='scroll-container'
+          scrollY
+          scrollWithAnimation
+        >
+          <View className='user-info' style={{height: `${infoHeight}px`}}>
+            <View className='user-base-info'>
+              <Image className='avatar' src={userData.avatar || avatar} mode='widthFix' />
+              <View className='info'>
+                <View className='nickname'>{userData.nickname}</View>
+                <View className='auth-btn'
+                  onClick={this.onLookPageHandler.bind(this, '/pages/auth/index')}
+                >{isAuth}</View>
+              </View>
+              <View className='user-msg'>
+                <Image className='msg-btn' src={msgBtn} mode='widthFix' onClick={this.onOpenMsgHandler.bind(this)} />
+                <View className='address-info' onClick={this.openAddress.bind(this)}>{area}</View>
+              </View>
             </View>
-            <View className='user-msg'>
-              <Image className='msg-btn' src={msgBtn} mode='widthFix' onClick={this.onOpenMsgHandler.bind(this)} />
-              <View className='address-info' onClick={this.openAddress.bind(this)}>{area}</View>
+            <View className='user-data-info'>
+              <View className='data-item'>
+                <View className='data-num'>{userAccount.credits}</View>
+                <View className='data-desc'>信用积分</View>
+              </View>
+              <View className='data-item'>
+                <View className='data-num'>{userAccount.point}</View>
+                <View className='data-desc'>阅点</View>
+              </View>
+              <View className='data-item'>
+                <View className='data-num'>{userSign.countSign}</View>
+                <View className='data-desc'>签到</View>
+              </View>
             </View>
           </View>
-          <View className='user-data-info'>
-            <View className='data-item'>
-              <View className='data-num'>{userAccount.credits}</View>
-              <View className='data-desc'>信用积分</View>
-            </View>
-            <View className='data-item'>
-              <View className='data-num'>{userAccount.point}</View>
-              <View className='data-desc'>阅点</View>
-            </View>
-            <View className='data-item'>
-              <View className='data-num'>{userSign.countSign}</View>
-              <View className='data-desc'>签到</View>
-            </View>
-          </View>
-        </View>
 
-        <View className='data-column' style={{height: `${remainHeight}px`}}>
-          {columnContent}
-        </View>
+          <View className='data-column' style={{height: `${remainHeight}px`}}>
+            {columnContent}
+          </View>
+
+
+        </ScrollView>
 
         <AddressDialog isOpened={isOpened} address={address} onCancel={this.onCancelAddress.bind(this)}
           onConfirmAddress={this.onConfirmAddress.bind(this)}
         />
-
       </View>
     )
   }
