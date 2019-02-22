@@ -46,13 +46,14 @@ class HelpCenter extends Component {
   }
 
   onOpenUrl(accessUrl) {
+    accessUrl = 'https://share.viplucky.com/shorten/goto?url=http%3A%2F%2Fapi.viplark.com%2Fapi%2Fquestion%2Finfo%3FuserId%3D100180%26id%3D1'
     if (accessUrl && accessUrl.trim() !== '') {
       if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
         window.location = accessUrl
       } else if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
-        Taro.navigateTo({
-          url: '/pages/help/web?url=' + encodeURIComponent(accessUrl)
-        })
+        // Taro.navigateTo({
+        //   url: '/pages/help/web?url=' + encodeURIComponent(accessUrl)
+        // })
       }
     }
   }
