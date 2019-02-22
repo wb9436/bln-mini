@@ -19,7 +19,7 @@ class WebViewPage extends Component {
     if (url) {
       url = decodeURIComponent(url)
     }
-     this.setState({url})
+    this.setState({url})
   }
 
   render() {
