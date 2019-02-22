@@ -6,6 +6,59 @@
   background: $color-bg;
 
 
+  .help-item {
+    padding: 0 10px 0 30px;
+    width: auto;
+    height: 100px;
+    background: $color-white;
+    border-bottom: 2px solid $color-line;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .item-title {
+      height: 50px;
+      line-height: 50px;
+      @include sc(30px, $color-big);
+    }
+  }
+
+  .customer-service {
+    width: 100%;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    @include sc(24px, $color-small);
+
+    .customer-item {
+      margin-left: 28px;
+      height: 40px;
+      line-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .customer-title {
+        height: 100%;
+        width: 180px;
+        text-align: right;
+      }
+
+      .mobile {
+        text-decoration: underline;
+      }
+
+      .customer-content {
+        margin-left: 10px;
+        height: 100%;
+        color: $color-theme;
+      }
+
+    }
+
+  }
 
 }
 

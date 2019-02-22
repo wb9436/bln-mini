@@ -103,3 +103,11 @@ export const userFriends = data => Request({
   need_sid: true,
   data
 })
+
+/*问题列表*/
+export const questionList = data => Request({
+  url: '/api/question/list',
+  method: 'POST',
+  need_sid: true,
+  data
+})
