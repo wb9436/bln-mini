@@ -2,9 +2,9 @@ import Taro, {Component} from '@tarojs/taro'
 import {View, Swiper, SwiperItem, Image} from '@tarojs/components'
 import './index.scss'
 
-import p1 from '../../images/guide/p1.png'
-import p2 from '../../images/guide/p2.png'
-import p3 from '../../images/guide/p3.png'
+// import p1 from '../../images/guide/p1.png'
+// import p2 from '../../images/guide/p2.png'
+// import p3 from '../../images/guide/p3.png'
 
 class Index extends Component {
   config = {
@@ -82,15 +82,15 @@ class Index extends Component {
         <Swiper className='guide-swiper' autoplay circular interval={2000}
           duration={1000}
         >
-          <SwiperItem className='guide-swiper-item'>
-            <Image className='guide-image' src={p1} mode='widthFix' />
-          </SwiperItem>
-          <SwiperItem>
-            <Image className='guide-image' src={p2} mode='widthFix' />
-          </SwiperItem>
-          <SwiperItem>
-            <Image className='guide-image' src={p3} mode='widthFix' />
-          </SwiperItem>
+          {/*<SwiperItem className='guide-swiper-item'>*/}
+            {/*<Image className='guide-image' src={p1} mode='widthFix' />*/}
+          {/*</SwiperItem>*/}
+          {/*<SwiperItem>*/}
+            {/*<Image className='guide-image' src={p2} mode='widthFix' />*/}
+          {/*</SwiperItem>*/}
+          {/*<SwiperItem>*/}
+            {/*<Image className='guide-image' src={p3} mode='widthFix' />*/}
+          {/*</SwiperItem>*/}
         </Swiper>
 
         <View className='skip-btn' onClick={this.onSkip.bind(this)}>
