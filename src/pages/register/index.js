@@ -160,7 +160,7 @@ class ForgetPassword extends Component {
 
   onCheckMobile(mobile, code) {
     Api.toMobileRegister({mobile, code}).then(data => {
-      if(data && data,code == 200) {
+      if(data && data.code == 200) {
         let address = data.body.address || '上海市 上海市 浦东新区'
         this.setState({
           isCheck: false,

@@ -170,7 +170,7 @@ class AddressDialog extends Component {
 
   onTouchMove(e) {
     e.stopPropagation()
-    e.preventDefault()
+    // e.preventDefault()
   }
 
   render() {
