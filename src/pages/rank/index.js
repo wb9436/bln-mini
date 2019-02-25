@@ -5,7 +5,6 @@ import './index.scss'
 import LoadAll from '../../components/LoadAll/index'
 
 import * as Api from '../../store/user/service'
-import * as Utils from '../../utils/utils'
 
 import first from '../../images/rank/first.png'
 import second from '../../images/rank/second.png'
@@ -62,7 +61,7 @@ class UserRank extends Component {
   }
 
   onLoadHandler() {
-    const {type, pageSize, loadAll, list, mine} = this.state
+    const {type, pageSize, loadAll, list} = this.state
     if (!loadAll) {
       let curPageNum = this.state.curPageNum + 1
       Api.userRankList({type, pageSize, curPageNum}).then(data => {
@@ -89,7 +88,14 @@ class UserRank extends Component {
   render() {
     const {windowHeight, loadAll, list, mine} = this.state
     let mineHeight = 70
-    let scrollHeight = windowHeight - mineHeight
+    let hasData = false
+    if (list && list.length > 0) {
+      hasData = true
+    }
+    let scrollHeight = windowHeight
+    if (hasData) {
+      scrollHeight = windowHeight - mineHeight
+    }
 
     let myLevelImg = level
     let myLevelMsg = mine.sequence
@@ -153,20 +159,22 @@ class UserRank extends Component {
           <LoadAll loadAll={loadAll} />
         </ScrollView>
 
-        <View className='mine-rank' style={{height: `${mineHeight}px`}}>
-          <View className='user-data'>
-            <Image className='avatar' src={mine.avatar || avatar} mode='widthFix' />
-            <View className='rank-info'>
-              <View className='rank-name'>{mine.nickname}</View>
-              <View className='rank-share'>{`转发数：${mine.sendNum}`}</View>
+        {hasData ?
+          <View className='mine-rank' style={{height: `${mineHeight}px`}}>
+            <View className='user-data'>
+              <Image className='avatar' src={mine.avatar || avatar} mode='widthFix' />
+              <View className='rank-info'>
+                <View className='rank-name'>{mine.nickname}</View>
+                <View className='rank-share'>{`转发数：${mine.sendNum}`}</View>
+              </View>
             </View>
-          </View>
-          <View className='rank-level'>
-            <Image className={mine.sequence > 3 ? 'level-img' : 'level-img top-three'} mode='widthFix' src={myLevelImg} />
-            <View className='level-data'>{`阅读数 ${mine.readNum}`}</View>
-            <View className='level'>{myLevelMsg}</View>
-          </View>
-        </View>
+            <View className='rank-level'>
+              <Image className={mine.sequence > 3 ? 'level-img' : 'level-img top-three'} mode='widthFix' src={myLevelImg} />
+              <View className='level-data'>{`阅读数 ${mine.readNum}`}</View>
+              <View className='level'>{myLevelMsg}</View>
+            </View>
+          </View> : ''
+        }
 
       </View>
     )
