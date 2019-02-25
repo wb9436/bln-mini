@@ -168,7 +168,13 @@ class IdAuth extends Component {
           </View>
         </View>
 
-        <View className={disabled ? 'auth-submit auth-disabled' : 'auth-submit'} onClick={this.onUserAuth.bind(this)}>提交</View>
+        {authState == 1 ?
+          <View className='auth-success'>实名认证审核成功</View> : ''
+        }
+
+        {authState == 1 ? '' :
+          <View className={disabled ? 'auth-submit auth-disabled' : 'auth-submit'} onClick={this.onUserAuth.bind(this)}>提交</View>
+        }
 
       </View>
     )
