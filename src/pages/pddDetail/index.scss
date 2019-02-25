@@ -32,15 +32,19 @@
       font-size: 30px;
 
       .discount-title {
+        height: 50px;
+        line-height: 50px;
         width: 100px;
         background: $color-theme;
         color: $color-white;
       }
 
       .discount-receive {
+        height: 50px;
+        line-height: 50px;
         border: 2px solid $color-theme;
         border-radius: 4px;
-        color: $color-theme-3;
+        color: $color-theme;
         padding: 0 8px;
       }
 
