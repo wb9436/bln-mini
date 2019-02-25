@@ -141,6 +141,10 @@ class InviteFriend extends Component {
               </View> : ''
             }
 
+            {navType == 0 ?
+              <View className='blank-view'></View> : ''
+            }
+
             {navType == 1 ?
               friendContent : ''
             }
