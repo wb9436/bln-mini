@@ -6,6 +6,7 @@ import './index.scss'
 
 import * as Utils from '../../utils/utils'
 
+import avatarDef from '../../images/public/avatar.png'
 import moreBtn from '../../images/topic/more.png'
 import shareBtn from '../../images/topic/share.png'
 import commentBtn from '../../images/topic/comment.png'
@@ -188,7 +189,7 @@ class MyTopic extends Component {
     return (
       <View className='my-topic-page'>
         <View className='my-info' style={{height: `${infoHeight}px`}}>
-          <Image className='avatar' src={avatar} mode='widthFix' />
+          <Image className='avatar' src={avatar || avatarDef} mode='widthFix' />
           <View className='nickname'>{nickname}</View>
           <View className='my-topic'>
             <View className='my-attention'>{`我的关注 ${attentionNum}`}</View>
