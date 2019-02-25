@@ -45,15 +45,14 @@ class HelpCenter extends Component {
     }
   }
 
-  onOpenUrl(accessUrl) {
-    accessUrl = 'https://share.viplucky.com/shorten/goto?url=http%3A%2F%2Fapi.viplark.com%2Fapi%2Fquestion%2Finfo%3FuserId%3D100180%26id%3D1'
+  onOpenUrl(accessUrl, id) {
     if (accessUrl && accessUrl.trim() !== '') {
       if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
         window.location = accessUrl
       } else if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
-        // Taro.navigateTo({
-        //   url: '/pages/help/web?url=' + encodeURIComponent(accessUrl)
-        // })
+        Taro.navigateTo({
+          url: '/pages/help/web?id=' + id + '&userId' + Taro.getStorageSync('userId')
+        })
       }
     }
   }
@@ -61,7 +60,7 @@ class HelpCenter extends Component {
   render() {
     const {itemList} = this.state
     const itemContent = itemList.map((item, index) => {
-      return <View key={index} className='help-item' onClick={this.onOpenUrl.bind(this, item.accessUrl)}>
+      return <View key={index} className='help-item' onClick={this.onOpenUrl.bind(this, item.accessUrl, item.id)}>
         <View className='item-title'>{item.title}</View>
         <AtIcon value='chevron-right' size={28} color='#EfEEf4' />
       </View>
@@ -74,7 +73,7 @@ class HelpCenter extends Component {
         <View className='customer-service'>
           <View className='customer-item'>
             <View className='customer-title'>客服：        联系电话</View>
-            <View className='customer-content mobile' onClick={this.onCallMobile.bind(this, '13761372019')}>13761372019</View>
+            <View className='customer-content mobile' onClick={this.onCallMobile.bind(this, '18017534850')}>18017534850</View>
           </View>
           <View className='customer-item'>
             <View className='customer-title'>在线时间</View>

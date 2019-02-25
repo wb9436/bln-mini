@@ -15,10 +15,8 @@ class WebViewPage extends Component {
   }
 
   componentDidMount() {
-    let url = this.$router.params.url
-    if (url) {
-      url = decodeURIComponent(url)
-    }
+    const {id, userId} = this.$router.params
+    let url = `https://api.vipsunyou.com/api/question/info?id=${id}&userId=${userId}`
     this.setState({url})
   }
 
@@ -26,7 +24,7 @@ class WebViewPage extends Component {
     const {url} = this.state
 
     return (
-      <WebView src={url} />
+      <WebView className='web-view-page' src={url} />
     )
   }
 }
