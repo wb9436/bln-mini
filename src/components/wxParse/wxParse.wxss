@@ -23,6 +23,7 @@ view{
 
 image {
   width: 100%;
+  height: auto;
 }
 
 .wxParse-inline{
@@ -100,6 +101,8 @@ image {
 
 .wxParse-img{
     /*background-color: #efefef;*/
+    width: 100%;
+    height: auto;
     overflow: hidden;
 }
 

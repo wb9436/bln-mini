@@ -131,8 +131,6 @@ class ActivityTask extends Component {
     }
   }
 
-
-
   onScroll(e) {
     let top = this.props.scrollTop
     const {scrollTop, scrollHeight} = e.detail
@@ -248,8 +246,8 @@ class ActivityTask extends Component {
               </View>
             </View>
 
-            {Taro.getEnv() === Taro.ENV_TYPE.WEAPP && <ParseComponent nodes={content} />}
-            {Taro.getEnv() === Taro.ENV_TYPE.WEB && <View className='rich-text'><RichText nodes={content} /></View>}
+            {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? <ParseComponent nodes={content} /> : ''}
+            {Taro.getEnv() === Taro.ENV_TYPE.WEB ? <View className='rich-text'><RichText nodes={content} /></View> : ''}
           </View>
 
           {type == 0 && existAct &&
