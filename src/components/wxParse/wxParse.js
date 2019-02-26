@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro'
+// import Taro from '@tarojs/taro'
 
 /**
  * author: Di (微信小程序开发工程师)
@@ -19,17 +19,17 @@ import HtmlToJson from './html2json.js';
 /**
  * 配置及公有属性
  **/
-var realWindowWidth = Taro.getSystemInfoSync().windowWidth;
-var realWindowHeight = Taro.getSystemInfoSync().windowHeight;
+// var realWindowWidth = Taro.getSystemInfoSync().windowWidth;
+// var realWindowHeight = Taro.getSystemInfoSync().windowHeight;
 
-// var realWindowWidth = 0;
-// var realWindowHeight = 0;
-// wx.getSystemInfo({
-//   success: function (res) {
-//     realWindowWidth = res.windowWidth
-//     realWindowHeight = res.windowHeight
-//   }
-// })
+var realWindowWidth = 0;
+var realWindowHeight = 0;
+wx.getSystemInfo({
+  success: function (res) {
+    realWindowWidth = res.windowWidth
+    realWindowHeight = res.windowHeight
+  }
+})
 /**
  * 主函数入口区
  **/
