@@ -146,6 +146,7 @@ class PddSearch extends Component {
             <View className='search-value'>
               <Input placeholder='搜索' focus autoFocus maxLength='16' onInput={this.onKeywordInput.bind(this)}
                 onChange={this.onKeywordInput.bind(this)}
+                onConfirm={this.onSearchByKeyword.bind(this)}
               />
             </View>
           </View>

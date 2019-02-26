@@ -13,7 +13,7 @@ export default {
     desc: '',
     imageUrl: '',
     //活动详情
-    refreshTime: null,
+    refreshTime: new Date().getTime(),
     hits: 0,//阅读量
     praise: 0,//点赞
     praiseState: 0,//点赞状态
@@ -58,7 +58,7 @@ export default {
           desc: '',
           imageUrl: '',
           //活动详情
-          refreshTime: null,
+          refreshTime: new Date().getTime(),
           hits: 0,//阅读量
           praise: 0,//点赞
           praiseState: 0,//点赞状态

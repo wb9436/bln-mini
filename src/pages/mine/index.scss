@@ -21,6 +21,7 @@
       }
 
       .info {
+        width: 334px;
         margin-left: 20px;
         display: flex;
         flex-direction: column;
@@ -28,9 +29,12 @@
         justify-content: center;
 
         .nickname {
+          width: 100%;
           height: 50px;
           line-height: 50px;
           @include sc(30px, $color-big);
+          white-space: nowrap;
+          overflow: hidden;
         }
 
         .auth-btn {
@@ -47,7 +51,7 @@
       .user-msg {
         width: 150px;
         height: 100%;
-        margin-left: 222px;
+        //margin-left: 222px;
         display: flex;
         flex-direction: column;
         align-items: center;
