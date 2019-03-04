@@ -47,17 +47,7 @@ class TopicShareDetail extends Component {
 
   onPreviewImage(sourceUrl, index) {
     if (sourceUrl && sourceUrl.length > 0) {
-      if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
-        Taro.previewImage({
-          current: sourceUrl[index],
-          urls: sourceUrl
-        })
-      } else if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
-        window.wx.previewImage({
-          current: sourceUrl[index],
-          urls: sourceUrl
-        })
-      }
+      Utils.previewImage(sourceUrl[index], sourceUrl)
     }
   }
 

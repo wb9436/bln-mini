@@ -184,17 +184,7 @@ class CityTopic extends Component {
   onPreviewImage(sourceUrl, idx, e) {
     e.stopPropagation()
     if(sourceUrl && sourceUrl.length > 0) {
-      if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
-        Taro.previewImage({
-          current: sourceUrl[idx],
-          urls: sourceUrl
-        })
-      } else if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
-        window.wx.previewImage({
-          current: sourceUrl[idx],
-          urls: sourceUrl
-        })
-      }
+      Utils.previewImage(sourceUrl[idx], sourceUrl)
     }
   }
 

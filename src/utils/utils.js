@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
 import CryptoJS from 'crypto-js'
+import WeiXinUtils from 'weixin-js-sdk'
 
 export const windowHeight = tabPage => {
   let height = Taro.getSystemInfoSync().windowHeight
@@ -170,3 +171,18 @@ export const timeDesc = time => {
 export const md5 = data => {
   return CryptoJS.MD5(data).toString()
 }
+
+export const previewImage = (current, urls) => {
+  if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+    WeiXinUtils.previewImage({
+      current: current,
+      urls: urls
+    })
+  } else if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+    Taro.previewImage({
+      current: current,
+      urls: urls
+    })
+  }
+}
+
