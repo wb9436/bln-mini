@@ -68,6 +68,7 @@ class BusinessApply extends Component {
   }
 
   onOpenAction(actType) {
+    console.log('点击动作面板：' + actType)
     this.setState({actType})
   }
 
@@ -76,7 +77,7 @@ class BusinessApply extends Component {
   }
 
   onConfirmAddress(address) {
-
+    this.setState({address})
   }
 
 
@@ -96,6 +97,7 @@ class BusinessApply extends Component {
     const {windowHeight, scale, userId, name, address, img, attachment, industry, baState, linkman, mobile, baServicerUserId, actType} = this.state
     const btnHeight = 80 * scale
     const scrollHeight = windowHeight - btnHeight
+    const openAction = actType !== -1 ? true : false
 
     return (
       <View className='business-apply-page'>
@@ -174,11 +176,9 @@ class BusinessApply extends Component {
           <View className='apply-btn'>提交</View>
         </View>
 
-        {actType == 2 ?
-          <AddressDialog isOpened={actType == 2} address={address} onCancel={this.onCloseAction().bind(this)}
-            onConfirmAddress={this.onConfirmAddress.bind(this)}
-          /> : ''
-        }
+        <AddressDialog isOpened={openAction} address={address} onCancel={this.onCloseAction.bind(this)}
+          onConfirmAddress={this.onConfirmAddress.bind(this)}
+        />
 
 
       </View>

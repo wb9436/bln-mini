@@ -367,11 +367,9 @@ class CityTopic extends Component {
         }
 
         {/*话题地址修改*/}
-        {isOpenAdd ?
-          <AddressDialog isOpened={isOpenAdd} address={area} onCancel={this.onCancelAddress.bind(this)}
-            onConfirmAddress={this.onConfirmAddress.bind(this)}
-          /> : ''
-        }
+        <AddressDialog isOpened={isOpenAdd} address={area} onCancel={this.onCancelAddress.bind(this)}
+          onConfirmAddress={this.onConfirmAddress.bind(this)}
+        />
 
       </View>
     )
