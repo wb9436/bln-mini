@@ -3,6 +3,7 @@
 .mine-page {
   width: 100%;
   background: $color-bg;
+  position: relative;
 
   .user-info {
     width: 100%;
@@ -157,6 +158,15 @@
       margin-top: 10px;
     }
 
+  }
+
+  .address-btn {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    bottom: 80px;
+    right: 40px;
+    z-index: 2;
   }
 
 }

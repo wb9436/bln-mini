@@ -73,10 +73,17 @@ class TopicDetail extends Component {
 
   onPreviewImage(sourceUrl, index) {
     if (sourceUrl && sourceUrl.length > 0) {
-      Taro.previewImage({
-        current: sourceUrl[index],
-        urls: sourceUrl
-      })
+      if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+        Taro.previewImage({
+          current: sourceUrl[index],
+          urls: sourceUrl
+        })
+      } else if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+        window.wx.previewImage({
+          current: sourceUrl[index],
+          urls: sourceUrl
+        })
+      }
     }
   }
 

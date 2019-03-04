@@ -1,0 +1,112 @@
+@import "../../styles/mixin";
+
+.at-action-sheet {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1010;
+  visibility: hidden;
+  transition: visibility 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+
+  /* elements */
+  &__overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 300ms ease-in;
+  }
+
+  &__container {
+    position: absolute;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: $color-white;
+    transform: translate3d(0, 100%, 0);
+    transition: transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+  }
+
+  &__header {
+    padding: 24px 24px;
+    color: #B2B2B2;
+    font-size: 28px;
+    text-align: center;
+    line-height: 1.5;
+    position: relative;
+
+    &::after {
+      position: absolute;
+      transform-origin: center;
+      box-sizing: border-box;
+      pointer-events: none;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      border: 0 $style $color;
+      transform: scale(0.5);
+      border-bottom-width: $width;
+    }
+  }
+
+  &__footer {
+    padding: 24px 24px;
+    font-size: 36px;
+    border-top: 12px solid rgba($color: #C5D9E8, $alpha: 0.3);
+    transition: background-color 0.3s;
+
+    &:active {
+      background-color: #F0F0F0;
+    }
+  }
+
+  &__body {
+    text-align: center;
+  }
+
+  &__item {
+    padding: 24px 24px;
+    font-size: 36px;
+    transition: background-color 0.3s;
+    @include ellipsis;
+
+    &:active {
+      background-color: #F0F0F0;
+    }
+    position: relative;
+
+    &::after {
+      position: absolute;
+      transform-origin: center;
+      box-sizing: border-box;
+      pointer-events: none;
+      top: auto;
+      left: $left;
+      right: 0;
+      bottom: 0;
+      transform: scaleY(0.5);
+      border-bottom: 1Px solid mix(#FFF, #C5D9E8, 30%);
+    }
+  }
+
+  /* modifiers */
+  &--active {
+    visibility: visible;
+
+    .at-action-sheet__overlay {
+      opacity: 1;
+    }
+
+    .at-action-sheet__container {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}

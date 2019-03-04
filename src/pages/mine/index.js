@@ -4,11 +4,12 @@ import {connect} from '@tarojs/redux'
 import {AtIcon} from 'taro-ui'
 import './index.scss'
 
+import AddressDialog from '../../components/Address'
 import * as Api from '../../store/user/service'
 import * as Utils from '../../utils/utils'
 
+import addressBtn from '../../images/mine/addressBtn.png'
 import msgBtn from '../../images/mine/msgBtn.png'
-
 import wallet from '../../images/mine/wallet.png'
 import account from '../../images/mine/account.png'
 import friend from '../../images/mine/friend.png'
@@ -19,10 +20,8 @@ import rank from '../../images/mine/rank.png'
 import business from '../../images/mine/business.png'
 import help from '../../images/mine/help.png'
 import setup from '../../images/mine/setup.png'
-
 import avatar from '../../images/public/avatar.png'
 import discCircular from '../../images/public/disc-circular.png'
-import AddressDialog from "../../components/Address";
 
 @connect(({user}) => ({
   ...user
@@ -216,6 +215,8 @@ class Mine extends Component {
         <AddressDialog isOpened={isOpened} address={address} onCancel={this.onCancelAddress.bind(this)}
           onConfirmAddress={this.onConfirmAddress.bind(this)}
         />
+
+        <Image className='address-btn' src={addressBtn} mode='widthFix' onClick={this.openAddress.bind(this)} />
 
       </View>
     )

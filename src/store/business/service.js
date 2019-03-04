@@ -39,5 +39,13 @@ export const industryList = data => Request({
   data
 })
 
+/*商家信息修改*/
+export const businessUpdate = data => Request({
+  url: '/api/business/info/update',
+  method: 'POST',
+  need_sid: true,
+  data
+})
+
 
 

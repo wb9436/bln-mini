@@ -88,24 +88,120 @@ class BusinessApply extends Component {
     })
   }
 
+  onCheckIndustry(industry) {
+    this.setState({industry: industry, actType: -1})
+  }
 
-  onBack() {
-    const {from} = this.state
-    let delta = 1
-    if (from === 'code') {
-      delta = 2
+  onPutApply() {
+    const {name, address, img, attachment, industry, baState, linkman, mobile, baServicerUserId} = this.state
+    if(!name || name.trim() === '') {
+      this.showToast('请输入商家名称')
+      return false
     }
-    Taro.navigateBack({
-      delta: delta
+    if(!linkman || linkman.trim() === '') {
+      this.showToast('请输入联系人')
+      return false
+    }
+    if (!mobile || mobile.trim() === '' || mobile.length != 11) {
+      this.showToast('请输入正确的手机号')
+      return false;
+    }
+    this.uploadImage({
+      sid: Taro.getStorageSync('sid'),
+      url: TOPIC_API + '/chat/tools/files/upload',
+      mediaType: 1,
+      path: [img, attachment],
+      name,
+      address,
+      industry,
+      baState,
+      linkman,
+      mobile,
+      baServicerUserId,
     })
   }
 
+  uploadImage = (data) => {
+    let path = data.path
+    if (path && path.length > 0) {
+      let i = data.i ? data.i : 0
+      if(path[i] && path[i].trim() !== '') {
+        Taro.uploadFile({
+          url: data.url,
+          filePath: path[i],
+          name: 'files',
+          formData: {
+            sid: data.sid,
+            type: data.mediaType
+          },
+          success: (res) => {
+            if (res.statusCode == 200) {
+              const {code, body} = JSON.parse(res.data)
+              if (code == 200) {
+                if (i == 0) {
+                  data.img = body[0]
+                } else if (i == 1) {
+                  data.attachment = body[0]
+                }
+              } else {
+                console.log('上传失败。。。')
+              }
+            }
+          },
+          complete: () => {
+            i++
+            if (i == path.length) { //当图片传完时，停止调用
+              // console.log('执行完毕: 成功：' + success + ' 失败：' + fail + '; filePath: ' + JSON.stringify(filePath))
+              this.onPutApplyBusiness(data)
+            } else {//若图片还没有传完，则继续调用函数
+              data.i = i
+              this.uploadImage(data)
+            }
+          }
+        })
+      } else {
+        i++
+        if (i == path.length) {
+          this.onPutApplyBusiness(data)
+        } else {
+          data.i = i
+          this.uploadImage(data)
+        }
+      }
+    } else {
+      this.onPutApplyBusiness(data)
+    }
+  }
+
+  onPutApplyBusiness = (data) => {
+    const {from} = this.state
+    Api.businessUpdate(data).then(res => {
+      const {code} = res
+      if(code == 200) {
+        this.showToast('申请成功')
+        let delta = 1
+        if (from === 'code') {
+          delta = 2
+        }
+        Taro.navigateBack({
+          delta: delta
+        })
+      }
+    })
+  }
+
+  showToast(msg) {
+    Taro.showToast({
+      title: msg,
+      icon: 'none',
+      mask: true,
+    })
+  }
 
   render() {
     const {windowHeight, scale, userId, name, address, img, attachment, industry, industryList, baState, linkman, mobile, baServicerUserId, actType} = this.state
     const btnHeight = 80 * scale
     const scrollHeight = windowHeight - btnHeight
-    const openAction = actType !== -1 ? true : false
 
     return (
       <View className='business-apply-page'>
@@ -173,7 +269,7 @@ class BusinessApply extends Component {
             <View className='apply-item'>
               <View className='item-label'><Image className='must-icon' src={mustImg} /> 联系电话：</View>
               <View className='item-input'>
-                <Input className='input-field' placeholder='请输入联系电话'
+                <Input className='input-field' placeholder='请输入联系电话' value={mobile}
                   onInput={this.onInputHandler.bind(this, 'mobile')}
                 />
               </View>
@@ -192,7 +288,7 @@ class BusinessApply extends Component {
         </View>
 
         <View className='btn-content' style={{height: `${btnHeight}px`}}>
-          <View className='apply-btn'>提交</View>
+          <View className='apply-btn' onClick={this.onPutApply.bind(this)}>提交</View>
         </View>
 
         <AddressDialog isOpened={actType === 2 ? true : false} address={address} onCancel={this.onCloseAction.bind(this)}
@@ -206,14 +302,12 @@ class BusinessApply extends Component {
         >
           {
             industryList.map((item, index) => {
-              return <AtActionSheetItem key={index}>
+              return <AtActionSheetItem key={index} onClick={this.onCheckIndustry.bind(this, item.name)}>
                 {item.name}
               </AtActionSheetItem>
             })
           }
-
         </AtActionSheet>
-
 
       </View>
     )

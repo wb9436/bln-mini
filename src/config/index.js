@@ -1,5 +1,5 @@
 // 是否关闭打印
-export const noConsole = false
+export const noConsole = true
 
 // 请求连接前缀
 export const baseUrl = 'http://api.viplark.com'

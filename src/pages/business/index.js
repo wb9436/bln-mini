@@ -51,7 +51,7 @@ class Business extends Component {
       const {code, body} = res
       if (code === 200) {
         this.setState({
-          isBusiness: body.state === 0 ? 1 : 0,
+          isBusiness: body.state === 0 ? 0 : 1,
           businessId: body.businessId,
         })
       }
