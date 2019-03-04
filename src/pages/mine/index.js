@@ -43,16 +43,17 @@ class Mine extends Component {
       area: '',
       address: '',
       columnItem: [
-        {name: '我的钱包',type: 'wallet', icon: wallet, page: '/pages/wallet/index'},
+        //type: 0=本程序页面, 1=web页面, 2=小程序页面
+        {name: '我的钱包', type: 'wallet', icon: wallet, page: '/pages/wallet/index', showType: 0},
         // {name: '账号绑定',type: 'account',  icon: account, page: ''},
-        {name: '邀请好友',type: 'friend',  icon: friend, page: '/pages/friend/index'},
-        {name: '我的话题',type: 'topic',  icon: mine, page: '/pages/myTopic/index'},
-        {name: '日常任务',type: 'task',  icon: task, page: '/pages/task/index'},
-        {name: '排行榜',type: 'rank',  icon: rank, page: '/pages/rank/index'},
-        {name: '实名认证',type: 'auth',  icon: auth, page: '/pages/auth/index'},
-        {name: '商家推广',type: 'business',  icon: business, page: '/pages/business/index'},
-        {name: '帮助中心',type: 'help',  icon: help, page: '/pages/help/index'},
-        {name: '系统设置',type: 'setup',  icon: setup, page: '/pages/setup/index'},
+        {name: '邀请好友', type: 'friend', icon: friend, page: '/pages/friend/index', showType: 0},
+        {name: '我的话题', type: 'topic', icon: mine, page: '/pages/myTopic/index', showType: 0},
+        {name: '日常任务', type: 'task', icon: task, page: '/pages/task/index', showType: 0},
+        {name: '排行榜', type: 'rank', icon: rank, page: '/pages/rank/index', showType: 0},
+        {name: '实名认证', type: 'auth', icon: auth, page: '/pages/auth/index', showType: 2},
+        {name: '商家推广', type: 'business', icon: business, page: '/pages/business/index', showType: 2},
+        {name: '帮助中心', type: 'help', icon: help, page: '/pages/help/index', showType: 0},
+        {name: '系统设置', type: 'setup', icon: setup, page: '/pages/setup/index', showType: 0},
       ]
     }
   }
@@ -145,7 +146,13 @@ class Mine extends Component {
           signMessage = true
         }
       }
-      return <View key={index} className='column-item' onClick={this.onLookPageHandler.bind(this, item.page)}>
+      let isShow = true
+      if (item.showType == 1 && Taro.getEnv() !== Taro.ENV_TYPE.WEB) {
+        isShow = false
+      } else if (item.showType == 2 && Taro.getEnv() !== Taro.ENV_TYPE.WEAPP) {
+        isShow = false
+      }
+      return <View key={index} className={isShow ? 'column-item' : 'column-item hidden'} onClick={this.onLookPageHandler.bind(this, item.page)}>
         <View className='column-left'>
           <Image className='column-icon' src={item.icon} mode='widthFix' />
           <View className='column-name'>{item.name}</View>

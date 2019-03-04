@@ -296,9 +296,13 @@ class CityTopic extends Component {
             <View className={type == 0 ? 'type-item type-item_active' : 'type-item'} onClick={this.onCheckTopicType.bind(this, 0)}>话题</View>
             <View className={type == 1 ? 'type-item type-item_active' : 'type-item'} onClick={this.onCheckTopicType.bind(this, 1)}>关注</View>
           </View>
-          <View className='topic-add' onClick={this.onAddTopic.bind(this)}>
-            <Image className='nav-icon' src={addBtn} mode='widthFix' />
-          </View>
+
+          {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ?
+            <View className='topic-add' onClick={this.onAddTopic.bind(this)}>
+              <Image className='nav-icon' src={addBtn} mode='widthFix' />
+            </View> : ''
+          }
+
         </View>
 
         <View className='topic-scroll' style={{height: `${scrollHeight}px`}}>

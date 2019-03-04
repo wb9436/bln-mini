@@ -29,7 +29,7 @@ class InviteFriend extends Component {
       friendList: [],
       totalFriends: 0,
       curPageNum: 1,
-      pageSize: 10,
+      pageSize: 20,
       loadAll: false,
     }
   }
