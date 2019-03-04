@@ -52,6 +52,11 @@ class App extends Component {
       'pages/friend/index',
       'pages/help/index',
       'pages/help/web',
+      'pages/business/index',
+      'pages/business/info',
+      'pages/business/apply',
+      'pages/business/order',
+      'pages/business/payCode',
     ],
     tabBar: {
       "color": "#929292",

@@ -50,7 +50,7 @@ class Mine extends Component {
         {name: '日常任务',type: 'task',  icon: task, page: '/pages/task/index'},
         {name: '排行榜',type: 'rank',  icon: rank, page: '/pages/rank/index'},
         {name: '实名认证',type: 'auth',  icon: auth, page: '/pages/auth/index'},
-        // {name: '商家推广',type: 'business',  icon: business, page: ''},
+        {name: '商家推广',type: 'business',  icon: business, page: '/pages/business/index'},
         {name: '帮助中心',type: 'help',  icon: help, page: '/pages/help/index'},
         {name: '系统设置',type: 'setup',  icon: setup, page: '/pages/setup/index'},
       ]
@@ -206,9 +206,12 @@ class Mine extends Component {
           </View>
         </ScrollView>
 
-        <AddressDialog isOpened={isOpened} address={address} onCancel={this.onCancelAddress.bind(this)}
-          onConfirmAddress={this.onConfirmAddress.bind(this)}
-        />
+        {isOpened ?
+          <AddressDialog isOpened={isOpened} address={address} onCancel={this.onCancelAddress.bind(this)}
+            onConfirmAddress={this.onConfirmAddress.bind(this)}
+          /> : ''
+        }
+
       </View>
     )
   }

@@ -275,9 +275,11 @@ class ForgetPassword extends Component {
           </View>
         }
 
-        <AddressDialog isOpened={isOpened} address={address} onCancel={this.onCancelAddress.bind(this)}
-          onConfirmAddress={this.onConfirmAddress.bind(this)}
-        />
+        {isOpened ?
+          <AddressDialog isOpened={isOpened} address={address} onCancel={this.onCancelAddress.bind(this)}
+            onConfirmAddress={this.onConfirmAddress.bind(this)}
+          /> : ''
+        }
 
       </View>
     )
