@@ -21,7 +21,7 @@
     position: absolute;
     background-color: rgba(0, 0, 0, 0.3);
     opacity: 0;
-    transition: opacity 150ms ease-in;
+    transition: opacity 300ms ease-in;
   }
 
   .address-layout__container {
@@ -31,12 +31,8 @@
     height: 261Px;
     font-size: 17Px;
     background-color: #FFF;
-    -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
-    -webkit-transition: -webkit-transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
-    transition: -webkit-transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
     transition: transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
-    transition: transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1), -webkit-transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
 
     .layout-header {
       position: relative;

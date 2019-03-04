@@ -1,5 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, ScrollView, Image, Input} from '@tarojs/components'
+import {View, ScrollView, Image, Input, Switch} from '@tarojs/components'
+import { AtActionSheet, AtActionSheetItem } from 'taro-ui'
 import './apply.scss'
 
 import AddressDialog from '../../components/Address'
@@ -28,7 +29,7 @@ class BusinessApply extends Component {
       industry: '', //所属行业
       industryList: [], //行业列表
       baState: 0, //是否参加商家联盟
-      linkman: Taro.getStorageSync('user').nickname, //联系人
+      linkman: '', //联系人
       mobile: Taro.getStorageSync('user').mobile, //联系人
       baServicerUserId: '', //推广员
       actType: -1, //动作面板
@@ -77,7 +78,14 @@ class BusinessApply extends Component {
   }
 
   onConfirmAddress(address) {
-    this.setState({address})
+    this.setState({address: address, actType: -1})
+  }
+
+  onStateChange(e) {
+    let value = e.detail.value
+    this.setState({
+      baState: value === true ? 1 : 0
+    })
   }
 
 
@@ -94,7 +102,7 @@ class BusinessApply extends Component {
 
 
   render() {
-    const {windowHeight, scale, userId, name, address, img, attachment, industry, baState, linkman, mobile, baServicerUserId, actType} = this.state
+    const {windowHeight, scale, userId, name, address, img, attachment, industry, industryList, baState, linkman, mobile, baServicerUserId, actType} = this.state
     const btnHeight = 80 * scale
     const scrollHeight = windowHeight - btnHeight
     const openAction = actType !== -1 ? true : false
@@ -114,9 +122,9 @@ class BusinessApply extends Component {
             </View>
 
             <View className='apply-item'>
-              <View className='item-label'>商家名称：</View>
+              <View className='item-label'><Image className='must-icon' src={mustImg} /> 商家名称：</View>
               <View className='item-input'>
-                <Input className='input-field' placeholder='商家名称' value={name}
+                <Input className='input-field' placeholder='请输入商家名称' value={name}
                   onInput={this.onInputHandler.bind(this, 'name')}
                 />
               </View>
@@ -139,34 +147,45 @@ class BusinessApply extends Component {
               <View className='item-input'> <View className='item-desc' onClick={this.onOpenAction.bind(this, 2)}>{address}</View></View>
             </View>
 
-            <View className='apply-item'>
+            <View className='apply-item apply-icon'>
               <View className='item-label'>营业执照：</View>
-              <View className='item-input'></View>
+              <View className='item-input'>
+                <Image className='add-icon' src={attachment || addImg} mode='scaleToFill' onClick={this.onInputImgHandler.bind(this, 'attachment')} />
+              </View>
             </View>
 
             <View className='apply-item'>
               <View className='item-label'>加入商家联盟：</View>
-              <View className='item-input'></View>
+              <View className='item-input'>
+                <Switch checked={baState === 1 ? true : false} type='switch' color='#EE735D' onChange={this.onStateChange.bind(this)} />
+              </View>
             </View>
 
             <View className='apply-item'>
-              <View className='item-label'>联系人：</View>
-              <View className='item-input'></View>
+              <View className='item-label'><Image className='must-icon' src={mustImg} /> 联系人：</View>
+              <View className='item-input'>
+                <Input className='input-field' placeholder='请输入联系人' value={linkman}
+                  onInput={this.onInputHandler.bind(this, 'linkman')}
+                />
+              </View>
             </View>
 
             <View className='apply-item'>
-              <View className='item-label'>联系电话：</View>
-              <View className='item-input'></View>
+              <View className='item-label'><Image className='must-icon' src={mustImg} /> 联系电话：</View>
+              <View className='item-input'>
+                <Input className='input-field' placeholder='请输入联系电话'
+                  onInput={this.onInputHandler.bind(this, 'mobile')}
+                />
+              </View>
             </View>
 
             <View className='apply-item'>
-              <View className='item-label'>所属行业：</View>
-              <View className='item-input'></View>
-            </View>
-
-            <View className='apply-item'>
-              <View className='item-label'>推广员：</View>
-              <View className='item-input'></View>
+              <View className='item-label'>推广员ID：</View>
+              <View className='item-input'>
+                <Input className='input-field' placeholder='推广员ID' value={baServicerUserId}
+                  onInput={this.onInputHandler.bind(this, 'baServicerUserId')}
+                />
+              </View>
             </View>
 
           </ScrollView>
@@ -176,9 +195,24 @@ class BusinessApply extends Component {
           <View className='apply-btn'>提交</View>
         </View>
 
-        <AddressDialog isOpened={openAction} address={address} onCancel={this.onCloseAction.bind(this)}
+        <AddressDialog isOpened={actType === 2 ? true : false} address={address} onCancel={this.onCloseAction.bind(this)}
           onConfirmAddress={this.onConfirmAddress.bind(this)}
         />
+
+        <AtActionSheet isOpened={actType === 1 ? true : false}
+          onClose={this.onCloseAction.bind(this)}
+          onCancel={this.onCloseAction.bind(this)}
+          cancelText='取消'
+        >
+          {
+            industryList.map((item, index) => {
+              return <AtActionSheetItem key={index}>
+                {item.name}
+              </AtActionSheetItem>
+            })
+          }
+
+        </AtActionSheet>
 
 
       </View>
