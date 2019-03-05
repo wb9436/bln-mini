@@ -47,10 +47,11 @@ class Business extends Component {
 
   componentDidShow() {
     Api.businessInfo().then(res => {
+      console.log(res)
       const {code, body} = res
       if (code === 200) {
         this.setState({
-          isBusiness: body.state === 0 ? 0 : 1,
+          isBusiness: body.state === 0 ? 1 : 0,
           businessId: body.businessId,
         })
       }

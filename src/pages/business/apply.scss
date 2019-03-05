@@ -79,6 +79,10 @@
       @include sc(32px, $color-white);
     }
 
+    .apply-ing {
+      background: $color-theme-disabled;
+    }
+
   }
 
 
