@@ -55,7 +55,6 @@ class BusinessInfo extends Component {
 
   render() {
     const {windowHeight, userId, name, address, img, attachment, industry, baState, linkman, mobile, baServicerUserId} = this.state
-    let state = 0
 
     return (
       <View className='business-info-page'>
@@ -109,8 +108,8 @@ class BusinessInfo extends Component {
             <View className='info-item'>
               <View className='item-label'>加入商家联盟</View>
               <View className='item-content'>
-                {state === 1 && <View className='item-field'>是</View>}
-                {state === 0 && <Switch checked={false} type='switch' color='#EE735D' />}
+                {baState === 1 && <View className='item-field'>是</View>}
+                {baState === 0 && <Switch checked={false} type='switch' color='#EE735D' />}
               </View>
             </View>
 
