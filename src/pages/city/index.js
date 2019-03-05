@@ -305,11 +305,6 @@ class CityTopic extends Component {
               <Image className='nav-icon' src={addBtn} mode='widthFix' />
             </View> : ''
           }
-
-          <View className='topic-add' onClick={this.onAddTopic.bind(this)}>
-            <Image className='nav-icon' src={addBtn} mode='widthFix' />
-          </View>
-
         </View>
 
         <View className='topic-scroll' style={{height: `${scrollHeight}px`}}>
