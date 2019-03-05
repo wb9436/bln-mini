@@ -102,9 +102,9 @@ class PddSearch extends Component {
     const {showSort, goodsList, loadAll} = this.props
 
     let windowHeight = Utils.windowHeight(false) //可用窗口高度
-    let searchHeight = 50 //搜索栏高度
+    let searchHeight = 60 //搜索栏高度
     let goodsHeight = windowHeight - searchHeight //商品展示高度
-    let sortHeight = 35 //排序高度
+    let sortHeight = 32 //排序高度
     let scrollHeight = goodsHeight //滑动高度
     if (showSort) {
       scrollHeight = goodsHeight - sortHeight
@@ -133,17 +133,12 @@ class PddSearch extends Component {
         {/*微信分享*/}
         {process.env.TARO_ENV === 'h5' ? <WxShare /> : ''}
 
-        <View className='search-btn' style={{height: `${searchHeight}px`}} >
-          <View className='btn-back' onClick={this.goBack.bind(this)}>
-            {Taro.getEnv() === Taro.ENV_TYPE.WEB &&
-              <AtIcon value='chevron-left' color='#FFF' size='30' />
-            }
-          </View>
-          <View className='search-input'>
-            <View className='search-icon'>
-              <AtIcon value='search' color='#B5B5B5' size='20' />
+        <View className='pdd-search-btn' style={{height: `${searchHeight}px`}} >
+          <View className='pdd-search'>
+            <View className='pdd-search-icon'>
+              <AtIcon value='search' color='#B5B5B5' size='18' />
             </View>
-            <View className='search-value'>
+            <View className='pdd-search-value'>
               <Input placeholder='搜索' focus autoFocus maxLength='16' onInput={this.onKeywordInput.bind(this)}
                 onChange={this.onKeywordInput.bind(this)}
                 onConfirm={this.onSearchByKeyword.bind(this)}

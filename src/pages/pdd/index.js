@@ -108,10 +108,10 @@ class Pdd extends Component {
   render() {
     const {goodsList, loadAll, showSort} = this.props
     let windowHeight = Utils.windowHeight(false) //可用窗口高度
-    let searchHeight = 50 //搜索栏高度
-    let optHeight = 40 //类目高度
+    let searchHeight = 60 //搜索栏高度
+    let optHeight = 47 //类目高度
     let goodsHeight = windowHeight - searchHeight - optHeight //商品展示高度
-    let sortHeight = 35 //排序高度
+    let sortHeight = 32 //排序高度
     let scrollHeight = goodsHeight //滑动高度
     if (showSort) {
       scrollHeight = goodsHeight - sortHeight
@@ -143,7 +143,7 @@ class Pdd extends Component {
         <View className='search-btn' style={{height: `${searchHeight}px`}} onClick={this.onSearchGoods.bind(this)} >
           <View className='search-input'>
             <View className='search-icon'>
-              <AtIcon value='search' color='#B5B5B5' size='20' />
+              <AtIcon value='search' color='#9C9C9C' size='18' />
             </View>
             <View className='search-value'>搜索</View>
           </View>

@@ -232,10 +232,16 @@ class CityTopic extends Component {
             </View>
           </View>
           <View className='topic-btn'>
-            <View className='topic-follow' onClick={this.onTopicAttention.bind(this, index, item.id, item.myself, item.attention)}>
-              {item.myself == 1 ? '删除' : ''}
-              {item.myself == 0 ? `${item.attention == 1 ? '已关注' : '关注' }` : ''}
-            </View>
+            {item.myself == 1 ?
+              <View className='topic-follow' onClick={this.onTopicAttention.bind(this, index, item.id, item.myself, item.attention)}>
+                删除
+              </View> : ''
+            }
+            {(item.myself == 0 && item.attention == 0) ?
+              <View className='topic-follow' onClick={this.onTopicAttention.bind(this, index, item.id, item.myself, item.attention)}>
+                关注
+              </View> : ''
+            }
             <View className='topic-more' onClick={this.onOpenAction.bind(this, index, item.id, item.myself)}>
               <Image className='more-icon' src={moreBtn} mode='widthFix' />
             </View>
@@ -299,6 +305,10 @@ class CityTopic extends Component {
               <Image className='nav-icon' src={addBtn} mode='widthFix' />
             </View> : ''
           }
+
+          <View className='topic-add' onClick={this.onAddTopic.bind(this)}>
+            <Image className='nav-icon' src={addBtn} mode='widthFix' />
+          </View>
 
         </View>
 

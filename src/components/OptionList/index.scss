@@ -3,16 +3,16 @@
 .opt-view {
   display: block;
   width: 100vw;
-  height: 80px;
+  height: 85px;
 
   .opt-list {
     width: 100%;
-    height: 80px;
+    height: 85px;
     white-space: nowrap;
 
     .opt-item {
-      width: 70px;
-      height: 70px;
+      width: 88px;
+      height: 75px;
       margin: 0 14px;
       line-height: 86px;
       display: inline-block;
@@ -21,7 +21,7 @@
     }
 
     .opt-checked {
-      border-bottom: 4px solid $color-theme;
+      border-bottom: 3px solid $color-theme;
       @include sc(32px, $color-theme)
     }
   }

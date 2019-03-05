@@ -61,8 +61,8 @@ class TaskProfit extends Component {
         <Image className='task-img' src={item.iconUrl} mode='widthFix' />
         <View className='task-content'>
           <View className='task-title'>
-            {item.hot == 1 && <View className='hot-state hot'>热</View>}
-            {item.hot == 2 && <View className='hot-state new'>新</View>}
+            {item.hot == 1 && <View className='font-icon hot'>热</View>}
+            {item.hot == 2 && <View className='font-icon new'>新</View>}
             {`【${item.title}】${item.subTitle}`}
           </View>
           <View className='task-data'>
@@ -72,7 +72,7 @@ class TaskProfit extends Component {
           </View>
           <View className='task-state'>
             <Image className='task-icon' src={item.state == 1 ? doing : complete} mode='widthFix' />
-            <View className='state-desc'>{item.state == 1 ? '进行中' : '已结束'}</View>
+            <View className={item.state == 1 ? 'state-desc' : 'state-desc state-desc_over'}>{item.state == 1 ? '进行中' : '已结束'}</View>
           </View>
         </View>
       </View>

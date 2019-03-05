@@ -133,9 +133,9 @@
         justify-content: flex-start;
 
         .topic-follow {
-          width: 100px;
-          height: 50px;
-          line-height: 50px;
+          width: 90px;
+          height: 46px;
+          line-height: 46px;
           text-align: center;
           border: 2px solid $color-theme;
           border-radius: 6px;
@@ -150,7 +150,7 @@
           justify-content: flex-end;
 
           .more-icon {
-            width: 30px;
+            width: 28px;
             height: auto;
           }
         }
@@ -159,6 +159,7 @@
     }
 
     .topic-content {
+      margin-top: 8px;
       @include sc(32px, $color-big);
       line-height: 44px;
       word-wrap: break-word;
@@ -206,7 +207,7 @@
         justify-content: center;
 
         .topic-data-icon {
-          width: 32px;
+          width: 26px;
           height: auto;
         }
 
@@ -214,7 +215,7 @@
           height: 50px;
           line-height: 50px;
           margin-left: 10px;
-          @include sc(30px, $color-small);
+          @include sc(24px, $color-small);
         }
 
         .item-data_checked {

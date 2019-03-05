@@ -105,14 +105,16 @@ class Home extends Component {
           <Image className='act-logo' src={item.iconUrl} mode='scaleToFill' />
         </View>
         <View className='item-content'>
-          <View className='item-title'>{`【${item.title}】${item.subTitle}`}</View>
+          <View className='item-title'>
+            {item.hot == 1 && <View className='font-icon hot'> 热 </View>}
+            {item.hot == 2 && <View className='font-icon new'> 新 </View>}
+            {`【${item.title}】${item.subTitle}`}
+          </View>
           <View className='item-desc'>
             {(item.free === 0 && item.money > 0) ? `每增加一次阅读可获得${item.money}元` : ''}
           </View>
           <View className='item-data'>
             <View className='data-detail'>
-              {item.hot == 1 && <View className='title-icon hot'> 热 </View>}
-              {item.hot == 2 && <View className='title-icon new'> 新 </View>}
               {item.hits}人阅读
             </View>
             <View className={item.state == 1 ? 'share-btn_start' : 'share-btn_start share-btn_end'}>

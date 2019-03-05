@@ -1,8 +1,13 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View} from '@tarojs/components'
+import {View, Image} from '@tarojs/components'
 import PropTypes from 'prop-types'
 import {AtIcon} from 'taro-ui'
 import './index.scss'
+
+import chevronUp from '../../images/chevron/chevron-up.png'
+import chevronUpSelect from '../../images/chevron/chevron-up_select.png'
+import chevronDown from '../../images/chevron/chevron-down.png'
+import chevronDownSelect from '../../images/chevron/chevron-down_select.png'
 
 /**
  * 排序列表
@@ -20,9 +25,36 @@ class SortList extends Component {
     this.state = {
       sortTypes: [
         {typeId: 0, name: '综合排序', types: []},
-        {typeId: 1, name: '佣金比例', types: [{type: 1, icon: 'chevron-up', desc: '升序'},{type: 2, icon: 'chevron-down', desc: '降序'}]},
-        {typeId: 2, name: '价格', types: [{type: 3, icon: 'chevron-up', desc: '升序'},{type: 4, icon: 'chevron-down', desc: '降序'}]},
-        {typeId: 3, name: '销量', types: [{type: 5, icon: 'chevron-up', desc: '升序'},{type: 6, icon: 'chevron-down', desc: '降序'}]}
+        {
+          typeId: 1,
+          name: '佣金比例',
+          types: [{type: 1, icon: chevronUp, iconSelect: chevronUpSelect, desc: '升序'}, {
+            type: 2,
+            icon: chevronDown,
+            iconSelect: chevronDownSelect,
+            desc: '降序'
+          }]
+        },
+        {
+          typeId: 2,
+          name: '价格',
+          types: [{type: 3, icon: chevronUp, iconSelect: chevronUpSelect, desc: '升序'}, {
+            type: 4,
+            icon: chevronDown,
+            iconSelect: chevronDownSelect,
+            desc: '降序'
+          }]
+        },
+        {
+          typeId: 3,
+          name: '销量',
+          types: [{type: 5, icon: chevronUp, iconSelect: chevronUpSelect, desc: '升序'}, {
+            type: 6,
+            icon: chevronDown,
+            iconSelect: chevronDownSelect,
+            desc: '降序'
+          }]
+        }
       ],
       typeId: 0,
       sortType: 0
@@ -73,7 +105,8 @@ class SortList extends Component {
         {item.types.length > 0 ?
           <View className='sort-icon'>
             {item.types.map(sort => {
-              return <AtIcon key={sort.type} size='15' color={sort.type == sortType ? '#EE735D' : ''} value={sort.icon} />
+              // return <AtIcon key={sort.type} size='12' color={sort.type == sortType ? '#EE735D' : ''} value={sort.icon} />
+              return <Image key={sort.type} className='sort-icon-img' src={sort.type == sortType ? sort.iconSelect : sort.icon} mode='widthFix' />
             })}
           </View> : ''
         }
@@ -82,6 +115,7 @@ class SortList extends Component {
 
     return (
       <View className='sort-view'>
+
         {sortContent}
       </View>
     )
