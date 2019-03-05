@@ -30,7 +30,6 @@ class Business extends Component {
     Api.mealPackageList().then(res => {
       const {code, body} = res
       if (code === 200) {
-        console.log(body)
         packageList = body
         if (packageList && packageList.length > 0) {
           packageList.map(item => {

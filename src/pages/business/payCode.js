@@ -66,7 +66,6 @@ class PayCode extends Component {
   render() {
     const {businessId, hasIcon, hasLoad} = this.state
     let url = 'https://api.vipsunyou.com/api/business/getQr?businessId=' + businessId
-    console.log(url)
 
     return (
       <View className='pay-code-page'>
