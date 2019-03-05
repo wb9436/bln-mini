@@ -22,7 +22,7 @@
       }
 
       .info {
-        width: 334px;
+        width: 314px;
         margin-left: 20px;
         display: flex;
         flex-direction: column;
@@ -50,7 +50,7 @@
       }
 
       .user-msg {
-        width: 150px;
+        width: 170px;
         height: 100%;
         //margin-left: 222px;
         display: flex;
@@ -81,6 +81,7 @@
       justify-content: space-around;
 
       .data-item {
+        width: 250px;
         text-align: center;
 
         .data-num {

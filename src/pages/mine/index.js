@@ -182,9 +182,11 @@ class Mine extends Component {
               <Image className='avatar' src={userData.avatar || avatar} mode='widthFix' />
               <View className='info'>
                 <View className='nickname'>{userData.nickname}</View>
-                <View className='auth-btn'
-                  onClick={this.onLookPageHandler.bind(this, '/pages/auth/index')}
-                >{isAuth}</View>
+                {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ?
+                  <View className='auth-btn'
+                    onClick={this.onLookPageHandler.bind(this, '/pages/auth/index')}
+                  >{isAuth}</View> : ''
+                }
               </View>
               <View className='user-msg'>
                 <Image className='msg-btn' src={msgBtn} mode='widthFix' onClick={this.onOpenMsgHandler.bind(this)} />
