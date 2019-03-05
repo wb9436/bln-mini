@@ -59,17 +59,10 @@
         .award-desc {
           width: 25%;
           height: 100%;
+          line-height: 70px;
           text-align: center;
           @include sc(30px, $color-theme);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          .award-img {
-            margin-left: 5px;
-            width: 30px;
-            height: auto;
-          }
+          font-weight: bold;
         }
       }
 
@@ -95,9 +88,9 @@
           justify-content: center;
 
           .btn_start {
-            width: 85%;
-            height: 50px;
-            line-height: 50px;
+            width: 70%;
+            height: 40px;
+            line-height: 40px;
             text-align: center;
             @include sc(24px, $color-white);
             background: $color-theme;

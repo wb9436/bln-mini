@@ -55,9 +55,11 @@ class CashRecord extends Component {
 
     const content = list.map((item, index) => {
       return <View key={index} className='cash-item'>
-        <View className='cash-date'>{Utils.formatTime(new Date(item.createTime))}</View>
+        <View className='cash-content'>
+          <View className='cash-state'>{item.state == 1 ? '提现成功' : '提现失败'}</View>
+          <View className='cash-date'>{Utils.formatTime(new Date(item.createTime))}</View>
+        </View>
         <View className='cash-money'>¥{Utils.formatPricePoint(item.money)}</View>
-        <View className='cash-state'>{item.state == 1 ? '成功' : '失败'}</View>
       </View>
     })
 
@@ -65,8 +67,6 @@ class CashRecord extends Component {
       <View className='cash-page'>
         <ScrollView className='scroll-container cash-list'
           scrollY
-          scrollLeft='0'
-          scrollTop='0'
           scrollWithAnimation
           onScrollToLower={this.onLoadHandler.bind(this)}
         >

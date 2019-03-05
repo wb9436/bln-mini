@@ -7,7 +7,6 @@ import * as Utils from '../../utils/utils'
 
 import discCircular from '../../images/public/disc-circular.png'
 import emptyCircular from '../../images/public/empty-circular.png'
-import award from '../../images/task/award.png'
 import blnShare from '../../images/public/bln_share.png'
 
 class Task extends Component {
@@ -156,7 +155,6 @@ class Task extends Component {
             <View className='task-title'>{item.title}</View>
             <View className='award-desc'>
               +{item.award}
-              <Image className='award-img' src={award} mode='widthFix' />
             </View>
           </View>
           <View className='task-desc'>
