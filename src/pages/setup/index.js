@@ -5,6 +5,7 @@ import './index.scss'
 
 import {downloadUrl} from '../../config/index'
 
+import moreBtn from '../../images/public/moreBtn.png'
 import logout from '../../images/setup/logout.png'
 import pwd from '../../images/setup/pwd.png'
 
@@ -52,7 +53,7 @@ class Setup extends Component {
             <View className='column-name'>修改密码</View>
           </View>
           <View className='column-right'>
-            <AtIcon value='chevron-right' size={28} color='#EfEEf4' />
+            <Image className='more-btn' src={moreBtn} mode='widthFix' />
           </View>
         </View>
         <View className='column-item' onClick={this.onLogoutHandler.bind(this)}>
@@ -61,7 +62,7 @@ class Setup extends Component {
             <View className='column-name'>退出登录</View>
           </View>
           <View className='column-right'>
-            <AtIcon value='chevron-right' size={28} color='#EfEEf4' />
+            <Image className='more-btn' src={moreBtn} mode='widthFix' />
           </View>
         </View>
 
@@ -72,7 +73,7 @@ class Setup extends Component {
               <View className='column-name at-column'>下载百灵鸟APP</View>
             </View>
             <View className='column-right'>
-              <AtIcon value='chevron-right' size={28} color='#EfEEf4' />
+              <Image className='more-btn' src={moreBtn} mode='widthFix' />
             </View>
           </View> : ''
         }

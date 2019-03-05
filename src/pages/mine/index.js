@@ -1,13 +1,13 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Image, ScrollView} from '@tarojs/components'
 import {connect} from '@tarojs/redux'
-import {AtIcon} from 'taro-ui'
 import './index.scss'
 
 import AddressDialog from '../../components/Address'
 import * as Api from '../../store/user/service'
 import * as Utils from '../../utils/utils'
 
+import moreBtn from '../../images/public/moreBtn.png'
 import addressBtn from '../../images/mine/addressBtn.png'
 import msgBtn from '../../images/mine/msgBtn.png'
 import wallet from '../../images/mine/wallet.png'
@@ -166,7 +166,7 @@ class Mine extends Component {
           {signMessage && item.type === 'task' ?
             <Image className='task-sign' src={discCircular} mode='widthFix' /> : ''
           }
-          <AtIcon value='chevron-right' size={28} color='#EfEEf4' />
+          <Image className='more-btn' src={moreBtn} mode='widthFix' />
         </View>
       </View>
     })

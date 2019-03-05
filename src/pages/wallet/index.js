@@ -1,11 +1,11 @@
 import Taro, {Component} from '@tarojs/taro'
 import {Image, View} from '@tarojs/components'
-import {AtIcon} from 'taro-ui'
 import './index.scss'
 
 import * as Utils from '../../utils/utils'
 import * as Constant from '../../config/index'
 
+import moreBtn from '../../images/public/moreBtn.png'
 import cash from '../../images/wallet/cash.png'
 import bind from '../../images/wallet/bind.png'
 import detail from '../../images/wallet/detail.png'
@@ -85,7 +85,7 @@ class Wallet extends Component {
           <View className='column-name'>{item.name}</View>
         </View>
         <View className='column-right'>
-          <AtIcon value='chevron-right' size={28} color='#EfEEf4' />
+          <Image className='more-btn' src={moreBtn} mode='widthFix' />
         </View>
       </View>
     })

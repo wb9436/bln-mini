@@ -70,7 +70,7 @@ class TaskProfit extends Component {
             <View className='data-detail'>有效数: <View className='data-num'>{item.visit}</View></View>
             <View className='data-detail'>分享数: <View className='data-num'>{item.share}</View></View>
           </View>
-          <View className='task-state'>
+          <View className='act-task-state'>
             <Image className='task-icon' src={item.state == 1 ? doing : complete} mode='widthFix' />
             <View className={item.state == 1 ? 'state-desc' : 'state-desc state-desc_over'}>{item.state == 1 ? '进行中' : '已结束'}</View>
           </View>

@@ -1,9 +1,10 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View} from '@tarojs/components'
-import {AtIcon} from 'taro-ui'
+import {View, Image} from '@tarojs/components'
 import './index.scss'
 
 import * as Api from '../../store/user/service'
+
+import moreBtn from '../../images/public/moreBtn.png'
 
 class HelpCenter extends Component {
   config = {
@@ -62,7 +63,7 @@ class HelpCenter extends Component {
     const itemContent = itemList.map((item, index) => {
       return <View key={index} className='help-item' onClick={this.onOpenUrl.bind(this, item.accessUrl, item.id)}>
         <View className='item-title'>{item.title}</View>
-        <AtIcon value='chevron-right' size={28} color='#EfEEf4' />
+        <Image className='more-btn' src={moreBtn} mode='widthFix' />
       </View>
     })
 

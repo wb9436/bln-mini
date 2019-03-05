@@ -16,6 +16,7 @@ class TopicAdd extends Component {
     super(...arguments)
     this.state = {
       area: Taro.getStorageSync('topicAddress') || Taro.getStorageSync('address') || '上海市 上海市 浦东新区',
+      nickname: Taro.getStorageSync('user').nickname,
       mediaType: 1,//0=纯文本,1=图片;2=视频
       sourceUrl: [],//存储资源地址
       content: '',//文本内容
@@ -187,7 +188,7 @@ class TopicAdd extends Component {
   }
 
   render() {
-    const {sourceUrl, autoHeight} = this.state
+    const {sourceUrl, autoHeight, nickname} = this.state
 
     return (
       <View className='topic-add-page'>
@@ -195,7 +196,7 @@ class TopicAdd extends Component {
           <View className='cancel-btn' onClick={this.onCancelAddTopic}>取消</View>
           <View className='nav-title'>
             <View className='title-desc'>发话题</View>
-            <View className='topic-author'>依凡</View>
+            <View className='topic-author'>{nickname}</View>
           </View>
           <View className='send-btn' onClick={this.onAddTopic.bind(this)}>发布</View>
         </View>

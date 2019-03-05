@@ -100,7 +100,7 @@
     overflow-y: scroll;
 
     .column-item {
-      padding: 0 10px 0 30px;
+      padding: 0 25px 0 28px;
       height: 100px;
       background: $color-white;
       display: flex;
@@ -133,6 +133,7 @@
           display: inline-block;
           @include sc(30px, $color-theme);
           font-weight: bold;
+          margin-right: 20px;
 
           .money-name {
             margin-left: 5px;
@@ -144,6 +145,7 @@
         .task-sign {
           width: 16px;
           height: auto;
+          margin-right: 20px;
         }
 
         .column-right-btn {
