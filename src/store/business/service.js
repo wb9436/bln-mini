@@ -47,5 +47,13 @@ export const businessUpdate = data => Request({
   data
 })
 
+/*商家推广订单*/
+export const businessActivity = data => Request({
+  url: '/api/business/activity',
+  method: 'POST',
+  need_sid: true,
+  data
+})
+
 
 

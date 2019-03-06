@@ -21,6 +21,7 @@ class ForgetPassword extends Component {
   constructor() {
     super(...arguments)
     this.state = {
+      id: Taro.getStorageSync('inviter') || '',
       mobile: '',
       password: '',
       code: '',
@@ -36,10 +37,13 @@ class ForgetPassword extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {inviter} = this.$router.params
-    if(inviter) {
+    if (inviter && inviter !== 0) {
       Taro.setStorageSync('inviter', inviter)
+      this.setState({
+        id: inviter
+      })
     }
   }
 
@@ -138,7 +142,7 @@ class ForgetPassword extends Component {
   }
 
   onRegisterHandler(isCheck) {
-    const {mobile, password, code, address} = this.state
+    const {id, mobile, password, code, address} = this.state
     if (!mobile || mobile.length != 11) {
       this.showToast('请输入正确的手机号')
       return false;
@@ -154,7 +158,7 @@ class ForgetPassword extends Component {
         this.showToast('请输入新密码')
         return false;
       }
-      this.onMobileRegister(mobile, password, address)
+      this.onMobileRegister(id, mobile, password, address)
     }
   }
 
@@ -171,15 +175,14 @@ class ForgetPassword extends Component {
     })
   }
 
-  onMobileRegister(mobile, password, address) {
+  onMobileRegister(id, mobile, password, address) {
     let src = ''
     if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
       src = 'web'
     } else if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
       src = 'mini'
     }
-    let id = Taro.getStorageSync('inviter') || 0
-    Api.mobileRegister({mobile, address, password, id, src}).then(data => {
+    Api.mobileRegister({id: id || 0, mobile, address, password, src}).then(data => {
       if (data && data.code == 200) {
         this.showToast('注册成功，请去登录')
         Taro.redirectTo({
@@ -210,7 +213,7 @@ class ForgetPassword extends Component {
   }
 
   render() {
-    const {isPassword, codeMsg, isLogin, isCheck, btnMsg, isOpened, address} = this.state
+    const {id, isPassword, codeMsg, isLogin, isCheck, btnMsg, isOpened, address} = this.state
 
     return (
       <View className='login-container'>
@@ -242,12 +245,17 @@ class ForgetPassword extends Component {
           </View> : ''
         }
 
-        {!isCheck ?
-          <View className='input address'>
-            <Image className='icon' src={map} mode='widthFix' />
-            <View className='input-box' onClick={this.onOpenAddressUpdate.bind(this)}>{address}</View>
-          </View> : ''
-        }
+        {/*{!isCheck ?*/}
+          {/*<View className='input'>*/}
+            {/*<Image className='icon' src={codePng} mode='widthFix' />*/}
+            {/*<Input className='input-box code-input'*/}
+              {/*placeholderClass='placeholder'*/}
+              {/*placeholder='输入邀请人ID'*/}
+              {/*maxLength={8}*/}
+              {/*onInput={this.onInputHandler.bind(this, 'id')}*/}
+            {/*/>*/}
+          {/*</View> : ''*/}
+        {/*}*/}
 
         {!isCheck ?
           <View className='input pwd'>
@@ -261,6 +269,13 @@ class ForgetPassword extends Component {
             <Image className='see-icon' src={isPassword ? seeNo : seeYes} mode='widthFix'
               onClick={this.onSwitch.bind(this)}
             />
+          </View> : ''
+        }
+
+        {!isCheck ?
+          <View className='input'>
+            <Image className='icon' src={map} mode='widthFix' />
+            <View className='input-box' onClick={this.onOpenAddressUpdate.bind(this)}>{address}</View>
           </View> : ''
         }
 
