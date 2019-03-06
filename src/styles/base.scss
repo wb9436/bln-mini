@@ -41,6 +41,14 @@
   border: 2px solid #62EC46;
 }
 
+.font-disabled {
+  color: $color-theme-disabled !important;
+}
+
+.bg-disabled {
+  background: $color-theme-disabled !important;
+}
+
 button {
   background: #fff;
   outline: none;

@@ -3,12 +3,154 @@
 .business-act-page {
   width: 100%;
   height: 100vh;
+  background: $color-bg;
 
+  .act-order-item {
+    padding: 0 28px;
+    width: auto;
+    height: 290px;
+    background: $color-white;
+    border-bottom: 2px solid $color-line;
 
+    .order-content {
+      width: 100%;
+      height: 100%;
 
+      .order-act {
+        width: 100%;
+        height: 170px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
+        .order-act-icon {
+          width: 180px;
+          height: 130px;
+          overflow: hidden;
+          border-radius: 10px;
+        }
 
+        .order-act-content {
+          width: 485px;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
 
+          .order-act-title {
+            margin-top: 14px;
+            width: 100%;
+            height: 80px;
+            line-height: 42px;
+            @include sc(32px, $color-big);
+            white-space: normal;
+            word-wrap: break-word;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+          }
 
+          .order-act-state {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
 
+            .act-state {
+              height: 48px;
+              display: flex;
+              align-items: flex-end;
+              justify-content: flex-start;
+
+              .act-icon {
+                width: 30px;
+                height: auto;
+              }
+
+              .act-state-desc {
+                height: 100%;
+                line-height: 64px;
+                margin-left: 10px;
+                @include sc(28px, $color-theme);
+              }
+            }
+
+            .act-money {
+              height: 48px;
+              line-height: 64px;
+              margin-left: 80px;
+              @include sc(30px, $color-theme);
+            }
+          }
+        }
+      }
+
+      .order-act-data {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .data-item {
+          font-size: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          overflow: hidden;
+
+          .data-item-title {
+            color: $color-small;
+            white-space: nowrap;
+          }
+
+          .data-info {
+            color: $color-theme;
+            white-space: nowrap;
+          }
+        }
+
+        .act-hit {
+          width: 185px;
+        }
+
+        .act-share {
+          width: 185px;
+        }
+
+        .act-effect {
+          width: 310px;
+        }
+      }
+
+      .order-act-btn {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .order-btn-item {
+          width: 140px;
+          height: 46px;
+          line-height: 46px;
+          border-radius: 23px;
+          text-align: center;
+          @include sc(24px, $color-white);
+        }
+
+        .order-data-stat {
+          background: #EEAF5D;
+          margin-right: 20px;
+        }
+
+        .order-invoice {
+          background: $color-theme;
+        }
+
+      }
+
+    }
+  }
 }
