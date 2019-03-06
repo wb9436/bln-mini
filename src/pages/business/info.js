@@ -32,6 +32,7 @@ class BusinessInfo extends Component {
   componentDidMount() {
     const {from} = this.$router.params
     Api.businessInfo().then(res => {
+      console.log(res)
       const {code, body} = res
       if (code === 200) {
         this.setState({
@@ -117,7 +118,7 @@ class BusinessInfo extends Component {
             <View className='info-item info-icon'>
               <View className='item-label'>营业执照</View>
               <View className='item-content'>
-                {attachment && <Image className='item-icon' src={attachment || logo} mode='widthFix' />}
+                {attachment ? <Image className='item-icon' src={attachment} mode='widthFix' /> : ''}
               </View>
             </View>
 

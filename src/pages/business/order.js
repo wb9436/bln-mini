@@ -1,5 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View} from '@tarojs/components'
+import {View, ScrollView, Image} from '@tarojs/components'
 import './order.scss'
 
 import * as Api from '../../store/business/service'
@@ -30,6 +30,13 @@ class BusinessOrder extends Component {
   render() {
     return (
       <View className='business-act-page'>
+        <ScrollView className='scroll-container'
+          scrollY
+          scrollWithAnimation
+        >
+
+
+        </ScrollView>
       </View>
     )
   }

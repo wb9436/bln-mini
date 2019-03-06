@@ -15,17 +15,27 @@ class PayCode extends Component {
       businessId: 0, //商家ID
       hasIcon: false, //是否有收款码
       hasLoad: true, //是否加载
+      loading: true,
     }
   }
 
-  componentDidMount() {
+  componentDidShow() {
     const {isBusiness, businessId} = this.$router.params
-    if (isBusiness && isBusiness === 1) {
+    if (isBusiness == 1 && isBusiness == 1) {
       this.setState({
         isBusiness: isBusiness,
         businessId: businessId,
       })
     }
+    this.onLoading()
+  }
+
+  onLoading = () => {
+    this.timerId = setTimeout(() => {
+      this.setState({
+        loading: false
+      })
+    }, 100)
   }
 
   onLoadImgError() {
@@ -64,12 +74,12 @@ class PayCode extends Component {
   }
 
   render() {
-    const {businessId, hasIcon, hasLoad} = this.state
+    const {businessId, hasIcon, hasLoad, loading} = this.state
     let url = 'https://api.vipsunyou.com/api/business/getQr?businessId=' + businessId
 
     return (
       <View className='pay-code-page'>
-        {(hasLoad || hasIcon) ?
+        {(hasLoad || hasIcon || loading) ?
           <View className='code-content'>
             <Image className='code-icon' src={url} onError={this.onLoadImgError.bind(this)}
               onLoad={this.onLoadImgSuccess.bind(this)} onClick={this.onPreviewImage.bind(this, url)}
