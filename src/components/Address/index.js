@@ -191,8 +191,13 @@ class AddressDialog extends Component {
       return <View key={`areaId-${index}`} id={`areaId-${index}`} className='area-item'>{item}</View>
     })
 
+    let className = 'address-layout address-layout--active'
+    if(!_isOpened) {
+      className = 'address-layout'
+    }
+
     return (
-      <View className={_isOpened ? 'address-layout address-layout--active' : 'address-layout'} onTouchMove={this.onTouchMove.bind(this)}>
+      <View className={className} onTouchMove={this.onTouchMove.bind(this)}>
         <View className='address-layout__overlay' onClick={this.onCancel.bind(this)} />
         <View className='address-layout__container'>
           <View className='layout-header'>
