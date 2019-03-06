@@ -52,6 +52,22 @@ class BusinessInfo extends Component {
     })
   }
 
+  onStateChange(e) {
+    let value = e.detail.value
+    if (value) {
+      let baState = 1
+      const {name, address, attachment, baServicerUserId, img, industry, linkman, mobile} = this.state
+      let data = {name, address, attachment, baServicerUserId, baState, img, industry, linkman, mobile}
+      Api.businessUpdate(data).then(res => {
+        const {code} = res
+        if (code == 200) {
+          this.setState({
+            baState: baState
+          })
+        }
+      })
+    }
+  }
 
   render() {
     const {windowHeight, userId, name, address, img, attachment, industry, baState, linkman, mobile, baServicerUserId} = this.state
@@ -109,7 +125,7 @@ class BusinessInfo extends Component {
               <View className='item-label'>加入商家联盟</View>
               <View className='item-content'>
                 {baState === 1 && <View className='item-field'>是</View>}
-                {baState === 0 && <Switch checked={false} type='switch' color='#EE735D' />}
+                {baState === 0 && <Switch checked={false} type='switch' color='#EE735D' onChange={this.onStateChange.bind(this)} />}
               </View>
             </View>
 
