@@ -5,7 +5,7 @@ import './index.scss'
 import * as Api from '../../store/user/service'
 import AddressDialog from '../../components/Address/index'
 
-import map from '../../images/public/map.png'
+import map from '../../images/login/map.png'
 import logo from '../../images/login/logo.png'
 import phone from '../../images/login/phone.png'
 import pwd from '../../images/login/pwd.png'
