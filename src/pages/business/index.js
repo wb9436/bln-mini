@@ -47,7 +47,6 @@ class Business extends Component {
 
   componentDidShow() {
     Api.businessInfo().then(res => {
-      console.log(res)
       const {code, body} = res
       if (code === 200) {
         this.setState({
