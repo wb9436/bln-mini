@@ -319,7 +319,7 @@ class CityTopic extends Component {
           </ScrollView>
         </View>
 
-        {actType == 0 &&
+        {(actType == 0 && isOpenAct) ?
           <AtActionSheet isOpened={isOpenAct}
             onClose={this.onCloseAction.bind(this)}
             onCancel={this.onCloseAction.bind(this)}
@@ -328,10 +328,10 @@ class CityTopic extends Component {
             <AtActionSheetItem onClick={this.onTopicDelete.bind(this)}>
               删除话题
             </AtActionSheetItem>
-          </AtActionSheet>
+          </AtActionSheet> : ''
         }
 
-        {actType == 1 &&
+        {(actType == 1 && isOpenAct) ?
           <AtActionSheet isOpened={isOpenAct}
             onClose={this.onCloseAction.bind(this)}
             onCancel={this.onCloseAction.bind(this)}
@@ -345,10 +345,10 @@ class CityTopic extends Component {
                 投诉
               </AtActionSheetItem> : ''
             }
-          </AtActionSheet>
+          </AtActionSheet> : ''
         }
 
-        {actType == 2 &&
+        {(actType == 2 && isOpenAct) ?
           <AtActionSheet isOpened={isOpenAct}
             onClose={this.onCloseAction.bind(this)}
             onCancel={this.onCloseAction.bind(this)}
@@ -369,7 +369,7 @@ class CityTopic extends Component {
             <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '侵犯人身权益')}>
               侵犯人身权益
             </AtActionSheetItem>
-          </AtActionSheet>
+          </AtActionSheet> : ''
         }
 
         {/*话题地址修改*/}
