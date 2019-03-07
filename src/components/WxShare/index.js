@@ -1,4 +1,4 @@
-import wx from 'weixin-js-sdk'
+// import wx from 'weixin-js-sdk'
 import Taro, {Component} from '@tarojs/taro'
 import {View} from '@tarojs/components'
 import PropTypes from "prop-types"
@@ -47,7 +47,7 @@ class WxShare extends Component {
             if (code == 200) {
               const {link, title, desc, imgUrl} = nextProps
 
-              wx.config({
+              window.wx.config({
                 debug: false,
                 appId: body.appId,
                 timestamp: body.timestamp,
@@ -61,9 +61,9 @@ class WxShare extends Component {
                   // 'onMenuShareQZone'
                 ]
               })
-              wx.ready(() => {
+              window.wx.ready(() => {
                 //分享给朋友
-                wx.onMenuShareAppMessage({
+                window.wx.onMenuShareAppMessage({
                   title: title,
                   desc: desc,
                   link: link,

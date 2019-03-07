@@ -62,7 +62,7 @@ class App extends Component {
       "color": "#929292",
       "selectedColor": "#EE735D",
       "backgroundColor": "#ffffff",
-      "borderStyle": "#000",
+      "borderStyle": "black",
       "list": [
         {
           "pagePath": "pages/home/index",
