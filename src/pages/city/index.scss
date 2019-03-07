@@ -209,7 +209,7 @@
           height: 50px;
           line-height: 50px;
           margin-left: 10px;
-          @include sc(24px, $color-small);
+          @include sc(24px, $color-big);
         }
 
         .item-data_checked {

@@ -73,7 +73,7 @@
               display: flex;
               align-items: center;
               justify-content: flex-start;
-              color: $color-small;
+              color: $color-big;
 
               .praise-icon {
                 width: 28px;
@@ -116,7 +116,7 @@
   }
 
   .has-praised {
-    color: $color-theme;
+    color: $color-theme !important;
   }
 
 }

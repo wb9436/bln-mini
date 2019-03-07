@@ -237,6 +237,7 @@
                   display: flex;
                   align-items: center;
                   justify-content: flex-start;
+                  color: $color-big;
 
                   .praise-icon {
                     width: 28px;
@@ -284,7 +285,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      @include sc(15Px, $color-small);
+      @include sc(15Px, $color-big);
 
       .data-img {
         width: 16Px;
@@ -364,7 +365,7 @@
   }
 
   .has-praised {
-    color: $color-theme;
+    color: $color-theme !important;
   }
 
 
