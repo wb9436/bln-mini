@@ -1,6 +1,7 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, ScrollView, Image, Input, Switch} from '@tarojs/components'
 import { AtActionSheet, AtActionSheetItem } from 'taro-ui'
+import 'taro-ui/dist/style/components/action-sheet.scss'
 import './apply.scss'
 
 import AddressDialog from '../../components/Address'

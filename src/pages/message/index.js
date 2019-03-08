@@ -1,6 +1,7 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, ScrollView, Image} from '@tarojs/components'
 import {AtSwipeAction} from 'taro-ui'
+import 'taro-ui/dist/style/components/swipe-action.scss'
 import './index.scss'
 
 import LoadAll from '../../components/LoadAll/index'
