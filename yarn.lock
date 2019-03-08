@@ -85,16 +85,16 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@tarojs/async-await@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/async-await/-/async-await-1.2.15.tgz#bd093cfe03ac3a1e3323d3676243bc9c7737ab2c"
+"@tarojs/async-await@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/async-await/-/async-await-1.2.16.tgz#05c014b3d41eee7501498c6030512be2a851d5f1"
   dependencies:
     promise-polyfill "^7.1.2"
     regenerator-runtime "^0.11.1"
 
-"@tarojs/components@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/components/-/components-1.2.15.tgz#350f4e4d7b0bff315e14dfedbebc27f2bc49123d"
+"@tarojs/components@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/components/-/components-1.2.16.tgz#a30a41ff4a1c704d3bba19dd1831bb581798b436"
   dependencies:
     classnames "^2.2.5"
     nervjs "^1.3.0"
@@ -102,48 +102,48 @@
     swiper "^4.4.2"
     weui "^1.1.2"
 
-"@tarojs/plugin-babel@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/plugin-babel/-/plugin-babel-1.2.15.tgz#cf66b5cf7fd99dee4ec3e7e586366614e31bd021"
+"@tarojs/plugin-babel@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/plugin-babel/-/plugin-babel-1.2.16.tgz#f0cce9f77f8039d120392a10c7de3b17989acd4b"
   dependencies:
     babel-core "^6.26.0"
 
-"@tarojs/plugin-csso@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/plugin-csso/-/plugin-csso-1.2.15.tgz#6d8090c807e3c4f39051b3f1ebf91ca6dc145e43"
+"@tarojs/plugin-csso@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/plugin-csso/-/plugin-csso-1.2.16.tgz#249b687bbbb51836e9cd7da83a4ecf81310ce451"
   dependencies:
     csso "^3.5.0"
 
-"@tarojs/plugin-sass@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/plugin-sass/-/plugin-sass-1.2.15.tgz#10118dead28c5cea7d3ce34e61ea5c4ebddf7b24"
+"@tarojs/plugin-sass@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/plugin-sass/-/plugin-sass-1.2.16.tgz#ca14e968f165c37e670a79c91c5d3c647782184a"
   dependencies:
     node-sass "^4.11.0"
 
-"@tarojs/plugin-uglifyjs@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/plugin-uglifyjs/-/plugin-uglifyjs-1.2.15.tgz#09a1e46b556333f3943937bbccb6cf217d375ca5"
+"@tarojs/plugin-uglifyjs@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/plugin-uglifyjs/-/plugin-uglifyjs-1.2.16.tgz#7f7b8590a8490a17b9acbd5167e73b687fe8357c"
   dependencies:
     uglify-js "^3.3.24"
 
-"@tarojs/redux-h5@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/redux-h5/-/redux-h5-1.2.15.tgz#c3503314a31d909076d74faec02b9237672c0588"
+"@tarojs/redux-h5@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/redux-h5/-/redux-h5-1.2.16.tgz#c54e232359c78bcf6402b7869a046bf05c61ee2f"
   dependencies:
     hoist-non-react-statics "^2.5.0"
     invariant "^2.2.4"
     loose-envify "^1.1.0"
     prop-types "^15.6.1"
 
-"@tarojs/redux@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/redux/-/redux-1.2.15.tgz#dfe58ea8ca210c89ec0f6f8b87984ad67b74879b"
+"@tarojs/redux@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/redux/-/redux-1.2.16.tgz#afc02ed6a829a7b28bdcbe66b49ed6770000389b"
   dependencies:
-    "@tarojs/utils" "1.2.15"
+    "@tarojs/utils" "1.2.16"
 
-"@tarojs/router@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/router/-/router-1.2.15.tgz#1f5cdd184f9661d183bffa74db97ccfe41dc53f0"
+"@tarojs/router@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/router/-/router-1.2.16.tgz#daf00cf2cbe18d73e93daa231849c549a92da575"
   dependencies:
     invariant "2.2.4"
     lodash "4.17.11"
@@ -152,63 +152,63 @@
     value-equal "0.4.0"
     warning "4.0.2"
 
-"@tarojs/taro-alipay@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/taro-alipay/-/taro-alipay-1.2.15.tgz#132b6ea04517f1ade01deca6a62aa384ce672cd6"
+"@tarojs/taro-alipay@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/taro-alipay/-/taro-alipay-1.2.16.tgz#005072a77f0b45c070ba1a998bc7eb5731aa477c"
   dependencies:
-    "@tarojs/taro" "1.2.15"
-    "@tarojs/utils" "1.2.15"
+    "@tarojs/taro" "1.2.16"
+    "@tarojs/utils" "1.2.16"
     lodash "^4.17.10"
     prop-types "^15.6.1"
 
-"@tarojs/taro-h5@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/taro-h5/-/taro-h5-1.2.15.tgz#0f4840948dae86ece941b1e794b03cda5cdb4504"
+"@tarojs/taro-h5@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/taro-h5/-/taro-h5-1.2.16.tgz#afd09cfb0a179b249ea424296a9febe480014bac"
   dependencies:
-    "@tarojs/taro" "1.2.15"
+    "@tarojs/taro" "1.2.16"
     base64-js "^1.3.0"
     jsonp-retry "^1.0.3"
     mobile-detect "^1.4.2"
     whatwg-fetch "^2.0.4"
 
-"@tarojs/taro-swan@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/taro-swan/-/taro-swan-1.2.15.tgz#10f29edf09781c020fe4968ac28560c9bb799356"
+"@tarojs/taro-swan@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/taro-swan/-/taro-swan-1.2.16.tgz#741bea2dca4ac6460d8a951a6fe459077dc392c7"
   dependencies:
-    "@tarojs/taro" "1.2.15"
-    "@tarojs/utils" "1.2.15"
+    "@tarojs/taro" "1.2.16"
+    "@tarojs/utils" "1.2.16"
     lodash "^4.17.10"
     prop-types "^15.6.1"
 
-"@tarojs/taro-tt@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/taro-tt/-/taro-tt-1.2.15.tgz#25dc4251b3d1efb582cdcaa7e4390ceaa457e1f1"
+"@tarojs/taro-tt@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/taro-tt/-/taro-tt-1.2.16.tgz#603a893112f6a4dfcda3b0744b8fcd9d1203726d"
   dependencies:
-    "@tarojs/taro" "1.2.15"
-    "@tarojs/utils" "1.2.15"
+    "@tarojs/taro" "1.2.16"
+    "@tarojs/utils" "1.2.16"
     lodash "^4.17.10"
     prop-types "^15.6.1"
 
-"@tarojs/taro-weapp@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/taro-weapp/-/taro-weapp-1.2.15.tgz#73502ddda9d6e0d00403f6f7f0c4427e8d2c6a86"
+"@tarojs/taro-weapp@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/taro-weapp/-/taro-weapp-1.2.16.tgz#7b144ec354919cc0a3f9b27cacb9ecd368220485"
   dependencies:
-    "@tarojs/taro" "1.2.15"
-    "@tarojs/utils" "1.2.15"
+    "@tarojs/taro" "1.2.16"
+    "@tarojs/utils" "1.2.16"
     lodash "^4.17.10"
     prop-types "^15.6.1"
 
-"@tarojs/taro@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/taro/-/taro-1.2.15.tgz#01789ca6388e55ae8b5476fd9f71cd2545abdc60"
+"@tarojs/taro@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/taro/-/taro-1.2.16.tgz#3cddf74589e57610504976a3061e2f9755c22331"
 
-"@tarojs/utils@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/utils/-/utils-1.2.15.tgz#d9aff7c0ae650f3b1129b5c65060c5914e69617a"
+"@tarojs/utils@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/utils/-/utils-1.2.16.tgz#65da89bc16e11b4e9b6dbbbf21b15b17c660bcf1"
 
-"@tarojs/webpack-runner@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/webpack-runner/-/webpack-runner-1.2.15.tgz#34b7c12dbf9a1cb52c7719918502fb06ade8118f"
+"@tarojs/webpack-runner@1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@tarojs/webpack-runner/-/webpack-runner-1.2.16.tgz#87c6762a49eca45155ebb3a8030c6d1f62f15ae9"
   dependencies:
     autoprefixer "8.6.4"
     babel-core "6.26.0"
@@ -223,14 +223,14 @@
     html-webpack-plugin "3.1.0"
     less "3.0.4"
     less-loader "4.1.0"
-    lodash "4.17.10"
+    lodash "4.17.11"
     mini-css-extract-plugin "0.4.1"
     node-sass "4.11.0"
     opn "5.3.0"
     ora "2.1.0"
     postcss-loader "2.1.6"
-    postcss-plugin-constparse "1.2.15"
-    postcss-pxtransform "1.2.15"
+    postcss-plugin-constparse "1.2.16"
+    postcss-pxtransform "1.2.16"
     resolve "1.8.1"
     resolve-url-loader "2.3.0"
     sass-loader "7.1.0"
@@ -2380,11 +2380,11 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
-eslint-config-taro@1.2.15:
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/eslint-config-taro/-/eslint-config-taro-1.2.15.tgz#49d40964b8371a52d7d6397f4d6e115a763aff5f"
+eslint-config-taro@1.2.16:
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/eslint-config-taro/-/eslint-config-taro-1.2.16.tgz#4e1a0756f547b54344f97540e821ac40a6aebc1a"
   dependencies:
-    eslint-plugin-taro "1.2.15"
+    eslint-plugin-taro "1.2.16"
 
 eslint-import-resolver-node@^0.3.1:
   version "0.3.2"
@@ -2427,9 +2427,9 @@ eslint-plugin-react@^7.8.2:
     prop-types "^15.6.2"
     resolve "^1.9.0"
 
-eslint-plugin-taro@1.2.15:
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-taro/-/eslint-plugin-taro-1.2.15.tgz#0f74de95684eff930041858fc2362d347b77020a"
+eslint-plugin-taro@1.2.16:
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-taro/-/eslint-plugin-taro-1.2.16.tgz#fa9e99b09ea702d175824fdadd30a1155683a1a3"
   dependencies:
     has "^1.0.1"
 
@@ -3893,10 +3893,6 @@ lodash.tail@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.tail/-/lodash.tail-4.1.1.tgz#d2333a36d9e7717c8ad2f7cacafec7c32b444664"
 
-lodash@4.17.10:
-  version "4.17.10"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
-
 lodash@4.17.11, lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@~4.17.10:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
@@ -4869,9 +4865,9 @@ postcss-modules-values@^1.3.0:
     icss-replace-symbols "^1.1.0"
     postcss "^6.0.1"
 
-postcss-plugin-constparse@1.2.15:
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/postcss-plugin-constparse/-/postcss-plugin-constparse-1.2.15.tgz#75189037e5802343d0f8ab83d51807d2948864fd"
+postcss-plugin-constparse@1.2.16:
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/postcss-plugin-constparse/-/postcss-plugin-constparse-1.2.16.tgz#237d116adbcc5544780ab199c31287fcac7018e9"
   dependencies:
     postcss "^6.0.22"
 
@@ -4882,9 +4878,9 @@ postcss-pxtorem@^4.0.1:
     object-assign "^4.1.0"
     postcss "^5.2.10"
 
-postcss-pxtransform@1.2.15:
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/postcss-pxtransform/-/postcss-pxtransform-1.2.15.tgz#6df22975b0154a935e07658993f9152c6d778aaa"
+postcss-pxtransform@1.2.16:
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/postcss-pxtransform/-/postcss-pxtransform-1.2.16.tgz#379ba84bee0f482e381b3086ee5931e2bf2ea8c3"
   dependencies:
     postcss "^6.0.16"
     postcss-pxtorem "^4.0.1"
