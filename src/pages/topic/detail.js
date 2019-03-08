@@ -1,7 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Image, Video, ScrollView, Button, RichText} from '@tarojs/components'
 import {AtActionSheet, AtActionSheetItem} from 'taro-ui'
-import 'taro-ui/dist/style/components/action-sheet.scss'
 import {connect} from '@tarojs/redux'
 import './detail.scss'
 
