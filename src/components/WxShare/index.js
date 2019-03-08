@@ -1,7 +1,7 @@
 // import wx from 'weixin-js-sdk'
 import Taro, {Component} from '@tarojs/taro'
 import {View} from '@tarojs/components'
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types'
 import * as WxApi from './service'
 import {noConsole} from '../../config/index'
 
