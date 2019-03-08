@@ -10,6 +10,7 @@ import logo from '../../images/login/logo.png'
 import phone from '../../images/login/phone.png'
 import pwd from '../../images/login/pwd.png'
 import codePng from '../../images/login/code.png'
+import userIcon from '../../images/login/user.png'
 import seeNo from '../../images/login/see_no.png'
 import seeYes from '../../images/login/see_yes.png'
 
@@ -173,6 +174,11 @@ class ForgetPassword extends Component {
         })
       }
     })
+    // this.setState({
+    //   isCheck: false,
+    //   btnMsg: '立即注册',
+    //   address: '上海市 上海市 浦东新区'
+    // })
   }
 
   onMobileRegister(id, mobile, password, address) {
@@ -217,65 +223,80 @@ class ForgetPassword extends Component {
 
     return (
       <View className='login-container'>
-        <Image className='logo' src={logo} mode='widthFix' />
+        <Image className='bln-logo' src={logo} mode='widthFix' />
 
-        <View className='input phone'>
-          <Image className='icon' src={phone} mode='widthFix' />
-          <Input className='input-box'
-            placeholderClass='placeholder'
-            placeholder='输入手机号'
-            maxLength={11}
-            disabled={!isCheck}
-            onInput={this.onInputHandler.bind(this, 'mobile')}
-          />
+        <View className='input-container input-top'>
+          <View className='input-left'>
+            <Image className='icon' src={phone} mode='widthFix' />
+            <Input className='input-box'
+              placeholderClass='placeholder'
+              placeholder='输入手机号'
+              maxLength={11}
+              disabled={!isCheck}
+              onInput={this.onInputHandler.bind(this, 'mobile')}
+            />
+          </View>
+          <View className='input-right' />
         </View>
 
         {isCheck ?
-          <View className='input code'>
-            <Image className='icon' src={codePng} mode='widthFix' />
-            <Input className='input-box code-input'
-              placeholderClass='placeholder'
-              placeholder='输入验证码'
-              maxLength={8}
-              onInput={this.onInputHandler.bind(this, 'code')}
-            />
-            <View className='code-btn' onClick={this.onSendCodeHandler.bind(this)}>
-              {codeMsg}
+          <View className='input-container'>
+            <View className='input-left'>
+              <Image className='icon' src={codePng} mode='widthFix' />
+              <Input className='input-box'
+                placeholderClass='placeholder'
+                placeholder='输入验证码'
+                maxLength={8}
+                onInput={this.onInputHandler.bind(this, 'code')}
+              />
+            </View>
+            <View className='input-right' onClick={this.onSendCodeHandler.bind(this)}>
+              <View className='code-desc'>{codeMsg}</View>
             </View>
           </View> : ''
         }
 
         {/*{!isCheck ?*/}
-          {/*<View className='input'>*/}
-            {/*<Image className='icon' src={codePng} mode='widthFix' />*/}
-            {/*<Input className='input-box code-input'*/}
-              {/*placeholderClass='placeholder'*/}
-              {/*placeholder='输入邀请人ID'*/}
-              {/*maxLength={8}*/}
-              {/*onInput={this.onInputHandler.bind(this, 'id')}*/}
-            {/*/>*/}
+          {/*<View className='input-container'>*/}
+            {/*<View className='input-left'>*/}
+              {/*<Image className='icon' src={userIcon} mode='widthFix' />*/}
+              {/*<Input className='input-box'*/}
+                {/*placeholderClass='placeholder'*/}
+                {/*placeholder='输入邀请人ID'*/}
+                {/*maxLength={8}*/}
+                {/*onInput={this.onInputHandler.bind(this, 'id')}*/}
+              {/*/>*/}
+            {/*</View>*/}
+            {/*<View className='input-right' />*/}
           {/*</View> : ''*/}
         {/*}*/}
 
         {!isCheck ?
-          <View className='input pwd'>
-            <Image className='icon' src={pwd} mode='widthFix' />
-            <Input className='input-box'
-              placeholderClass='placeholder'
-              placeholder='输入密码'
-              password={isPassword}
-              onInput={this.onInputHandler.bind(this, 'password')}
-            />
-            <Image className='see-icon' src={isPassword ? seeNo : seeYes} mode='widthFix'
-              onClick={this.onSwitch.bind(this)}
-            />
+          <View className='input-container'>
+            <View className='input-left'>
+              <Image className='icon' src={pwd} mode='widthFix' />
+              <Input className='input-box'
+                placeholderClass='placeholder'
+                placeholder='输入密码'
+                password={isPassword}
+                onInput={this.onInputHandler.bind(this, 'password')}
+              />
+            </View>
+            <View className='input-right'>
+              <Image className='pwd-state' src={isPassword ? seeNo : seeYes} mode='widthFix'
+                onClick={this.onSwitch.bind(this)}
+              />
+            </View>
           </View> : ''
         }
 
         {!isCheck ?
-          <View className='input'>
-            <Image className='icon' src={map} mode='widthFix' />
-            <View className='input-box' onClick={this.onOpenAddressUpdate.bind(this)}>{address}</View>
+          <View className='input-container'>
+            <View className='input-left'>
+              <Image className='icon' src={map} mode='widthFix' />
+              <View className='input-address' onClick={this.onOpenAddressUpdate.bind(this)}>{address}</View>
+            </View>
+            <View className='input-right' />
           </View> : ''
         }
 

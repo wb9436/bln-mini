@@ -126,28 +126,36 @@ class Login extends Component {
       <View className='login-container'>
         {process.env.TARO_ENV === 'h5' ? <WxShare /> : ''}
 
-        <Image className='logo' src={logo} mode='widthFix' />
-        <View className='input phone'>
-          <Image className='icon' src={phone} mode='widthFix' />
-          <Input className='input-box'
-            placeholderClass='placeholder'
-            placeholder='输入手机号'
-            maxLength={11}
-            onInput={this.onInputHandler.bind(this, 'mobile')}
-          />
+        <Image className='bln-logo' src={logo} mode='widthFix' />
+
+        <View className='input-container input-top'>
+          <View className='input-left'>
+            <Image className='icon' src={phone} mode='widthFix' />
+            <Input className='input-box'
+              placeholderClass='placeholder'
+              placeholder='输入手机号'
+              maxLength={11}
+              onInput={this.onInputHandler.bind(this, 'mobile')}
+            />
+          </View>
+          <View className='input-right' />
         </View>
 
-        <View className='input pwd'>
-          <Image className='icon' src={pwd} mode='widthFix' />
-          <Input className='input-box'
-            placeholderClass='placeholder'
-            placeholder='输入密码'
-            password={isPassword}
-            onInput={this.onInputHandler.bind(this, 'password')}
-          />
-          <Image className='see-icon' src={isPassword ? seeNo : seeYes} mode='widthFix'
-            onClick={this.onSwitch.bind(this)}
-          />
+        <View className='input-container'>
+          <View className='input-left'>
+            <Image className='icon' src={pwd} mode='widthFix' />
+            <Input className='input-box'
+              placeholderClass='placeholder'
+              placeholder='输入密码'
+              password={isPassword}
+              onInput={this.onInputHandler.bind(this, 'password')}
+            />
+          </View>
+          <View className='input-right'>
+            <Image className='pwd-state' src={isPassword ? seeNo : seeYes} mode='widthFix'
+              onClick={this.onSwitch.bind(this)}
+            />
+          </View>
         </View>
 
         <View className='login-btn' onClick={this.onLoginHandler.bind(this)}>

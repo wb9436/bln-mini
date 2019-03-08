@@ -50,7 +50,7 @@ class Mine extends Component {
         {name: '日常任务', type: 'task', icon: task, page: '/pages/task/index', showType: 0},
         {name: '排行榜', type: 'rank', icon: rank, page: '/pages/rank/index', showType: 0},
         {name: '实名认证', type: 'auth', icon: auth, page: '/pages/auth/index', showType: 2},
-        // {name: '商家推广', type: 'business', icon: business, page: '/pages/business/index', showType: 2},
+        {name: '商家推广', type: 'business', icon: business, page: '/pages/business/index', showType: 2},
         {name: '帮助中心', type: 'help', icon: help, page: '/pages/help/index', showType: 0},
         {name: '系统设置', type: 'setup', icon: setup, page: '/pages/setup/index', showType: 0},
       ]
@@ -146,11 +146,11 @@ class Mine extends Component {
         }
       }
       let isShow = true
-      if (item.showType == 1 && Taro.getEnv() !== Taro.ENV_TYPE.WEB) {
-        isShow = false
-      } else if (item.showType == 2 && Taro.getEnv() !== Taro.ENV_TYPE.WEAPP) {
-        isShow = false
-      }
+      // if (item.showType == 1 && Taro.getEnv() !== Taro.ENV_TYPE.WEB) {
+      //   isShow = false
+      // } else if (item.showType == 2 && Taro.getEnv() !== Taro.ENV_TYPE.WEAPP) {
+      //   isShow = false
+      // }
       let menuClass = 'menu-item'
       if (!isShow) {
         menuClass += ' hidden'
@@ -164,13 +164,13 @@ class Mine extends Component {
           <View className='menu-name'>{item.name}</View>
         </View>
         <View className='menu-right'>
-          {signMessage && item.type === 'wallet' ?
+          {(signMessage && item.type === 'wallet') ?
             <View className='wallet-money'>
               {userAccount.money}
               <View className='money-name'>元</View>
             </View> : ''
           }
-          {signMessage && item.type === 'task' ?
+          {(signMessage && item.type === 'task') ?
             <Image className='task-sign' src={discCircular} mode='widthFix' /> : ''
           }
           <Image className='detail-btn' src={moreBtn} mode='widthFix' />
