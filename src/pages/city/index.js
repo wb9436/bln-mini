@@ -222,13 +222,13 @@ class CityTopic extends Component {
       if ((item.type == 1 || item.type == 2) && item.sourceUrl.length > 0) {
         sourceUrl = item.sourceUrl
       }
-      return <View key={index} className='topic-item' onClick={this.onTopicDetail.bind(this, item.id)}>
+      return <View key={index} className='topic-item list-item' onClick={this.onTopicDetail.bind(this, item.id)}>
         <View className='topic-author'>
           <View className='author-info'>
             <Image className='author-avatar' mode='widthFix' src={item.avatar || avatar} />
             <View className='author-info'>
               <View className='author-name'>{item.nickname}</View>
-              <View className='author-desc'>{Utils.timeDesc(parseInt(item.createTime / 1000))}</View>
+              <View className='topic-date'>{Utils.timeDesc(parseInt(item.createTime / 1000))}</View>
             </View>
           </View>
           <View className='topic-btn'>
@@ -270,19 +270,19 @@ class CityTopic extends Component {
             </View> : ''
           }
         </View>
-        <View className='topic-hit'> {`${item.hitNum}次浏览`} </View>
+        <View className='topic-hits'> {`${item.hitNum}次浏览`} </View>
         <View className='topic-data'>
           <View className='topic-data-item' >
             <Image className='topic-data-icon' src={shareBtn} mode='widthFix' />
-            <View className='item-data'>{item.shareNum}</View>
+            <View className='topic-data-num'>{item.shareNum}</View>
           </View>
           <View className='topic-data-item'>
             <Image className='topic-data-icon' src={commentBtn} mode='widthFix' />
-            <View className='item-data'>{item.commentNum}</View>
+            <View className='topic-data-num'>{item.commentNum}</View>
           </View>
           <View className='topic-data-item' onClick={this.onTopicPraise.bind(this, index, item.id, item.praise)}>
             <Image className='topic-data-icon' src={item.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />
-            <View className={item.praise == 1 ? 'item-data item-data_checked' : 'item-data'}>{item.praiseNum}</View>
+            <View className={item.praise == 1 ? 'topic-data-num topic-data-item_checked' : 'topic-data-num'}>{item.praiseNum}</View>
           </View>
         </View>
       </View>

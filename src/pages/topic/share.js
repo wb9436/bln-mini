@@ -134,13 +134,13 @@ class TopicShareDetail extends Component {
             onScrollToLower={this.appendNextPageList.bind(this)}
           >
             {/*话题详情*/}
-            <View className='topic-detail'>
+            <View className='topic-item'>
               <View className='topic-author'>
                 <View className='author-info'>
                   <Image className='author-avatar' mode='widthFix' src={topic.avatar || avatar} />
                   <View className='author-info'>
                     <View className='author-name'>{topic.nickname || '百灵鸟'}</View>
-                    <View className='author-desc'>{Utils.timeDesc(parseInt(topic.createTime / 1000))}</View>
+                    <View className='topic-date'>{Utils.timeDesc(parseInt(topic.createTime / 1000))}</View>
                   </View>
                 </View>
                 <View className='topic-btn'>
@@ -184,7 +184,7 @@ class TopicShareDetail extends Component {
                   </View> : ''
                 }
               </View>
-              <View className='topic-hit'> {`${topic.hitNum}次浏览`} </View>
+              <View className='topic-hits'> {`${topic.hitNum}次浏览`} </View>
             </View>
             {/*话题评论详情*/}
             <View className='comment-detail'>
