@@ -50,7 +50,7 @@ class Mine extends Component {
         {name: '日常任务', type: 'task', icon: task, page: '/pages/task/index', showType: 0},
         {name: '排行榜', type: 'rank', icon: rank, page: '/pages/rank/index', showType: 0},
         {name: '实名认证', type: 'auth', icon: auth, page: '/pages/auth/index', showType: 2},
-        {name: '商家推广', type: 'business', icon: business, page: '/pages/business/index', showType: 2},
+        // {name: '商家推广', type: 'business', icon: business, page: '/pages/business/index', showType: 2},
         {name: '帮助中心', type: 'help', icon: help, page: '/pages/help/index', showType: 0},
         {name: '系统设置', type: 'setup', icon: setup, page: '/pages/setup/index', showType: 0},
       ]

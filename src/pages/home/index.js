@@ -89,7 +89,7 @@ class Home extends Component {
 
   render() {
     const {windowHeight, loading} = this.state
-    const {category, actTypes, activityList, loadAll, scrollTop} = this.props
+    const {category, actTypes, activityList, loadAll} = this.props
     const typeContent = actTypes.map((item, index) => {
       return <View key={index} className={category === item.name ? 'type-item checked' : 'type-item'}
         onClick={this.onActTypeChecked.bind(this, category, item.name)}
@@ -101,23 +101,23 @@ class Home extends Component {
 
     const actContent = activityList.map((item, index) => {
       return <View key={index} className='activity-item' onClick={this.onActivityClick.bind(this, item.actId, item.subTitle, item.iconUrl)}>
-        <View className='item-image'>
-          <Image className='act-logo' src={item.iconUrl} mode='scaleToFill' />
+        <View className='activity-view'>
+          <Image className='activity-logo' src={item.iconUrl} mode='scaleToFill' />
         </View>
-        <View className='item-content'>
-          <View className='item-title'>
+        <View className='activity-content'>
+          <View className='activity-title'>
             {item.hot == 1 && <View className='font-icon hot'> 热 </View>}
             {item.hot == 2 && <View className='font-icon new'> 新 </View>}
             {`【${item.title}】${item.subTitle}`}
           </View>
-          <View className='item-desc'>
+          <View className='activity-profit'>
             {(item.free === 0 && item.money > 0) ? `每增加一次阅读可获得${item.money}元` : ''}
           </View>
-          <View className='item-data'>
-            <View className='data-detail'>
+          <View className='activity-data'>
+            <View className='activity-hits'>
               {item.hits}人阅读
             </View>
-            <View className={item.state == 1 ? 'share-btn_start' : 'share-btn_start share-btn_end'}>
+            <View className={item.state == 1 ? 'activity-btn' : 'activity-btn activity-over'}>
               {item.state == 1 ? '立即分享' : '活动已结束'}
             </View>
           </View>
