@@ -146,11 +146,11 @@ class Mine extends Component {
         }
       }
       let isShow = true
-      // if (item.showType == 1 && Taro.getEnv() !== Taro.ENV_TYPE.WEB) {
-      //   isShow = false
-      // } else if (item.showType == 2 && Taro.getEnv() !== Taro.ENV_TYPE.WEAPP) {
-      //   isShow = false
-      // }
+      if (item.showType == 1 && Taro.getEnv() !== Taro.ENV_TYPE.WEB) {
+        isShow = false
+      } else if (item.showType == 2 && Taro.getEnv() !== Taro.ENV_TYPE.WEAPP) {
+        isShow = false
+      }
       return <View key={index} className={isShow ? 'column-item' : 'column-item hidden'} onClick={this.onLookPageHandler.bind(this, item.page)}>
         <View className='column-left'>
           <Image className='column-icon' src={item.icon} mode='widthFix' />
