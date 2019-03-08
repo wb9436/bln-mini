@@ -94,8 +94,6 @@ class PayCode extends Component {
           </View> : ''
         }
 
-
-
       </View>
     )
   }
