@@ -166,7 +166,7 @@ class Mine extends Component {
         <View className='menu-right'>
           {(signMessage && item.type === 'wallet') ?
             <View className='wallet-money'>
-              {userAccount.money}
+              {Utils.formatPricePoint(userAccount.money)}
               <View className='money-name'>元</View>
             </View> : ''
           }
