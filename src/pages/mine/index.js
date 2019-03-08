@@ -105,7 +105,7 @@ class Mine extends Component {
           isOpened: false
         })
         Taro.setStorageSync('address', address)
-        this.loadAreaData()
+        this.onLoadAreaData()
       }
     })
   }
