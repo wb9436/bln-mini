@@ -329,11 +329,11 @@ class TopicDetail extends Component {
                   </View>
                 </View>
                 <View className='topic-btn'>
-                  {topic.myself == 0 ?
-                    <View className='topic-follow' onClick={this.onTopicAttention.bind(this, topic.myself)}>
-                      {`${topic.attention == 1 ? '已关注' : '关注' }`}
-                    </View> : ''
-                  }
+                  {/*{topic.myself == 0 ?*/}
+                    {/*<View className='topic-follow' onClick={this.onTopicAttention.bind(this, topic.myself)}>*/}
+                      {/*{`${topic.attention == 1 ? '已关注' : '关注' }`}*/}
+                    {/*</View> : ''*/}
+                  {/*}*/}
                   <View className='topic-more' onClick={this.onOpenAction.bind(this, topic.myself)}>
                     <Image className='more-icon' src={moreBtn} mode='widthFix' />
                   </View>

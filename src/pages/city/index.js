@@ -44,6 +44,8 @@ class CityTopic extends Component {
       actType: 0, //动作类型: 0=删除, 1=查看, 2=投诉
       isOpenAct: false, //是否打开动作面板
       isOpenAdd: false, //是否打开地址修改
+      myself: 0, //是否是我的
+      attention: 0, //是否关注
     }
   }
 
@@ -145,14 +147,15 @@ class CityTopic extends Component {
         type: 'cityTopic/onTopicAttention',
         payload: {type, index, id, attention}
       })
+      this.onCloseAction()
     }
   }
 
-  onOpenAction(index, id, myself, e) {
+  onOpenAction(index, id, myself, attention, e) {
     e.stopPropagation()
     let actType = 1
     let isOpenAct = true
-    this.setState({index, id, myself, actType, isOpenAct})
+    this.setState({index, id, myself, attention, actType, isOpenAct})
   }
 
   onOpenReportAction() {
@@ -161,7 +164,7 @@ class CityTopic extends Component {
     this.setState({actType, isOpenAct})
   }
 
-  onCloseAction() {
+  onCloseAction = () => {
     this.setState({isOpenAct: false})
   }
 
@@ -200,6 +203,7 @@ class CityTopic extends Component {
   }
 
   onTopicDetail(id) {
+    this.onCloseAction()
     Taro.navigateTo({
       url: '/pages/topic/detail?id=' + id
       // url: '/pages/topic/share?id=' + id
@@ -213,7 +217,8 @@ class CityTopic extends Component {
   }
 
   render() {
-    const {windowHeight, area, city, type, id, myself, actType, isOpenAct, isOpenAdd} = this.state
+    const {windowHeight, area, city, type, id, myself, attention, actType, isOpenAct, isOpenAdd} = this.state
+    const topicIndex  = this.state.index
     const {topicList, loadAll, effects} = this.props
     let navHeight = 43
     let scrollHeight = windowHeight - 45
@@ -243,7 +248,7 @@ class CityTopic extends Component {
                 关注
               </View> : ''
             }
-            <View className='topic-more' onClick={this.onOpenAction.bind(this, index, item.id, item.myself)}>
+            <View className='topic-more' onClick={this.onOpenAction.bind(this, index, item.id, item.myself, item.attention)}>
               <Image className='more-icon' src={moreBtn} mode='widthFix' />
             </View>
           </View>
@@ -338,6 +343,11 @@ class CityTopic extends Component {
             onCancel={this.onCloseAction.bind(this)}
             cancelText='取消'
           >
+            {(myself == 0 && attention == 1) ?
+              <AtActionSheetItem onClick={this.onTopicAttention.bind(this, topicIndex, id, myself, attention)}>
+                取消关注
+              </AtActionSheetItem> : ''
+            }
             <AtActionSheetItem onClick={this.onTopicDetail.bind(this, id)}>
               评论
             </AtActionSheetItem>
