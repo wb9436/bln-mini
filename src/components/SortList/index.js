@@ -105,7 +105,6 @@ class SortList extends Component {
         {item.types.length > 0 ?
           <View className='sort-icon'>
             {item.types.map(sort => {
-              // return <AtIcon key={sort.type} size='12' color={sort.type == sortType ? '#EE735D' : ''} value={sort.icon} />
               return <Image key={sort.type} className='sort-icon-img' src={sort.type == sortType ? sort.iconSelect : sort.icon} mode='widthFix' />
             })}
           </View> : ''
