@@ -60,17 +60,12 @@ class PayCode extends Component {
     })
   }
 
-  onApplyBusiness() {
-    const {isBusiness} = this.state
-    let url = ''
-    if (isBusiness === 1) { //是否是商家
-      url = '/pages/business/info'
-    } else {
-      url = '/pages/business/apply?from=code'
+  onCallMobile(mobile) {
+    if(Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+      Taro.makePhoneCall({
+        phoneNumber: mobile
+      })
     }
-    Taro.navigateTo({
-      url: url
-    })
   }
 
   render() {
@@ -91,10 +86,15 @@ class PayCode extends Component {
         {!hasIcon ?
           <View className='code-none'>
             <Image className='none-icon' src={noneIcon} mode='widthFix' />
-            <View className='none-desc'>暂无收款码，快去成为商家吧</View>
-            <View className='apply-btn' onClick={this.onApplyBusiness.bind(this)}>申请商家</View>
+            <View className='none-desc'>暂无商家收款码，快去成为商家吧</View>
+            <View className='node-customer'>
+              <View className='customer-title'>客服电话</View>
+              <View className='customer-mobile' onClick={this.onCallMobile.bind(this, '18017534850')}>18017534850</View>
+            </View>
           </View> : ''
         }
+
+
 
       </View>
     )
