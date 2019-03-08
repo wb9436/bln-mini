@@ -61,9 +61,13 @@ class HelpCenter extends Component {
   render() {
     const {itemList} = this.state
     const itemContent = itemList.map((item, index) => {
-      return <View key={index} className='help-item' onClick={this.onOpenUrl.bind(this, item.accessUrl, item.id)}>
-        <View className='item-title'>{item.title}</View>
-        <Image className='more-btn' src={moreBtn} mode='widthFix' />
+      return <View key={index} className='menu-item' onClick={this.onOpenUrl.bind(this, item.accessUrl, item.id)}>
+        <View className='menu-left'>
+          <View className='menu-name'>{item.title}</View>
+        </View>
+        <View className='menu-right'>
+          <Image className='detail-btn' src={moreBtn} mode='widthFix' />
+        </View>
       </View>
     })
 

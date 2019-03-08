@@ -79,13 +79,17 @@ class Wallet extends Component {
       } else if (item.showType == 2 && Taro.getEnv() !== Taro.ENV_TYPE.WEAPP) {
         isShow = false
       }
-      return <View key={index} className={isShow ? 'column-item' : 'column-item hidden'} onClick={this.onLookPageHandler.bind(this, item.page)}>
-        <View className='column-left'>
-          <Image className='column-icon' src={item.icon} mode='widthFix' />
-          <View className='column-name'>{item.name}</View>
+      let menuClass = 'menu-item'
+      if (!isShow) {
+        menuClass += ' hidden'
+      }
+      return <View key={index} className={menuClass} onClick={this.onLookPageHandler.bind(this, item.page)}>
+        <View className='menu-left'>
+          <Image className='menu-icon' src={item.icon} mode='widthFix' />
+          <View className='menu-name'>{item.name}</View>
         </View>
-        <View className='column-right'>
-          <Image className='more-btn' src={moreBtn} mode='widthFix' />
+        <View className='menu-right'>
+          <Image className='detail-btn' src={moreBtn} mode='widthFix' />
         </View>
       </View>
     })

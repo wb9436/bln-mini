@@ -260,7 +260,7 @@ class CityTopic extends Component {
               muted
             /> : ''
           }
-          {item.type == 1 ?
+          {(item.type == 1 && sourceUrl.length > 0) ?
             <View className='topic-img-list'>
               {sourceUrl.map((imageUrl, idx) => (
                 <View key={idx} className='topic-img-box'>

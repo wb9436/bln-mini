@@ -1,4 +1,5 @@
 @import "../../styles/mixin";
+@import "../../styles/menu";
 
 .wallet-page {
   width: 100%;
@@ -49,8 +50,6 @@
       }
     }
 
-
-
     .line {
       margin-top: 15px;
       height: 60px;
@@ -58,47 +57,6 @@
       background: $color-white;
     }
 
-  }
-
-  .column-item {
-    padding: 0 25px 0 30px;
-    height: 100px;
-    background: $color-white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid $color-line;
-
-    .column-left {
-      height: 100%;
-      display: flex;
-      align-items: center;
-
-      .column-icon {
-        width: 36px;
-        height: auto;
-      }
-
-      .column-name {
-        margin-left: 32px;
-        @include sc(30px, $color-big);
-      }
-
-      .at-column {
-        margin-left: 24px;
-      }
-    }
-
-    .column-right {
-      height: 100%;
-      display: flex;
-      align-items: center;
-
-      .column-right-btn {
-        width: 24px;
-        height: auto;
-      }
-    }
   }
 
 }

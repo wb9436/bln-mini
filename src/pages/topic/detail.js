@@ -343,7 +343,7 @@ class TopicDetail extends Component {
                 {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? content : ''}
               </View>
               <View className='topic-media'>
-                {topic.type == 2 && topic.sourceUrl.length > 0 > 0 ?
+                {(topic.type == 2 && topic.sourceUrl.length > 0) ?
                   <Video
                     src={topic.sourceUrl[0]}
                     controls
@@ -354,7 +354,7 @@ class TopicDetail extends Component {
                     muted
                   /> : ''
                 }
-                {topic.type == 1 && topic.sourceUrl.length > 0 ?
+                {(topic.type == 1 && topic.sourceUrl.length > 0) ?
                   <View className='topic-img-list'>
                     {topic.sourceUrl.map((imageUrl, idx) => (
                       <View key={idx} className='topic-img-box'>

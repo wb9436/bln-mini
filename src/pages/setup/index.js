@@ -47,33 +47,33 @@ class Setup extends Component {
   render() {
     return (
       <View className='setup-page'>
-        <View className='column-item' onClick={this.onUpdatePwdHandler.bind(this)}>
-          <View className='column-left'>
-            <Image className='column-icon' src={pwd} mode='widthFix' />
-            <View className='column-name'>修改密码</View>
+        <View className='menu-item' onClick={this.onUpdatePwdHandler.bind(this)}>
+          <View className='menu-left'>
+            <Image className='menu-icon' src={pwd} mode='widthFix' />
+            <View className='menu-name'>修改密码</View>
           </View>
-          <View className='column-right'>
-            <Image className='more-btn' src={moreBtn} mode='widthFix' />
+          <View className='menu-right'>
+            <Image className='detail-btn' src={moreBtn} mode='widthFix' />
           </View>
         </View>
-        <View className='column-item' onClick={this.onLogoutHandler.bind(this)}>
-          <View className='column-left'>
-            <Image className='column-icon' src={logout} mode='widthFix' />
-            <View className='column-name'>退出登录</View>
+        <View className='menu-item' onClick={this.onLogoutHandler.bind(this)}>
+          <View className='menu-left'>
+            <Image className='menu-icon' src={logout} mode='widthFix' />
+            <View className='menu-name'>退出登录</View>
           </View>
-          <View className='column-right'>
-            <Image className='more-btn' src={moreBtn} mode='widthFix' />
+          <View className='menu-right'>
+            <Image className='detail-btn' src={moreBtn} mode='widthFix' />
           </View>
         </View>
 
         {Taro.getEnv() === Taro.ENV_TYPE.WEB ?
-          <View className='column-item' onClick={this.onDownloadHandler.bind(this)}>
-            <View className='column-left'>
+          <View className='menu-item' onClick={this.onDownloadHandler.bind(this)}>
+            <View className='menu-left'>
               <AtIcon value='download' size={20} color='#EE735D' />
-              <View className='column-name at-column'>下载百灵鸟APP</View>
+              <View className='menu-name at-column'>下载百灵鸟APP</View>
             </View>
-            <View className='column-right'>
-              <Image className='more-btn' src={moreBtn} mode='widthFix' />
+            <View className='menu-right'>
+              <Image className='detail-btn' src={moreBtn} mode='widthFix' />
             </View>
           </View> : ''
         }

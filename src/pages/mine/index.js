@@ -151,12 +151,19 @@ class Mine extends Component {
       } else if (item.showType == 2 && Taro.getEnv() !== Taro.ENV_TYPE.WEAPP) {
         isShow = false
       }
-      return <View key={index} className={isShow ? 'column-item' : 'column-item hidden'} onClick={this.onLookPageHandler.bind(this, item.page)}>
-        <View className='column-left'>
-          <Image className='column-icon' src={item.icon} mode='widthFix' />
-          <View className='column-name'>{item.name}</View>
+      let menuClass = 'menu-item'
+      if (!isShow) {
+        menuClass += ' hidden'
+      }
+      if (index == 0) {
+        menuClass += ' menu-first'
+      }
+      return <View key={index} className={menuClass} onClick={this.onLookPageHandler.bind(this, item.page)}>
+        <View className='menu-left'>
+          <Image className='menu-icon' src={item.icon} mode='widthFix' />
+          <View className='menu-name'>{item.name}</View>
         </View>
-        <View className='column-right'>
+        <View className='menu-right'>
           {signMessage && item.type === 'wallet' ?
             <View className='wallet-money'>
               {userAccount.money}
@@ -166,7 +173,7 @@ class Mine extends Component {
           {signMessage && item.type === 'task' ?
             <Image className='task-sign' src={discCircular} mode='widthFix' /> : ''
           }
-          <Image className='more-btn' src={moreBtn} mode='widthFix' />
+          <Image className='detail-btn' src={moreBtn} mode='widthFix' />
         </View>
       </View>
     })
@@ -209,7 +216,7 @@ class Mine extends Component {
             </View>
           </View>
 
-          <View className='data-column' style={{height: `${remainHeight}px`}}>
+          <View className='menu-list' style={{height: `${remainHeight}px`}}>
             {columnContent}
           </View>
         </ScrollView>

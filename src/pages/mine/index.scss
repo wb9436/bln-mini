@@ -1,4 +1,5 @@
 @import "../../styles/mixin";
+@import "../../styles/menu";
 
 .mine-page {
   width: 100%;
@@ -96,71 +97,28 @@
     }
   }
 
-  .data-column {
+  .menu-list {
     width: 100%;
     overflow-y: scroll;
+  }
 
-    .column-item {
-      padding: 0 25px 0 28px;
-      height: 100px;
-      background: $color-white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 2px solid $color-line;
+  .wallet-money {
+    display: inline-block;
+    @include sc(30px, $color-theme);
+    font-weight: bold;
+    margin-right: 20px;
 
-      .column-left {
-        height: 100%;
-        display: flex;
-        align-items: center;
-
-        .column-icon {
-          width: 36px;
-          height: auto;
-        }
-
-        .column-name {
-          margin-left: 32px;
-          @include sc(30px, $color-big);
-        }
-      }
-
-      .column-right {
-        height: 100%;
-        display: flex;
-        align-items: center;
-
-        .wallet-money {
-          display: inline-block;
-          @include sc(30px, $color-theme);
-          font-weight: bold;
-          margin-right: 20px;
-
-          .money-name {
-            margin-left: 5px;
-            display: inline-block;
-            color: $color-small;
-          }
-        }
-
-        .task-sign {
-          width: 16px;
-          height: auto;
-          margin-right: 20px;
-        }
-
-        .column-right-btn {
-          width: 24px;
-          height: auto;
-        }
-      }
-
+    .money-name {
+      margin-left: 5px;
+      display: inline-block;
+      color: $color-small;
     }
+  }
 
-    .column-item:first-child {
-      margin-top: 10px;
-    }
-
+  .task-sign {
+    width: 16px;
+    height: auto;
+    margin-right: 20px;
   }
 
   .address-btn {

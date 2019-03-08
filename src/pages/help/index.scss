@@ -1,27 +1,10 @@
 @import "../../styles/mixin";
+@import "../../styles/menu";
 
 .help-page {
   width: 100%;
   height: 100vh;
   background: $color-bg;
-
-
-  .help-item {
-    padding: 0 25px 0 28px;
-    width: auto;
-    height: 100px;
-    background: $color-white;
-    border-bottom: 2px solid $color-line;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .item-title {
-      height: 50px;
-      line-height: 50px;
-      @include sc(30px, $color-big);
-    }
-  }
 
   .customer-service {
     width: 100%;
