@@ -3,7 +3,7 @@
 .sort-view {
   width: 100vw;
   height: 60px;
-  @include sc(24px, $color-small);
+  @include sc(28px, $color-small);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -22,7 +22,7 @@
 
     .sort-icon {
       margin-left: 5px;
-      height: 22px;
+      height: 24px;
       width: 30px;
       display: flex;
       flex-direction: column;
@@ -37,7 +37,8 @@
     }
 
     .sort-checked {
-      @include sc(28px, $color-theme);
+      color: $color-theme;
+      //@include sc(28px, $color-theme);
     }
   }
 

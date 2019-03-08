@@ -17,7 +17,7 @@
       line-height: 86px;
       display: inline-block;
       text-align: center;
-      @include sc(30px, $color-big)
+      @include sc(32px, $color-big)
     }
 
     .opt-checked {
