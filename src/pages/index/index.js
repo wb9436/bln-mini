@@ -1,67 +1,72 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, Swiper, SwiperItem, Image} from '@tarojs/components'
+import {View, Image} from '@tarojs/components'
 import './index.scss'
 
-// import p1 from '../../images/guide/p1.png'
-// import p2 from '../../images/guide/p2.png'
-// import p3 from '../../images/guide/p3.png'
+import * as Utils from '../../utils/utils'
+import loading from '../../images/public/loading.gif'
 
-class Index extends Component {
-  config = {
-    navigationBarTitleText: '百灵鸟'
-  }
-
-  constructor() {
-    super(...arguments)
-    this.state = {
-      remain: 3, //剩余
-      skip: false //点击跳过
+  class Index extends Component {
+    config = {
+      navigationBarTitleText: '百灵鸟'
     }
-  }
 
-  componentWillMount() {
-    this.skipTimerID = setInterval(
-      () => this.onUpdateRemain(),
-      2000
-    )
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.skipTimerID)
-  }
-
-  onUpdateRemain() {
-    let remain = this.state.remain
-    if (remain > 0) {
-      remain -= 1
-      this.setState({
-        remain: remain
-      })
-      if (remain == 0) {
-        clearInterval(this.skipTimerID)
-        this.onCheckLogin()
+    componentWillMount() {
+      const params = this.$router.params
+      let sid = params.sid || Taro.getStorageSync('sid')
+      if (sid) { //已登录
+        this.checkLogin(sid) //验证登录
+      } else { //校验是否是微信登录
+        const isWeiXin = Utils.isWeiXin()
+        const {unionid, openid} = params
+        if (isWeiXin && unionid && openid && unionid.trim() !== '' && openid.trim() !== '') {
+          this.toWeiXinLogin(params)
+        } else {
+          // this.toLogin()
+          this.toWeiXinLogin(params)
+        }
       }
     }
-  }
 
-  onSkip() {
-    const {skip} = this.state
-    if (!skip) {
-      this.setState({
-        skip: true
+    checkLogin = (sid) => {
+      let baseUrl = BASE_API
+      Taro.request({
+        url: baseUrl + '/api/user/getUserBySid',
+        method: 'POST',
+        data: {sid: sid},
+        header: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        const {data} = res
+        if (data && data.body.user && data.code == 200) {
+          this.toHome(data, sid)
+        } else {
+          this.toLogin()
+        }
+      }).catch(e => {
+        console.log(e)
+        this.toLogin()
       })
-      clearInterval(this.skipTimerID)
-      this.onCheckLogin()
     }
-  }
 
-  onCheckLogin() {
-    let sid = Taro.getStorageSync('sid')
-    if (!sid) {
+    toLogin = () => {
+      Taro.removeStorageSync('sid')
+      Taro.removeStorageSync('address')
+      Taro.removeStorageSync('user')
       Taro.redirectTo({
         url: '/pages/login/index'
       })
-    } else {
+    }
+
+    toHome = (data, sid) => {
+      let address = data.body.address
+      let user = data.body.user
+      let userId = user.userId
+
+      Taro.setStorageSync('sid', sid)
+      Taro.setStorageSync('address', address)
+      Taro.setStorageSync('user', user)
+      Taro.setStorageSync('userId', userId)
       if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
         Taro.reLaunch({
           url: '/pages/home/index'
@@ -72,34 +77,24 @@ class Index extends Component {
         })
       }
     }
-  }
 
-  render() {
-    const {remain} = this.state
+    toWeiXinLogin = (params) => { //微信注册绑定
+      const {unionid, openid, headimgurl, nickname} = params
+      Taro.redirectTo({
+        url: '/pages/wxBind/index?unionid=' + unionid + '&openid=' + openid + '&headimgurl=' + headimgurl + '&nickname=' + nickname
+      })
+    }
 
-    return (
-      <View className='index-page'>
-        <Swiper className='guide-swiper' autoplay circular interval={2000}
-          duration={1000}
-        >
-          {/*<SwiperItem className='guide-swiper-item'>*/}
-            {/*<Image className='guide-image' src={p1} mode='widthFix' />*/}
-          {/*</SwiperItem>*/}
-          {/*<SwiperItem>*/}
-            {/*<Image className='guide-image' src={p2} mode='widthFix' />*/}
-          {/*</SwiperItem>*/}
-          {/*<SwiperItem>*/}
-            {/*<Image className='guide-image' src={p3} mode='widthFix' />*/}
-          {/*</SwiperItem>*/}
-        </Swiper>
+    render() {
+      const windowHeight = Taro.getSystemInfoSync().windowHeight
+      let height = windowHeight / 5 * 1.6
 
-        <View className='skip-btn' onClick={this.onSkip.bind(this)}>
-          {`跳过 ${remain}`}
+      return (
+        <View className='index-page'>
+          <Image className='loading-icon' style={{marginTop: `${height}px`}} src={loading} mode='widthFix' />
         </View>
-
-      </View>
-    )
+      )
+    }
   }
-}
 
 export default Index

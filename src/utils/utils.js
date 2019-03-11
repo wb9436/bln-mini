@@ -186,3 +186,38 @@ export const previewImage = (current, urls) => {
   }
 }
 
+export const isWeiXin = () => {
+  if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+    let ua = window.navigator.userAgent.toLowerCase();
+    if (ua.indexOf('micromessenger') != -1) {
+      return true
+    } else {
+      return false
+    }
+  }
+  return false
+}
+
+export const isMobile = (mobile) => {
+  if (!mobile || mobile.toString().length != 11) {
+    return false
+  }
+  mobile = mobile.toString()
+  const reg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
+  if (reg.test(mobile)) {
+    return true
+  }
+  return false
+}
+
+
+export const isNumber = (val) => {
+  if (!val) {
+    return false
+  }
+  const reg = /^\d+$/
+  if (reg.test(val)) {
+    return true
+  }
+  return false
+}
