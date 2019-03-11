@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 class App extends Component {
   config = {
     pages: [
-      // 'pages/index/index',
+      'pages/index/index',
       'pages/home/index',
       'pages/city/index',
       'pages/classify/index',
@@ -59,6 +59,7 @@ class App extends Component {
       'pages/business/apply',
       'pages/business/order',
       'pages/business/payCode',
+      'pages/wxBind/index',
     ],
     tabBar: {
       "color": "#929292",
