@@ -32,7 +32,7 @@ export default (options = {method: 'GET', data: {}, need_sid: false, no_toast: f
         console.log(`${new Date().toLocaleString()}【 M=${options.url} 】【接口响应：】`, res.data)
       }
       if (data.code != 200) {
-        if (data.code == 10071 || (!sid && options.need_sid)) {
+        if (data.code == 10071 || data.code == 10072 || (!sid && options.need_sid)) {
           Taro.removeStorageSync('sid')
           Taro.removeStorageSync('address')
           Taro.removeStorageSync('user')
