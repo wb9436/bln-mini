@@ -108,7 +108,6 @@ class App extends Component {
     try {
       const {inviter} = this.$router.params
       if (inviter && inviter.toString().trim() !== '') {
-        console.log(`inviter: ${this.$router}`)
         Taro.setStorageSync('inviter', inviter)
       }
     } catch (e) {
