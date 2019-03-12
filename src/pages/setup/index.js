@@ -47,15 +47,16 @@ class Setup extends Component {
   render() {
     return (
       <View className='setup-page'>
-        <View className='menu-item' onClick={this.onUpdatePwdHandler.bind(this)}>
-          <View className='menu-left'>
-            <Image className='menu-icon' src={pwd} mode='widthFix' />
-            <View className='menu-name'>修改密码</View>
-          </View>
-          <View className='menu-right'>
-            <Image className='detail-btn' src={moreBtn} mode='widthFix' />
-          </View>
-        </View>
+        {/*<View className='menu-item' onClick={this.onUpdatePwdHandler.bind(this)}>*/}
+          {/*<View className='menu-left'>*/}
+            {/*<Image className='menu-icon' src={pwd} mode='widthFix' />*/}
+            {/*<View className='menu-name'>修改密码</View>*/}
+          {/*</View>*/}
+          {/*<View className='menu-right'>*/}
+            {/*<Image className='detail-btn' src={moreBtn} mode='widthFix' />*/}
+          {/*</View>*/}
+        {/*</View>*/}
+
         <View className='menu-item' onClick={this.onLogoutHandler.bind(this)}>
           <View className='menu-left'>
             <Image className='menu-icon' src={logout} mode='widthFix' />

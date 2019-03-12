@@ -3,6 +3,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
 import 'taro-ui/dist/style/components/action-sheet.scss'
 import 'taro-ui/dist/style/components/swipe-action.scss'
+import 'taro-ui/dist/style/components/icon.scss'
 import Index from './pages/index'
 import './styles/base.scss'
 
