@@ -40,3 +40,11 @@ export const mobileLogin = data => Request({
   data
 })
 
+export const weiXinMiniLogin = data => Request({
+  url: '/api/user/wxMiniLogin',
+  method: 'POST',
+  need_sid: false,
+  no_toast: true,//是否需要弹窗
+  data
+})
+

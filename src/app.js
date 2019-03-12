@@ -61,6 +61,7 @@ class App extends Component {
       'pages/business/order',
       'pages/business/payCode',
       'pages/wxBind/webIndex',
+      'pages/wxBind/miniIndex',
       'pages/wxBind/mobileIndex',
     ],
     tabBar: {

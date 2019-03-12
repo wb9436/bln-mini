@@ -63,7 +63,7 @@ class MobileRegister extends Component {
     const {mobile, code, inviter, address} = this.state
     Api.mobileBindWeiXinRegister({code, mobile, id: inviter, address, versionNo}).then(data => {
       if (data.code == 200) {
-        this.checkLogin(data.sid)
+        this.checkLogin(data.body.sid)
       } else {
         this.showToast('登录出错，请返回重新登录')
       }

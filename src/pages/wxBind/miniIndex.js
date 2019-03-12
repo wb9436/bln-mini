@@ -6,15 +6,13 @@ import * as Api from '../../store/user/newService'
 import * as Utils from '../../utils/utils'
 import AddressDialog from '../../components/Address/index'
 
-import logoIcon from '../../images/login/logo.png'
 import phoneIcon from '../../images/login/phone.png'
 import codeIcon from '../../images/login/code.png'
 import userIcon from '../../images/login/user.png'
 import mapIcon from '../../images/login/map.png'
 import phoneBtn from '../../images/login/phoneBtn.png'
-import weiXinBtn from '../../images/login/weixinBtn.png'
 
-class WebWxBind extends Component {
+class MiniWxBind extends Component {
   config = {
     navigationBarTitleText: '用户登录'
   }
@@ -22,11 +20,9 @@ class WebWxBind extends Component {
   constructor() {
     super(...arguments)
     let scale = Taro.getSystemInfoSync().windowWidth / 375
-    let isWeiXin = Utils.isWeiXin()
     this.state = {
       windowHeight: Taro.getSystemInfoSync().windowHeight,
       scale: scale, //当前屏幕宽度与设计宽度的比例
-      isWeiXin: isWeiXin, //是否是微信
       inviter: '', //邀请人ID
       unionid: '',
       openid: '',
@@ -156,7 +152,7 @@ class WebWxBind extends Component {
   }
 
   onLoginHandler() {
-    const {isWeiXin, mobile, code, inviter, address, unionid, openid, nickname, headimgurl, isBind, isRegister} = this.state
+    const {mobile, code, inviter, address, unionid, openid, nickname, headimgurl, isBind, isRegister} = this.state
     if (!Utils.isMobile(mobile)) {
       return false;
     }
@@ -167,20 +163,16 @@ class WebWxBind extends Component {
       this.showToast('手机号已绑定其他微信！')
       return false;
     }
-    if (isWeiXin) { //微信内
-      if (isRegister && !isBind) {//进行微信绑定手机号登录
-        this.onMobileBindWeiXinLogin(nickname, headimgurl, unionid, openid, code, mobile)
-      } else {//微信绑定手机号注册
-        this.onMobileBindWeiXinRegister(nickname, headimgurl, unionid, openid, code, mobile, inviter, address)
-      }
-    } else {//非微信
-      this.onMobileLogin(isRegister, mobile, code)
+    if (isRegister && !isBind) {//进行微信绑定手机号登录
+      this.onMobileBindWeiXinLogin(nickname, headimgurl, unionid, openid, code, mobile)
+    } else {//微信绑定手机号注册
+      this.onMobileBindWeiXinRegister(nickname, headimgurl, unionid, openid, code, mobile, inviter, address)
     }
   }
 
   /*手机号绑定微信登录*/
-  onMobileBindWeiXinLogin = (nickname, headimgurl, wxUnionid, webOpenid, code, mobile) => {
-    Api.mobileBindWeiXinLogin({nickname, headimgurl, wxUnionid, webOpenid, code, mobile}).then(data => {
+  onMobileBindWeiXinLogin = (nickname, headimgurl, wxUnionid, miniOpenid, code, mobile) => {
+    Api.mobileBindWeiXinLogin({nickname, headimgurl, wxUnionid, miniOpenid, code, mobile}).then(data => {
       if (data.code === 200) {
         this.checkLogin(data.body.sid)
       } else {
@@ -190,39 +182,15 @@ class WebWxBind extends Component {
   }
 
   /*手机号绑定微信注册*/
-  onMobileBindWeiXinRegister = (nickname, headimgurl, wxUnionid, webOpenid, code, mobile, id, address) => {
+  onMobileBindWeiXinRegister = (nickname, headimgurl, wxUnionid, miniOpenid, code, mobile, id, address) => {
     let versionNo = Utils.getVersionNo()
-    Api.mobileBindWeiXinRegister({nickname, headimgurl, wxUnionid, webOpenid, code, mobile, id, address, versionNo}).then(data => {
+    Api.mobileBindWeiXinRegister({nickname, headimgurl, wxUnionid, miniOpenid, code, mobile, id, address, versionNo}).then(data => {
       if (data.code == 200) {
         this.checkLogin(data.body.sid)
       } else {
         this.showToast(data.msg)
       }
     })
-  }
-
-  onMobileLogin = (isRegister, mobile, code) => {
-    if (!isRegister) { //未注册，完善个人信息
-      Api.checkRegCode({mobile, code}).then(data => {
-        if (data.code == 200) { //校验验证码
-          Taro.navigateTo({
-            url: `/pages/wxBind/mobileIndex?mobile=${mobile}&code=${code}`
-          })
-        } else if (data.code == 10031) { //验证码错误
-          this.showToast('验证码错误')
-        }
-      })
-    } else { //已注册，登录
-      let versionNo = Utils.getVersionNo()
-      let from = Utils.getFrom()
-      Api.mobileLogin({mobile, code, versionNo, from}).then(data => {
-        if (data.code == 200) { //登录成功
-          this.checkLogin(data.body.sid)
-        } else if (data.code == 10031) { //验证码错误
-          this.showToast('登录失败，请重新登录')
-        }
-      })
-    }
   }
 
   checkLogin = (sid) => {
@@ -282,24 +250,15 @@ class WebWxBind extends Component {
     })
   }
 
-  onToWeiXinLogin() {
-    if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
-      window.location = WX_WEB
-    }
-  }
-
   render() {
-    const {windowHeight, scale, isWeiXin, isRegister, isOpened, address, codeMsg, btnState} = this.state
+    const {windowHeight, scale, isRegister, isOpened, address, codeMsg, btnState} = this.state
     const quickLoginHeight = 120 * scale
     const remainHeight = windowHeight - quickLoginHeight
 
     return (
       <View className='wx-bind-page'>
         <View className='current-login' style={{height: `${remainHeight}px`}}>
-          {isWeiXin ?
-            <View className='logo-title'>绑定手机号</View> : <Image className='bln-logo' src={logoIcon} mode='widthFix' />
-          }
-
+          <View className='logo-title'>绑定手机号</View>
           <View className='input-container input-top'>
             <View className='input-left'>
               <Image className='icon' src={phoneIcon} mode='widthFix' />
@@ -329,7 +288,7 @@ class WebWxBind extends Component {
           </View>
 
           {/*未注册填写邀请人UID*/}
-          {(!isRegister && isWeiXin && btnState) ?
+          {(!isRegister && btnState) ?
             <View className='input-container'>
               <View className='input-left'>
                 <Image className='icon' src={userIcon} mode='widthFix' />
@@ -345,7 +304,7 @@ class WebWxBind extends Component {
           }
 
           {/*未注册填写任务地址*/}
-          {(!isRegister && isWeiXin && btnState) ?
+          {(!isRegister && btnState) ?
             <View className='input-container'>
               <View className='input-left'>
                 <Image className='icon' src={mapIcon} mode='widthFix' />
@@ -359,7 +318,7 @@ class WebWxBind extends Component {
           <View className={btnState ? 'login-btn' : 'login-btn login-btn--disabled'}
             onClick={this.onLoginHandler.bind(this)}
           >
-            {isWeiXin ? '绑定' : '登录'}
+            绑定
           </View>
         </View>
 
@@ -370,10 +329,7 @@ class WebWxBind extends Component {
             <View className='quick-line' />
           </View>
           <View className='quick-btn'>
-            {isWeiXin ?
-              <Image className='quick-icon' src={phoneBtn} mode='widthFix' onClick={this.onToMobileLogin.bind(this)} /> :
-              <Image className='quick-icon' src={weiXinBtn} mode='widthFix' onClick={this.onToWeiXinLogin.bind(this)} />
-            }
+            <Image className='quick-icon' src={phoneBtn} mode='widthFix' onClick={this.onToMobileLogin.bind(this)} />
           </View>
         </View>
 
@@ -387,4 +343,4 @@ class WebWxBind extends Component {
   }
 }
 
-export default WebWxBind
+export default MiniWxBind

@@ -5,6 +5,7 @@ import './index.scss'
 import WxShare from '../../components/WxShare/index'
 import * as Utils from '../../utils/utils'
 import * as Api from '../../store/user/newService'
+import * as WxApi from '../../store/activity/service'
 
 import logoIcon from '../../images/login/logo.png'
 import phoneIcon from '../../images/login/phone.png'
@@ -123,18 +124,123 @@ class Login extends Component {
       let from = Utils.getFrom()
       Api.mobileLogin({mobile, code, versionNo, from}).then(data => {
         if (data.code == 200) { //登录成功
-          this.checkLogin(data.sid)
+          this.checkLogin(data.body.sid)
         } else if (data.code == 10031) { //验证码错误
-          this.showToast('登录失败，请重新登录')
+          this.showToast('验证码错误')
+        } else {
+          this.showToast('登录失败，请稍后再试')
         }
       })
     }
   }
 
-  onToWeiXinLogin() {
-    if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
-      window.location = WX_WEB
+  checkLogin = (sid) => {
+    let baseUrl = BASE_API
+    Taro.request({
+      url: baseUrl + '/api/user/getUserBySid',
+      method: 'POST',
+      data: {sid: sid},
+      header: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => {
+      const {data} = res
+      if (data && data.body.user && data.code == 200) {
+        this.toHome(data, sid)
+      } else {
+        this.showToast('登录失败，请稍后再试')
+      }
+    }).catch(e => {
+      console.log(e)
+      this.showToast('登录失败，请稍后再试')
+    })
+  }
+
+  toHome = (data, sid) => {
+    let address = data.body.address
+    let user = data.body.user
+    let userId = user.userId
+
+    Taro.setStorageSync('sid', sid)
+    Taro.setStorageSync('address', address)
+    Taro.setStorageSync('user', user)
+    Taro.setStorageSync('userId', userId)
+    if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+      Taro.reLaunch({
+        url: '/pages/home/index'
+      })
+    } else {
+      Taro.redirectTo({
+        url: '/pages/home/index'
+      })
     }
+  }
+
+  onToWeiXinLogin(e) {
+    let that = this
+    if (Taro.getEnv() === Taro.ENV_TYPE.WEB) { //微信H5登录
+      window.location = WX_WEB
+      // let unionid = 'oOTnV0jqeLXW2NJ3LWwRlFRRCNN0'
+      // this.onWxMiniLogin(unionid, null, null)
+    } else if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) { //微信小程序登录
+      const {encryptedData, iv, userInfo} = e.detail
+      Taro.login({
+        success: function (res) {
+          let code = res.code
+          if (code) {
+            WxApi.getOpenid({code}).then(data => {
+              if (data.code == 200) {
+                let openid = data.body.openid
+                let sessionKey = data.body.session_key
+                let unionid = data.body.unionid
+                if (unionid) {
+                  that.onWxMiniLogin(unionid, openid, userInfo)
+                } else {
+                  WxApi.getDecryptData({sessionKey, encryptedData, iv}).then(resultData => {
+                    if (resultData.code == 200) {
+                      that.onWxMiniLogin(resultData.body.unionId, openid, userInfo)
+                    } else {
+                      that.showToast('系统繁忙，请稍后再试')
+                    }
+                  }).catch(() => {
+                    this.showToast('系统繁忙，请稍后再试')
+                  })
+                }
+              } else {
+                that.showToast('系统繁忙，请稍后再试')
+              }
+            })
+          } else {
+            that.showToast('系统繁忙，请稍后再试')
+          }
+        }
+      })
+    }
+  }
+
+  onWxMiniLogin(unionid, openid, userInfo) {
+    let versionNo = Utils.getVersionNo()
+    Api.weiXinMiniLogin({unionid, versionNo}).then(data => {
+      const {code, body} = data
+      if (code == 200) {
+        if (body.isbind.toString() === '1') { //已注册
+          this.checkLogin(body.sid)
+        } else { //未注册绑定手机号
+          this.toMiniWxLogin(unionid, openid, userInfo.avatarUrl, userInfo.nickName)
+        }
+      } else {
+        this.showToast('系统繁忙，请稍后再试')
+      }
+    }).catch(e => {
+      console.log(e)
+      this.showToast('系统繁忙，请稍后再试')
+    })
+  }
+
+  toMiniWxLogin = (unionid, openid, headimgurl, nickname) => { //微信注册绑定
+    Taro.redirectTo({
+      url: '/pages/wxBind/miniIndex?unionid=' + unionid + '&openid=' + openid + '&headimgurl=' + encodeURI(headimgurl) + '&nickname=' + encodeURI(nickname)
+    })
   }
 
   render() {

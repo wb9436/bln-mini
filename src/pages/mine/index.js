@@ -57,11 +57,27 @@ class Mine extends Component {
     }
   }
 
+  componentDidMount() {
+    let sid = Taro.getStorageSync('sid')
+    if (sid && sid.trim() !== '') {
+      this.props.dispatch({
+        type: 'user/setMineData'
+      })
+      this.onLoadAreaData()
+    }
+  }
+
   componentDidShow() {
-    this.props.dispatch({
-      type: 'user/setMineData'
-    })
-    this.onLoadAreaData()
+    let sid = Taro.getStorageSync('sid')
+    if (sid && sid.trim() !== '') {
+      this.props.dispatch({
+        type: 'user/setMineData'
+      })
+    } else {
+      Taro.navigateTo({
+        url: '/pages/login/index'
+      })
+    }
   }
 
   onLoadAreaData() {
