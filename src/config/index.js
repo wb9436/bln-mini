@@ -1,6 +1,8 @@
 // 是否关闭打印
 export const noConsole = true
 
+//当前版本号
+export const versionNo = '2.1.0'
 
 // 请求连接前缀
 export const baseUrl = 'http://api.viplark.com'
@@ -13,3 +15,4 @@ export const pointShopUrl = baseUrl + '/api/shop/point/show'
 
 //钻石兑换
 export const diamondShopUrl = baseUrl + '/api/game/shop/list'
+

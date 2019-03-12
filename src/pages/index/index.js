@@ -21,8 +21,7 @@ import loading from '../../images/public/loading.gif'
         if (isWeiXin && unionid && openid && unionid.trim() !== '' && openid.trim() !== '') {
           this.toWeiXinLogin(params)
         } else {
-          // this.toLogin()
-          this.toWeiXinLogin(params)
+          this.toLogin()
         }
       }
     }
@@ -81,7 +80,7 @@ import loading from '../../images/public/loading.gif'
     toWeiXinLogin = (params) => { //微信注册绑定
       const {unionid, openid, headimgurl, nickname} = params
       Taro.redirectTo({
-        url: '/pages/wxBind/index?unionid=' + unionid + '&openid=' + openid + '&headimgurl=' + headimgurl + '&nickname=' + nickname
+        url: '/pages/wxBind/webIndex?unionid=' + unionid + '&openid=' + openid + '&headimgurl=' + headimgurl + '&nickname=' + nickname
       })
     }
 

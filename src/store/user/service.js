@@ -111,11 +111,3 @@ export const questionList = data => Request({
   need_sid: true,
   data
 })
-
-export const newSendRegCode = data => Request({
-  url: '/api/user/sendRegCode',
-  method: 'POST',
-  need_sid: false,
-  no_toast: true,//是否需要弹窗
-  data
-})

@@ -59,7 +59,8 @@ class App extends Component {
       'pages/business/apply',
       'pages/business/order',
       'pages/business/payCode',
-      'pages/wxBind/index',
+      'pages/wxBind/webIndex',
+      'pages/wxBind/mobileIndex',
     ],
     tabBar: {
       "color": "#929292",

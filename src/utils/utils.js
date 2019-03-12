@@ -1,4 +1,5 @@
 import Taro from '@tarojs/taro'
+import * as Constant from '../config/index'
 import CryptoJS from 'crypto-js'
 // import WeiXinUtils from 'weixin-js-sdk'
 
@@ -220,4 +221,25 @@ export const isNumber = (val) => {
     return true
   }
   return false
+}
+
+export const getVersionNo = () => {
+  let versionNo = Constant.versionNo
+  if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+    versionNo = 'WeApp:' + versionNo
+  }
+  if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+    versionNo = 'Web:' + versionNo
+  }
+  return versionNo
+}
+
+export const getFrom = () => {
+  let from = ''
+  if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+    from = 'web'
+  } else if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+    from = 'mini'
+  }
+  return from
 }

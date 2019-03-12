@@ -6,6 +6,11 @@
   height: 200px !important;
 }
 
+.logo-title {
+  margin-top: 130px;
+  @include sc(60px, $color-big);
+}
+
 .input-top {
   margin-top: 110px !important;
 }
@@ -17,7 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid $color-line;
+  border-bottom: 2px solid $color-line-gray;
 
   .input-left {
     height: 100%;
@@ -65,9 +70,23 @@
 
   }
 
+  input::-webkit-input-placeholder {
+    color: $color-line-gray;
+  }
+  input:-moz-placeholder {
+    color: $color-line-gray;
+  }
+  input::-moz-placeholder {
+    color: $color-line-gray;
+  }
+  input::-ms-input-placeholder {
+    color: $color-line-gray;
+  }
+
+
   .placeholder {
     font-size: 32px;
-    color: $color-small;
+    color: $color-line-gray !important;
   }
 
 }
@@ -92,12 +111,12 @@
   justify-content: space-between;
 
   .other-desc {
-    @include sc(28px, $color-small)
+    @include sc(28px, $color-line-gray)
   }
 }
 
 .login-btn--disabled {
-  background: #E5E5E5;
+  background: $color-line-gray;
 }
 
 .current-login {
@@ -120,14 +139,14 @@
     .quick-line {
       width: 110px;
       height: 1Px;
-      background: $color-bg;
+      background: $color-line-gray;
     }
 
     .quick-desc {
       height: 50px;
       line-height: 50px;
       margin: 0 40px;
-      @include sc(26px, $color-line);
+      @include sc(24px, $color-line-gray);
     }
 
   }
