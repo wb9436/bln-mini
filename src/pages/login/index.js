@@ -1,171 +1,199 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, Image, Input} from '@tarojs/components'
+import {View, Image, Input, Button} from '@tarojs/components'
 import './index.scss'
 
 import WxShare from '../../components/WxShare/index'
+import * as Utils from '../../utils/utils'
+import * as Api from '../../store/user/newService'
 
-import {userMobileLogin as UserLogin, getUserDataBySid as CheckUserSid} from '../../store/user/service'
-
-import logo from '../../images/login/logo.png'
-import phone from '../../images/login/phone.png'
-import pwd from '../../images/login/pwd.png'
-import seeNo from '../../images/login/see_no.png'
-import seeYes from '../../images/login/see_yes.png'
+import logoIcon from '../../images/login/logo.png'
+import phoneIcon from '../../images/login/phone.png'
+import codeIcon from '../../images/login/code.png'
+import weiXinBtn from '../../images/login/weixinBtn.png'
 
 class Login extends Component {
   config = {
     navigationBarTitleText: '用户登录'
   }
 
-  componentDidShow() {
-    let sid = Taro.getStorageSync('sid')
-    let user = Taro.getStorageSync('user')
-    if (sid && user) {
-      if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
-        Taro.reLaunch({
-          url: '/pages/home/index'
-        })
-      } else {
-        Taro.redirectTo({
-          url: '/pages/home/index'
-        })
-      }
-    }
-  }
-
   constructor() {
     super(...arguments)
+    let scale = Taro.getSystemInfoSync().windowWidth / 375
     this.state = {
+      windowHeight: Taro.getSystemInfoSync().windowHeight,
+      scale: scale, //当前屏幕宽度与设计宽度的比例
+      remainTime: 60,
+      codeMsg: '获取验证码',
+      timerId: null,
       mobile: '',
-      password: '',
-      isPassword: true
+      btnState: false,
+      isRegister: true,
     }
   }
 
   onInputHandler(type, e) {
+    const {mobile, code} = this.state
+    let btnState = true
+    const value = e.detail.value
+    if (type === 'mobile') {
+      if (!value || !Utils.isMobile(value)) {
+        btnState = false;
+      }
+      if (!code || !Utils.isNumber(code)) {
+        btnState = false;
+      }
+    }
+    if (type === 'code') {
+      if (!mobile || !Utils.isMobile(mobile)) {
+        btnState = false;
+      }
+      if (!value || !Utils.isNumber(value)) {
+        btnState = false;
+      }
+    }
     this.setState({
-      [type]: e.detail.value
+      [type]: value,
+      btnState: btnState
     })
   }
 
-  onSwitch() {
-    const {isPassword} = this.state
-    this.setState({
-      isPassword: !isPassword
+  showToast = (msg) => {
+    Taro.showToast({
+      title: msg,
+      icon: 'none',
+      mask: true,
     })
+  }
+
+  onSendCodeHandler = () => {
+    const {mobile, hasSendCode, remainTime} = this.state
+    if (!hasSendCode) { //发送验证码
+      if (!mobile || mobile.length != 11) {
+        this.showToast('请输入正确的手机号')
+        return false;
+      }
+      Api.sendRegCode({mobile}).then(data => {
+        if (data && data.code == 200) {
+          const {registered} = data.body
+          this.showToast('验证码发送成功')
+          let timeId = setInterval(() => this.countDown(), 1000)
+          this.setState({
+            hasSendCode: true,
+            codeMsg: `倒计时${remainTime}秒`,
+            timerId: timeId,
+            isRegister: registered.toString() === '1' ? true : false,
+          })
+        }
+      })
+    }
+  }
+
+  countDown = () => {
+    const {remainTime, timerId} = this.state
+    if (remainTime >= 1) {
+      this.setState({
+        remainTime: remainTime - 1,
+        codeMsg: `倒计时${remainTime - 1}秒`
+      })
+    } else {
+      this.setState({
+        hasSendCode: false,
+        remainTime: 60,
+        codeMsg: `重新获取`,
+        timerId: null,
+      })
+      clearInterval(timerId)
+    }
   }
 
   onLoginHandler() {
-    const {mobile, password} = this.state
-    if (!mobile || mobile.length != 11) {
-      Taro.showToast({
-        title: '请输入正确的手机号',
-        icon: 'none',
-        mask: true,
+    const {isRegister, mobile, code} = this.state
+    if (!isRegister) { //未注册，完善个人信息
+      Api.checkRegCode({mobile, code}).then(data => {
+        if (data.code == 200) { //校验验证码
+          Taro.navigateTo({
+            url: `/pages/wxBind/mobileIndex?mobile=${mobile}&code=${code}`
+          })
+        } else if (data.code == 10031) { //验证码错误
+          this.showToast('验证码错误')
+        }
       })
-      return false;
-    }
-    if (!password) {
-      Taro.showToast({
-        title: '请输入登录密码',
-        icon: 'none',
-        mask: true,
+    } else { //已注册，登录
+      let versionNo = Utils.getVersionNo()
+      let from = Utils.getFrom()
+      Api.mobileLogin({mobile, code, versionNo, from}).then(data => {
+        if (data.code == 200) { //登录成功
+          this.checkLogin(data.sid)
+        } else if (data.code == 10031) { //验证码错误
+          this.showToast('登录失败，请重新登录')
+        }
       })
-      return false;
     }
-    let from = ''
-    if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
-      from = 'web'
-    } else if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
-      from = 'mini'
-    }
-    UserLogin({mobile, password, from}).then(res => {
-      if (res && res.code == 200) {
-        let sid = res.body.sid
-        CheckUserSid({sid, from}).then((data) => {
-          if (data.code == 200) {
-            let address = data.body.address
-            let user = data.body.user
-
-            Taro.setStorageSync('sid', sid)
-            Taro.setStorageSync('address', address)
-            Taro.setStorageSync('user', user)
-            Taro.setStorageSync('userId', user.userId)
-
-            if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
-              Taro.reLaunch({
-                url: '/pages/home/index'
-              })
-            } else {
-              Taro.redirectTo({
-                url: '/pages/home/index'
-              })
-            }
-          }
-        })
-      }
-    })
   }
 
-  onOtherHandler(handlerType) {
-    if (handlerType === 'updatePwd') {
-      Taro.navigateTo({
-        url: '/pages/forget/index'
-      })
-    } else if (handlerType === 'register') {
-      Taro.navigateTo({
-        url: '/pages/register/index'
-      })
+  onToWeiXinLogin() {
+    if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+      window.location = WX_WEB
     }
   }
 
   render() {
-    const {isPassword} = this.state
+    const {windowHeight, scale, codeMsg, btnState} = this.state
+    const quickLoginHeight = 120 * scale
+    const remainHeight = windowHeight - quickLoginHeight
 
     return (
       <View className='login-container'>
         {process.env.TARO_ENV === 'h5' ? <WxShare /> : ''}
 
-        <Image className='bln-logo' src={logo} mode='widthFix' />
-
-        <View className='input-container input-top'>
-          <View className='input-left'>
-            <Image className='icon' src={phone} mode='widthFix' />
-            <Input className='input-box'
-              placeholderClass='placeholder'
-              placeholder='输入手机号'
-              maxLength={11}
-              onInput={this.onInputHandler.bind(this, 'mobile')}
-            />
+        <View className='current-login' style={{height: `${remainHeight}px`}}>
+          <Image className='bln-logo' src={logoIcon} mode='widthFix' />
+          <View className='input-container input-top'>
+            <View className='input-left'>
+              <Image className='icon' src={phoneIcon} mode='widthFix' />
+              <Input className='input-box'
+                placeholderClass='placeholder'
+                placeholder='输入手机号'
+                maxLength={11}
+                onInput={this.onInputHandler.bind(this, 'mobile')}
+              />
+            </View>
+            <View className='input-right' />
           </View>
-          <View className='input-right' />
-        </View>
 
-        <View className='input-container'>
-          <View className='input-left'>
-            <Image className='icon' src={pwd} mode='widthFix' />
-            <Input className='input-box'
-              placeholderClass='placeholder'
-              placeholder='输入密码'
-              password={isPassword}
-              onInput={this.onInputHandler.bind(this, 'password')}
-            />
+          <View className='input-container'>
+            <View className='input-left'>
+              <Image className='icon' src={codeIcon} mode='widthFix' />
+              <Input className='input-box'
+                placeholderClass='placeholder'
+                placeholder='输入验证码'
+                maxLength={11}
+                onInput={this.onInputHandler.bind(this, 'code')}
+              />
+            </View>
+            <View className='input-right' onClick={this.onSendCodeHandler.bind(this)}>
+              <View className='code-desc'>{codeMsg}</View>
+            </View>
           </View>
-          <View className='input-right'>
-            <Image className='pwd-state' src={isPassword ? seeNo : seeYes} mode='widthFix'
-              onClick={this.onSwitch.bind(this)}
-            />
+
+          <View className={btnState ? 'login-btn' : 'login-btn login-btn--disabled'} onClick={this.onLoginHandler.bind(this)}>
+            登录
           </View>
         </View>
 
-        <View className='login-btn' onClick={this.onLoginHandler.bind(this)}>
-          登录
+        <View className='quick-login' style={{height: `${quickLoginHeight }`}}>
+          <View className='quick-title'>
+            <View className='quick-line' />
+            <View className='quick-desc'>社交账号登录</View>
+            <View className='quick-line' />
+          </View>
+          <View className='quick-btn'>
+            <Button className='quick-button' openType='getUserInfo' onClick={this.onToWeiXinLogin.bind(this)}>
+              <Image className='quick-icon' src={weiXinBtn} mode='widthFix' />
+            </Button>
+          </View>
         </View>
 
-        <View className='other-btn'>
-          <View className='other-desc' onClick={this.onOtherHandler.bind(this, 'updatePwd')}>忘记密码?</View>
-          <View className='other-desc' onClick={this.onOtherHandler.bind(this, 'register')}>立即注册</View>
-        </View>
 
       </View>
     )

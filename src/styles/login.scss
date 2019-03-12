@@ -157,10 +157,20 @@
     justify-content: center;
 
     .quick-icon {
-      margin-top: 30px;
       width: 40Px;
       height: 40Px;
     }
+
+    .quick-button {
+      margin-top: 30px;
+      border-radius: 0;
+      border: none;
+      outline: none;
+      background: $color-white;
+      display: flex;
+      justify-content: center;
+    }
+
   }
 
 }

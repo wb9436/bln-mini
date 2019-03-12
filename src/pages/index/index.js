@@ -2,6 +2,7 @@ import Taro, {Component} from '@tarojs/taro'
 import {View, Image} from '@tarojs/components'
 import './index.scss'
 
+import WxShare from '../../components/WxShare'
 import * as Utils from '../../utils/utils'
 import loading from '../../images/public/loading.gif'
 
@@ -90,6 +91,7 @@ import loading from '../../images/public/loading.gif'
 
       return (
         <View className='index-page'>
+          {process.env.TARO_ENV === 'h5' ? <WxShare /> : ''}
           <Image className='loading-icon' style={{marginTop: `${height}px`}} src={loading} mode='widthFix' />
         </View>
       )

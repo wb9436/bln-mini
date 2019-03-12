@@ -26,7 +26,7 @@ class WebWxBind extends Component {
     this.state = {
       windowHeight: Taro.getSystemInfoSync().windowHeight,
       scale: scale, //当前屏幕宽度与设计宽度的比例
-      isWeiXin: true, //是否是微信
+      isWeiXin: isWeiXin, //是否是微信
       inviter: '', //邀请人ID
       unionid: '',
       openid: '',
@@ -204,7 +204,7 @@ class WebWxBind extends Component {
   onMobileLogin = (isRegister, mobile, code) => {
     if (!isRegister) { //未注册，完善个人信息
       Api.checkRegCode({mobile, code}).then(data => {
-        if (data.code == 200) { //登录成功
+        if (data.code == 200) { //校验验证码
           Taro.navigateTo({
             url: `/pages/wxBind/mobileIndex?mobile=${mobile}&code=${code}`
           })
