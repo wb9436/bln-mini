@@ -1,5 +1,5 @@
 // 是否关闭打印
-export const noConsole = false
+export const noConsole = true
 
 //当前版本号
 export const versionNo = '2.1.0'
