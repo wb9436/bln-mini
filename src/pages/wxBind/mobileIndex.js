@@ -92,6 +92,35 @@ class MobileRegister extends Component {
     })
   }
 
+  toLogin = () => {
+    Taro.removeStorageSync('sid')
+    Taro.removeStorageSync('address')
+    Taro.removeStorageSync('user')
+    Taro.redirectTo({
+      url: '/pages/login/index'
+    })
+  }
+
+  toHome = (data, sid) => {
+    let address = data.body.address
+    let user = data.body.user
+    let userId = user.userId
+
+    Taro.setStorageSync('sid', sid)
+    Taro.setStorageSync('address', address)
+    Taro.setStorageSync('user', user)
+    Taro.setStorageSync('userId', userId)
+    if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+      Taro.reLaunch({
+        url: '/pages/home/index'
+      })
+    } else {
+      Taro.redirectTo({
+        url: '/pages/home/index'
+      })
+    }
+  }
+
   showToast(msg) {
     Taro.showToast({
       title: msg,
