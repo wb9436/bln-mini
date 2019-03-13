@@ -247,7 +247,7 @@ class Login extends Component {
 
   render() {
     const {windowHeight, scale, codeMsg, btnState} = this.state
-    const quickLoginHeight = 130 * scale
+    const quickLoginHeight = 145 * scale
     const remainHeight = windowHeight - quickLoginHeight
 
     return (
@@ -308,6 +308,10 @@ class Login extends Component {
                 <Image className='quick-icon' src={weiXinBtn} mode='widthFix' />
               </Button> : ''
             }
+          </View>
+          <View className='service-agreement'>
+            <View className='service-desc'>默认您已同意本平台</View>
+            <View className='service-btn'>《用户服务协议》</View>
           </View>
         </View>
 

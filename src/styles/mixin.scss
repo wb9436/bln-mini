@@ -7,7 +7,7 @@ $color-bg: #F2F2F2 !default;//背景色
 $color-bg-2: #EFEFEF !default;//背景色
 $color-big: #484848 !default;//大标题
 $color-small: #929292 !default;//小标题
-$color-line: #EfEEf4 !default;//线的颜色
+$color-line: rgba(146, 146, 146, 0.25) !default;//线的颜色
 $color-line-gray: #E5E5E5 !default;//线的颜色
 $color-success: #97A78A !default;//成功: 深绿色
 $color-green: #57D295 !default;//绿色
@@ -15,7 +15,6 @@ $color-mark: #A9A9A9 !default;//遮罩
 $color-gray: #C6C5CA !default;//深灰
 $color-blue: #7A80A0 !default;//浅蓝色
 $color-input: #9C9C9C !default;//输入框内颜色
-$color-line-gray: #D9D9D9 !default;
 
 @mixin flex-wrap {
   display: flex;

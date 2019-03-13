@@ -71,16 +71,16 @@
   }
 
   input::-webkit-input-placeholder {
-    color: $color-line-gray;
+    color: $color-small;
   }
   input:-moz-placeholder {
-    color: $color-line-gray;
+    color: $color-small;
   }
   input::-moz-placeholder {
-    color: $color-line-gray;
+    color: $color-small;
   }
   input::-ms-input-placeholder {
-    color: $color-line-gray;
+    color: $color-small;
   }
 
 
@@ -116,7 +116,7 @@
 }
 
 .login-btn--disabled {
-  background: $color-line-gray;
+  background: $color-line;
 }
 
 .current-login {
@@ -139,16 +139,15 @@
     .quick-line {
       width: 110px;
       height: 1Px;
-      background: $color-line-gray;
+      background: $color-line;
     }
 
     .quick-desc {
       height: 50px;
       line-height: 50px;
       margin: 0 40px;
-      @include sc(24px, $color-line-gray);
+      @include sc(24px, $color-small);
     }
-
   }
 
   .quick-btn {
@@ -170,7 +169,27 @@
       display: flex;
       justify-content: center;
     }
+  }
 
+  .service-agreement {
+    margin-top: 40px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include sc(24px, $color-small);
+
+    .service-desc {
+      height: 100%;
+      line-height: 40px;
+    }
+
+    .service-btn {
+      height: 100%;
+      line-height: 40px;
+      color: $color-theme;
+    }
   }
 
 }
