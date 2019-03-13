@@ -84,6 +84,8 @@ class Login extends Component {
             timerId: timeId,
             isRegister: registered.toString() === '1' ? true : false,
           })
+        } else {
+          this.showToast('验证码发送失败，请稍后再试')
         }
       })
     }
