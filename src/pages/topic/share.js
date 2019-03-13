@@ -13,7 +13,6 @@ import praiseYes from '../../images/public/praise_yes.png'
 import praiseNo from '../../images/public/praise_no.png'
 import topicBg from '../../images/topic/topic_bg.png'
 import avatar from '../../images/public/avatar.png'
-import moreBtn from '../../images/topic/more.png'
 
 @connect(({topicComment, loading}) => ({
   ...topicComment,

@@ -95,6 +95,7 @@
             @include sc(24px, $color-white);
             background: $color-theme;
             border-radius: 25px;
+            border: none;
           }
 
           .btn_end {

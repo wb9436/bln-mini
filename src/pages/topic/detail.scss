@@ -162,6 +162,7 @@
       align-items: center;
       justify-content: center;
       @include sc(15Px, $color-big);
+      border: none;
 
       .data-img {
         width: 16Px;

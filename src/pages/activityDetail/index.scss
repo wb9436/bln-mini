@@ -170,9 +170,6 @@
     .act-list {
       width: 100%;
       background: $color-white;
-
-
-
     }
   }
 
@@ -183,6 +180,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
 
     .btn-img {
       width: 36px;
@@ -190,8 +188,6 @@
       margin-right: 10px;
     }
   }
-
-
 
   .detail-mark{
     width: 100%;
@@ -210,6 +206,7 @@
       border-radius: 3Px;
       background: $color-white;
       color: $color-theme;
+      border: none;
     }
   }
 
