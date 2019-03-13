@@ -194,7 +194,7 @@ class Login extends Component {
                 let openid = data.body.openid
                 let sessionKey = data.body.session_key
                 let unionid = data.body.unionid
-                if (unionid) {
+                if (unionid && unionid.trim() !== '') {
                   this.onWxMiniLogin(unionid, openid, userInfo)
                 } else {
                   WxApi.getDecryptData({sessionKey, encryptedData, iv}).then(resultData => {
