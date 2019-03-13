@@ -90,7 +90,7 @@ class ForgetPassword extends Component {
           let timeId = setInterval(() => this.countDown(), 1000)
           this.setState({
             hasSendCode: true,
-            codeMsg: `倒计时${remainTime}秒`,
+            codeMsg: `${remainTime}秒`,
             timerId: timeId
           })
         }
@@ -103,7 +103,7 @@ class ForgetPassword extends Component {
     if (remainTime >= 1) {
       this.setState({
         remainTime: remainTime - 1,
-        codeMsg: `倒计时${remainTime - 1}秒`
+        codeMsg: `${remainTime - 1}秒`
       })
     } else {
       this.setState({
