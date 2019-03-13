@@ -162,7 +162,7 @@ class Task extends Component {
             <View className='task-btn'>
 
               {Taro.getEnv() === Taro.ENV_TYPE.WEAPP && item.type === 'invite' &&
-                <Button className={taskState ? 'btn_start btn_end' : 'btn_start'} openType='share'
+                <Button className={taskState ? 'btn_start btn_end' : 'btn_start'} plain openType='share'
                   onClick={this.onCompleteTask.bind(this, item.type, taskState)}
                 >
                 {taskState == true ? item.btn_yes : item.btn_no}

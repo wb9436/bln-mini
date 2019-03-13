@@ -152,7 +152,7 @@ class InviteFriend extends Component {
         </View>
 
         {navType == 0 ?
-          <Button className='invite-share' openType='share' style={{height: `${shareBtnHeight}px`}} onClick={this.onInviteFriend.bind(this)}>
+          <Button className='invite-share' openType='share' plain style={{height: `${shareBtnHeight}px`}} onClick={this.onInviteFriend.bind(this)}>
             <Image className='invite-share-icon' src={shareBtn} mode='widthFix' />
             <View className='invite-share-title'>立即分享</View>
           </Button> : ''

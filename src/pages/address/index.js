@@ -203,7 +203,7 @@ class DistrictTest extends Component {
           </ScrollView>
         </View>
 
-        <Button onClick={this.onConfirmAddress.bind(this)}>确认地址</Button>
+        <Button plain onClick={this.onConfirmAddress.bind(this)}>确认地址</Button>
 
       </View>
     )

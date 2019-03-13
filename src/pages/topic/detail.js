@@ -388,19 +388,19 @@ class TopicDetail extends Component {
         {/*评论底部按钮*/}
         {existTopic ?
           <View className='topic-data' style={{height: `${topicDataHeight}px`, borderTop: `1px solid #EfEEf4`}}>
-            <Button className='data-item' openType='share'  >
+            <Button className='data-item' plain openType='share'  >
               <View className='data-img'>
                 <Image src={shareBtn} mode='widthFix' />
               </View>
               <View className='data'>分享</View>
             </Button>
-            <Button className='data-item' onClick={this.onOpenTopicComment.bind(this, id)}>
+            <Button className='data-item' plain onClick={this.onOpenTopicComment.bind(this, id)}>
               <View className='data-img'>
                 <Image src={commentBtn} mode='widthFix' />
               </View>
               <View className='data'>评论</View>
             </Button>
-            <Button className='data-item' onClick={this.onTopicPraise.bind(this)}>
+            <Button className='data-item' plain onClick={this.onTopicPraise.bind(this)}>
               <View className='data-img'>
                 <Image src={topic.praise == 1 ? praiseYes : praiseNo} mode='widthFix' />
               </View>

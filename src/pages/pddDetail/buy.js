@@ -167,7 +167,7 @@ class PddBuy extends Component {
         </View>
 
         <View className='goods-btn'>
-          <Button className='btn-buy-now' onClick={this.onWeAppBuyGoods.bind(this, buyUrl)}>
+          <Button className='btn-buy-now' plain onClick={this.onWeAppBuyGoods.bind(this, buyUrl)}>
             <View className='btn-name'>
               立即购买
             </View>
