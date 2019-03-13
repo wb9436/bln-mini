@@ -131,7 +131,7 @@ class MobileRegister extends Component {
 
   render() {
     const {windowHeight, scale, isOpened, address} = this.state
-    const quickLoginHeight = 120 * scale
+    const quickLoginHeight = 130 * scale
     const remainHeight = windowHeight - quickLoginHeight
 
     return (
@@ -165,7 +165,7 @@ class MobileRegister extends Component {
             登录
           </View>
         </View>
-        <View className='quick-login' style={{height: `${quickLoginHeight }`}} />
+        <View className='quick-login' style={{height: `${quickLoginHeight}px`}} />
 
         <AddressDialog isOpened={isOpened} address={address} onCancel={this.onCancelAddress.bind(this)}
           onConfirmAddress={this.onConfirmAddress.bind(this)}

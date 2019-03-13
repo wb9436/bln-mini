@@ -1,5 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
-import {Image, Input, View} from '@tarojs/components'
+import {Button, Image, Input, View} from '@tarojs/components'
 import './index.scss'
 
 import * as Api from '../../store/user/newService'
@@ -292,7 +292,7 @@ class WebWxBind extends Component {
 
   render() {
     const {windowHeight, scale, isWeiXin, isRegister, isOpened, address, codeMsg, btnState} = this.state
-    const quickLoginHeight = 120 * scale
+    const quickLoginHeight = 130 * scale
     const remainHeight = windowHeight - quickLoginHeight
 
     return (
@@ -368,7 +368,7 @@ class WebWxBind extends Component {
           </View>
         </View>
 
-        <View className='quick-login' style={{height: `${quickLoginHeight }`}}>
+        <View className='quick-login' style={{height: `${quickLoginHeight}px`}}>
           <View className='quick-title'>
             <View className='quick-line' />
             <View className='quick-desc'>快捷登录</View>
@@ -376,8 +376,13 @@ class WebWxBind extends Component {
           </View>
           <View className='quick-btn'>
             {isWeiXin ?
-              <Image className='quick-icon' src={phoneBtn} mode='widthFix' onClick={this.onToMobileLogin.bind(this)} /> :
-              <Image className='quick-icon' src={weiXinBtn} mode='widthFix' onClick={this.onToWeiXinLogin.bind(this)} />
+              <Button className='quick-button' plain onClick={this.onToMobileLogin.bind(this)} >
+                <Image className='quick-icon' src={phoneBtn} mode='widthFix' onClick={this.onToMobileLogin.bind(this)} />
+              </Button>
+              :
+              <Button className='quick-button' plain onClick={this.onToMobileLogin.bind(this)} >
+                <Image className='quick-icon' src={weiXinBtn} mode='widthFix' onClick={this.onToWeiXinLogin.bind(this)} />
+              </Button>
             }
           </View>
         </View>

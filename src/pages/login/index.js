@@ -247,7 +247,7 @@ class Login extends Component {
 
   render() {
     const {windowHeight, scale, codeMsg, btnState} = this.state
-    const quickLoginHeight = 120 * scale
+    const quickLoginHeight = 130 * scale
     const remainHeight = windowHeight - quickLoginHeight
 
     return (
@@ -291,7 +291,7 @@ class Login extends Component {
           </View>
         </View>
 
-        <View className='quick-login' style={{height: `${quickLoginHeight }`}}>
+        <View className='quick-login' style={{height: `${quickLoginHeight}px`}}>
           <View className='quick-title'>
             <View className='quick-line' />
             <View className='quick-desc'>社交账号登录</View>

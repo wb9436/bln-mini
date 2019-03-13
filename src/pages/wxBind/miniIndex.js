@@ -254,7 +254,7 @@ class MiniWxBind extends Component {
 
   render() {
     const {windowHeight, scale, isRegister, isOpened, address, codeMsg, btnState} = this.state
-    const quickLoginHeight = 120 * scale
+    const quickLoginHeight = 130 * scale
     const remainHeight = windowHeight - quickLoginHeight
 
     return (
@@ -327,7 +327,7 @@ class MiniWxBind extends Component {
           </View>
         </View>
 
-        <View className='quick-login' style={{height: `${quickLoginHeight }`}}>
+        <View className='quick-login' style={{height: `${quickLoginHeight}px`}}>
           <View className='quick-title'>
             <View className='quick-line' />
             <View className='quick-desc'>快捷登录</View>
@@ -335,7 +335,7 @@ class MiniWxBind extends Component {
           </View>
           <View className='quick-btn'>
             <Button className='quick-button' plain onClick={this.onToMobileLogin.bind(this)} >
-              <Image className='quick-icon' src={phoneBtn} mode='widthFix' onClick={this.onToMobileLogin.bind(this)} />
+              <Image className='quick-icon' src={phoneBtn} mode='widthFix' />
             </Button>
           </View>
         </View>
