@@ -267,7 +267,7 @@ class Login extends Component {
               <Image className='icon' src={phoneIcon} mode='widthFix' />
               <Input className='input-box'
                 type='number'
-                placeholderClass='placeholder'
+                placeholderClass='input-placeholder'
                 placeholder='输入手机号'
                 maxLength={11}
                 onInput={this.onInputHandler.bind(this, 'mobile')}
@@ -281,7 +281,7 @@ class Login extends Component {
               <Image className='icon' src={codeIcon} mode='widthFix' />
               <Input className='input-box'
                 type='number'
-                placeholderClass='placeholder'
+                placeholderClass='input-placeholder'
                 placeholder='输入验证码'
                 maxLength={11}
                 onInput={this.onInputHandler.bind(this, 'code')}
