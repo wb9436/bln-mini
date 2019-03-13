@@ -131,7 +131,7 @@ class MobileRegister extends Component {
 
   render() {
     const {windowHeight, scale, isOpened, address} = this.state
-    const quickLoginHeight = 130 * scale
+    const quickLoginHeight = 145 * scale
     const remainHeight = windowHeight - quickLoginHeight
 
     return (
