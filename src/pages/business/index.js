@@ -1,6 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, ScrollView, Image} from '@tarojs/components'
-import {AtIcon} from 'taro-ui'
 import './index.scss'
 
 import * as Api from '../../store/business/service'
@@ -10,14 +9,13 @@ import popupImg from '../../images/business/popup.png'
 
 class Business extends Component {
   config = {
-    navigationBarTitleText: '商家推广'
+    navigationBarTitleText: '推广'
   }
   constructor() {
     super(...arguments)
     this.state = {
       windowHeight: Taro.getSystemInfoSync().windowHeight,
-      mealList: [], //套餐列表
-      mealId: -1, //套餐编号
+      configList: [],
       popup: false, //是否弹窗
       isBusiness: 0, //是否为商家
       businessId: 0, //商家ID
@@ -25,22 +23,11 @@ class Business extends Component {
   }
 
   componentDidMount() {
-    let packageList = []
-    let mealList = []
-    Api.mealPackageList().then(res => {
-      const {code, body} = res
-      if (code === 200) {
-        packageList = body
-        if (packageList && packageList.length > 0) {
-          packageList.map(item => {
-            Api.mealList({packageId: item.id}).then(result => {
-              if (result.code === 200) {
-                mealList = result.body
-                this.setState({mealList})
-              }
-            })
-          })
-        }
+    Api.businessConfig().then(data => {
+      if(data.code == 200) {
+        this.setState({
+          configList: data.body
+        })
       }
     })
   }
@@ -55,15 +42,6 @@ class Business extends Component {
         })
       }
     })
-  }
-
-  onCheckMeal(id) {
-    const {mealId} = this.state
-    if (id === mealId) {
-      this.setState({mealId: -1})
-    } else {
-      this.setState({mealId: id})
-    }
   }
 
   onConfirmPutMeal() {
@@ -88,11 +66,7 @@ class Business extends Component {
     const {isBusiness, businessId} = this.state
     let url = ''
     if (type === 'info') {
-      if (isBusiness === 1) { //是否是商家
-        url = '/pages/business/info'
-      } else {
-        url = '/pages/business/apply?from=index'
-      }
+      url = '/pages/business/info'
     } else if (type === 'order') {
       url = '/pages/business/order'
     } else if (type === 'code') {
@@ -104,27 +78,13 @@ class Business extends Component {
   }
 
   render() {
-    const {windowHeight, mealList, mealId, popup} = this.state
+    const {windowHeight, configList, popup} = this.state
     let btnHeight = 40
     let scrollHeight = windowHeight - btnHeight
 
-    const mealContent = mealList.map((item, index) => {
-      return <View key={index} className='meal-item' onClick={this.onCheckMeal.bind(this, item.id)}>
-        <View className='meal-type'>
-          <View className='meal-check'>
-            {item.id == mealId ? <AtIcon size={16} value='check' color='#F07A76' /> : ''}
-          </View>
-          <View className='type-title'>{item.name}</View>
-        </View>
-        <View className='line' />
-        <View className='meal-content'>
-          <View className='meal-title'>效果评估</View>
-          {item.mealValueGoodsList.map((val, idx) => {
-            return <View key={idx} className='meal-value'>{val.content}</View>
-          })}
-          <View className='meal-title'>服务内容</View>
-          <View className='meal-value'>{item.content}</View>
-        </View>
+    const configContent = configList.map((item, index) => {
+      return <View key={index} className='config-item'>
+        <Image className='config-image' src={item.imgUrl} mode='widthFix' />
       </View>
     })
 
@@ -135,9 +95,10 @@ class Business extends Component {
             scrollY
             scrollWithAnimation
           >
-            {mealContent}
+            {configContent}
           </ScrollView>
         </View>
+
         <View className='meal-btn' onClick={this.onConfirmPutMeal.bind(this)}
           style={{height: `${btnHeight}px`, lineHeight: `${btnHeight}px`}}
         >我要投放</View>

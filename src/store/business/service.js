@@ -1,5 +1,13 @@
 import Request from '../../utils/request'
 
+/*商家主页配置列表*/
+export const businessConfig = data => Request({
+  url: '/api/business/config/list',
+  method: 'POST',
+  need_sid: true,
+  data
+})
+
 /*套餐包列表*/
 export const mealPackageList = data => Request({
   url: '/api/meal/package/list',
@@ -54,6 +62,10 @@ export const businessActList = data => Request({
   need_sid: true,
   data
 })
+
+
+
+
 
 
 

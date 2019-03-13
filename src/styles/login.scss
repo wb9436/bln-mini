@@ -67,28 +67,7 @@
       width: 50px;
       height: auto;
     }
-
   }
-
-  input::-webkit-input-placeholder {
-    color: $color-small;
-  }
-  input:-moz-placeholder {
-    color: $color-small;
-  }
-  input::-moz-placeholder {
-    color: $color-small;
-  }
-  input::-ms-input-placeholder {
-    color: $color-small;
-  }
-
-
-  .input-placeholder {
-    font-size: 32px;
-    color: $color-small !important;
-  }
-
 }
 
 .login-btn {

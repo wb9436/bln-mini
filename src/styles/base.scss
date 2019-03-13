@@ -107,3 +107,30 @@ button {
   }
 }
 
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: $color-small;
+}
+
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: $color-small;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: $color-small;
+}
+
+input::-ms-input-placeholder, textarea::-moz-placeholder {
+  color: $color-small;
+}
+
+.input-placeholder {
+  color: $color-small !important;
+}
+
+.textarea-placeholder {
+  color: $color-small !important;
+}
+
+textarea:disabled {
+  background: $color-white !important;
+}

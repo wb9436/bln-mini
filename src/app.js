@@ -57,7 +57,6 @@ class App extends Component {
       'pages/help/web',
       'pages/business/index',
       'pages/business/info',
-      'pages/business/apply',
       'pages/business/order',
       'pages/business/payCode',
       'pages/wxBind/webIndex',
