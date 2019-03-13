@@ -108,14 +108,14 @@ class WebWxBind extends Component {
   onSendCodeHandler = () => {
     const {mobile, hasSendCode, remainTime} = this.state
     if (!hasSendCode) { //发送验证码
-      if (!mobile || mobile.length != 11) {
+      if (!Utils.isMobile(mobile)) {
         this.showToast('请输入正确的手机号')
         return false;
       }
       Api.sendRegCode({mobile}).then(data => {
         if (data && data.code == 200) {
           const {isbind, registered} = data.body
-          this.showToast('验证码发送成功')
+          this.showToast('验证码已发送')
           let timeId = setInterval(() => this.countDown(), 1000)
           this.setState({
             hasSendCode: true,
@@ -304,6 +304,7 @@ class WebWxBind extends Component {
             <View className='input-left'>
               <Image className='icon' src={phoneIcon} mode='widthFix' />
               <Input className='input-box'
+                type='number'
                 placeholderClass='placeholder'
                 placeholder='输入手机号'
                 maxLength={11}
@@ -317,6 +318,7 @@ class WebWxBind extends Component {
             <View className='input-left'>
               <Image className='icon' src={codeIcon} mode='widthFix' />
               <Input className='input-box'
+                type='number'
                 placeholderClass='placeholder'
                 placeholder='输入验证码'
                 maxLength={11}
@@ -334,6 +336,7 @@ class WebWxBind extends Component {
               <View className='input-left'>
                 <Image className='icon' src={userIcon} mode='widthFix' />
                 <Input className='input-box'
+                  type='number'
                   placeholderClass='placeholder'
                   placeholder='推荐人UID'
                   maxLength={11}

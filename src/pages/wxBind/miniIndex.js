@@ -104,14 +104,14 @@ class MiniWxBind extends Component {
   onSendCodeHandler = () => {
     const {mobile, hasSendCode, remainTime} = this.state
     if (!hasSendCode) { //发送验证码
-      if (!mobile || mobile.length != 11) {
+      if (!Utils.isMobile(mobile)) {
         this.showToast('请输入正确的手机号')
         return false;
       }
       Api.sendRegCode({mobile}).then(data => {
         if (data && data.code == 200) {
           const {isbind, registered} = data.body
-          this.showToast('验证码发送成功')
+          this.showToast('验证码已发送')
           let timeId = setInterval(() => this.countDown(), 1000)
           this.setState({
             hasSendCode: true,

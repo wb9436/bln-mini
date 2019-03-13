@@ -143,6 +143,7 @@ class MobileRegister extends Component {
             <View className='input-left'>
               <Image className='icon' src={userIcon} mode='widthFix' />
               <Input className='input-box'
+                type='number'
                 placeholderClass='placeholder'
                 placeholder='推荐人UID'
                 maxLength={11}
