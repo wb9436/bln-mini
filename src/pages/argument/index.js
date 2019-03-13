@@ -10,8 +10,6 @@ class ServiceArgument extends Component {
   }
 
   render() {
-    console.log(argument)
-
     return (
       <View className='argument-page'>
         <RichText nodes={argument} />
