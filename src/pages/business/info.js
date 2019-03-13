@@ -1,6 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, ScrollView, Image, Input, Textarea} from '@tarojs/components'
-import {AtIcon} from 'taro-ui'
 import './info.scss'
 
 import * as Api from '../../store/business/service'
@@ -38,6 +37,7 @@ class BusinessApply extends Component {
       state: -3, //商家状态：1=商家已被禁用；0=审核通过；-1=审核中；-2=审核被拒；-3=未提交审核
       linkman: '', //联系人
       baServicerUserId: '', //推广员
+      baServicerName: '', //推广员昵称
       message: '', //审核结果描述
       btnMsg: '提交',
     }
@@ -67,6 +67,7 @@ class BusinessApply extends Component {
           linkman: body.linkman,
           mobile: body.mobile,
           baServicerUserId: (body.baServicerUserId && body.baServicerUserId.toString() !== '0') ? body.baServicerUserId : '',
+          baServicerName: body.baServicerName,
           message: body.message,
           btnMsg: btnMsg
         })
@@ -195,7 +196,8 @@ class BusinessApply extends Component {
         this.showToast('已提交审核')
         this.setState({
           state: -1,
-          btnMsg: '重新提交'
+          btnMsg: '重新提交',
+          message: '审核中',
         })
       }
     })
@@ -211,7 +213,7 @@ class BusinessApply extends Component {
 
   render() {
     const {loading, windowHeight, scale, imgFile, attachmentFile, userId, name, address, img, attachment, industry,
-      baState, state, linkman, mobile, baServicerUserId, message, btnMsg} = this.state
+      baState, state, linkman, mobile, baServicerUserId, baServicerName, message, btnMsg} = this.state
     const btnHeight = 80 * scale
     const scrollHeight = windowHeight - btnHeight
     const disabled = (state == 1 || state == 0) ? true : false
@@ -317,13 +319,16 @@ class BusinessApply extends Component {
                 </View>
               </View>
 
-              <View className='apply-item'>
-                <View className='item-label'><Image className='must-icon' src={mustImg} mode='widthFix' /> 推广员ID：</View>
-                <View className='item-input'>
-                  <Input className='input-field' placeholderClass='input-placeholder' disabled={disabled}
-                    type='number' placeholder='推广员ID' value={baServicerUserId} onInput={this.onInputHandler.bind(this, 'baServicerUserId')}
-                  />
+              <View className='apply-item apply-service'>
+                <View className='apply-left'>
+                  <View className='item-label'><Image className='must-icon' src={mustImg} mode='widthFix' /> 推广员ID：</View>
+                  <View className='item-input'>
+                    <Input className='input-field' placeholderClass='input-placeholder' disabled={disabled}
+                      type='number' placeholder='推广员ID' value={baServicerUserId} onInput={this.onInputHandler.bind(this, 'baServicerUserId')}
+                    />
+                  </View>
                 </View>
+                <View className='service-user'>{baServicerName}</View>
               </View>
 
             </ScrollView>
@@ -335,7 +340,7 @@ class BusinessApply extends Component {
             <View className='apply-btn' onClick={this.onPutApply.bind(this)}>
               {btnMsg}
             </View>
-            {state == -2 ?
+            {state != -3 ?
               <View className='apply-result'>{message}</View> : ''
             }
           </View> : ''
