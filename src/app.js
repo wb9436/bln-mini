@@ -63,6 +63,7 @@ class App extends Component {
       'pages/wxBind/webIndex',
       'pages/wxBind/miniIndex',
       'pages/wxBind/mobileIndex',
+      'pages/argument/index',
     ],
     tabBar: {
       "color": "#929292",

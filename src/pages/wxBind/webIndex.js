@@ -290,6 +290,12 @@ class WebWxBind extends Component {
     }
   }
 
+  onOpenServiceArgument() {
+    Taro.navigateTo({
+      url: '/pages/argument/index'
+    })
+  }
+
   render() {
     const {windowHeight, scale, isWeiXin, isRegister, isOpened, address, codeMsg, btnState} = this.state
     const quickLoginHeight = 145 * scale
@@ -384,6 +390,10 @@ class WebWxBind extends Component {
                 <Image className='quick-icon' src={weiXinBtn} mode='widthFix' onClick={this.onToWeiXinLogin.bind(this)} />
               </Button>
             }
+          </View>
+          <View className='service-agreement'>
+            <View className='service-desc'>默认您已同意本平台</View>
+            <View className='service-btn' onClick={this.onOpenServiceArgument.bind(this)}>《用户服务协议》</View>
           </View>
         </View>
 

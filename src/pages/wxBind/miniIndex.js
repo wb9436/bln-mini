@@ -252,6 +252,12 @@ class MiniWxBind extends Component {
     })
   }
 
+  onOpenServiceArgument() {
+    Taro.navigateTo({
+      url: '/pages/argument/index'
+    })
+  }
+
   render() {
     const {windowHeight, scale, isRegister, isOpened, address, codeMsg, btnState} = this.state
     const quickLoginHeight = 145 * scale
@@ -337,6 +343,10 @@ class MiniWxBind extends Component {
             <Button className='quick-button' plain onClick={this.onToMobileLogin.bind(this)} >
               <Image className='quick-icon' src={phoneBtn} mode='widthFix' />
             </Button>
+          </View>
+          <View className='service-agreement'>
+            <View className='service-desc'>默认您已同意本平台</View>
+            <View className='service-btn' onClick={this.onOpenServiceArgument.bind(this)}>《用户服务协议》</View>
           </View>
         </View>
 

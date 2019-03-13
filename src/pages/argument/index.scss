@@ -1,0 +1,9 @@
+@import "../../styles/mixin";
+
+.argument-page {
+  padding: 0 20px;
+  height: 100vh;
+  @include sc(30px, $color-big)
+
+
+}
