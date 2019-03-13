@@ -314,7 +314,7 @@ class ActivityTask extends Component {
         {/*小程序需要授权*/}
         {!canScrollTemp ?
           <View className='detail-mark'>
-            <Button className='authorize-btn' openType='getUserInfo' onGetUserInfo={this.onGetUserInfo.bind(this)}>点击继续阅读</Button>
+            <Button className='authorize-btn' openType='getUserInfo' plain onGetUserInfo={this.onGetUserInfo.bind(this)}>点击继续阅读</Button>
           </View> : ''
         }
       </View>

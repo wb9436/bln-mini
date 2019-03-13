@@ -211,8 +211,6 @@ class Login extends Component {
                 this.showToast('系统繁忙，请稍后再试')
               }
             })
-          } else {
-            this.showToast('系统繁忙，请稍后再试')
           }
         }
       })
@@ -232,9 +230,6 @@ class Login extends Component {
       } else {
         this.showToast('系统繁忙，请稍后再试')
       }
-    }).catch(e => {
-      console.log(e)
-      this.showToast('系统繁忙，请稍后再试')
     })
   }
 
@@ -297,12 +292,16 @@ class Login extends Component {
             <View className='quick-line' />
           </View>
           <View className='quick-btn'>
-            <Button className='quick-button' openType='getUserInfo' onClick={this.onToWeiXinLogin.bind(this)}>
-              <Image className='quick-icon' src={weiXinBtn} mode='widthFix' />
-            </Button>
+            {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ?
+              <Button className='quick-button' plain openType='getUserInfo' onGetUserInfo={this.onToWeiXinLogin.bind(this)} >
+                <Image className='quick-icon' src={weiXinBtn} mode='widthFix' />
+              </Button> : ''
+            }
+            {Taro.getEnv() === Taro.ENV_TYPE.WEB ?
+              <Image className='quick-icon' src={weiXinBtn} mode='widthFix' onClick={this.onToWeiXinLogin.bind(this)} /> : ''
+            }
           </View>
         </View>
-
 
       </View>
     )

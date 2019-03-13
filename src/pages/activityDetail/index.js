@@ -200,7 +200,7 @@ class ActivityDetail extends Component {
         </ScrollView>
 
         {(existAct && Taro.getEnv() === Taro.ENV_TYPE.WEAPP) ?
-          <Button className='share-btn' openType='share' style={{height: `${shareBtnHeight}px`}}>
+          <Button className='share-btn' plain openType='share' style={{height: `${shareBtnHeight}px`}}>
             <Image className='btn-img' src={shareBtn} mode='widthFix' />
             <View>立即分享</View>
           </Button> : ''
