@@ -31,9 +31,15 @@ class Setup extends Component {
         Taro.removeStorageSync('userId')
         Taro.removeStorageSync('address')
 
-        Taro.redirectTo({
-          url: '/pages/login/index'
-        })
+        if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+          Taro.redirectTo({
+            url: '/pages/login/index'
+          })
+        } else {
+          Taro.reLaunch({
+            url: '/pages/login/index'
+          })
+        }
       }
     })
   }

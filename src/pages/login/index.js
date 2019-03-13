@@ -240,7 +240,7 @@ class Login extends Component {
 
   toMiniWxLogin = (unionid, openid, headimgurl, nickname) => { //微信注册绑定
     Taro.hideLoading()
-    Taro.redirectTo({
+    Taro.navigateTo({
       url: '/pages/wxBind/miniIndex?unionid=' + unionid + '&openid=' + openid + '&headimgurl=' + encodeURI(headimgurl) + '&nickname=' + encodeURI(nickname)
     })
   }
