@@ -179,7 +179,6 @@ class Login extends Component {
   }
 
   onToWeiXinLogin(e) {
-    let that = this
     if (Taro.getEnv() === Taro.ENV_TYPE.WEB) { //微信H5登录
       window.location = WX_WEB
       // let unionid = 'oOTnV0jqeLXW2NJ3LWwRlFRRCNN0'
@@ -187,7 +186,7 @@ class Login extends Component {
     } else if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) { //微信小程序登录
       const {encryptedData, iv, userInfo} = e.detail
       Taro.login({
-        success: function (res) {
+        success: (res) => {
           let code = res.code
           if (code) {
             WxApi.getOpenid({code}).then(data => {
@@ -196,24 +195,24 @@ class Login extends Component {
                 let sessionKey = data.body.session_key
                 let unionid = data.body.unionid
                 if (unionid) {
-                  that.onWxMiniLogin(unionid, openid, userInfo)
+                  this.onWxMiniLogin(unionid, openid, userInfo)
                 } else {
                   WxApi.getDecryptData({sessionKey, encryptedData, iv}).then(resultData => {
                     if (resultData.code == 200) {
-                      that.onWxMiniLogin(resultData.body.unionId, openid, userInfo)
+                      this.onWxMiniLogin(resultData.body.unionId, openid, userInfo)
                     } else {
-                      that.showToast('系统繁忙，请稍后再试')
+                      this.showToast('系统繁忙，请稍后再试')
                     }
                   }).catch(() => {
                     this.showToast('系统繁忙，请稍后再试')
                   })
                 }
               } else {
-                that.showToast('系统繁忙，请稍后再试')
+                this.showToast('系统繁忙，请稍后再试')
               }
             })
           } else {
-            that.showToast('系统繁忙，请稍后再试')
+            this.showToast('系统繁忙，请稍后再试')
           }
         }
       })
