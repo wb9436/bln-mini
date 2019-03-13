@@ -43,9 +43,15 @@ export default (options = {method: 'GET', data: {}, need_sid: false, no_toast: f
               icon: 'none'
             })
           }
-          Taro.redirectTo({
-            url: '/pages/login/index'
-          })
+          if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+            Taro.redirectTo({
+              url: '/pages/login/index'
+            })
+          } else {
+            Taro.reLaunch({
+              url: '/pages/login/index'
+            })
+          }
         } else {
           if (!options.no_toast) {
             Taro.showToast({
