@@ -159,6 +159,7 @@ class Login extends Component {
   }
 
   toHome = (data, sid) => {
+    Taro.hideLoading()
     let address = data.body.address
     let user = data.body.user
     let userId = user.userId
@@ -179,6 +180,10 @@ class Login extends Component {
   }
 
   onToWeiXinLogin(e) {
+    Taro.showLoading({
+      title: '正在登录...',
+      mask: true
+    })
     if (Taro.getEnv() === Taro.ENV_TYPE.WEB) { //微信H5登录
       window.location = WX_WEB
       // let unionid = 'oOTnV0jqeLXW2NJ3LWwRlFRRCNN0'
@@ -234,6 +239,7 @@ class Login extends Component {
   }
 
   toMiniWxLogin = (unionid, openid, headimgurl, nickname) => { //微信注册绑定
+    Taro.hideLoading()
     Taro.redirectTo({
       url: '/pages/wxBind/miniIndex?unionid=' + unionid + '&openid=' + openid + '&headimgurl=' + encodeURI(headimgurl) + '&nickname=' + encodeURI(nickname)
     })
@@ -298,7 +304,9 @@ class Login extends Component {
               </Button> : ''
             }
             {Taro.getEnv() === Taro.ENV_TYPE.WEB ?
-              <Image className='quick-icon' src={weiXinBtn} mode='widthFix' onClick={this.onToWeiXinLogin.bind(this)} /> : ''
+              <Button className='quick-button' plain onClick={this.onToWeiXinLogin.bind(this)} >
+                <Image className='quick-icon' src={weiXinBtn} mode='widthFix' />
+              </Button> : ''
             }
           </View>
         </View>

@@ -1,5 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
-import {Image, Input, View} from '@tarojs/components'
+import {Button, Image, Input, View} from '@tarojs/components'
 import './index.scss'
 
 import * as Api from '../../store/user/newService'
@@ -265,6 +265,7 @@ class MiniWxBind extends Component {
             <View className='input-left'>
               <Image className='icon' src={phoneIcon} mode='widthFix' />
               <Input className='input-box'
+                type='number'
                 placeholderClass='placeholder'
                 placeholder='输入手机号'
                 maxLength={11}
@@ -278,6 +279,7 @@ class MiniWxBind extends Component {
             <View className='input-left'>
               <Image className='icon' src={codeIcon} mode='widthFix' />
               <Input className='input-box'
+                type='number'
                 placeholderClass='placeholder'
                 placeholder='输入验证码'
                 maxLength={11}
@@ -295,6 +297,7 @@ class MiniWxBind extends Component {
               <View className='input-left'>
                 <Image className='icon' src={userIcon} mode='widthFix' />
                 <Input className='input-box'
+                  type='number'
                   placeholderClass='placeholder'
                   placeholder='推荐人UID'
                   maxLength={11}
@@ -331,7 +334,9 @@ class MiniWxBind extends Component {
             <View className='quick-line' />
           </View>
           <View className='quick-btn'>
-            <Image className='quick-icon' src={phoneBtn} mode='widthFix' onClick={this.onToMobileLogin.bind(this)} />
+            <Button className='quick-button' plain onClick={this.onToMobileLogin.bind(this)} >
+              <Image className='quick-icon' src={phoneBtn} mode='widthFix' onClick={this.onToMobileLogin.bind(this)} />
+            </Button>
           </View>
         </View>
 
