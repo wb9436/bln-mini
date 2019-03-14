@@ -65,11 +65,11 @@ class Business extends Component {
   onPopupHandler(type) {
     const {isBusiness, businessId} = this.state
     let url = ''
-    if (type === 'info') {
+    if (type === 'info') { //商家信息
       url = '/pages/business/info'
-    } else if (type === 'order') {
-      url = '/pages/business/order'
-    } else if (type === 'code') {
+    } else if (type === 'advert') { //广告服务
+      url = '/pages/business/advert'
+    } else if (type === 'code') { //商家收款码
       url = '/pages/business/payCode?isBusiness=' + isBusiness + '&businessId=' + businessId
     }
     Taro.navigateTo({
@@ -123,8 +123,10 @@ class Business extends Component {
 
               <View className='popup-content'>
                 <View className='popup-item popup-item--border' onClick={this.onPopupHandler.bind(this, 'info')}>商家信息</View>
-                <View className='popup-item popup-item--border' onClick={this.onPopupHandler.bind(this, 'order')}>订单</View>
-                <View className='popup-item' onClick={this.onPopupHandler.bind(this, 'code')}>收款码</View>
+                <View className='popup-item popup-item--border' onClick={this.onPopupHandler.bind(this, 'advert')}>广告服务</View>
+                <View className='popup-item popup-item--border' onClick={this.onPopupHandler.bind(this, 'baOrder')}>商家订单</View>
+                <View className='popup-item popup-item--border' onClick={this.onPopupHandler.bind(this, 'code')}>收款码</View>
+                <View className='popup-item' onClick={this.onPopupHandler.bind(this, 'promoter')}>推广员</View>
               </View>
             </View>
           </View> : ''

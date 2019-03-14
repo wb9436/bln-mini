@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, ScrollView, Image} from '@tarojs/components'
-import './order.scss'
+import './advert.scss'
 
 import LoadAll from '../../components/LoadAll/index'
 import * as Utils from '../../utils/utils'
@@ -11,7 +11,7 @@ import doing from '../../images/public/doing.png'
 
 class BusinessOrder extends Component {
   config = {
-    navigationBarTitleText: '我的推广'
+    navigationBarTitleText: '广告服务'
   }
   constructor() {
     super(...arguments)
@@ -22,7 +22,6 @@ class BusinessOrder extends Component {
       loadAll: false,
     }
   }
-
 
   componentDidMount() {
     const {pageSize, curPageNum} = this.state
