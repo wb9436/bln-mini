@@ -27,19 +27,11 @@ class PayCode extends Component {
         businessId: businessId,
       })
     }
-    this.onLoading()
-  }
-
-  onLoading = () => {
-    this.timerId = setTimeout(() => {
-      this.setState({
-        loading: false
-      })
-    }, 100)
   }
 
   onLoadImgError() {
     this.setState({
+      loading: false,
       hasIcon: false,
       hasLoad: false
     })
@@ -47,6 +39,7 @@ class PayCode extends Component {
 
   onLoadImgSuccess() {
     this.setState({
+      loading: false,
       hasIcon: true,
       hasLoad: false
     })
@@ -74,16 +67,16 @@ class PayCode extends Component {
 
     return (
       <View className='pay-code-page'>
-        {(hasLoad || hasIcon || loading) ?
+        {(loading || hasLoad || hasIcon) ?
           <View className='code-content'>
             <Image className='code-icon' src={url} onError={this.onLoadImgError.bind(this)}
               onLoad={this.onLoadImgSuccess.bind(this)} onClick={this.onPreviewImage.bind(this, url)}
             />
-            <View className='preview-desc'>点击并保存图片到相册</View>
+            <View className={loading ? 'hidden' : 'preview-desc'}>点击并保存图片到相册</View>
           </View> : ''
         }
 
-        {!hasIcon ?
+        {(!hasIcon && !loading) ?
           <View className='code-none'>
             <Image className='none-icon' src={noneIcon} mode='widthFix' />
             <View className='none-desc'>暂无商家收款码，快去成为商家吧</View>
