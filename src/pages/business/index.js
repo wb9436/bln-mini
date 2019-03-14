@@ -77,8 +77,17 @@ class Business extends Component {
     })
   }
 
-  onOpenLink(url) {
-    console.log(url)
+  onOpenLink(title, url) {
+    if (url && url.trim() !== '') {
+      if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+        Taro.setStorageSync('WebUrl', url)
+        Taro.navigateTo({
+          url: '/pages/web/index?title=' + encodeURI(title)
+        })
+      } else if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+        window.location = url
+      }
+    }
   }
 
   render() {
@@ -87,7 +96,7 @@ class Business extends Component {
     let scrollHeight = windowHeight - btnHeight
 
     const configContent = configList.map((item, index) => {
-      return <View key={index} className='config-item' onClick={this.onOpenLink.bind(this, item.linkUrl)}>
+      return <View key={index} className='config-item' onClick={this.onOpenLink.bind(this, item.name, item.linkUrl)}>
         <Image className='config-image' src={item.imgUrl} mode='widthFix' />
       </View>
     })
