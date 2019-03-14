@@ -8,8 +8,8 @@ import * as Api from '../../store/user/service'
 import * as Utils from '../../utils/utils'
 
 import moreBtn from '../../images/public/moreBtn.png'
-import addressBtn from '../../images/mine/addressBtn.png'
-import msgBtn from '../../images/mine/msgBtn.png'
+import addressIcon from '../../images/login/map.png'
+import msgIcon from '../../images/mine/msgIcon.png'
 import wallet from '../../images/mine/wallet.png'
 import account from '../../images/mine/account.png'
 import friend from '../../images/mine/friend.png'
@@ -44,6 +44,7 @@ class Mine extends Component {
       columnItem: [
         //type: 0=本程序页面, 1=web页面, 2=小程序页面
         {name: '我的钱包', type: 'wallet', icon: wallet, page: '/pages/wallet/index', showType: 0},
+        {name: '我的消息', type: 'message', icon: msgIcon, page: '/pages/message/index', showType: 0},
         // {name: '账号绑定',type: 'account',  icon: account, page: ''},
         {name: '邀请好友', type: 'friend', icon: friend, page: '/pages/friend/index', showType: 0},
         {name: '我的话题', type: 'topic', icon: mine, page: '/pages/myTopic/index', showType: 0},
@@ -140,12 +141,6 @@ class Mine extends Component {
     }
   }
 
-  onOpenMsgHandler() {
-    Taro.navigateTo({
-      url: '/pages/message/index'
-    })
-  }
-
   render() {
     const {windowHeight, columnItem, area, address, isOpened} = this.state
     let infoHeight = 135
@@ -211,9 +206,9 @@ class Mine extends Component {
                   >{isAuth}</View> : ''
                 }
               </View>
-              <View className='user-msg'>
-                <Image className='msg-btn' src={msgBtn} mode='widthFix' onClick={this.onOpenMsgHandler.bind(this)} />
-                <View className='address-info' onClick={this.openAddress.bind(this)}>{area}</View>
+              <View className='user-msg' onClick={this.openAddress.bind(this)}>
+                <Image className='msg-btn' src={addressIcon} mode='widthFix' />
+                <View className='address-info'>{area}</View>
               </View>
             </View>
             <View className='user-data-info'>
@@ -240,8 +235,6 @@ class Mine extends Component {
         <AddressDialog isOpened={isOpened} address={address} onCancel={this.onCancelAddress.bind(this)}
           onConfirmAddress={this.onConfirmAddress.bind(this)}
         />
-
-        <Image className='address-btn' src={addressBtn} mode='widthFix' onClick={this.openAddress.bind(this)} />
 
       </View>
     )

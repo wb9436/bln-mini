@@ -1,0 +1,42 @@
+@import "../../styles/mixin";
+
+.business-order-page {
+  width: 100vw;
+  height: 100vh;
+  background: $color-bg;
+
+  .order-item {
+    width: 100%;
+    height: 260px;
+    margin-bottom: 14px;
+    background: $color-white;
+    @include sc(32px, $color-big);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .order-data {
+      margin: 0 28px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      @include ellipsis;
+
+      .data-title {
+        height: 100%;
+        line-height: 55px;
+      }
+
+      .data-value {
+        height: 100%;
+        line-height: 55px;
+      }
+
+      .data-money {
+        color: $color-red;
+      }
+    }
+  }
+
+}

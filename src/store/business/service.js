@@ -8,40 +8,9 @@ export const businessConfig = data => Request({
   data
 })
 
-/*套餐包列表*/
-export const mealPackageList = data => Request({
-  url: '/api/meal/package/list',
-  method: 'POST',
-  need_sid: true,
-  data
-})
-
-/*套餐列表*/
-export const mealList = data => Request({
-  url: '/api/meal/list',
-  method: 'POST',
-  need_sid: true,
-  data
-})
-
 /*商家信息*/
 export const businessInfo = data => Request({
   url: '/api/business/info/get',
-  method: 'POST',
-  need_sid: true,
-  data
-})
-
-/*收款码*/
-export const payCode = data => Request({
-  url: '/api/business/getQr',
-  method: 'GET',
-  data
-})
-
-/*行业列表*/
-export const industryList = data => Request({
-  url: '/api/business/industry/list',
   method: 'POST',
   need_sid: true,
   data
@@ -63,6 +32,22 @@ export const businessActList = data => Request({
   data
 })
 
+
+/*商家订单*/
+export const businessOrder = data => Request({
+  url: '/api/ba/order/list',
+  method: 'POST',
+  need_sid: true,
+  data
+})
+
+/*商家广告意向*/
+export const businessAdvertIdea = data => Request({
+  url: '/api/business/idea',
+  method: 'POST',
+  need_sid: true,
+  data
+})
 
 
 

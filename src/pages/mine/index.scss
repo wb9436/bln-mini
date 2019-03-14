@@ -52,15 +52,14 @@
 
       .user-msg {
         width: 170px;
-        height: 100%;
+        height: 50px;
         //margin-left: 222px;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
 
         .msg-btn {
-          width: 70px;
+          width: 42px;
           height: auto;
         }
 

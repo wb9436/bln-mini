@@ -45,14 +45,9 @@ class Business extends Component {
   }
 
   onConfirmPutMeal() {
-    const {mealId} = this.state
-    if (mealId == -1) {
-      Taro.showToast({
-        icon: 'none',
-        title: '请选择推广套餐',
-      })
-      return false
-    }
+    Taro.navigateTo({
+      url: '/pages/business/advertApply'
+    })
   }
 
   onShowPopup() {
@@ -71,6 +66,8 @@ class Business extends Component {
       url = '/pages/business/advert'
     } else if (type === 'code') { //商家收款码
       url = '/pages/business/payCode?isBusiness=' + isBusiness + '&businessId=' + businessId
+    } else if(type === 'baOrder') {
+      url = '/pages/business/order'
     }
     Taro.navigateTo({
       url: url
