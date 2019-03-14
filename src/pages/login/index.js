@@ -32,6 +32,12 @@ class Login extends Component {
     }
   }
 
+  componentWillMount() {
+    Taro.removeStorageSync('sid')
+    Taro.removeStorageSync('address')
+    Taro.removeStorageSync('user')
+  }
+
   onInputHandler(type, e) {
     const {mobile, code} = this.state
     let btnState = true
