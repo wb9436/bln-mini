@@ -49,8 +49,12 @@ class BusinessApply extends Component {
       if (code === 200) {
         let state = body.state
         let btnMsg = '提交'
-        if (state === -1 || state === -2) {
+        let message = ''
+        if (state == -1 || state == -2) {
           btnMsg = '重新提交'
+          if(state == -1) {
+            message = '审核中'
+          }
         } else if (state == 0 || state == 1) {
           btnMsg = '审核通过'
         }
@@ -68,7 +72,7 @@ class BusinessApply extends Component {
           mobile: body.mobile,
           baServicerUserId: (body.baServicerUserId && body.baServicerUserId.toString() !== '0') ? body.baServicerUserId : '',
           baServicerName: body.baServicerName,
-          message: body.message,
+          message: body.message || message,
           btnMsg: btnMsg
         })
       }
@@ -227,14 +231,14 @@ class BusinessApply extends Component {
               scrollWithAnimation
             >
               <View className='apply-item'>
-                <View className='item-label'><Image className='must-icon' src={mustImg} mode='widthFix' /> 会员编号：</View>
+                <View className='item-label'><Image className={disabled ? 'hidden' : 'must-icon'} src={mustImg} mode='widthFix' /> 会员编号：</View>
                 <View className='item-input'>
                   <Input className='input-field' placeholderClass='input-placeholder' placeholder='会员编号' value={userId} disabled />
                 </View>
               </View>
 
               <View className='apply-item'>
-                <View className='item-label'><Image className='must-icon' src={mustImg} mode='widthFix' /> 商家名称：</View>
+                <View className='item-label'><Image className={disabled ? 'hidden' : 'must-icon'} src={mustImg} mode='widthFix' /> 商家名称：</View>
                 <View className='item-input'>
                   <Input className='input-field' placeholderClass='input-placeholder' disabled={disabled}
                     placeholder='请输入商家名称' value={name} onInput={this.onInputHandler.bind(this, 'name')}
@@ -287,8 +291,8 @@ class BusinessApply extends Component {
                 <View className='item-label'>加入商家联盟：</View>
                 <View className='item-input'>
                   <View className={disabled ? 'item-desc' : 'hidden'}>
-                    {baState == 0 ? '加入广告' : ''}
-                    {baState == 1 ? '加入商家' : ''}
+                    {baState == 0 ? '是' : ''}
+                    {baState == 1 ? '否' : ''}
                   </View>
                   <View className={disabled ? 'hidden' : 'check-box'} onClick={this.onStateChange.bind(this, 1)}>
                     <Image className='checkbox-icon' src={baState == 1 ? checkTrue : checkFalse} mode='widthFix' />
@@ -302,7 +306,7 @@ class BusinessApply extends Component {
               </View>
 
               <View className='apply-item'>
-                <View className='item-label'><Image className='must-icon' src={mustImg} mode='widthFix' /> 联系人：</View>
+                <View className='item-label'><Image className={disabled ? 'hidden' : 'must-icon'} src={mustImg} mode='widthFix' /> 联系人：</View>
                 <View className='item-input'>
                   <Input className='input-field' placeholderClass='input-placeholder' disabled={disabled}
                     placeholder='请输入联系人' value={linkman} onInput={this.onInputHandler.bind(this, 'linkman')}
@@ -311,7 +315,7 @@ class BusinessApply extends Component {
               </View>
 
               <View className='apply-item'>
-                <View className='item-label'><Image className='must-icon' src={mustImg} mode='widthFix' /> 联系电话：</View>
+                <View className='item-label'><Image className={disabled ? 'hidden' : 'must-icon'} src={mustImg} mode='widthFix' /> 联系电话：</View>
                 <View className='item-input'>
                   <Input className='input-field' placeholderClass='input-placeholder' disabled={disabled}
                     type='number' placeholder='请输入联系电话' value={mobile} onInput={this.onInputHandler.bind(this, 'mobile')}
@@ -321,7 +325,7 @@ class BusinessApply extends Component {
 
               <View className='apply-item apply-service'>
                 <View className='apply-left'>
-                  <View className='item-label'><Image className='must-icon' src={mustImg} mode='widthFix' /> 推广员ID：</View>
+                  <View className='item-label'><Image className={disabled ? 'hidden' : 'must-icon'} src={mustImg} mode='widthFix' /> 推广员ID：</View>
                   <View className='item-input'>
                     <Input className='input-field' placeholderClass='input-placeholder' disabled={disabled}
                       type='number' placeholder='推广员ID' value={baServicerUserId} onInput={this.onInputHandler.bind(this, 'baServicerUserId')}
