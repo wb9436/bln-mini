@@ -77,13 +77,17 @@ class Business extends Component {
     })
   }
 
+  onOpenLink(url) {
+    console.log(url)
+  }
+
   render() {
     const {windowHeight, configList, popup} = this.state
     let btnHeight = 40
     let scrollHeight = windowHeight - btnHeight
 
     const configContent = configList.map((item, index) => {
-      return <View key={index} className='config-item'>
+      return <View key={index} className='config-item' onClick={this.onOpenLink.bind(this, item.linkUrl)}>
         <Image className='config-image' src={item.imgUrl} mode='widthFix' />
       </View>
     })

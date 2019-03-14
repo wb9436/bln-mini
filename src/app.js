@@ -26,8 +26,6 @@ class App extends Component {
       'pages/classify/index',
       'pages/mine/index',
       'pages/login/index',
-      // 'pages/forget/index',
-      // 'pages/register/index',
       'pages/address/index',
       'pages/setup/index',
       'pages/wallet/index',
