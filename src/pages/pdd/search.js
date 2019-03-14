@@ -129,7 +129,7 @@ class PddSearch extends Component {
     })
 
     return (
-      <View className='pdd-page'>
+      <View className='pdd-page' style={{height: `${windowHeight}px`}}>
         {/*微信分享*/}
         {process.env.TARO_ENV === 'h5' ? <WxShare /> : ''}
 
