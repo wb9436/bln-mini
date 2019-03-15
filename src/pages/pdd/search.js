@@ -139,9 +139,8 @@ class PddSearch extends Component {
               <AtIcon value='search' color='#B5B5B5' size='18' />
             </View>
             <View className='pdd-search-value'>
-              <Input placeholder='搜索' focus autoFocus maxLength='16' onInput={this.onKeywordInput.bind(this)}
-                onChange={this.onKeywordInput.bind(this)}
-                onConfirm={this.onSearchByKeyword.bind(this)}
+              <Input className='goods-input' placeholder='搜索' placeholderClass='input-placeholder' focus autoFocus maxLength='16'
+                onInput={this.onKeywordInput.bind(this)} onConfirm={this.onSearchByKeyword.bind(this)}
               />
             </View>
           </View>

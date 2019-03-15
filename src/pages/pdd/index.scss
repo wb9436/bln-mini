@@ -56,6 +56,13 @@
         margin-left: 15px;
         font-size: 26px;
         color: $color-input;
+
+        .goods-input {
+          height: 40px;
+          width: 530px;
+          color: $color-big;
+        }
+
       }
 
     }
