@@ -67,6 +67,8 @@ class App extends Component {
       'pages/web/index',
       'pages/promoter/index',
       'pages/promoter/info',
+      'pages/promoter/day',
+      'pages/promoter/month',
     ],
     tabBar: {
       "color": "#929292",

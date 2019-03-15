@@ -73,6 +73,23 @@ export const agentBusinessList = data => Request({
   data
 })
 
+/*商家每日数据*/
+export const businessDayData = data => Request({
+  url: '/api/stat/ba/order/daily',
+  method: 'POST',
+  need_sid: true,
+  data
+})
+
+/*商家每月数据*/
+export const businessMonthData = data => Request({
+  url: '/api/stat/ba/order/month',
+  method: 'POST',
+  need_sid: true,
+  data
+})
+
+
 
 
 
