@@ -40,6 +40,7 @@ class App extends Component {
       'pages/rank/index',
       'pages/activityDetail/index',
       'pages/activityDetail/task',
+      'pages/activityDetail/detail',
       'pages/news/index',
       'pages/pdd/index',
       'pages/pdd/search',

@@ -65,6 +65,14 @@ export const agentUpdate = data => Request({
   data
 })
 
+/*推广员商家列表*/
+export const agentBusinessList = data => Request({
+  url: '/api/agent/business/list',
+  method: 'POST',
+  need_sid: true,
+  data
+})
+
 
 
 
