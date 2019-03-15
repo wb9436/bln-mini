@@ -5,7 +5,7 @@ import './add.scss'
 
 import * as Api from '../../store/topic/service'
 
-import add from '../../images/topic/add.png'
+import add from '../../images/public/add.png'
 
 class TopicAdd extends Component {
   config = {

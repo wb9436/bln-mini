@@ -49,7 +49,21 @@ export const businessAdvertIdea = data => Request({
   data
 })
 
+/*推广员信息*/
+export const agentInfo = data => Request({
+  url: '/api/agent/info/get',
+  method: 'POST',
+  need_sid: true,
+  data
+})
 
+/*推广员信息修改*/
+export const agentUpdate = data => Request({
+  url: '/api/agent/info/update',
+  method: 'POST',
+  need_sid: true,
+  data
+})
 
 
 

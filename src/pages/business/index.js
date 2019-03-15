@@ -19,6 +19,7 @@ class Business extends Component {
       popup: false, //是否弹窗
       isBusiness: 0, //是否为商家
       businessId: 0, //商家ID
+      isPromoter: false, //是否为推广员
     }
   }
 
@@ -33,12 +34,20 @@ class Business extends Component {
   }
 
   componentDidShow() {
-    Api.businessInfo().then(res => {
-      const {code, body} = res
-      if (code === 200) {
+    Api.businessInfo().then(data => {
+      const {code, body} = data
+      if (code == 200) {
         this.setState({
           isBusiness: body.state === 0 ? 1 : 0,
           businessId: body.businessId,
+        })
+      }
+    })
+    Api.agentInfo().then(data => {
+      const {code, body} = data
+      if (code == 200 && (body.state == 0 || body.state == 1)) {
+        this.setState({
+          isPromoter: true,
         })
       }
     })
@@ -58,7 +67,7 @@ class Business extends Component {
   }
 
   onPopupHandler(type) {
-    const {isBusiness, businessId} = this.state
+    const {isBusiness, businessId, isPromoter} = this.state
     let url = ''
     if (type === 'info') { //商家信息
       url = '/pages/business/info'
@@ -66,8 +75,14 @@ class Business extends Component {
       url = '/pages/business/advert'
     } else if (type === 'code') { //商家收款码
       url = '/pages/business/payCode?isBusiness=' + isBusiness + '&businessId=' + businessId
-    } else if(type === 'baOrder') {
+    } else if (type === 'baOrder') {
       url = '/pages/business/order'
+    } else if (type === 'promoter') {
+      if (isPromoter) {
+        url = '/pages/promoter/index'
+      } else {
+        url = '/pages/promoter/info'
+      }
     }
     Taro.navigateTo({
       url: url

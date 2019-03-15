@@ -6,7 +6,7 @@ import * as Api from '../../store/business/service'
 import * as Utils from '../../utils/utils'
 
 import mustImg from '../../images/business/must.png'
-import addImg from '../../images/topic/add.png'
+import addImg from '../../images/public/add.png'
 import loadingIcon from '../../images/public/loading.gif'
 import checkTrue from '../../images/public/check-true.png'
 import checkFalse from '../../images/public/check-false.png'
@@ -103,7 +103,7 @@ class BusinessApply extends Component {
     })
   }
 
-  onPutApply() {
+  onPushApply() {
     const {imgFile, attachmentFile, name, address, img, attachment, industry, baState, state, linkman, mobile, baServicerUserId} = this.state
     if(state == 1 || state == 0) {
       return false
@@ -250,7 +250,7 @@ class BusinessApply extends Component {
                 <View className='item-label'>商家图片：</View>
                 <View className='item-input'>
                   {disabled ? <Image className='add-icon' src={img} mode='scaleToFill' /> :
-                    <Image className='add-icon' src={img || imgFile || addImg} mode='scaleToFill'
+                    <Image className='add-icon' src={imgFile || img || addImg} mode='scaleToFill'
                       onClick={this.onInputImgHandler.bind(this, 'imgFile')}
                     />
                   }
@@ -280,7 +280,7 @@ class BusinessApply extends Component {
                 <View className='item-input'>
                   {disabled ?
                     <Image className='add-icon' src={attachment} mode='scaleToFill' /> :
-                    <Image className='add-icon' src={attachment || attachmentFile || addImg} mode='scaleToFill'
+                    <Image className='add-icon' src={attachmentFile || attachment || addImg} mode='scaleToFill'
                       onClick={this.onInputImgHandler.bind(this, 'attachmentFile')}
                     />
                   }
@@ -341,7 +341,7 @@ class BusinessApply extends Component {
 
         {(!loading && !disabled) ?
           <View className='btn-content' style={{height: `${btnHeight}px`}}>
-            <View className='apply-btn' onClick={this.onPutApply.bind(this)}>
+            <View className='apply-btn' onClick={this.onPushApply.bind(this)}>
               {btnMsg}
             </View>
             {state != -3 ?
