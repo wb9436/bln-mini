@@ -26,7 +26,6 @@ class BusinessOrder extends Component {
   componentDidMount() {
     const {pageSize, curPageNum} = this.state
     Api.businessActList({pageSize, curPageNum}).then(res => {
-      console.log(res)
       const {code, body} = res
       if(code == 200) {
         this.setState({
