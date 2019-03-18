@@ -27,7 +27,6 @@
         align-items: center;
         justify-content: center;
 
-
         .search-input {
           margin-left: 10px;
           width: 200px;
@@ -36,7 +35,6 @@
 
         .search-date {
           margin-left: 10px;
-          width: 200px;
           @include sc(30px, $color-small);
         }
       }

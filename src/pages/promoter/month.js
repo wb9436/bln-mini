@@ -30,7 +30,6 @@ class BusinessMonthData extends Component {
     this.setState({businessUserId: userId})
     const {curPageNum, pageSize} = this.state
     Api.businessMonthData({businessUserId: userId, curPageNum, pageSize}).then(data => {
-      console.log(data)
       const {code, body} = data
       if (code == 200) {
         this.setState({
@@ -152,7 +151,7 @@ class BusinessMonthData extends Component {
         {popup ?
           <View className={popup ? 'popup-layout popup-layout--active' : 'popup-layout'} onClick={this.onShowPopup.bind(this)}>
             <View className='date-popup'>
-              <AtCalendar isVertical format='YYYY-MM' hideArrow currentDate={currentDate || Utils.formatSimpleTimeMonth(new Date())}
+              <AtCalendar isVertical format='YYYY-MM' monthFormat='YYYY-MM' hideArrow currentDate={currentDate || Utils.formatSimpleTimeMonth(new Date())}
                 onDayClick={this.onDayClick.bind(this)}
               />
             </View>
