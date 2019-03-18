@@ -124,7 +124,7 @@ class ActivityDetail extends Component {
             {`【${item.title}】${item.subTitle}`}
           </View>
           <View className='activity-profit'>
-            {(item.free === 0 && item.money > 0) ? `每增加一次阅读可获得${item.money}元` : ''}
+            {(item.free == 0 && item.money > 0) ? `每增加一次阅读可获得${item.money}元` : ''}
           </View>
           <View className='activity-data'>
             <View className='activity-hits'>
