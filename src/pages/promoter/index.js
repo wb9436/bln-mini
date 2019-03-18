@@ -60,6 +60,23 @@ class PromoterBusiness extends Component {
     })
   }
 
+  onCleanInput() {
+    this.setState({
+      input: ''
+    })
+    const {curPageNum, pageSize} = this.state
+    Api.agentBusinessList({curPageNum, pageSize}).then(data => {
+      console.log(data)
+      const {code, body} = data
+      if (code == 200) {
+        this.setState({
+          businessList: body.array,
+          loadAll: body.paging.last
+        })
+      }
+    })
+  }
+
   onInputConfirm() {
     const {input, curPageNum, pageSize} = this.state
     if(Utils.isNumber(input)) {
@@ -107,10 +124,11 @@ class PromoterBusiness extends Component {
   }
 
   render() {
-    const {windowHeight, businessList, popup, top} = this.state
+    const {windowHeight, businessList, input, popup, top} = this.state
     const headerHeight = 55
     const titleHeight = 30
     const scrollHeight = windowHeight - headerHeight - titleHeight
+    const hasInput = (input && input.trim() !== '') ? true : false
 
     const businessContent = businessList.map((item, index) => {
       let stateDesc = ''
@@ -138,11 +156,16 @@ class PromoterBusiness extends Component {
       <View className='promoter-business-page' style={{height: `${windowHeight}px`}}>
         <View className='promoter-header' style={{height: `${headerHeight}px`}}>
           <View className='header-input'>
-            <AtIcon value='search' color='#B5B5B5' size='18' />
-            <Input className='search-input' placeholder='输入商家编号' placeholderClass='input-placeholder'
-              type='number' onInput={this.onInputHandler.bind(this)}
-              onBlur={this.onInputConfirm.bind(this)} onConfirm={this.onInputConfirm.bind(this)}
-            />
+            <View className='header-center'>
+              <AtIcon value='search' color='#B5B5B5' size='18' />
+              <Input className='search-input' placeholder='输入商家编号' placeholderClass='input-placeholder'
+                value={input} type='number' onInput={this.onInputHandler.bind(this)}
+                onBlur={this.onInputConfirm.bind(this)} onConfirm={this.onInputConfirm.bind(this)}
+              />
+            </View>
+            <View className='header-right' onClick={this.onCleanInput.bind(this)}>
+              {hasInput ? <AtIcon value='close-circle' color='#B5B5B5' size='15' /> : ''}
+            </View>
           </View>
         </View>
         <View className='list-title' style={{height: `${titleHeight}px`}}>

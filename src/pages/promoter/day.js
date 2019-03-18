@@ -47,6 +47,22 @@ class BusinessDayData extends Component {
     })
   }
 
+  onCleanInput() {
+    this.setState({
+      currentDate: ''
+    })
+    const {businessUserId, curPageNum, pageSize} = this.state
+    Api.businessDayData({businessUserId, curPageNum, pageSize}).then(data => {
+      const {code, body} = data
+      if (code == 200) {
+        this.setState({
+          list: body.array,
+          loadAll: body.paging.last
+        })
+      }
+    })
+  }
+
   onDayClick = (e) => {
     const date = e.value
     const {businessUserId, pageSize, curPageNum, currentDate} = this.state
@@ -85,7 +101,8 @@ class BusinessDayData extends Component {
     const headerHeight = 55
     const titleHeight = 30
     const scrollHeight = windowHeight - headerHeight - titleHeight
-    const hasCheckDate = (currentDate && currentDate.trim() !== '') ? true : false
+    const hasInput = (currentDate && currentDate.trim() !== '') ? true : false
+
     const listContent = list.map((item, index) => {
       return <View key={index} className='list-item'>
         <View className='item-container item-container_content'>
@@ -102,8 +119,13 @@ class BusinessDayData extends Component {
       <View className='promoter-business-page' style={{height: `${windowHeight}px`}}>
         <View className='promoter-header' style={{height: `${headerHeight}px`}}>
           <View className='header-input'>
-            {hasCheckDate ? '' : <AtIcon value='search' color='#B5B5B5' size='18' />}
-            <View className='search-date' onClick={this.onShowPopup.bind(this)}>{currentDate || '输入日期'}</View>
+            <View className='header-center'>
+              <AtIcon value='search' color='#B5B5B5' size='18' />
+              <View className='search-date' onClick={this.onShowPopup.bind(this)}>{currentDate || '输入日期'}</View>
+            </View>
+            <View className='header-right' onClick={this.onCleanInput.bind(this)}>
+              {hasInput ? <AtIcon value='close-circle' color='#B5B5B5' size='15' /> : ''}
+            </View>
           </View>
         </View>
         <View className='list-title' style={{height: `${titleHeight}px`}}>
