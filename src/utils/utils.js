@@ -199,6 +199,19 @@ export const isWeiXin = () => {
   return false
 }
 
+export const isIdCard = (idCard) => {
+  if (!idCard || (idCard.toString().length != 18 && idCard.toString().length != 15)) {
+    return false
+  }
+  idCard = idCard.toString()
+  const reg = /^(\d{6})(19|20)(\d{2})(1[0-2]|0[1-9])(0[1-9]|[1-2][0-9]|3[0-1])(\d{3})(\d|X|x)?$/
+  if (reg.test(idCard)) {
+    return true
+  }
+  return false
+}
+
+
 export const isMobile = (mobile) => {
   if (!mobile || mobile.toString().length != 11) {
     return false

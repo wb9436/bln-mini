@@ -25,6 +25,13 @@
         width: 200px;
         @include sc(30px, $color-small);
       }
+
+      .search-date {
+        margin-left: 10px;
+        width: 200px;
+        @include sc(30px, $color-small);
+      }
+
     }
   }
 
@@ -33,62 +40,87 @@
     width: auto;
     background: $color-white;
     @include sc(26px, $color-big);
-
-    .title-container {
-      height: 57px;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-    }
   }
 
-  .title-id {
-    width: 140px;
-    text-align: center;
-  }
-
-  .title-name {
-    width: 210px;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  .title-ba {
-    width: 140px;
-    text-align: center;
-  }
-
-  .title-state {
-    width: 104px;
-    text-align: center;
-  }
-
-  .title-act {
-    width: 100px;
-    text-align: center;
-  }
-
-  .business-scroll {
+  .list-scroll {
     width: 100%;
   }
 
-  .business-item {
+  .list-item {
     height: 100px;
     padding: 0 28px;
     width: auto;
     background: $color-white;
     @include sc(24px, $color-big);
-
-    .title-container {
-      height: 98px;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      border-top: 2px solid $color-line;
-    }
   }
 
+  .item-container_title {
+    height: 57px;
+  }
+
+  .item-container_content {
+    height: 98px;
+    border-top: 2px solid $color-line;
+  }
+
+  .item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .business {
+      &-id {
+        width: 150px;
+        text-align: center;
+      }
+      &-name {
+        width: 194px;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      &-baState {
+        width: 150px;
+        text-align: center;
+      }
+      &-state {
+        width: 100px;
+        text-align: center;
+      }
+      &-act {
+        width: 100px;
+        text-align: center;
+      }
+    }
+
+    .day {
+      &-date {
+        width: 150px;
+        text-align: center;
+      }
+      &-id {
+        width: 150px;
+        text-align: center;
+      }
+      &-order {
+        width: 140px;
+        text-align: center;
+      }
+      &-money {
+        width: 154px;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      &-state {
+        width: 100px;
+        text-align: center;
+      }
+    }
+
+
+
+  }
 
   .popup-layout {
     position: fixed;
@@ -135,6 +167,15 @@
         }
       }
     }
+
+    .date-popup {
+      width: 100%;
+      background: $color-white;
+      position: absolute;
+      left: 0;
+      top: 110px;
+    }
+
   }
 
   .popup-layout--active {

@@ -3,6 +3,7 @@ import {View, Input, Image} from '@tarojs/components'
 import './info.scss'
 
 import * as Api from '../../store/business/service'
+import * as Utils from '../../utils/utils'
 
 import addImg from '../../images/public/add.png'
 import checkTrue from '../../images/public/check-true.png'
@@ -38,7 +39,7 @@ class PromoterInfo extends Component {
         this.setState({
           userId: body.userId,
           name: body.name,
-          sex: body.sex,
+          sex: body.sex || '男',
           mobile: body.mobile,
           idNumber: body.idNumber,
           state: body.state, //推广员状态：-3未申请 -2=未通过 -1=申请中 0=启用 1=停用
@@ -73,7 +74,106 @@ class PromoterInfo extends Component {
   }
 
   onPushApply() {
+    const {name, sex, mobile, idNumber, state, idImgUrl, idImgFileUrl} = this.state
+    if (state == 1 || state == 0) {
+      return false
+    }
+    if (!name || name.trim() === '') {
+      this.showToast('请输入姓名')
+      return false
+    }
+    if (!Utils.isMobile(mobile)) {
+      this.showToast('请输入正确的手机号')
+      return false;
+    }
+    if (!Utils.isIdCard(idNumber)) {
+      this.showToast('请输入正确的身份证号')
+      return false;
+    }
+    if ((!idImgUrl || idImgUrl.toString().trim() === '') && (!idImgFileUrl || idImgFileUrl.toString().trim() === '')) {
+      this.showToast('请上传身份证照片')
+      return false;
+    }
+    this.uploadImage({
+      sid: Taro.getStorageSync('sid'),
+      url: TOPIC_API + '/chat/tools/files/upload',
+      mediaType: 1,
+      path: [idImgFileUrl],
+      name,
+      sex,
+      mobile,
+      idNumber,
+      idImgUrl: idImgUrl
+    })
+  }
 
+  uploadImage = (data) => {
+    let path = data.path
+    if (path && path.length > 0) {
+      let i = data.i ? data.i : 0
+      if(path[i] && path[i].trim() !== '') {
+        Taro.uploadFile({
+          url: data.url,
+          filePath: path[i],
+          name: 'files',
+          formData: {
+            sid: data.sid,
+            type: data.mediaType
+          },
+          success: (res) => {
+            if (res.statusCode == 200) {
+              const {code, body} = JSON.parse(res.data)
+              if (code == 200) {
+                data.idImgUrl = body[0]
+              } else {
+                console.log('上传失败。。。')
+              }
+            }
+          },
+          complete: () => {
+            i++
+            if (i == path.length) { //当图片传完时，停止调用
+              // console.log('执行完毕: 成功：' + success + ' 失败：' + fail + '; filePath: ' + JSON.stringify(filePath))
+              this.onPutApplyUpdate(data)
+            } else {//若图片还没有传完，则继续调用函数
+              data.i = i
+              this.uploadImage(data)
+            }
+          }
+        })
+      } else {
+        i++
+        if (i == path.length) {
+          this.onPutApplyUpdate(data)
+        } else {
+          data.i = i
+          this.uploadImage(data)
+        }
+      }
+    } else {
+      this.onPutApplyUpdate(data)
+    }
+  }
+
+  onPutApplyUpdate = (data) => {
+    Api.agentUpdate(data).then(result => {
+      console.log(result)
+      const {code} = result
+      if(code == 200) {
+        this.setState({
+          state: -1
+        })
+      }
+    })
+  }
+
+
+  showToast(msg) {
+    Taro.showToast({
+      title: msg,
+      icon: 'none',
+      mask: true,
+    })
   }
 
 
@@ -105,7 +205,7 @@ class PromoterInfo extends Component {
           <View className='item-label'>姓名：</View>
           <View className='item-input'>
             <Input className='input-field' placeholderClass='input-placeholder' disabled={disabled}
-              placeholder='请输入商家名称' value={name} onInput={this.onInputHandler.bind(this, 'name')}
+              placeholder='请输入姓名' value={name} onInput={this.onInputHandler.bind(this, 'name')}
             />
           </View>
         </View>

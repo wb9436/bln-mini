@@ -121,13 +121,13 @@ class PromoterBusiness extends Component {
       } else if (item.state == 0 || item.state == 1) {
         stateDesc = '通过'
       }
-      return <View key={index} className='business-item'>
-        <View className='title-container'>
-          <View className='title-id'>{item.userId}</View>
-          <View className='title-name'>{item.name}</View>
-          <View className='title-ba'>{item.baState == 1 ? '是' : '否'}</View>
-          <View className='title-state'>{stateDesc}</View>
-          <View className='title-act' onClick={this.onShowPopup.bind(this, item.userId)}>
+      return <View key={index} className='list-item'>
+        <View className='item-container item-container_content'>
+          <View className='business-id'>{item.userId}</View>
+          <View className='business-name'>{item.name}</View>
+          <View className='business-baState'>{item.baState == 1 ? '是' : '否'}</View>
+          <View className='business-state'>{stateDesc}</View>
+          <View className='business-act' onClick={this.onShowPopup.bind(this, item.userId)}>
             <AtIcon value='chevron-down' color='#484848' size='16' />
           </View>
         </View>
@@ -146,16 +146,16 @@ class PromoterBusiness extends Component {
           </View>
         </View>
         <View className='list-title' style={{height: `${titleHeight}px`}}>
-          <View className='title-container'>
-            <View className='title-id'>商家编号</View>
-            <View className='title-name'>商家名称</View>
-            <View className='title-ba'>加入商圈</View>
-            <View className='title-state'>状态</View>
-            <View className='title-act'>操作</View>
+          <View className='item-container item-container_title'>
+            <View className='business-id'>商家编号</View>
+            <View className='business-name'>商家名称</View>
+            <View className='business-baState'>加入商圈</View>
+            <View className='business-state'>状态</View>
+            <View className='business-act'>操作</View>
           </View>
         </View>
 
-        <View className='business-scroll' style={{height: `${scrollHeight}px`}}>
+        <View className='list-scroll' style={{height: `${scrollHeight}px`}}>
           <ScrollView className='scroll-container'
             scrollY
             scrollWithAnimation
