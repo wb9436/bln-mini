@@ -3,6 +3,7 @@ import {View, Image, Input} from '@tarojs/components'
 import './index.scss'
 
 import * as Api from '../../store/auth/service'
+import * as Utils from '../../utils/utils'
 import cardImg from '../../images/auth/auth-card.png'
 
 class IdAuth extends Component {
@@ -62,7 +63,6 @@ class IdAuth extends Component {
   onUserAuth() {
     const {isChange, imgUrl, realName, idNumber, authState} = this.state
     if (authState == -1 || authState == 2) {
-      let isIDCard = /^(\d{6})(19|20)(\d{2})(1[0-2]|0[1-9])(0[1-9]|[1-2][0-9]|3[0-1])(\d{3})(\d|X|x)?$/
       if (!realName || realName.trim() === '') {
         Taro.showToast({
           title: '请输入真实姓名',
@@ -71,15 +71,7 @@ class IdAuth extends Component {
         })
         return false
       }
-      if (!idNumber || idNumber.trim() === '') {
-        Taro.showToast({
-          title: '请输入身份证号',
-          icon: 'none',
-          mask: true,
-        })
-        return false
-      }
-      if (!isIDCard.test(idNumber)) {
+      if (!Utils.isIdCard(idNumber)) {
         Taro.showToast({
           title: '请输入正确的身份证号',
           icon: 'none',
