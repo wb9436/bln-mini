@@ -76,6 +76,14 @@ export const formatSimpleTime = date => {
   return [year, month, day].map(formatNumber).join('-')
 }
 
+/*格式化时间*/
+export const formatSimpleTimeMonth = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+
+  return [year, month].map(formatNumber).join('-')
+}
+
 /*判断是否为今天*/
 export const isTodayDay = date => {
   if (!date) {
