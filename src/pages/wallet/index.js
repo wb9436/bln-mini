@@ -14,6 +14,7 @@ import task from '../../images/wallet/task.png'
 import pdd from '../../images/wallet/pdd.png'
 import record from '../../images/wallet/record.png'
 import walletBg from '../../images/wallet/walletBg.png'
+import redBag from '../../images/redBag/red-bag.png'
 
 class Wallet extends Component {
   config = {
@@ -39,6 +40,7 @@ class Wallet extends Component {
       {name: '任务收益', icon: task, page: '/pages/profit/task', showType: 0},
       {name: '拼多多', icon: pdd, page: '/pages/profit/pdd', showType: 0},
       {name: '提现记录', icon: record, page: '/pages/cash/index', showType: 0},
+      {name: '我的红包', icon: redBag, page: '/pages/redBag/index', showType: 0},
     ]
     this.setState({
       amount: Utils.formatPricePoint(amount),
@@ -49,6 +51,9 @@ class Wallet extends Component {
   }
 
   onLookPageHandler(page) {
+    if(!page || page.trim() === '') {
+      return false
+    }
     if (page.indexOf('applyCash') >= 0 || page.indexOf('cashBind') >= 0) {
       let desc = '网页版不支持该功能，要去下载App吗'
       Taro.showModal({

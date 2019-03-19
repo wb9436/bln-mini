@@ -141,6 +141,31 @@ export const ddkOrderState = data => {
   return desc
 }
 
+/**用户红包类型*/
+export const redType = type => {
+  let desc = ''
+  if(!Number.isNaN(type)) {
+    switch (type) {
+      case 1:
+        desc = '商家联盟红包'
+        break;
+      case 2:
+        desc = '业务员红包'
+        break;
+      case 3:
+        desc = '普通红包'
+        break;
+      case 4:
+        desc = '达标红包'
+        break;
+      case 5:
+        desc = '绑定商家红包'
+        break;
+    }
+  }
+  return desc
+}
+
 /*显示距现在时间*/
 export const timeDesc = time => {
   let desc = ''

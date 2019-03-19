@@ -1,0 +1,80 @@
+@import "../../styles/mixin";
+
+.red-page {
+  width: 100%;
+  height: 100vh;
+  background: $color-bg;
+
+  .red-item {
+    padding: 24px 0 0 28px;
+    height: 177px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: $color-white;
+
+    .logo-avatar {
+      width: 90px;
+      height: auto;
+    }
+
+    .red-receive {
+      margin-left: 10px;
+      width: 512px;
+      height: 177px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      position: relative;
+
+      .red-state-img {
+        width: 512px;
+        height: auto;
+      }
+
+      .red-content {
+        width: 512px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        .red-money {
+          width: 355px;
+          height: 134px;
+          margin-left: 155px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+
+          .red-desc {
+            width: 100%;
+            @include sc(32px, $color-white);
+            @include ellipsis;
+          }
+
+          .red-time {
+            width: 100%;
+            @include sc(24px, $color-white);
+          }
+        }
+
+        .red-type {
+          margin-left: 60px;
+          width: 450px;
+          height: 43px;
+          line-height: 43px;
+          @include sc(24px, $color-small);
+          @include ellipsis;
+        }
+      }
+    }
+  }
+
+
+  .red-item_last {
+    padding: 24px 0 24px 28px;
+  }
+
+}
