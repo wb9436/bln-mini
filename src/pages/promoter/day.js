@@ -107,7 +107,7 @@ class BusinessDayData extends Component {
       return <View key={index} className='list-item'>
         <View className='item-container item-container_content'>
           <View className='day-date'>{item.day}</View>
-          <View className='day-id'>{item.servicerUserId}</View>
+          <View className='day-id'>{item.businessUserId}</View>
           <View className='day-order'>{item.orders}</View>
           <View className='day-money'>{Utils.formatPricePoint(item.totalMoney)}</View>
           <View className='day-state'>{item.isStandard == 1 ? '达标' : '未达标'}</View>
@@ -119,9 +119,9 @@ class BusinessDayData extends Component {
       <View className='promoter-business-page' style={{height: `${windowHeight}px`}}>
         <View className='promoter-header' style={{height: `${headerHeight}px`}}>
           <View className='header-input'>
-            <View className='header-center'>
+            <View className='header-center' onClick={this.onShowPopup.bind(this)}>
               <AtIcon value='search' color='#B5B5B5' size='18' />
-              <View className='search-date' onClick={this.onShowPopup.bind(this)}>{currentDate || '输入日期'}</View>
+              <View className='search-date'>{currentDate || '输入日期'}</View>
             </View>
             <View className='header-right' onClick={this.onCleanInput.bind(this)}>
               {hasInput ? <AtIcon value='close-circle' color='#B5B5B5' size='15' /> : ''}

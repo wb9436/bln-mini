@@ -30,7 +30,6 @@ class PromoterBusiness extends Component {
   componentDidMount() {
     const {curPageNum, pageSize} = this.state
     Api.agentBusinessList({curPageNum, pageSize}).then(data => {
-      console.log(data)
       const {code, body} = data
       if (code == 200) {
         this.setState({
