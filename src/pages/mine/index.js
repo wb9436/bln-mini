@@ -141,6 +141,12 @@ class Mine extends Component {
     }
   }
 
+  onUserInfo() {
+    Taro.navigateTo({
+      url: '/pages/user/index'
+    })
+  }
+
   render() {
     const {windowHeight, columnItem, area, address, isOpened} = this.state
     let infoHeight = 135
@@ -197,7 +203,7 @@ class Mine extends Component {
         >
           <View className='user-info' style={{height: `${infoHeight}px`}}>
             <View className='user-base-info'>
-              <Image className='avatar' src={userData.avatar || avatar} mode='widthFix' />
+              <Image className='avatar' src={userData.avatar || avatar} mode='widthFix' onClick={this.onUserInfo.bind(this)} />
               <View className='info'>
                 <View className='nickname'>{userData.nickname}</View>
                 {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ?

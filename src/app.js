@@ -71,6 +71,7 @@ class App extends Component {
       'pages/promoter/day',
       'pages/promoter/month',
       'pages/redBag/index',
+      'pages/user/index',
     ],
     tabBar: {
       "color": "#929292",
