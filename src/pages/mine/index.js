@@ -79,6 +79,7 @@ class Mine extends Component {
         url: '/pages/login/index'
       })
     }
+    this.onLoadAreaData()
   }
 
   onLoadAreaData() {
