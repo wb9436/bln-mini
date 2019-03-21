@@ -2,7 +2,7 @@
 export const noConsole = true
 
 //当前版本号
-export const versionNo = '2.1.0'
+export const versionNo = '2.2.0'
 
 // 请求连接前缀
 export const baseUrl = 'http://api.viplark.com'
