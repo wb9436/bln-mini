@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
-import * as Constant from '../config/index'
 import CryptoJS from 'crypto-js'
+import * as Constant from '../config/index'
 // import WeiXinUtils from 'weixin-js-sdk'
 
 export const windowHeight = tabPage => {
@@ -257,6 +257,19 @@ export const isMobile = (mobile) => {
   return false
 }
 
+/**最多两位小数金额校验*/
+export const isMoney = (money) => {
+  if (!money || money.toString().trim() === '') {
+    return false
+  }
+  money = money.toString()
+  // const reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/
+  const reg = /^(([1-9]([0-9]+)?)|([0]))(\.[0-9]{1,2})?$/
+  if (reg.test(money)) {
+    return true
+  }
+  return false
+}
 
 export const isNumber = (val) => {
   if (!val) {
