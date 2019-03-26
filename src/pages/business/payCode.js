@@ -21,7 +21,7 @@ class PayCode extends Component {
 
   componentDidShow() {
     const {isBusiness, businessId} = this.$router.params
-    if (isBusiness == 1 && isBusiness == 1) {
+    if (isBusiness == 1) {
       this.setState({
         isBusiness: isBusiness,
         businessId: businessId,
