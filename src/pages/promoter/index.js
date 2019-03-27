@@ -65,7 +65,6 @@ class PromoterBusiness extends Component {
     })
     const {curPageNum, pageSize} = this.state
     Api.agentBusinessList({curPageNum, pageSize}).then(data => {
-      console.log(data)
       const {code, body} = data
       if (code == 200) {
         this.setState({
@@ -80,7 +79,6 @@ class PromoterBusiness extends Component {
     const {input, curPageNum, pageSize} = this.state
     if(Utils.isNumber(input)) {
       Api.agentBusinessList({curPageNum, pageSize, input}).then(data => {
-        console.log(data)
         const {code, body} = data
         if (code == 200) {
           this.setState({
