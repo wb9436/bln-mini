@@ -48,19 +48,22 @@ class BusinessDayData extends Component {
   }
 
   onCleanInput() {
-    this.setState({
-      currentDate: ''
-    })
-    const {businessUserId, curPageNum, pageSize} = this.state
-    Api.businessDayData({businessUserId, curPageNum, pageSize}).then(data => {
-      const {code, body} = data
-      if (code == 200) {
-        this.setState({
-          list: body.array,
-          loadAll: body.paging.last
-        })
-      }
-    })
+    const {currentDate} = this.state
+    if(currentDate && currentDate.toString().trim() !== '') {
+      this.setState({
+        currentDate: ''
+      })
+      const {businessUserId, curPageNum, pageSize} = this.state
+      Api.businessDayData({businessUserId, curPageNum, pageSize}).then(data => {
+        const {code, body} = data
+        if (code == 200) {
+          this.setState({
+            list: body.array,
+            loadAll: body.paging.last
+          })
+        }
+      })
+    }
   }
 
   onDayClick = (e) => {

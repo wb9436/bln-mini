@@ -60,19 +60,22 @@ class PromoterBusiness extends Component {
   }
 
   onCleanInput() {
-    this.setState({
-      input: ''
-    })
-    const {curPageNum, pageSize} = this.state
-    Api.agentBusinessList({curPageNum, pageSize}).then(data => {
-      const {code, body} = data
-      if (code == 200) {
-        this.setState({
-          businessList: body.array,
-          loadAll: body.paging.last
-        })
-      }
-    })
+    const {input} = this.state
+    if(input && input.toString().trim() !== '') {
+      this.setState({
+        input: ''
+      })
+      const {curPageNum, pageSize} = this.state
+      Api.agentBusinessList({curPageNum, pageSize}).then(data => {
+        const {code, body} = data
+        if (code == 200) {
+          this.setState({
+            businessList: body.array,
+            loadAll: body.paging.last
+          })
+        }
+      })
+    }
   }
 
   onInputConfirm() {
