@@ -11,12 +11,20 @@ import './styles/base.scss'
 //配置store
 import store from './store/index'
 
-
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
+
+import IndexIcon from './images/tab/index.png'
+import IndexSelectIcon from './images/tab/index_select.png'
+import CityIcon from './images/tab/city.png'
+import CitySelectIcon from './images/tab/city_select.png'
+import ClassifyIcon from './images/tab/classify.png'
+import ClassifySelectIcon from './images/tab/classify_select.png'
+import MineIcon from './images/tab/mine.png'
+import MineSelectIcon from './images/tab/mine_select.png'
 
 class App extends Component {
   config = {
@@ -82,26 +90,26 @@ class App extends Component {
       "list": [
         {
           "pagePath": "pages/home/index",
-          "iconPath": "images/tab/index.png",
-          "selectedIconPath": "images/tab/index_select.png",
+          "iconPath": process.env.TARO_ENV === 'h5' ? IndexIcon : "images/tab/index.png",
+          "selectedIconPath": process.env.TARO_ENV === 'h5' ? IndexSelectIcon : "images/tab/index_select.png",
           "text": "首页"
         },
         {
           "pagePath": "pages/city/index",
-          "iconPath": "images/tab/city.png",
-          "selectedIconPath": "images/tab/city_select.png",
+          "iconPath": process.env.TARO_ENV === 'h5' ? CityIcon : "images/tab/city.png",
+          "selectedIconPath": process.env.TARO_ENV === 'h5' ? CitySelectIcon : "images/tab/city_select.png",
           "text": "同城"
         },
         {
           "pagePath": "pages/classify/index",
-          "iconPath": "images/tab/classify.png",
-          "selectedIconPath": "images/tab/classify_select.png",
+          "iconPath": process.env.TARO_ENV === 'h5' ? ClassifyIcon : "images/tab/classify.png",
+          "selectedIconPath": process.env.TARO_ENV === 'h5' ? ClassifySelectIcon : "images/tab/classify_select.png",
           "text": "发现"
         },
         {
           "pagePath": "pages/mine/index",
-          "iconPath": "images/tab/mine.png",
-          "selectedIconPath": "images/tab/mine_select.png",
+          "iconPath": process.env.TARO_ENV === 'h5' ? MineIcon : "images/tab/mine.png",
+          "selectedIconPath": process.env.TARO_ENV === 'h5' ? MineSelectIcon : "images/tab/mine_select.png",
           "text": "我的"
         }
       ]
