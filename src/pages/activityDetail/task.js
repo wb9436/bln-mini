@@ -3,8 +3,11 @@ import {View, RichText, ScrollView, Button, Image, Video} from '@tarojs/componen
 import {AtIcon} from 'taro-ui'
 import {connect} from '@tarojs/redux'
 import './index.scss'
-import * as Api from '../../store/activity/service'
+
 import ParseComponent from './wxParseComponent'
+import WxShare from '../../components/WxShare'
+
+import * as Api from '../../store/activity/service'
 import * as Utils from '../../utils/utils'
 
 import praiseBtn from '../../images/public/praise_yes.png'
@@ -222,7 +225,7 @@ class ActivityTask extends Component {
 
   render() {
     const {hasLogin} = this.state
-    const {type, title, content, unionid, refreshTime, hits, praise, praiseState} = this.props
+    const {type, title, content, link, desc, imageUrl, unionid, refreshTime, hits, praise, praiseState} = this.props
     const {isAd, isImage, isVideo, picUrl, videoUrl, adTitle, subTitle, btnTitle, actList} = this.props
 
     let existAct = false
@@ -264,6 +267,7 @@ class ActivityTask extends Component {
 
     return (
       <View className='activity-page'>
+        {process.env.TARO_ENV === 'h5' ? <WxShare link={link} title={title} desc={desc} imgUrl={imageUrl} /> : ''}
 
         <ScrollView
           className='act-scroll'
