@@ -60,8 +60,9 @@ class MobileRegister extends Component {
 
   onLoginHandler() {
     let versionNo = Utils.getVersionNo()
+    let marketId = Taro.getStorageSync('marketId')
     const {mobile, code, inviter, address} = this.state
-    Api.mobileBindWeiXinRegister({code, mobile, id: inviter, address, versionNo}).then(data => {
+    Api.mobileBindWeiXinRegister({code, mobile, id: inviter, address, versionNo, marketId}).then(data => {
       if (data.code == 200) {
         this.checkLogin(data.body.sid)
       } else {

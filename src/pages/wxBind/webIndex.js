@@ -194,7 +194,8 @@ class WebWxBind extends Component {
   /*手机号绑定微信注册*/
   onMobileBindWeiXinRegister = (nickname, headimgurl, wxUnionid, webOpenid, code, mobile, id, address) => {
     let versionNo = Utils.getVersionNo()
-    Api.mobileBindWeiXinRegister({nickname, headimgurl, wxUnionid, webOpenid, code, mobile, id, address, versionNo}).then(data => {
+    let marketId = Taro.getStorageSync('marketId')
+    Api.mobileBindWeiXinRegister({nickname, headimgurl, wxUnionid, webOpenid, code, mobile, id, address, versionNo, marketId}).then(data => {
       if (data.code == 200) {
         this.checkLogin(data.body.sid)
       } else {
