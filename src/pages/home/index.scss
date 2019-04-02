@@ -29,11 +29,112 @@
 
   }
 
+  .category-view {
+    margin: 0 35px;
+    display: flex;
+    align-items: center;
+    //justify-content: space-around;
+    flex-wrap: wrap;
+
+    .category-item {
+      width: 170px;
+      height: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+
+      .category-icon {
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+      }
+
+      .category-title {
+        width: 100%;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        @include sc(24px, $color-big);
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .category-desc {
+    margin-top: 20px;
+    border-top: 16px solid $color-bg;
+    padding: 0 28px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+
+    .category-name {
+      border-left: 6px solid $color-theme;
+      padding-left: 12px;
+      height: 32px;
+      line-height: 32px;
+      @include sc(30px, $color-big);
+    }
+
+    .category-sort {
+      width: 110px;
+      height: auto;
+    }
+
+    .popup-view {
+      position: absolute;
+      z-index: 1;
+      top: 50px;
+      right: 50px;
+      width: 210px;
+      height: 268px;
+
+      .popup-icon {
+        width: 210px;
+        height: 268px;
+      }
+
+      .sort-list {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .sort-item-desc {
+          width: 150px;
+          height: 70px;
+          text-align: center;
+          line-height: 70px;
+          @include sc(30px, $color-big);
+        }
+
+        .sort-item-border {
+          border-bottom: 2px solid $color-line;
+        }
+
+        .sort-item-checked {
+          color: $color-theme;
+        }
+
+      }
+
+    }
+
+  }
+
   .act-list {
     width: 100%;
     position: relative;
-
-
 
     .refresh-btn {
       position: absolute;

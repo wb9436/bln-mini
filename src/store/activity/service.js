@@ -16,6 +16,14 @@ export const activityListSearch = data => Request({
   data
 })
 
+/*活动列表查询*/
+export const activityListSortSearch = data => Request({
+  url: '/api/activity/list/sort',
+  method: 'POST',
+  need_sid: true,
+  data
+})
+
 /*活动内容详情*/
 export const activityContent = data => Request({
   url: '/api/activity/content',

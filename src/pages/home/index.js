@@ -6,6 +6,8 @@ import './index.scss'
 import WxShare from '../../components/WxShare/index'
 import LoadAll from '../../components/LoadAll/index'
 
+import SortIcon from '../../images/activity/sortIcon.png'
+import PopupIcon from '../../images/activity/popupIcon.png'
 import refreshBtn from '../../images/public/refresh.png'
 
 @connect(({activity, loading}) => ({
@@ -25,7 +27,8 @@ class Home extends Component {
     }
     this.state = {
       windowHeight: windowHeight,
-      loading: false
+      loading: false,
+      popup: false,
     }
   }
 
@@ -40,6 +43,26 @@ class Home extends Component {
     }, 500)
   }
 
+  onSortPopup() {
+    const {popup} = this.state
+    this.setState({popup: !popup})
+  }
+
+  onSortCheck(type) {
+    this.setState({popup: false})
+    const {sortType} = this.props
+    if(type != sortType) {
+      this.props.dispatch({
+        type: 'activity/save',
+        payload: {sortType: type}
+      })
+      this.props.dispatch({
+        type: 'activity/refreshActivity'
+      })
+      this.refresh()
+    }
+  }
+
   componentDidMount() {
     this.props.dispatch({
       type: 'activity/loadActType'
@@ -51,10 +74,11 @@ class Home extends Component {
   }
 
   onActTypeChecked(old, category) {
+    this.setState({popup: false})
     if (old !== category) {
       this.props.dispatch({
         type: 'activity/save',
-        payload: {category}
+        payload: {category, sortType: 0}
       })
       this.props.dispatch({
         type: 'activity/refreshActivity'
@@ -81,6 +105,8 @@ class Home extends Component {
   }
 
   onActivityClick(actId, title, iconUrl) {
+    this.setState({popup: false})
+
     let unionid = Taro.getStorageSync('unionid')
     if(!unionid || unionid.trim() === '') {
       unionid = Taro.getStorageSync('user').withdrawNo
@@ -93,16 +119,17 @@ class Home extends Component {
   }
 
   render() {
-    const {windowHeight, loading} = this.state
-    const {category, actTypes, activityList, loadAll} = this.props
-    const typeContent = actTypes.map((item, index) => {
-      return <View key={index} className={category === item.name ? 'type-item checked' : 'type-item'}
-        onClick={this.onActTypeChecked.bind(this, category, item.name)}
-      >{item.name}</View>
+    const {windowHeight, loading, popup} = this.state
+    const {category, actTypes, activityList, loadAll, sortType} = this.props
+
+    const categoryContent = actTypes.map((item) => {
+      return <View key={item.id} className='category-item' onClick={this.onActTypeChecked.bind(this, category, item.name)}>
+        <Image className='category-icon' src={item.imgUrl} mode='widthFix' />
+        <View className='category-title'>{item.name}</View>
+      </View>
     })
 
-    let typeHeight = 39
-    let actHeight = windowHeight - 40
+    let actHeight = windowHeight
 
     const actContent = activityList.map((item, index) => {
       return <View key={index} className='activity-item' onClick={this.onActivityClick.bind(this, item.actId, item.subTitle, item.iconUrl)}>
@@ -134,9 +161,6 @@ class Home extends Component {
       <View className='home-page'>
         {process.env.TARO_ENV === 'h5' ? <WxShare /> : ''}
 
-        <View className='act-type' style={{height: `${typeHeight}px`}}>
-          {typeContent}
-        </View>
         <View className='act-list' style={{height: `${actHeight}px`}}>
           <ScrollView className='scroll-container'
             scrollY
@@ -144,8 +168,25 @@ class Home extends Component {
             scrollWithAnimation
             onScrollToLower={this.onLoadHandler.bind(this)}
           >
-            {actContent}
+            <View className='category-view'>
+              {categoryContent}
+            </View>
 
+            <View className='category-desc'>
+              <View className='category-name'>{category}</View>
+              <Image className='category-sort' src={SortIcon} mode='widthFix' onClick={this.onSortPopup.bind(this)} />
+
+              <View className={popup ? 'popup-view' : 'popup-view hidden'}>
+                <Image className='popup-icon' src={PopupIcon} mode='widthFix' />
+                <View className='sort-list'>
+                  <View className={sortType == 0 ? 'sort-item-desc sort-item-border sort-item-checked' : 'sort-item-desc sort-item-border'} onClick={this.onSortCheck.bind(this, 0)}>最新</View>
+                  <View className={sortType == 1 ? 'sort-item-desc sort-item-border sort-item-checked' : 'sort-item-desc sort-item-border'} onClick={this.onSortCheck.bind(this, 1)}>酬金</View>
+                  <View className={sortType == 4 ? 'sort-item-desc sort-item-checked' : 'sort-item-desc'} onClick={this.onSortCheck.bind(this, 4)}>热度</View>
+                </View>
+              </View>
+            </View>
+
+            {actContent}
             <LoadAll loadAll={loadAll} />
           </ScrollView>
 

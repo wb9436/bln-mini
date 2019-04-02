@@ -1,15 +1,20 @@
+import Taro from '@tarojs/taro'
 import * as Api from './service'
+
+import RecommendIcon from '../../images/activity/recommend.png'
 
 export default {
   namespace: 'activity',
   state: {
     scrollTop: 0,
-    actTypes: [{name: '推荐', id: 1}],
+    actTypes: [{name: '推荐', imgUrl: RecommendIcon, id: 1}],
+    marketId: Taro.getStorageSync('marketId'),
     category: '推荐',
     activityList: [],
     loadAll: false,
     pageSize: 10,
     curPageNum: 1,
+    sortType: 0, //排序：0=最新；1=酬金；4=热度
   },
 
   effects: {
@@ -19,7 +24,7 @@ export default {
         yield put({
           type: 'save',
           payload: {
-            actTypes: [{name: '推荐', id: 1}].concat(body)
+            actTypes: [{name: '推荐', imgUrl: RecommendIcon, id: 1}].concat(body)
           }
         })
       }
@@ -34,12 +39,17 @@ export default {
         }
       })
       let curPageNum = 1
-      const {category, pageSize} = yield select(state => state.activity)
-      let params = {curPageNum, pageSize}
+      const {marketId, category, pageSize, sortType} = yield select(state => state.activity)
+      let params = {curPageNum, pageSize, sortType}
       if (category !== '推荐') {
         params.category = category
       }
-      const {code, body} = yield call(Api.activityListSearch, params)
+      if(marketId) {
+        params.category = '全部'
+        params.marketId = 'C0002'
+      }
+
+      const {code, body} = yield call(Api.activityListSortSearch, params)
       if (code == 200) {
         yield put({
           type: 'save',
@@ -54,14 +64,18 @@ export default {
     },
 
     * loadActivity(_, {call, put, select}) {
-      const {category, activityList, pageSize, curPageNum, loadAll} = yield select(state => state.activity)
+      const {marketId, category, activityList, pageSize, curPageNum, loadAll, sortType} = yield select(state => state.activity)
       if (!loadAll) {
-        let params = {pageSize}
+        let params = {pageSize, sortType}
         if (category !== '推荐') {
           params.category = category
         }
+        if(marketId) {
+          params.category = '全部'
+          params.marketId = 'C0002'
+        }
         params.curPageNum = curPageNum + 1
-        const {code, body} = yield call(Api.activityListSearch, params)
+        const {code, body} = yield call(Api.activityListSortSearch, params)
         if (code == 200) {
           yield put({
             type: 'save',
