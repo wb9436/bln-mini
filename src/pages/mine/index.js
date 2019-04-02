@@ -136,7 +136,7 @@ class Mine extends Component {
       } else if (page.indexOf('task') > -1) {
         page = page + '?signTime=' + userSign.signTime
       } else if (page.indexOf('myTopic') > -1) {
-        page = page + '?userId=' + userData.userId + '&nickname=' + userData.nickname + '&avatar=' + userData.avatar
+        page = page + '?userId=' + userData.userId + '&nickname=' + encodeURI(userData.nickname) + '&avatar=' + encodeURI(userData.avatar)
       }
       Taro.navigateTo({
         url: page

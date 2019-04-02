@@ -218,7 +218,7 @@ class CityTopic extends Component {
   onLookUserTopic(userId, nickname, headImg, e) {
     e.stopPropagation()
     Taro.navigateTo({
-      url : '/pages/myTopic/index?userId=' + userId + '&nickname=' + nickname + '&avatar=' + headImg
+      url : '/pages/myTopic/index?userId=' + userId + '&nickname=' + encodeURI(nickname) + '&avatar=' + encodeURI(headImg)
     })
   }
 

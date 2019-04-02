@@ -40,7 +40,7 @@ class MyTopic extends Component {
 
   componentDidMount() {
     const {userId, nickname, avatar} = this.$router.params
-    this.setState({nickname, avatar : (avatar && avatar !== 'null') ? avatar : ''})
+    this.setState({nickname: decodeURI(nickname), avatar : (avatar && avatar !== 'null') ? decodeURI(avatar) : ''})
     this.props.dispatch({
       type: 'myTopic/onInitData',
       payload: {userId: userId}
