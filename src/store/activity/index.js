@@ -46,15 +46,13 @@ export default {
       }
       if(marketId) {
         params.category = '全部'
-        params.marketId = 'C0002'
+        params.marketId = marketId
       }
-
       const {code, body} = yield call(Api.activityListSortSearch, params)
       if (code == 200) {
         yield put({
           type: 'save',
           payload: {
-
             activityList: body.array,
             loadAll: body.paging.last,
             curPageNum: curPageNum
@@ -72,7 +70,7 @@ export default {
         }
         if(marketId) {
           params.category = '全部'
-          params.marketId = 'C0002'
+          params.marketId = marketId
         }
         params.curPageNum = curPageNum + 1
         const {code, body} = yield call(Api.activityListSortSearch, params)
