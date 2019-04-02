@@ -133,7 +133,9 @@ class App extends Component {
         Taro.setStorageSync('inviter', inviter)
       }
       if (marketId && marketId.toString().trim() !== '' && marketId !== 'A0000') {
-        Taro.setStorageSync('marketId', marketId)
+        if(Taro.getEnv() === Taro.ENV_TYPE.WEB) { //只针对H5版本进行渠道处理
+          Taro.setStorageSync('marketId', marketId)
+        }
       }
     } catch (e) {
       console.log(e)
