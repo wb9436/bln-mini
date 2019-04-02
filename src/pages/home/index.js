@@ -83,7 +83,6 @@ class Home extends Component {
   onActivityClick(actId, title, iconUrl) {
     let unionid = Taro.getStorageSync('unionid')
     if(!unionid || unionid.trim() === '') {
-      console.log(unionid)
       unionid = Taro.getStorageSync('user').withdrawNo
     }
     Taro.navigateTo({
