@@ -2,10 +2,10 @@ import Taro, {Component} from '@tarojs/taro'
 import {View, Image} from '@tarojs/components'
 import './index.scss'
 
+import * as Api from '../../store/user/newService'
 import WxShare from '../../components/WxShare'
 import * as Utils from '../../utils/utils'
 import loading from '../../images/public/loading.gif'
-import * as Api from "../../store/user/newService";
 
 class Index extends Component {
   config = {
