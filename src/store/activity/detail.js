@@ -103,7 +103,16 @@ export default {
         })
       }
       res = yield call(Api.activityBrief, {userId, actId})
-      if (res) {
+      if (res && res.code == 200) {
+        console.log(res.body)
+        yield put({
+          type: 'save',
+          payload: {
+            subTitle: res.body.subTitle,
+            imageUrl: res.body.iconUrl
+          }
+        })
+
         let ruleDto = res.body.ruleDto
         if (ruleDto) {
           yield put({

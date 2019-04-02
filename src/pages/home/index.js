@@ -89,7 +89,7 @@ class Home extends Component {
     Taro.navigateTo({
       // url: `/pages/activityDetail/index?type=0&title=${title}&actId=${actId}&imageUrl=${iconUrl}`
       // url: `/pages/activityDetail/detail?actId=${actId}`
-      url: `/pages/activityDetail/task?type=0&title=${title}&actId=${actId}&userId=${Taro.getStorageSync('userId')}&unionid=${unionid}`
+      url: `/pages/activityDetail/task?type=0&title=${title}&actId=${actId}&userId=${Taro.getStorageSync('userId')}&imageUrl=${iconUrl}&unionid=${unionid}`
     })
   }
 

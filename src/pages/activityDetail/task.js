@@ -8,6 +8,7 @@ import ParseComponent from './wxParseComponent'
 import * as Utils from '../../utils/utils'
 
 import praiseBtn from '../../images/public/praise_yes.png'
+import shareBtn from '../../images/public/shareBtn.png'
 
 @connect(({activityDetail}) => ({
   ...activityDetail
@@ -19,15 +20,28 @@ class ActivityTask extends Component {
 
   constructor() {
     super(...arguments)
+
+    let hasLogin = true
+    let sid = Taro.getStorageSync('sid')
+    if(!sid || sid.trim() === '') {
+      hasLogin = false
+    }
     this.state = {
       click: false,
       canScroll: true,
+      hasLogin: hasLogin,
     }
   }
 
   componentDidMount() {
-    const {userId, type, actId, title} = this.$router.params
+    console.log(this.$router.params)
+    const {userId, type, actId, title, imageUrl} = this.$router.params
     let unionid = this.$router.params.unionid
+    let link = `http://api.viplark.com/api/web/share?userId=${userId}&type=${type}&actId=${actId}`
+    let desc = '更多有趣的段子，尽在百灵鸟平台'
+    if (type == 0) {
+      desc = '更多生活资讯、优惠信息，尽在百灵鸟平台'
+    }
     if (userId) {
       Taro.setStorageSync('inviter', userId)
     }
@@ -43,7 +57,7 @@ class ActivityTask extends Component {
     this.props.dispatch({
       type: 'activityDetail/save',
       payload: {
-        userId, type, actId, title, openTime, unionid
+        userId, type, actId, title, link, desc, imageUrl, openTime, unionid
       }
     })
     this.props.dispatch({
@@ -68,6 +82,16 @@ class ActivityTask extends Component {
       this.props.dispatch({
         type: 'activityDetail/loadNewsContent'
       })
+    }
+  }
+
+  onShareAppMessage() {
+    const {userId, type, actId, title, desc, imageUrl} = this.props
+    return {
+      title: title,
+      imageUrl: imageUrl,
+      desc: desc,
+      path: `/pages/activityDetail/task?userId=${userId}&type=${type}&actId=${actId}&title=${title}`
     }
   }
 
@@ -117,7 +141,7 @@ class ActivityTask extends Component {
               })
             } else {
               console.log('非有效任务...: ' + msg)
-              if (msg.indexOf('任务地址') > -1) {
+              if (msg.indexOf('任务地址') > -1 || msg.indexOf('活动状态不符合') > -1) {
                 clearInterval(this.checkTaskTimerID)
               }
             }
@@ -187,12 +211,14 @@ class ActivityTask extends Component {
 
   onActivityClick(actId, title) {
     const {userId} = this.props
+    let unionid = Taro.getStorageSync('unionid')
     Taro.navigateTo({
-      url: `/pages/activityDetail/task?type=0&title=${title}&actId=${actId}&userId=${userId}`
+      url: `/pages/activityDetail/task?type=0&title=${title}&actId=${actId}&userId=${userId}&unionid=${unionid}`
     })
   }
 
   render() {
+    const {hasLogin} = this.state
     const {type, title, content, unionid, refreshTime, hits, praise, praiseState} = this.props
     const {isAd, isImage, isVideo, picUrl, videoUrl, adTitle, subTitle, btnTitle, actList} = this.props
 
@@ -200,7 +226,13 @@ class ActivityTask extends Component {
     if(content && content.trim() !== '') {
       existAct = true
     }
+
+    let shareBtnHeight = 50
     let scrollHeight = Utils.windowHeight(false)
+    if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP && existAct && hasLogin) {
+      scrollHeight -= 50
+    }
+
     const {click} = this.state
     let canScrollTemp = (unionid && unionid.length > 0) ? true : this.state.canScroll
 
@@ -291,7 +323,7 @@ class ActivityTask extends Component {
 
         </ScrollView>
 
-        {existAct ?
+        {(existAct && !hasLogin) ?
           <View className='guide-container'>
             <View className='guide-btn' onClick={this.onGuideBtnClick.bind(this)}>
               <AtIcon value={click ? 'chevron-right' : 'chevron-left'} size='15' />
@@ -308,6 +340,14 @@ class ActivityTask extends Component {
             }
           </View> : ''
         }
+
+        {(existAct && hasLogin && Taro.getEnv() === Taro.ENV_TYPE.WEAPP) ?
+          <Button className='share-btn' plain openType='share' style={{height: `${shareBtnHeight}px`}}>
+            <Image className='btn-img' src={shareBtn} mode='widthFix' />
+            <View>立即分享</View>
+          </Button> : ''
+        }
+
 
         {/*小程序需要授权*/}
         {!canScrollTemp ?
