@@ -132,7 +132,7 @@ class App extends Component {
       if (inviter && inviter.toString().trim() !== '') {
         Taro.setStorageSync('inviter', inviter)
       }
-      if (marketId && marketId.toString().trim() !== '') {
+      if (marketId && marketId.toString().trim() !== '' && marketId !== 'A0000') {
         Taro.setStorageSync('marketId', marketId)
       }
     } catch (e) {

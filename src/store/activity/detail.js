@@ -104,7 +104,6 @@ export default {
       }
       res = yield call(Api.activityBrief, {userId, actId})
       if (res && res.code == 200) {
-        console.log(res.body)
         yield put({
           type: 'save',
           payload: {
@@ -112,7 +111,6 @@ export default {
             imageUrl: res.body.iconUrl
           }
         })
-
         let ruleDto = res.body.ruleDto
         if (ruleDto) {
           yield put({

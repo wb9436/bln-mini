@@ -37,7 +37,8 @@ class ActivityTask extends Component {
     console.log(this.$router.params)
     const {userId, type, actId, title, imageUrl} = this.$router.params
     let unionid = this.$router.params.unionid
-    let link = `http://api.viplark.com/api/web/share?userId=${userId}&type=${type}&actId=${actId}`
+    let marketId = Taro.getStorageSync('marketId')
+    let link = `http://api.viplark.com/api/web/share?userId=${userId}&type=${type}&actId=${actId}&marketId=${marketId}`
     let desc = '更多有趣的段子，尽在百灵鸟平台'
     if (type == 0) {
       desc = '更多生活资讯、优惠信息，尽在百灵鸟平台'
@@ -87,11 +88,12 @@ class ActivityTask extends Component {
 
   onShareAppMessage() {
     const {userId, type, actId, title, desc, imageUrl} = this.props
+    let marketId = Taro.getStorageSync('marketId')
     return {
       title: title,
       imageUrl: imageUrl,
       desc: desc,
-      path: `/pages/activityDetail/task?userId=${userId}&type=${type}&actId=${actId}&title=${title}`
+      path: `/pages/activityDetail/task?userId=${userId}&type=${type}&actId=${actId}&title=${title}&marketId=${marketId}`
     }
   }
 
@@ -212,8 +214,9 @@ class ActivityTask extends Component {
   onActivityClick(actId, title) {
     const {userId} = this.props
     let unionid = Taro.getStorageSync('unionid')
+    let marketId = Taro.getStorageSync('marketId')
     Taro.navigateTo({
-      url: `/pages/activityDetail/task?type=0&title=${title}&actId=${actId}&userId=${userId}&unionid=${unionid}`
+      url: `/pages/activityDetail/task?type=0&title=${title}&actId=${actId}&userId=${userId}&unionid=${unionid}&marketId=${marketId}`
     })
   }
 
