@@ -4,7 +4,7 @@ import * as Api from './service'
 export default {
   namespace: 'myTopic',
   state: {
-    userId: Taro.getStorageSync('userId'),
+    userId: '',
     attentionNum: 0, //关注数
     topicNum: 0, //我的话题数
     loadAll: false,
@@ -14,19 +14,21 @@ export default {
   },
 
   effects: {
-    * onInitData(_, {put}) {
-      yield put({
-        type: 'save',
-        payload: {
-          userId: Taro.getStorageSync('userId'),
-          attentionNum: 0, //关注数
-          topicNum: 0, //我的话题数
-          loadAll: false,
-          topicList: [],
-          curPageNum: 1,
-          pageSize: 15,
-        }
-      })
+    * onInitData({payload}, {put}) {
+      if(payload) {
+        yield put({
+          type: 'save',
+          payload: {
+            userId: payload.userId,
+            attentionNum: 0, //关注数
+            topicNum: 0, //我的话题数
+            loadAll: false,
+            topicList: [],
+            curPageNum: 1,
+            pageSize: 15,
+          }
+        })
+      }
     },
 
     * onLoadTopicList(_, {call, put, select}) {

@@ -25,30 +25,25 @@ class MyTopic extends Component {
 
   constructor() {
     super(...arguments)
-    let userInfo = Taro.getStorageSync('user')
     this.state = {
       windowHeight: Utils.windowHeight(false),
-      nickname: userInfo.nickname,
-      avatar: userInfo.avatar,
+      nickname: '',
+      avatar: '',
       id: '', //话题ID
       index: 0, //话题序号
       actType: 0, //动作类型: 0=删除, 1=查看, 2=投诉
       isOpenAct: false, //是否打开动作面板
+      myself: 0, //是否是我的
+      attention: 0, //是否关注
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    const {userId, nickname, avatar} = this.$router.params
+    this.setState({nickname, avatar : (avatar && avatar !== 'null') ? avatar : ''})
     this.props.dispatch({
       type: 'myTopic/onInitData',
-    })
-    this.props.dispatch({
-      type: 'myTopic/onLoadTopicList'
-    })
-  }
-
-  componentDidShow() {
-    this.props.dispatch({
-      type: 'myTopic/onInitData',
+      payload: {userId: userId}
     })
     this.props.dispatch({
       type: 'myTopic/onLoadTopicList'
@@ -78,20 +73,20 @@ class MyTopic extends Component {
     }
   }
 
-  onTopicDetail(id) {
-    Taro.navigateTo({
-      url: '/pages/topic/detail?id=' + id
-    })
-  }
-
-  onOpenAction(index, id, e) {
+  onOpenAction(index, id, myself, attention, e) {
     e.stopPropagation()
     let actType = 1
     let isOpenAct = true
-    this.setState({index, id, actType, isOpenAct})
+    this.setState({index, id, myself, attention, actType, isOpenAct})
   }
 
-  onCloseAction() {
+  onOpenReportAction() {
+    let actType = 2
+    let isOpenAct = true
+    this.setState({actType, isOpenAct})
+  }
+
+  onCloseAction = () => {
     this.setState({isOpenAct: false})
   }
 
@@ -104,6 +99,23 @@ class MyTopic extends Component {
     })
   }
 
+  onTopicAttention(index, id, myself, attention, e) {
+    e.stopPropagation()
+    let isOpenAct = false
+    let actType = 0
+    if (myself == 1) {
+      isOpenAct = true
+      this.setState({index, id, actType, isOpenAct})
+    } else {
+      const {type} = this.state
+      this.props.dispatch({
+        type: 'myTopic/onTopicAttention',
+        payload: {type, index, id, attention}
+      })
+      this.onCloseAction()
+    }
+  }
+
   onTopicPraise(index, id, praise, e) {
     e.stopPropagation()
     this.props.dispatch({
@@ -114,8 +126,25 @@ class MyTopic extends Component {
     })
   }
 
+  onTopicReport(id, reason) {
+    this.setState({isOpenAct: false})
+    this.props.dispatch({
+      type: 'myTopic/onTopicReport',
+      payload: {id, reason}
+    })
+  }
+
+  onTopicDetail(id) {
+    this.onCloseAction()
+    Taro.navigateTo({
+      url: '/pages/topic/detail?id=' + id
+    })
+  }
+
   render() {
-    const {windowHeight, nickname, avatar, id, actType, isOpenAct} = this.state
+    const {windowHeight, nickname, avatar, id, actType, isOpenAct, myself, attention} = this.state
+    const topicIndex  = this.state.index
+
     const {attentionNum, topicNum, topicList} = this.props
     let infoHeight = 140
     let totalHeight = 30
@@ -133,14 +162,24 @@ class MyTopic extends Component {
       return <View key={index} className='topic-item list-item' onClick={this.onTopicDetail.bind(this, item.id)}>
         <View className='topic-author'>
           <View className='author-info'>
-            <Image className='author-avatar' mode='widthFix' src={item.avatar || avatar} />
+            <Image className='author-avatar' mode='widthFix' src={item.avatar || avatarDef} />
             <View className='author-info'>
               <View className='author-name'>{item.nickname}</View>
               <View className='topic-date'>{Utils.timeDesc(parseInt(item.createTime / 1000))}</View>
             </View>
           </View>
           <View className='topic-btn'>
-            <View className='topic-more' onClick={this.onOpenAction.bind(this, index, item.id)}>
+            {item.myself == 1 ?
+              <View className='topic-follow' onClick={this.onTopicAttention.bind(this, index, item.id, item.myself, item.attention)}>
+                删除
+              </View> : ''
+            }
+            {(item.myself == 0 && item.attention == 0) ?
+              <View className='topic-follow' onClick={this.onTopicAttention.bind(this, index, item.id, item.myself, item.attention)}>
+                关注
+              </View> : ''
+            }
+            <View className='topic-more' onClick={this.onOpenAction.bind(this, index, item.id, item.myself, item.attention)}>
               <Image className='more-icon' src={moreBtn} mode='widthFix' />
             </View>
           </View>
@@ -229,6 +268,64 @@ class MyTopic extends Component {
               删除话题
             </AtActionSheetItem>
           </AtActionSheet>
+        }
+
+        {(actType == 0 && isOpenAct) ?
+          <AtActionSheet isOpened={isOpenAct}
+            onClose={this.onCloseAction.bind(this)}
+            onCancel={this.onCloseAction.bind(this)}
+            cancelText='取消'
+          >
+            <AtActionSheetItem onClick={this.onTopicDelete.bind(this)}>
+              删除话题
+            </AtActionSheetItem>
+          </AtActionSheet> : ''
+        }
+
+        {(actType == 1 && isOpenAct) ?
+          <AtActionSheet isOpened={isOpenAct}
+            onClose={this.onCloseAction.bind(this)}
+            onCancel={this.onCloseAction.bind(this)}
+            cancelText='取消'
+          >
+            {(myself == 0 && attention == 1) ?
+              <AtActionSheetItem onClick={this.onTopicAttention.bind(this, topicIndex, id, myself, attention)}>
+                取消关注
+              </AtActionSheetItem> : ''
+            }
+            <AtActionSheetItem onClick={this.onTopicDetail.bind(this, id)}>
+              评论
+            </AtActionSheetItem>
+            {myself == 0 ?
+              <AtActionSheetItem onClick={this.onOpenReportAction.bind(this)}>
+                投诉
+              </AtActionSheetItem> : ''
+            }
+          </AtActionSheet> : ''
+        }
+
+        {(actType == 2 && isOpenAct) ?
+          <AtActionSheet isOpened={isOpenAct}
+            onClose={this.onCloseAction.bind(this)}
+            onCancel={this.onCloseAction.bind(this)}
+            cancelText='取消'
+          >
+            <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '垃圾营销')}>
+              垃圾营销
+            </AtActionSheetItem>
+            <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '涉黄信息')}>
+              涉黄信息
+            </AtActionSheetItem>
+            <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '有害信息')}>
+              有害信息
+            </AtActionSheetItem>
+            <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '违法信息')}>
+              违法信息
+            </AtActionSheetItem>
+            <AtActionSheetItem onClick={this.onTopicReport.bind(this, id, '侵犯人身权益')}>
+              侵犯人身权益
+            </AtActionSheetItem>
+          </AtActionSheet> : ''
         }
 
       </View>

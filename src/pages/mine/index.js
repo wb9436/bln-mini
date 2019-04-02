@@ -129,12 +129,14 @@ class Mine extends Component {
   }
 
   onLookPageHandler(page) {
-    const {userAccount, userSign} = this.props
+    const {userAccount, userData, userSign} = this.props
     if (page) {
       if (page.indexOf('wallet') > -1) {
         page = page + '?amount=' + userAccount.amount + '&money=' + userAccount.money
       } else if (page.indexOf('task') > -1) {
         page = page + '?signTime=' + userSign.signTime
+      } else if (page.indexOf('myTopic') > -1) {
+        page = page + '?userId=' + userData.userId + '&nickname=' + userData.nickname + '&avatar=' + userData.avatar
       }
       Taro.navigateTo({
         url: page

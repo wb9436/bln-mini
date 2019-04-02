@@ -10,7 +10,7 @@ import LoadAll from '../../components/LoadAll/index'
 
 import * as Utils from '../../utils/utils'
 
-import avatar from '../../images/public/avatar.png'
+import avatarDef from '../../images/public/avatar.png'
 import addressImg from '../../images/topic/address.png'
 import addBtn from '../../images/topic/addBtn.png'
 import shareBtn from '../../images/topic/share.png'
@@ -215,6 +215,13 @@ class CityTopic extends Component {
     })
   }
 
+  onLookUserTopic(userId, nickname, headImg, e) {
+    e.stopPropagation()
+    Taro.navigateTo({
+      url : '/pages/myTopic/index?userId=' + userId + '&nickname=' + nickname + '&avatar=' + headImg
+    })
+  }
+
   render() {
     const {windowHeight, area, city, type, id, myself, attention, actType, isOpenAct, isOpenAdd} = this.state
     const topicIndex  = this.state.index
@@ -230,7 +237,7 @@ class CityTopic extends Component {
       return <View key={index} className='topic-item list-item' onClick={this.onTopicDetail.bind(this, item.id)}>
         <View className='topic-author'>
           <View className='author-info'>
-            <Image className='author-avatar' mode='widthFix' src={item.avatar || avatar} />
+            <Image className='author-avatar' mode='widthFix' src={item.avatar || avatarDef} onClick={this.onLookUserTopic.bind(this, item.userId, item.nickname, item.avatar)} />
             <View className='author-info'>
               <View className='author-name'>{item.nickname}</View>
               <View className='topic-date'>{Utils.timeDesc(parseInt(item.createTime / 1000))}</View>
