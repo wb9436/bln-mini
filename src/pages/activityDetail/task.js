@@ -27,13 +27,11 @@ class ActivityTask extends Component {
 
   componentDidMount() {
     const {userId, type, actId, title} = this.$router.params
-    // Taro.setNavigationBarTitle({title: title})
     let unionid = this.$router.params.unionid
-    // console.log(`Activity Task: ${JSON.stringify(this.$router.params)}`)
     if (userId) {
       Taro.setStorageSync('inviter', userId)
     }
-    if (!unionid) {
+    if (!unionid || unionid.trim() === '') {
       unionid = Taro.getStorageSync('unionid')
     } else {
       Taro.setStorageSync('unionid', unionid)

@@ -81,10 +81,15 @@ class Home extends Component {
   }
 
   onActivityClick(actId, title, iconUrl) {
+    let unionid = Taro.getStorageSync('unionid')
+    if(!unionid || unionid.trim() === '') {
+      console.log(unionid)
+      unionid = Taro.getStorageSync('user').withdrawNo
+    }
     Taro.navigateTo({
-      url: `/pages/activityDetail/index?type=0&title=${title}&actId=${actId}&imageUrl=${iconUrl}`
+      // url: `/pages/activityDetail/index?type=0&title=${title}&actId=${actId}&imageUrl=${iconUrl}`
       // url: `/pages/activityDetail/detail?actId=${actId}`
-      // url: `/pages/activityDetail/task?type=0&title=${title}&actId=${actId}&userId=${Taro.getStorageSync('userId')}`
+      url: `/pages/activityDetail/task?type=0&title=${title}&actId=${actId}&userId=${Taro.getStorageSync('userId')}&unionid=${unionid}`
     })
   }
 
