@@ -128,9 +128,12 @@ class App extends Component {
 
   componentDidMount() {
     try {
-      const {inviter} = this.$router.params
+      const {inviter, marketId} = this.$router.params
       if (inviter && inviter.toString().trim() !== '') {
         Taro.setStorageSync('inviter', inviter)
+      }
+      if (marketId && marketId.toString().trim() !== '') {
+        Taro.setStorageSync('marketId', marketId)
       }
     } catch (e) {
       console.log(e)

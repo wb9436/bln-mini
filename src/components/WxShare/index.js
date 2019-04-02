@@ -13,7 +13,7 @@ class WxShare extends Component {
     imgUrl: PropTypes.string,
   }
   static defaultProps = {
-    link: 'http://web.viplark.com/index.html#/pages/index/index?inviter=' + Taro.getStorageSync('userId'),
+    link: 'http://web.viplark.com/index.html#/pages/index/index?inviter=' + Taro.getStorageSync('userId') + '&marketId=' + Taro.getStorageSync('marketId'),
     title: '更多优惠尽在百灵鸟App',
     desc: '了解您身边的生活资讯信息，更有拼多多优惠券等你来拿！！！',
     imgUrl: 'https://upload.viplark.com/bln/logo.png',

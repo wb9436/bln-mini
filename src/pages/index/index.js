@@ -5,6 +5,7 @@ import './index.scss'
 import WxShare from '../../components/WxShare'
 import * as Utils from '../../utils/utils'
 import loading from '../../images/public/loading.gif'
+import * as Api from "../../store/user/newService";
 
 class Index extends Component {
   config = {
@@ -28,24 +29,13 @@ class Index extends Component {
   }
 
   checkLogin = (sid) => {
-    let baseUrl = BASE_API
-    Taro.request({
-      url: baseUrl + '/api/user/getUserBySid',
-      method: 'POST',
-      data: {sid: sid},
-      header: {
-        'Content-Type': 'application/json'
-      }
-    }).then(res => {
-      const {data} = res
-      if (data && data.body.user && data.code == 200) {
+    Api.checkUserLogin({sid}).then(data => {
+      const {code} = data
+      if (code == 200) {
         this.toHome(data, sid)
       } else {
         this.toLogin()
       }
-    }).catch(e => {
-      console.log(e)
-      this.toLogin()
     })
   }
 

@@ -48,3 +48,10 @@ export const weiXinMiniLogin = data => Request({
   data
 })
 
+export const checkUserLogin = data => Request({
+  url: '/api/user/getUserBySid',
+  method: 'POST',
+  need_sid: false,
+  no_toast: true,//是否需要弹窗
+  data
+})
