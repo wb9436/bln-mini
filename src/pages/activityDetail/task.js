@@ -6,6 +6,7 @@ import './index.scss'
 
 import ParseComponent from './wxParseComponent'
 import WxShare from '../../components/WxShare'
+import Loading from '../../components/Loading/index'
 
 import * as Api from '../../store/activity/service'
 import * as Utils from '../../utils/utils'
@@ -273,18 +274,20 @@ class ActivityTask extends Component {
           scrollWithAnimation
           onScroll={this.onScroll.bind(this)}
         >
-          <View className='act-detail'>
-            <View className='act-title'>
-              <View className='act-desc'>{title}</View>
-              <View className='act-date'>
-                <View className='date-title'>百灵鸟</View>
-                <View className='date'>{type == 0 ? Utils.formatSimpleTime(new Date(refreshTime)) : ''}</View>
+          {existAct &&
+            <View className='act-detail'>
+              <View className='act-title'>
+                <View className='act-desc'>{title}</View>
+                <View className='act-date'>
+                  <View className='date-title'>百灵鸟</View>
+                  <View className='date'>{type == 0 ? Utils.formatSimpleTime(new Date(refreshTime)) : ''}</View>
+                </View>
               </View>
-            </View>
 
-            {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? <ParseComponent nodes={content} /> : ''}
-            {Taro.getEnv() === Taro.ENV_TYPE.WEB ? <View className='rich-text'><RichText nodes={content} /></View> : ''}
-          </View>
+              {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? <ParseComponent nodes={content} /> : ''}
+              {Taro.getEnv() === Taro.ENV_TYPE.WEB ? <View className='rich-text'><RichText nodes={content} /></View> : ''}
+            </View>
+          }
 
           {type == 0 && existAct &&
             <View className='act-data'>
@@ -325,6 +328,7 @@ class ActivityTask extends Component {
             {existAct ? actContent : ''}
           </View>
 
+          <Loading loading={!existAct} />
         </ScrollView>
 
         {(existAct && !hasLogin) ?
