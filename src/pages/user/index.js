@@ -5,6 +5,7 @@ import './index.scss'
 
 import AddressDialog from '../../components/Address/index'
 import * as Api from '../../store/user/service'
+import * as Utils from '../../utils/utils'
 
 import avatarDef from '../../images/public/avatar.png'
 import maleIcon from '../../images/public/male.png'
@@ -83,7 +84,7 @@ class UserInfo extends Component {
         this.setState({
           address: body.address,
           avatar: body.avatar,
-          birthday: body.birthday,
+          birthday: body.birthday || Utils.formatSimpleTime(new Date()),
           education: body.education,
           hobby: hobby,
           income: body.income,
