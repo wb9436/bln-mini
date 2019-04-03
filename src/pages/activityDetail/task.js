@@ -23,27 +23,24 @@ class ActivityTask extends Component {
 
   constructor() {
     super(...arguments)
-
-    let hasLogin = true
-    let sid = Taro.getStorageSync('sid')
-    if(!sid || sid.trim() === '') {
-      hasLogin = false
-    }
     this.state = {
       click: false,
       canScroll: true,
-      hasLogin: hasLogin,
+      hasLogin: false,
     }
   }
 
   componentDidMount() {
-    const {userId, type, actId, title, imageUrl} = this.$router.params
+    const {userId, type, actId, title, imageUrl, lastPage} = this.$router.params
     let unionid = this.$router.params.unionid
     let marketId = Taro.getStorageSync('marketId')
     let link = `http://api.viplark.com/api/web/share?userId=${userId}&type=${type}&actId=${actId}&marketId=${marketId}`
     let desc = '更多有趣的段子，尽在百灵鸟平台'
     if (type == 0) {
       desc = '更多生活资讯、优惠信息，尽在百灵鸟平台'
+    }
+    if(lastPage && lastPage === 'have') {
+      this.setState({hasLogin: true})
     }
     if (userId) {
       Taro.setStorageSync('inviter', userId)
@@ -215,10 +212,11 @@ class ActivityTask extends Component {
 
   onActivityClick(actId, title) {
     const {userId} = this.props
+    const {hasLogin} = this.state
     let unionid = Taro.getStorageSync('unionid')
     let marketId = Taro.getStorageSync('marketId')
     Taro.navigateTo({
-      url: `/pages/activityDetail/task?type=0&title=${title}&actId=${actId}&userId=${userId}&unionid=${unionid}&marketId=${marketId}`
+      url: `/pages/activityDetail/task?type=0&title=${title}&actId=${actId}&userId=${userId}&unionid=${unionid}&marketId=${marketId}&lastPage=${hasLogin ? 'have' : ''}`
     })
   }
 
