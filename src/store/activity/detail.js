@@ -5,7 +5,6 @@ export default {
   namespace: 'activityDetail',
   state: {
     //分享信息
-    marketId: Taro.getStorageSync('marketId'),
     userId: 0,
     type: 0,//类型: 0=点阅活动;1=段子
     actId: 0,
@@ -262,9 +261,9 @@ export default {
     },
 
     * loadActAdData(_, {call, put, select}) {
-      const {userId, marketId} = yield select(state => state.activityDetail)
+      const {userId} = yield select(state => state.activityDetail)
       let num = 5//活动推荐
-      const {code, body} = yield call(Api.activityActAd, {userId, num, marketId})
+      const {code, body} = yield call(Api.activityActAd, {userId, num})
       if (code == 200) {
         yield put({
           type: 'save',

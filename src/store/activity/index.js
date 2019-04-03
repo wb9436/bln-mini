@@ -8,7 +8,6 @@ export default {
   state: {
     scrollTop: 0,
     actTypes: [{name: '推荐', imgUrl: RecommendIcon, id: 1}],
-    marketId: Taro.getStorageSync('marketId'),
     category: '推荐',
     activityList: [],
     loadAll: false,
@@ -39,14 +38,10 @@ export default {
         }
       })
       let curPageNum = 1
-      const {marketId, category, pageSize, sortType} = yield select(state => state.activity)
+      const {category, pageSize, sortType} = yield select(state => state.activity)
       let params = {curPageNum, pageSize, sortType}
       if (category !== '推荐') {
         params.category = category
-      }
-      if(marketId) {
-        params.category = '全部'
-        params.marketId = marketId
       }
       const {code, body} = yield call(Api.activityListSortSearch, params)
       if (code == 200) {
@@ -62,15 +57,11 @@ export default {
     },
 
     * loadActivity(_, {call, put, select}) {
-      const {marketId, category, activityList, pageSize, curPageNum, loadAll, sortType} = yield select(state => state.activity)
+      const {category, activityList, pageSize, curPageNum, loadAll, sortType} = yield select(state => state.activity)
       if (!loadAll) {
         let params = {pageSize, sortType}
         if (category !== '推荐') {
           params.category = category
-        }
-        if(marketId) {
-          params.category = '全部'
-          params.marketId = marketId
         }
         params.curPageNum = curPageNum + 1
         const {code, body} = yield call(Api.activityListSortSearch, params)
