@@ -2,7 +2,6 @@
 
 .friend-page {
   width: 100%;
-  height: 100vh;
 
   .invite-title {
     width: 100%;
@@ -10,6 +9,7 @@
 
     .title-icon {
       width: 100%;
+      height: 100%;
     }
 
     .invite-code {
@@ -23,7 +23,6 @@
       top: 250px;
       left: 0;
     }
-
   }
 
   .invite-nav {
@@ -32,20 +31,18 @@
     align-items: center;
     justify-content: space-between;
 
-
     .nav-item {
-      height: 100%;
       width: 50%;
       line-height: 84px;
       text-align: center;
       @include sc(32px, $color-big);
-      border-bottom: 2px solid $color-line;
+      border-bottom-style: solid;
+      border-bottom-color: $color-line;
     }
 
     .nav-checked {
-      border-bottom: 4px solid $color-white;
+      border-bottom-color: $color-theme;
     }
-
   }
 
   .invite-scroll {
@@ -78,9 +75,7 @@
           line-height: 40px;
           @include sc(30px, $color-big);
         }
-
       }
-
     }
 
     .invite-how {
@@ -158,11 +153,8 @@
           }
 
         }
-
       }
-
     }
-
   }
 
   .invite-share {
@@ -185,9 +177,7 @@
       line-height: 70px;
       @include sc(34px, $color-white)
     }
-
   }
-
 
 }
 

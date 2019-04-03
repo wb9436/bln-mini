@@ -125,17 +125,15 @@ class InviteFriend extends Component {
         {process.env.TARO_ENV === 'h5' ? <WxShare /> : ''}
 
         <View className='invite-title' style={{height: `${titleHeight}px`}}>
-          <Image className='title-icon' style={{height: `${titleHeight}px`}} src={inviteTitle} mode='aspectFit' />
+          <Image className='title-icon' src={inviteTitle} mode='aspectFit' />
           <View className='invite-code'>{`邀请码：${userId}`}</View>
         </View>
         <View className='invite-nav' style={{height: `${navHeight + checkBorder}px`}}>
           <View className={navType == 0 ? 'nav-item nav-checked' : 'nav-item'}
-            style={navType == 0 ? {borderBottomColor: '#EE735D', color: '#EE735D'} : ''}
-            onClick={this.onCheckNavBar.bind(this, 0)}
+            style={{height: `${navHeight}px`, borderBottomWidth: `${checkBorder}px`}} onClick={this.onCheckNavBar.bind(this, 0)}
           >邀请好友</View>
           <View className={navType == 1 ? 'nav-item nav-checked' : 'nav-item'}
-            style={navType == 1 ? {borderBottomColor: '#EE735D', color: '#EE735D'} : ''}
-            onClick={this.onCheckNavBar.bind(this, 1)}
+            style={{height: `${navHeight}px`, borderBottomWidth: `${checkBorder}px`}} onClick={this.onCheckNavBar.bind(this, 1)}
           >{`好友列表(${totalFriends})`}</View>
         </View>
         <View className='invite-scroll' style={{height: `${scrollHeight}px`}}>
