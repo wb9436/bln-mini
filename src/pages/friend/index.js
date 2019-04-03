@@ -77,6 +77,23 @@ class InviteFriend extends Component {
     }
   }
 
+  onLoadDataHandler() {
+    const {navType, curPageNum, pageSize, loadAll, friendList} = this.state
+    if (navType == 1 && !loadAll) {
+      Api.userFriends({curPageNum: curPageNum + 1, pageSize}).then(res => {
+        const {code, body} = res
+        if (code == 200) {
+          this.setState({
+            friendList: friendList.concat(body.array),
+            totalFriends: body.paging.totalRows,
+            curPageNum: curPageNum + 1,
+            loadAll: body.paging.last,
+          })
+        }
+      })
+    }
+  }
+
   render() {
     const {windowHeight, scale, userId, navType, friendList, totalFriends} = this.state
     let titleHeight = 161 * scale
@@ -124,6 +141,8 @@ class InviteFriend extends Component {
         <View className='invite-scroll' style={{height: `${scrollHeight}px`}}>
           <ScrollView className='scroll-container'
             scrollY
+            scrollWithAnimation
+            onScrollToLower={this.onLoadDataHandler.bind(this)}
           >
             {navType == 0 ?
               <View className='invite-desc'>
