@@ -37,7 +37,6 @@ class ActivityTask extends Component {
   }
 
   componentDidMount() {
-    console.log(this.$router.params)
     const {userId, type, actId, title, imageUrl} = this.$router.params
     let unionid = this.$router.params.unionid
     let marketId = Taro.getStorageSync('marketId')
