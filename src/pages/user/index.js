@@ -6,6 +6,7 @@ import './index.scss'
 import AddressDialog from '../../components/Address/index'
 import * as Api from '../../store/user/service'
 
+import avatarDef from '../../images/public/avatar.png'
 import maleIcon from '../../images/public/male.png'
 import femaleIcon from '../../images/public/female.png'
 import moreBtn from '../../images/public/moreBtn.png'
@@ -263,7 +264,7 @@ class UserInfo extends Component {
           <View className='user-info'>
             <View className='info-title'>头像</View>
             <View className='info-content'>
-              <Image className='info-avatar' src={avatar} mode='widthFix' />
+              <Image className='info-avatar' src={avatar || avatarDef} mode='widthFix' />
             </View>
           </View>
           <View className='user-info'>
