@@ -132,6 +132,7 @@ class Home extends Component {
     let actHeight = windowHeight
 
     const actContent = activityList.map((item, index) => {
+      let title = (item.title && item.title.trim() !== '') ? `【${item.title}】${item.subTitle}` : `${item.subTitle}`
       return <View key={index} className='activity-item' onClick={this.onActivityClick.bind(this, item.actId, item.subTitle, item.iconUrl)}>
         <View className='activity-view'>
           <Image className='activity-logo' src={item.iconUrl} mode='scaleToFill' />
@@ -140,7 +141,7 @@ class Home extends Component {
           <View className='activity-title'>
             {item.hot == 1 && <View className='font-icon hot'> 热 </View>}
             {item.hot == 2 && <View className='font-icon new'> 新 </View>}
-            {`【${item.title}】${item.subTitle}`}
+            {title}
           </View>
           <View className='activity-profit'>
             {(item.free == 0 && item.money > 0) ? `每增加一次阅读可获得${item.money}元` : ''}

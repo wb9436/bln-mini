@@ -241,7 +241,7 @@ class Mine extends Component {
           </View>
         </ScrollView>
 
-        <AddressDialog isOpened={isOpened} address={address} onCancel={this.onCancelAddress.bind(this)}
+        <AddressDialog isOpened={isOpened} isTab address={address} onCancel={this.onCancelAddress.bind(this)}
           onConfirmAddress={this.onConfirmAddress.bind(this)}
         />
 

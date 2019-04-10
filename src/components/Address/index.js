@@ -8,12 +8,14 @@ import * as DistrictsUtils from '../../components/Address/areaInfo'
 class AddressDialog extends Component {
   static propTypes = {
     isOpened: PropTypes.bool,
+    isTab: PropTypes.bool,
     address: PropTypes.string,
     onCancel: PropTypes.func,
     onConfirmAddress: PropTypes.func,
   }
   static defaultProps = {
     isOpened: false,
+    isTab: false,
     address: '上海市 上海市 浦东新区',
     onCancel: null,
     onConfirmAddress: null,
@@ -174,6 +176,7 @@ class AddressDialog extends Component {
   }
 
   render() {
+    const {isTab} = this.props
     const {_isOpened, pro, city, area} = this.state
     let proTop = pro.index * 40
     let cityTop = city.index * 40
@@ -194,6 +197,9 @@ class AddressDialog extends Component {
     let className = 'address-layout address-layout--active'
     if(!_isOpened) {
       className = 'address-layout'
+    }
+    if(isTab) {
+      className += ' address-layout_bottom'
     }
 
     return (
