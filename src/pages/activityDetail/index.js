@@ -155,8 +155,7 @@ class ActivityDetail extends Component {
               </View>
             </View>
 
-            {Taro.getEnv() === Taro.ENV_TYPE.WEAPP && <ParseComponent nodes={content} />}
-            {Taro.getEnv() === Taro.ENV_TYPE.WEB && <View className='rich-text'><RichText nodes={content} /></View>}
+            {process.env.TARO_ENV === 'weapp' ? <ParseComponent nodes={content} /> : <View className='rich-text'><RichText nodes={content} /></View>}
           </View>
 
           {type == 0 && existAct &&
