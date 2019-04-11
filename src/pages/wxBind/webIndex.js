@@ -288,7 +288,7 @@ class WebWxBind extends Component {
 
   render() {
     const {windowHeight, scale, isWeiXin, isRegister, isOpened, address, codeMsg, btnState} = this.state
-    const quickLoginHeight = 145 * scale
+    const quickLoginHeight = 145
     const remainHeight = windowHeight - quickLoginHeight
 
     return (

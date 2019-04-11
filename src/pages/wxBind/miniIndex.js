@@ -250,7 +250,7 @@ class MiniWxBind extends Component {
 
   render() {
     const {windowHeight, scale, isRegister, isOpened, address, codeMsg, btnState} = this.state
-    const quickLoginHeight = 145 * scale
+    const quickLoginHeight = 145
     const remainHeight = windowHeight - quickLoginHeight
 
     return (
