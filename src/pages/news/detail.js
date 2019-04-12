@@ -3,7 +3,7 @@ import {View, RichText, ScrollView} from '@tarojs/components'
 import {connect} from '@tarojs/redux'
 import './detail.scss'
 
-import ParseComponent from '../activityDetail/wxParseComponent'
+import ParseComponent from '../../components/wxParse/wxParseComponent'
 
 @connect(({newsDetail}) => ({
   ...newsDetail

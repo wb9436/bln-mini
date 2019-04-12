@@ -6,7 +6,7 @@ import './index.scss'
 import WxShare from '../../components/WxShare/index'
 
 import * as Utils from '../../utils/utils'
-import ParseComponent from './wxParseComponent'
+import ParseComponent from '../../components/wxParse/wxParseComponent'
 
 import praiseBtn from '../../images/public/praise_yes.png'
 import shareBtn from '../../images/public/shareBtn.png'

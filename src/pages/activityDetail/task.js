@@ -4,7 +4,7 @@ import {AtIcon} from 'taro-ui'
 import {connect} from '@tarojs/redux'
 import './index.scss'
 
-import ParseComponent from './wxParseComponent'
+import ParseComponent from '../../components/wxParse/wxParseComponent'
 import WxShare from '../../components/WxShare'
 import Loading from '../../components/Loading/index'
 
