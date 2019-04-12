@@ -1,8 +1,9 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, RichText, Button, ScrollView, Image, Video} from '@tarojs/components'
+import {View, Button, ScrollView, Image, Video} from '@tarojs/components'
 import {connect} from '@tarojs/redux'
 import './index.scss'
 
+import RichView from '../../components/RichView'
 import WxShare from '../../components/WxShare/index'
 
 import * as Utils from '../../utils/utils'
@@ -155,7 +156,10 @@ class ActivityDetail extends Component {
               </View>
             </View>
 
-            {process.env.TARO_ENV === 'weapp' ? <ParseComponent nodes={content} /> : <View className='rich-text'><RichText nodes={content} /></View>}
+            {process.env.TARO_ENV === 'weapp' ?
+              <ParseComponent nodes={content} /> :
+              <RichView nodes={content} />
+            }
           </View>
 
           {type == 0 && existAct &&

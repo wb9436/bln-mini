@@ -1,8 +1,9 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, RichText, ScrollView, Image, Video} from '@tarojs/components'
+import {View, ScrollView, Image, Video} from '@tarojs/components'
 import {connect} from '@tarojs/redux'
 import './index.scss'
 
+import RichView from '../../components/RichView'
 import * as Utils from '../../utils/utils'
 import praiseBtn from '../../images/public/praise_yes.png'
 
@@ -64,7 +65,7 @@ class ActivityDetailIOS extends Component {
                 <View className='date'>{type == 0 ? Utils.formatSimpleTime(new Date(refreshTime)) : ''}</View>
               </View>
             </View>
-            <View className='rich-text'><RichText nodes={content} /></View>
+            <RichView nodes={content} />
           </View>
 
           {type == 0 && existAct &&

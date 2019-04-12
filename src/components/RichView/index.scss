@@ -1,0 +1,74 @@
+@import "../../styles/mixin";
+
+.rich-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  line-height: 1.6;
+  background-color: $color-white;
+  color: #3e3e3e;
+
+}
+
+.rich-content > div {
+  max-width: 100% !important;
+  background: $color-white;
+}
+
+.rich-content > div *{
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  word-wrap: break-word !important
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  font-size: 32px
+}
+
+.rich-content > div > a {
+  color: #607fa6;
+  text-decoration: none
+}
+
+.rich-content > div > p {
+  clear: both;
+  margin: 0 0;
+  font-size: 32px;
+  min-height: 1em;
+  white-space: normal;
+}
+
+.rich-content > div > img, .rich-content > div > video {
+  *zoom: 1;
+  max-width: 100%;
+  *max-width: 96%;
+  height: auto !important;
+}
+
+.rich-content > div > p {
+  clear: both;
+  min-height: 1em;
+  white-space: pre-wrap
+}
+
+.rich-content > div > em {
+  font-style: italic
+}
+
+.rich-content > div > fieldset {
+  min-width: 0
+}
+
+.rich-content > div > .list-paddingleft-2 {
+  padding-left: 30px
+}
+
+.rich-content > div > blockquote {
+  margin: 0;
+  padding-left: 20px;
+  border-left: 6px solid #dbdbdb
+}
+
+

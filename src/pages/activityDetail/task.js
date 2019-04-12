@@ -1,9 +1,10 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, RichText, ScrollView, Button, Image, Video} from '@tarojs/components'
+import {View, ScrollView, Button, Image, Video} from '@tarojs/components'
 import {AtIcon} from 'taro-ui'
 import {connect} from '@tarojs/redux'
 import './index.scss'
 
+import RichView from '../../components/RichView'
 import ParseComponent from '../../components/wxParse/wxParseComponent'
 import WxShare from '../../components/WxShare'
 import Loading from '../../components/Loading/index'
@@ -284,7 +285,10 @@ class ActivityTask extends Component {
                 </View>
               </View>
 
-              {process.env.TARO_ENV === 'weapp' ? <ParseComponent nodes={content} /> : <View className='rich-text'><RichText nodes={content} /></View>}
+              {process.env.TARO_ENV === 'weapp' ?
+                <ParseComponent nodes={content} /> :
+                <RichView nodes={content} />
+              }
             </View>
           }
 
