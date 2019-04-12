@@ -38,10 +38,9 @@ class Hot extends Component {
     }
   }
 
-  onNewsClick(actId, title, imageUrl) {
+  onNewsClick(id, title, imageUrl) {
     Taro.navigateTo({
-      url: `/pages/activityDetail/index?type=1&title=${title}&actId=${actId}&imageUrl=${imageUrl}`
-      // url: `/pages/activityDetail/task?type=1&title=${title}&actId=${actId}&userId=${Taro.getStorageSync('userId')}`
+      url: `/pages/news/detail?id=${id}&title=${title}&imageUrl=${imageUrl}`
     })
   }
 

@@ -51,6 +51,7 @@ class App extends Component {
       'pages/activityDetail/task',
       'pages/activityDetail/detail',
       'pages/news/index',
+      'pages/news/detail',
       'pages/pdd/index',
       'pages/pdd/search',
       'pages/pddDetail/index',

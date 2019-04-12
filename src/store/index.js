@@ -4,6 +4,7 @@ import activity from './activity/index'
 import activityDetail from './activity/detail'
 import user from './user/index'
 import news from './news/index'
+import newsDetail from './news/detail'
 import pdd from './pdd/index'
 import pddSearch from './pdd/search'
 import pddDetail from './pdd/detail'
@@ -17,6 +18,7 @@ const models = [
   activityDetail,
   user,
   news,
+  newsDetail,
   pdd,
   pddSearch,
   pddDetail,
