@@ -194,8 +194,8 @@ class AddressDialog extends Component {
       return <View key={`areaId-${index}`} id={`areaId-${index}`} className='area-item'>{item}</View>
     })
 
-    let className = 'address-layout address-layout--active'
-    if(!_isOpened) {
+    let className = 'address-layout address-layout--closed'
+    if(_isOpened) {
       className = 'address-layout'
     }
     if(isTab) {
