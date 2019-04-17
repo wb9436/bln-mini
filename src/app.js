@@ -17,6 +17,7 @@ import store from './store/index'
 //   require('nerv-devtools')
 // }
 
+
 import IndexIcon from './images/tab/index.png'
 import IndexSelectIcon from './images/tab/index_select.png'
 import CityIcon from './images/tab/city.png'
